@@ -28,7 +28,8 @@ def TestMoveOperandDeps :
 
   let arguments =
     (ins TransformHandleTypeInterface:$op,
-         TransformHandleTypeInterface:$insertion_point);
+         TransformHandleTypeInterface:$insertion_point,
+         DefaultValuedAttr<BoolAttr, "false">:$exclude_insertion_point_dependencies);
   
   let results = (outs);
 

@@ -1061,10 +1061,18 @@ LogicalResult mlir::simplifyRegions(RewriterBase &rewriter,
 // Move operation dependencies
 //===---------------------------------------------------------------------===//
 
-LogicalResult mlir::moveOperationDependencies(RewriterBase &rewriter,
-                                              Operation *op,
-                                              Operation *insertionPoint,
-                                              DominanceInfo &dominance) {
+static Operation *getParentInBlock(Operation *op, Block *block) {
+  while (op) {
+    if (op->getBlock() == block)
+      return op;
+    op = op->getParentOp();
+  }
+  return nullptr;
+}
+
+LogicalResult mlir::moveOperationDependencies(
+    RewriterBase &rewriter, Operation *op, Operation *insertionPoint,
+    DominanceInfo &dominance, bool excludeInsertionPointDependencies) {
   // Currently unsupported case where the op and insertion point are
   // in different basic blocks.
   if (op->getBlock() != insertionPoint->getBlock()) {
@@ -1078,6 +1086,26 @@ LogicalResult mlir::moveOperationDependencies(RewriterBase &rewriter,
                                        "insertion point does not dominate op");
   }
 
+  // First compute the forward slice from insertionPoint to find all operations
+  // that depend on it
+  llvm::SetVector<Operation *> forwardSlice;
+  if (excludeInsertionPointDependencies) {
+    ForwardSliceOptions forwardOptions;
+    forwardOptions.inclusive = true;
+    forwardOptions.filter = [&](Operation *sliceBoundaryOp) {
+      if (dominance.properlyDominates(sliceBoundaryOp, op))
+        return true;
+      Operation *parent = getParentInBlock(sliceBoundaryOp, op->getBlock());
+      if (parent && dominance.properlyDominates(parent, op))
+        return true;
+      return false;
+    };
+    getForwardSlice(insertionPoint, &forwardSlice, forwardOptions);
+    for (Operation *sliceOp : forwardSlice) {
+      forwardSlice.insert(getParentInBlock(sliceOp, op->getBlock()));
+    }
+  }
+
   // Find the backward slice of operation for each `Value` the operation
   // depends on. Prune the slice to only include operations not already
   // dominated by the `insertionPoint`
@@ -1088,7 +1116,17 @@ LogicalResult mlir::moveOperationDependencies(RewriterBase &rewriter,
   // the slices dont need to look past block arguments.
   options.omitBlockArguments = true;
   options.filter = [&](Operation *sliceBoundaryOp) {
-    return !dominance.properlyDominates(sliceBoundaryOp, insertionPoint);
+    if (dominance.properlyDominates(sliceBoundaryOp, insertionPoint)) {
+      return false;
+    }
+    // return !dominance.dominates(sliceBoundaryOp, insertionPoint);
+    // Don't include operations that depend on insertionPoint (are in its
+    // forward slice)
+    if (forwardSlice.contains(sliceBoundaryOp)) {
+      return false;
+    }
+
+    return true;
   };
   llvm::SetVector<Operation *> slice;
   LogicalResult result = getBackwardSlice(op, &slice, options);
@@ -1110,11 +1148,13 @@ LogicalResult mlir::moveOperationDependencies(RewriterBase &rewriter,
   return success();
 }
 
-LogicalResult mlir::moveOperationDependencies(RewriterBase &rewriter,
-                                              Operation *op,
-                                              Operation *insertionPoint) {
+LogicalResult
+mlir::moveOperationDependencies(RewriterBase &rewriter, Operation *op,
+                                Operation *insertionPoint,
+                                bool excludeInsertionPointDependencies) {
   DominanceInfo dominance(op);
-  return moveOperationDependencies(rewriter, op, insertionPoint, dominance);
+  return moveOperationDependencies(rewriter, op, insertionPoint, dominance,
+                                   excludeInsertionPointDependencies);
 }
 
 LogicalResult mlir::moveValueDefinitions(RewriterBase &rewriter,

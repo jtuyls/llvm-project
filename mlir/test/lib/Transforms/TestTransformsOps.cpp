@@ -33,7 +33,10 @@ transform::TestMoveOperandDeps::apply(TransformRewriter &rewriter,
                                       TransformState &state) {
   Operation *op = *state.getPayloadOps(getOp()).begin();
   Operation *moveBefore = *state.getPayloadOps(getInsertionPoint()).begin();
-  if (failed(moveOperationDependencies(rewriter, op, moveBefore))) {
+  bool excludeInsertionPointDependencies =
+      getExcludeInsertionPointDependencies();
+  if (failed(moveOperationDependencies(rewriter, op, moveBefore,
+                                       excludeInsertionPointDependencies))) {
     auto listener = cast<ErrorCheckingTrackingListener>(rewriter.getListener());
     std::string errorMsg = listener->getLatestMatchFailureMessage();
     (void)emitRemark(errorMsg);

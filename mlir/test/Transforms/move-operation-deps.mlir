@@ -212,6 +212,43 @@ module attributes {transform.with_named_sequence} {
 
 // -----
 
+// Test with exclude flag true
+func.func @do_not_move_slice_with_exclude() -> (f32, f32) {
+  %0 = "before"() : () -> (f32)
+  %1 = "dont_move"() ({
+    "yield"(%0) : (f32) -> ()
+  }) : () -> (f32)
+  %2 = "moved_op"() : () -> (f32)
+  %3:2 = "foo"() ({
+    "yield"(%1, %2) : (f32, f32) -> ()
+  }) : () -> (f32, f32)
+  return %3#0, %3#1 : f32, f32
+}
+// CHECK-LABEL: func @do_not_move_slice_with_exclude()
+//       CHECK:   %[[MOVED:.+]] = "moved_op"
+//       CHECK:   %[[BEFORE:.+]] = "before"
+//       CHECK:   %[[DONT_MOVE:.+]] = "dont_move"() ({
+//       CHECK:     "yield"(%[[BEFORE]]) : (f32) -> ()
+//       CHECK:   })
+//       CHECK:   %[[FOO:.+]]:2 = "foo"() ({
+//       CHECK:     "yield"(%[[DONT_MOVE]], %[[MOVED]]) : (f32, f32) -> ()
+//       CHECK:   })
+//       CHECK:   return %[[FOO]]#0, %[[FOO]]#1
+
+module attributes {transform.with_named_sequence} {
+  transform.named_sequence @__transform_main(%arg0 : !transform.any_op {transform.readonly}) {
+    %op1 = transform.structured.match ops{["foo"]} in %arg0
+        : (!transform.any_op) -> !transform.any_op
+    %op2 = transform.structured.match ops{["before"]} in %arg0
+        : (!transform.any_op) -> !transform.any_op
+    transform.test.move_operand_deps %op1 before %op2 {exclude_insertion_point_dependencies = true}
+        : !transform.any_op, !transform.any_op
+    transform.yield
+  }
+}
+
+// -----
+
 // Dont move ops when insertion point does not dominate the op
 func.func @do_not_move() -> f32 {
   %1 = "moved_op"() : () -> (f32)
