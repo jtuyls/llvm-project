@@ -684,3 +684,43 @@ func.func @vectorize_nd_tensor_extract_transfer_read_basic_column(
 // CHECK:           %[[READ:.*]] = vector.transfer_read %[[SRC]][%[[C0]], %[[C0]], %[[C0]]], %[[PV]] : tensor<3x3x3xf32>, vector<f32>
 // CHECK:           %[[READ_BCAST:.*]] = vector.broadcast %[[READ]] : vector<f32> to vector<3x1x1xf32>
 // CHECK:           vector.transfer_write %[[READ_BCAST]], %[[INIT]]{{\[}}%[[C0]], %[[C0]], %[[C0]]] {in_bounds = [true, true, true]} : vector<3x1x1xf32>, tensor<3x1x1xf32>
+
+// -----
+
+// When a tensor is backed by a non-contiguous (strided) memref, the gather
+// offset calculation must use the actual memory strides rather than the
+// tensor's logical dimension sizes. This test verifies that for a tensor
+// created from a strided memref (e.g., a subview with strides [4, 1]), the
+// linearized gather indices use stride 4 instead of the tensor dim size 2.
+func.func @vectorize_nd_tensor_extract_strided_memref(
+    %src: memref<3x4xf32>,
+    %output: tensor<3xf32>) -> tensor<3xf32> {
+  %subview = memref.subview %src[0, 0][3, 2][1, 1]
+      : memref<3x4xf32> to memref<3x2xf32, strided<[4, 1]>>
+  %tensor = bufferization.to_tensor %subview restrict writable
+      : memref<3x2xf32, strided<[4, 1]>> to tensor<3x2xf32>
+
+  %c1 = arith.constant 1 : index
+  %res = linalg.generic {
+    indexing_maps = [affine_map<(d0) -> (d0)>],
+    iterator_types = ["parallel"]
+  } outs(%output : tensor<3xf32>) {
+  ^bb0(%out: f32):
+    %idx = linalg.index 0 : index
+    %extracted = tensor.extract %tensor[%idx, %c1] : tensor<3x2xf32>
+    linalg.yield %extracted : f32
+  } -> tensor<3xf32>
+
+  return %res : tensor<3xf32>
+}
+
+// The key check: the linearized gather indices must be [1, 5, 9], computed as
+// idx * 4 + 1 using the memref stride of 4. If the tensor dim size (2) were
+// used instead, the indices would incorrectly be [1, 3, 5].
+//
+// CHECK-LABEL:   func.func @vectorize_nd_tensor_extract_strided_memref(
+// CHECK-SAME:      %[[SRC:.*]]: memref<3x4xf32>,
+// CHECK-SAME:      %[[OUTPUT:.*]]: tensor<3xf32>)
+// CHECK-DAG:       %[[INDICES:.*]] = arith.constant dense<[1, 5, 9]> : vector<3xindex>
+// CHECK-DAG:       %[[C0:.*]] = arith.constant 0 : index
+// CHECK:           vector.gather %{{.*}}[%[[C0]], %[[C0]]] [%[[INDICES]]]

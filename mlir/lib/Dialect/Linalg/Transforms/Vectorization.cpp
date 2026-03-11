@@ -894,6 +894,62 @@ tensorExtractVectorizationPrecondition(Operation *op, bool vectorizeNDExtract) {
   return success();
 }
 
+/// Tries to get the memory strides from a tensor's defining op.
+/// When a tensor is backed by a strided memref (e.g., via a
+/// memref-to-tensor conversion), the logical tensor dimensions may not
+/// reflect the actual memory layout. This function extracts the real
+/// strides from the backing memref if available.
+///
+/// Returns true if strides were found, with `strides` populated.
+static bool getBackingMemRefStrides(Value tensor, size_t expectedRank,
+                                    SmallVectorImpl<int64_t> &strides) {
+  auto *defOp = tensor.getDefiningOp();
+  if (!defOp)
+    return false;
+
+  // Look for a memref-typed operand that could be the backing storage.
+  for (auto operand : defOp->getOperands()) {
+    auto memrefType = dyn_cast<MemRefType>(operand.getType());
+    if (!memrefType)
+      continue;
+
+    SmallVector<int64_t> memStrides;
+    int64_t offset;
+    if (failed(memrefType.getStridesAndOffset(memStrides, offset)))
+      continue;
+
+    if (memStrides.size() != expectedRank)
+      continue;
+
+    // Check if the strides differ from the default contiguous layout.
+    // If they match the contiguous layout, no special handling is needed.
+    auto shape = memrefType.getShape();
+    bool isContiguous = true;
+    int64_t expectedStride = 1;
+    for (int64_t i = expectedRank - 1; i >= 0; --i) {
+      if (memStrides[i] != expectedStride) {
+        isContiguous = false;
+        break;
+      }
+      if (shape[i] == ShapedType::kDynamic)
+        break; // Can't verify contiguity with dynamic dims
+      expectedStride *= shape[i];
+    }
+
+    if (isContiguous)
+      return false;
+
+    // Non-contiguous strides found -- verify all strides are static.
+    if (llvm::any_of(memStrides,
+                     [](int64_t s) { return s == ShapedType::kDynamic; }))
+      return false;
+
+    strides.assign(memStrides.begin(), memStrides.end());
+    return true;
+  }
+  return false;
+}
+
 /// Calculates the offsets (`$index_vec`) for `vector.gather` operations
 /// generated from `tensor.extract`. The offset is calculated as follows
 /// (example using scalar values):
@@ -904,6 +960,10 @@ tensorExtractVectorizationPrecondition(Operation *op, bool vectorizeNDExtract) {
 ///
 /// For tensor<45 x 80 x 15 x f32> and index [1, 2, 3], this leads to:
 ///  offset = ( ( 1 ) * 80 +  2 ) * 15  + 3
+///
+/// When the tensor is backed by a non-contiguous (strided) memref, the
+/// offset is instead computed using the actual memory strides:
+///    offset = sum(extractOp.indices[i] * memrefStride[i])
 static Value calculateGatherOffset(RewriterBase &rewriter,
                                    VectorizationState &state,
                                    tensor::ExtractOp extractOp,
@@ -912,10 +972,37 @@ static Value calculateGatherOffset(RewriterBase &rewriter,
   auto indexVecType = state.getCanonicalVecType(rewriter.getIndexType());
   auto loc = extractOp.getLoc();
 
+  const size_t numIndices = extractOp.getIndices().size();
+
+  // Check if the tensor is backed by a non-contiguous memref. If so,
+  // we must use the actual memory strides for linearization instead of
+  // the tensor's logical dimension sizes.
+  SmallVector<int64_t> memStrides;
+  if (getBackingMemRefStrides(extractOp.getTensor(), numIndices, memStrides)) {
+    // Use explicit stride-based linearization:
+    //   offset = sum(index[i] * stride[i])
+    Value offset = nullptr;
+    for (size_t i = 0; i < numIndices; i++) {
+      auto idx = broadcastIfNeeded(
+          rewriter, bvm.lookup(extractOp.getIndices()[i]), indexVecType);
+
+      auto stride = broadcastIfNeeded(
+          rewriter,
+          arith::ConstantIndexOp::create(rewriter, loc, memStrides[i]),
+          indexVecType);
+
+      Value term = arith::MulIOp::create(rewriter, loc, idx, stride);
+      offset =
+          offset ? arith::AddIOp::create(rewriter, loc, offset, term) : term;
+    }
+    return offset;
+  }
+
+  // Default: use Horner's method with tensor dimension sizes (correct for
+  // contiguous tensors).
   Value offset = broadcastIfNeeded(
       rewriter, bvm.lookup(extractOp.getIndices()[0]), indexVecType);
 
-  const size_t numIndices = extractOp.getIndices().size();
   for (size_t i = 1; i < numIndices; i++) {
     Value dimIdx = arith::ConstantIndexOp::create(rewriter, loc, i);
 
