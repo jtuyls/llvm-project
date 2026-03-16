@@ -7,6 +7,8 @@ declare <16 x half> @llvm.amdgcn.wmma.f16.16x16x16.f16(<16 x half>, <16 x half> 
 declare <16 x half> @llvm.amdgcn.wmma.f16.16x16x16.f16.tied(<16 x half>, <16 x half> , <16 x half>, i1 immarg)
 declare <16 x i16> @llvm.amdgcn.wmma.bf16.16x16x16.bf16(<16 x i16>, <16 x i16> , <16 x i16>, i1 immarg)
 declare <16 x i16> @llvm.amdgcn.wmma.bf16.16x16x16.bf16.tied(<16 x i16>, <16 x i16> , <16 x i16>, i1 immarg)
+declare <8 x half> @llvm.amdgcn.wmma.f16.16x16x16.f16.v8f16.v16f16(<16 x half>, <16 x half> , <8 x half>, i1 immarg)
+declare <8 x i16> @llvm.amdgcn.wmma.bf16.16x16x16.bf16.v8i16.v16i16(<16 x i16>, <16 x i16> , <8 x i16>, i1 immarg)
 declare <8 x i32> @llvm.amdgcn.wmma.i32.16x16x16.iu8(i1 immarg, <4 x i32>, i1 immarg, <4 x i32> , <8 x i32>, i1 immarg)
 declare <8 x i32> @llvm.amdgcn.wmma.i32.16x16x16.iu4(i1 immarg, <2 x i32>, i1 immarg, <2 x i32> , <8 x i32>, i1 immarg)
 
@@ -189,6 +191,58 @@ bb:
   %res.1 = call <16 x i16> @llvm.amdgcn.wmma.bf16.16x16x16.bf16.tied(<16 x i16> %A.1, <16 x i16> %B.1, <16 x i16> %C, i1 0)
   store <16 x i16> %res.0, ptr addrspace(1) %out.0, align 32
   store <16 x i16> %res.1, ptr addrspace(1) %out.1, align 32
+  ret void
+}
+
+; @llvm.amdgcn.wmma.f16.16x16x16.f16 v8f16 accumulator (Wave32 gfx11 half-size result)
+
+define amdgpu_ps void @test_wmma_f16_16x16x16_f16_v8f16_lo(<16 x half> %A, <16 x half> %B, <8 x half> %C, ptr addrspace(1) %out) {
+; W32-LABEL: test_wmma_f16_16x16x16_f16_v8f16_lo:
+; W32:       ; %bb.0: ; %bb
+; W32:         v_wmma_f16_16x16x16_f16 v[{{[0-9:]+}}], v[0:7], v[8:15], v[{{[0-9:]+}}]{{$}}
+; W32:         global_store_b128
+; W32-NEXT:    s_endpgm
+bb:
+  %res = call <8 x half> @llvm.amdgcn.wmma.f16.16x16x16.f16.v8f16.v16f16(<16 x half> %A, <16 x half> %B, <8 x half> %C, i1 0)
+  store <8 x half> %res, ptr addrspace(1) %out, align 16
+  ret void
+}
+
+define amdgpu_ps void @test_wmma_f16_16x16x16_f16_v8f16_hi(<16 x half> %A, <16 x half> %B, <8 x half> %C, ptr addrspace(1) %out) {
+; W32-LABEL: test_wmma_f16_16x16x16_f16_v8f16_hi:
+; W32:       ; %bb.0: ; %bb
+; W32:         v_wmma_f16_16x16x16_f16 v[{{[0-9:]+}}], v[0:7], v[8:15], v[{{[0-9:]+}}] op_sel:[0,0,1]
+; W32:         global_store_b128
+; W32-NEXT:    s_endpgm
+bb:
+  %res = call <8 x half> @llvm.amdgcn.wmma.f16.16x16x16.f16.v8f16.v16f16(<16 x half> %A, <16 x half> %B, <8 x half> %C, i1 1)
+  store <8 x half> %res, ptr addrspace(1) %out, align 16
+  ret void
+}
+
+; @llvm.amdgcn.wmma.bf16.16x16x16.bf16 v8i16 accumulator
+
+define amdgpu_ps void @test_wmma_bf16_16x16x16_bf16_v8i16_lo(<16 x i16> %A, <16 x i16> %B, <8 x i16> %C, ptr addrspace(1) %out) {
+; W32-LABEL: test_wmma_bf16_16x16x16_bf16_v8i16_lo:
+; W32:       ; %bb.0: ; %bb
+; W32:         v_wmma_bf16_16x16x16_bf16 v[{{[0-9:]+}}], v[0:7], v[8:15], v[{{[0-9:]+}}]{{$}}
+; W32:         global_store_b128
+; W32-NEXT:    s_endpgm
+bb:
+  %res = call <8 x i16> @llvm.amdgcn.wmma.bf16.16x16x16.bf16.v8i16.v16i16(<16 x i16> %A, <16 x i16> %B, <8 x i16> %C, i1 0)
+  store <8 x i16> %res, ptr addrspace(1) %out, align 16
+  ret void
+}
+
+define amdgpu_ps void @test_wmma_bf16_16x16x16_bf16_v8i16_hi(<16 x i16> %A, <16 x i16> %B, <8 x i16> %C, ptr addrspace(1) %out) {
+; W32-LABEL: test_wmma_bf16_16x16x16_bf16_v8i16_hi:
+; W32:       ; %bb.0: ; %bb
+; W32:         v_wmma_bf16_16x16x16_bf16 v[{{[0-9:]+}}], v[0:7], v[8:15], v[{{[0-9:]+}}] op_sel:[0,0,1]
+; W32:         global_store_b128
+; W32-NEXT:    s_endpgm
+bb:
+  %res = call <8 x i16> @llvm.amdgcn.wmma.bf16.16x16x16.bf16.v8i16.v16i16(<16 x i16> %A, <16 x i16> %B, <8 x i16> %C, i1 1)
+  store <8 x i16> %res, ptr addrspace(1) %out, align 16
   ret void
 }
 

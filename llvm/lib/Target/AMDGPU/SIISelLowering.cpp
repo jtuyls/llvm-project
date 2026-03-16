@@ -10521,6 +10521,66 @@ SDValue SITargetLowering::LowerINTRINSIC_WO_CHAIN(SDValue Op,
                                             SIInstrInfo::MO_ABS32_LO);
     return {DAG.getMachineNode(AMDGPU::S_MOV_B32, DL, MVT::i32, GA), 0};
   }
+  case Intrinsic::amdgcn_wmma_f16_16x16x16_f16:
+  case Intrinsic::amdgcn_wmma_bf16_16x16x16_bf16: {
+    // On gfx11 Wave32, the WMMA f16/bf16 instruction physically operates on
+    // <16 x half> (8 VGPRs, 2 f16 per VGPR), but the intrinsic can be called
+    // with <8 x half> result/accumulator representing just the 8 valid values.
+    // We need to widen the accumulator to <16 x half>, call the intrinsic, and
+    // extract the 8 valid results back.
+    //
+    // The op_sel bit (operand 4) determines which half of each VGPR holds
+    // valid data:
+    //   op_sel=0: even indices (low 16 bits of each VGPR)
+    //   op_sel=1: odd indices (high 16 bits of each VGPR)
+    bool IsF16 = IntrinsicID == Intrinsic::amdgcn_wmma_f16_16x16x16_f16;
+    EVT ResultVT = Op.getValueType();
+    // bf16 WMMA uses i16 element type at the LLVM IR level, not bf16.
+    EVT HalfVT = IsF16 ? MVT::v8f16 : MVT::v8i16;
+    EVT FullVT = IsF16 ? MVT::v16f16 : MVT::v16i16;
+
+    // Only need widening for the half-size case on gfx11 Wave32.
+    // On Wave64, <8 x half> is the native ISel type.
+    // On gfx12+, the instruction natively uses <8 x half>.
+    if (ResultVT != HalfVT || !Subtarget->isWave32() ||
+        Subtarget->getGeneration() != AMDGPUSubtarget::GFX11)
+      return SDValue();
+
+    SDValue A = Op.getOperand(1);
+    SDValue B = Op.getOperand(2);
+    SDValue C = Op.getOperand(3); // <8 x half/i16>
+    unsigned OpSelVal = Op.getConstantOperandVal(4);
+    EVT EltVT = HalfVT.getVectorElementType();
+
+    // Widen <8 x half> accumulator → <16 x half> by placing each element
+    // at the position the hardware expects. op_sel determines the mapping:
+    //   op_sel=0: elements at even indices {0,2,4,...,14}
+    //   op_sel=1: elements at odd indices {1,3,5,...,15}
+    // Remaining positions are undef (don't-care for the accumulator input).
+    SDValue Undef = DAG.getUNDEF(EltVT);
+    SmallVector<SDValue, 16> WidenedElts(16, Undef);
+    for (unsigned I = 0; I < 8; ++I) {
+      unsigned Idx = OpSelVal ? (2 * I + 1) : (2 * I);
+      WidenedElts[Idx] = DAG.getNode(ISD::EXTRACT_VECTOR_ELT, DL, EltVT, C,
+                                     DAG.getConstant(I, DL, MVT::i32));
+    }
+    SDValue WidenedAcc = DAG.getBuildVector(FullVT, DL, WidenedElts);
+
+    // Call the intrinsic with the full <16 x half> types.
+    SDValue WideResult =
+        DAG.getNode(ISD::INTRINSIC_WO_CHAIN, DL, FullVT,
+                    {Op.getOperand(0), A, B, WidenedAcc, Op.getOperand(4)});
+
+    // Narrow <16 x half> → <8 x half> by extracting the 8 valid elements.
+    SmallVector<SDValue, 8> NarrowedElts;
+    for (unsigned I = 0; I < 8; ++I) {
+      unsigned Idx = OpSelVal ? (2 * I + 1) : (2 * I);
+      NarrowedElts.push_back(DAG.getNode(ISD::EXTRACT_VECTOR_ELT, DL, EltVT,
+                                         WideResult,
+                                         DAG.getConstant(Idx, DL, MVT::i32)));
+    }
+    return DAG.getBuildVector(ResultVT, DL, NarrowedElts);
+  }
   case Intrinsic::amdgcn_swmmac_f16_16x16x32_f16:
   case Intrinsic::amdgcn_swmmac_bf16_16x16x32_bf16:
   case Intrinsic::amdgcn_swmmac_f32_16x16x32_bf16:
