@@ -17,6 +17,7 @@
 #include "mlir/Dialect/MemRef/IR/MemRef.h"
 #include "mlir/Dialect/SCF/IR/SCF.h"
 #include "mlir/Dialect/Tensor/IR/Tensor.h"
+#include "mlir/Dialect/Utils/IndexingUtils.h"
 #include "mlir/Dialect/Utils/StructuredOpsUtils.h"
 #include "mlir/Dialect/Vector/IR/VectorOps.h"
 #include "mlir/Dialect/Vector/Transforms/LoweringPatterns.h"
@@ -26,7 +27,7 @@
 #include "mlir/IR/PatternMatch.h"
 #include "mlir/IR/TypeUtilities.h"
 
-#define DEBUG_TYPE "vector-broadcast-lowering"
+#define DEBUG_TYPE "vector-gather-lowering"
 
 using namespace mlir;
 using namespace mlir::vector;
@@ -78,26 +79,49 @@ struct UnrollGather : OpRewritePattern<vector::GatherOp> {
   }
 };
 
-/// Rewrites a vector.gather of a strided MemRef as a gather of a non-strided
-/// MemRef with updated indices that model the strided access.
+/// Rewrites a vector.gather of a strided MemRef (from a memref.subview) as a
+/// gather of the non-strided parent MemRef collapsed to 1-D, with indices
+/// de-linearized from the subview's contiguous layout and re-linearized using
+/// the parent's contiguous strides.
 ///
+/// Example (rank-reducing, rank-2 source to 1-D):
 /// ```mlir
-///   %subview = memref.subview %M (...)
-///     : memref<100x3xf32> to memref<100xf32, strided<[3]>>
-///   %gather = vector.gather %subview[%idxs] (...)
-///     : memref<100xf32, strided<[3]>>
+///   %subview = memref.subview %M[5, 0] [100, 1] [1, 1]
+///     : memref<105x3xf32> to memref<100xf32, strided<[3], offset: 15>>
+///   %gather = vector.gather %subview[%c0] [%idxs], ...
 /// ```
 /// ==>
 /// ```mlir
-///   %collapse_shape = memref.collapse_shape %M (...)
-///     : memref<100x3xf32> into memref<300xf32>
-///   %new_idxs = arith.muli %idxs, %c3 : vector<4xindex>
-///   %gather = vector.gather %collapse_shape[%new_idxs] (...)
-///     : memref<300xf32> (...)
+///   %collapsed = memref.collapse_shape %M [[0, 1]]
+///     : memref<105x3xf32> into memref<315xf32>
+///   %scaled = arith.muli %idxs, %c3 : vector<4xindex>
+///   %new_idxs = arith.addi %scaled, %c15 : vector<4xindex>
+///   %gather = vector.gather %collapsed[%c0] [%new_idxs], ...
 /// ```
 ///
-/// ATM this is effectively limited to reading a 1D Vector from a 2D MemRef,
-/// but should be fairly straightforward to extend beyond that.
+/// Example (same-rank, 3-D to 3-D with strided outer dim):
+/// ```mlir
+///   %subview = memref.subview %M[0, 0, 0] [2, 3, 4] [1, 1, 1]
+///     : memref<2x5x4xf32> to memref<2x3x4xf32, strided<[20, 4, 1]>>
+///   %gather = vector.gather %subview[%c0, %c0, %c0] [%idxs], ...
+/// ```
+/// ==>
+/// ```mlir
+///   %collapsed = memref.collapse_shape %M [[0, 1, 2]]
+///     : memref<2x5x4xf32> into memref<40xf32>
+///   // De-linearize with contiguous strides [12, 4, 1], re-linearize with
+///   // parent strides [20, 4, 1]:
+///   %d0 = arith.divui %idxs, %c12
+///   %d1_tmp = arith.divui %idxs, %c4
+///   %d1 = arith.remui %d1_tmp, %c3
+///   %d2 = arith.remui %idxs, %c4
+///   %new_idxs = %d0 * 20 + %d1 * 4 + %d2
+///   %gather = vector.gather %collapsed[%c0] [%new_idxs], ...
+/// ```
+///
+/// Handles any source rank, any result rank, and any stride values. Requires
+/// the source to be contiguous (row-major strides) with a static offset, and
+/// all subview strides/sizes/offset to be static.
 struct RemoveStrideFromGatherSource : OpRewritePattern<vector::GatherOp> {
   using Base::Base;
 
@@ -105,56 +129,165 @@ struct RemoveStrideFromGatherSource : OpRewritePattern<vector::GatherOp> {
                                 PatternRewriter &rewriter) const override {
     Value base = op.getBase();
 
-    // TODO: Strided accesses might be coming from other ops as well
+    // Only handle gathers sourced from a memref.subview.
     auto subview = base.getDefiningOp<memref::SubViewOp>();
     if (!subview)
       return failure();
 
+    auto resultType = subview.getResult().getType();
     auto sourceType = subview.getSource().getType();
+    int64_t resultRank = resultType.getRank();
 
-    // TODO: Allow ranks > 2.
-    if (sourceType.getRank() != 2)
+    // Verify the source (parent) is contiguous: strides must match row-major
+    // layout computed from the shape. The parent offset must be static but may
+    // be non-zero (e.g., when the parent is itself a subview). Since svOffset
+    // already includes the parent offset, we subtract it to avoid
+    // double-counting (the collapsed memref carries the parent offset in its
+    // layout).
+    SmallVector<int64_t> parentStrides;
+    int64_t parentOffset;
+    if (failed(sourceType.getStridesAndOffset(parentStrides, parentOffset)))
+      return failure();
+    if (ShapedType::isDynamic(parentOffset))
+      return failure();
+    int64_t expectedStride = 1;
+    for (int64_t d = sourceType.getRank() - 1; d >= 0; --d) {
+      if (ShapedType::isDynamic(sourceType.getShape()[d]) ||
+          parentStrides[d] != expectedStride)
+        return failure();
+      expectedStride *= sourceType.getShape()[d];
+    }
+
+    // Get the subview result's strides and element offset (must all be static).
+    SmallVector<int64_t> svStrides;
+    int64_t svOffset;
+    if (failed(resultType.getStridesAndOffset(svStrides, svOffset)))
+      return failure();
+    if (ShapedType::isDynamic(svOffset))
+      return failure();
+    if (llvm::any_of(svStrides, ShapedType::isDynamic))
       return failure();
 
-    // Get strides
-    auto layout = subview.getResult().getType().getLayout();
-    auto stridedLayoutAttr = llvm::dyn_cast<StridedLayoutAttr>(layout);
-    if (!stridedLayoutAttr)
+    // Compute contiguous (row-major) strides from the subview result shape.
+    // computeStrides requires static inner dims (asserts non-negative); the
+    // outermost dim may be dynamic since it's not used in the computation.
+    ArrayRef<int64_t> svShape = resultType.getShape();
+    if (llvm::any_of(svShape.drop_front(), ShapedType::isDynamic))
+      return failure();
+    SmallVector<int64_t> contiguousStrides = computeStrides(svShape);
+
+    // Check if the subview strides match contiguous layout. If so, only the
+    // offset matters; if offset is also 0, there's nothing to do.
+    bool needsRelinearization = (svStrides != contiguousStrides);
+    if (!needsRelinearization && svOffset == parentOffset)
       return failure();
 
-    // TODO: Allow the access to be strided in multiple dimensions.
-    if (stridedLayoutAttr.getStrides().size() != 1)
-      return failure();
-
-    int64_t srcTrailingDim = sourceType.getShape().back();
-
-    // Assume that the stride matches the trailing dimension of the source
-    // memref.
-    // TODO: Relax this assumption.
-    if (stridedLayoutAttr.getStrides()[0] != srcTrailingDim)
-      return failure();
-
-    // 1. Collapse the input memref so that it's "flat".
-    SmallVector<ReassociationIndices> reassoc = {{0, 1}};
-    Value collapsed = memref::CollapseShapeOp::create(
-        rewriter, op.getLoc(), subview.getSource(), reassoc);
-
-    // 2. Generate new gather indices that will model the
-    // strided access.
-    IntegerAttr stride = rewriter.getIndexAttr(srcTrailingDim);
+    Location loc = op.getLoc();
     VectorType vType = op.getIndices().getType();
-    Value mulCst = arith::ConstantOp::create(
-        rewriter, op.getLoc(), vType, DenseElementsAttr::get(vType, stride));
 
-    Value newIdxs =
-        arith::MulIOp::create(rewriter, op.getLoc(), op.getIndices(), mulCst);
+    // Helper: create a splat vector constant matching the index vector's
+    // element type (which may be index, i32, or i64).
+    auto makeVecCst = [&](int64_t val) -> Value {
+      Type elemTy = vType.getElementType();
+      Attribute attr =
+          elemTy.isIndex()
+              ? cast<Attribute>(rewriter.getIndexAttr(val))
+              : cast<Attribute>(rewriter.getIntegerAttr(elemTy, val));
+      return arith::ConstantOp::create(rewriter, loc, vType,
+                                       DenseElementsAttr::get(vType, attr));
+    };
 
-    // 3. Create an updated gather op with the collapsed input memref and the
-    // updated indices.
+    // 1. Collapse the parent memref to 1-D.
+    SmallVector<ReassociationIndices> reassoc = {
+        llvm::to_vector(llvm::seq<int64_t>(0, sourceType.getRank()))};
+    Value collapsed = memref::CollapseShapeOp::create(
+        rewriter, loc, subview.getSource(), reassoc);
+
+    // 2. Linearize the gather's base offsets into the subview's address space.
+    //    Static offsets are folded into svOffset. We subtract parentOffset
+    //    because svOffset already includes it, and the collapsed memref carries
+    //    parentOffset in its own layout — without subtraction it would be
+    //    counted twice.
+    int64_t staticBaseOffset = svOffset - parentOffset;
+    Value dynamicBaseOffset;
+    for (int64_t d = 0; d < resultRank; ++d) {
+      Value gatherOffset = op.getOffsets()[d];
+      if (std::optional<int64_t> cst = getConstantIntValue(gatherOffset)) {
+        staticBaseOffset += *cst * svStrides[d];
+      } else {
+        // Scale by the actual stride and accumulate.
+        Value strideCst =
+            rewriter.createOrFold<arith::ConstantIndexOp>(loc, svStrides[d]);
+        Value term =
+            arith::MulIOp::create(rewriter, loc, gatherOffset, strideCst);
+        dynamicBaseOffset =
+            dynamicBaseOffset
+                ? arith::AddIOp::create(rewriter, loc, dynamicBaseOffset, term)
+                : term;
+      }
+    }
+
+    // 3. De-linearize the gather index vector using contiguous strides (from
+    //    the subview result shape) and re-linearize with the subview's actual
+    //    strides (which map dimension indices to flat offsets in the underlying
+    //    buffer). We use vectorized arith ops rather than scalar
+    //    affine.delinearize_index/linearize_index to keep the gather as a
+    //    vector operation and avoid per-element scalarization.
+    Value newIdxs;
+    Value indexVec = op.getIndices();
+    if (needsRelinearization) {
+      for (int64_t d = 0; d < resultRank; ++d) {
+        // De-linearize: dimIdx = (flatIdx / contiguousStride[d]) % shape[d].
+        // The outermost dim (d==0) skips the modulo (already bounded).
+        // The innermost dim skips the division when contiguousStride == 1.
+        Value dimIdx = indexVec;
+        if (contiguousStrides[d] != 1) {
+          dimIdx = arith::DivUIOp::create(rewriter, loc, dimIdx,
+                                          makeVecCst(contiguousStrides[d]));
+        }
+        if (d != 0) {
+          dimIdx = arith::RemUIOp::create(rewriter, loc, dimIdx,
+                                          makeVecCst(svShape[d]));
+        }
+
+        // Re-linearize: term = dimIdx * actualStride[d].
+        Value term = dimIdx;
+        if (svStrides[d] != 1) {
+          term = arith::MulIOp::create(rewriter, loc, dimIdx,
+                                       makeVecCst(svStrides[d]));
+        }
+
+        newIdxs = newIdxs ? arith::AddIOp::create(rewriter, loc, newIdxs, term)
+                          : term;
+      }
+    } else {
+      // Strides match contiguous layout — indices are already correct.
+      newIdxs = indexVec;
+    }
+
+    // 4. Add dynamic base offset (broadcast scalar to vector).
+    if (dynamicBaseOffset) {
+      Type elemTy = vType.getElementType();
+      if (!elemTy.isIndex()) {
+        dynamicBaseOffset = arith::IndexCastOp::create(rewriter, loc, elemTy,
+                                                       dynamicBaseOffset);
+      }
+      Value bcast = rewriter.createOrFold<vector::BroadcastOp>(
+          loc, vType, dynamicBaseOffset);
+      newIdxs = arith::AddIOp::create(rewriter, loc, newIdxs, bcast);
+    }
+
+    // 5. Add static element offset.
+    if (staticBaseOffset != 0) {
+      newIdxs = arith::AddIOp::create(rewriter, loc, newIdxs,
+                                      makeVecCst(staticBaseOffset));
+    }
+
+    // 6. Create the new gather on the collapsed parent with a zero base offset.
+    Value c0 = rewriter.createOrFold<arith::ConstantIndexOp>(loc, 0);
     Value newGather = vector::GatherOp::create(
-        rewriter, op.getLoc(), op.getResult().getType(), collapsed,
-        op.getOffsets(), newIdxs, op.getMask(), op.getPassThru(),
-        op.getAlignmentAttr());
+        rewriter, loc, op.getResult().getType(), collapsed, ValueRange{c0},
+        newIdxs, op.getMask(), op.getPassThru(), op.getAlignmentAttr());
     rewriter.replaceOp(op, newGather);
 
     return success();
@@ -193,18 +326,12 @@ struct Gather1DToConditionalLoads : OpRewritePattern<vector::GatherOp> {
 
     // For multi-dimensional memrefs, use linearize+delinearize to compute
     // correct N-D load indices from the 1-D gather index.
+    // Note: no stride check is needed here because each element is loaded
+    // individually as vector<1xelemTy>. Single-element vector.load is valid
+    // on any memref regardless of stride (the stride only affects multi-element
+    // contiguous loads).
     bool useDelinearization = false;
     if (auto memType = dyn_cast<MemRefType>(base.getType())) {
-      // vector.load requires the most minor memref dim to have unit stride
-      // (unless reading exactly 1 element).
-      if (auto stridesAttr =
-              dyn_cast_if_present<StridedLayoutAttr>(memType.getLayout())) {
-        if (stridesAttr.getStrides().back() != 1 &&
-            resultTy.getNumElements() != 1)
-          return rewriter.notifyMatchFailure(
-              op, "most minor memref dim must have unit stride");
-      }
-
       if (memType.getRank() > 1)
         useDelinearization = true;
     }
