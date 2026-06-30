@@ -34,6 +34,14 @@ StringRef Triple::getArchTypeName(ArchType Kind) {
     return "aarch64_be";
   case amdgcn:
     return "amdgcn";
+  case aie:
+    return "aie";
+  case aie2:
+    return "aie2";
+  case aie2p:
+    return "aie2p";
+  case aie2ps:
+    return "aie2ps";
   case amdil64:
     return "amdil64";
   case amdil:
@@ -719,6 +727,10 @@ Triple::ArchType Triple::getArchTypeForLLVMName(StringRef Name) {
       .Case("renderscript32", renderscript32)
       .Case("renderscript64", renderscript64)
       .Case("ve", ve)
+      .Case("aie", aie)
+      .Case("aie2", aie2)
+      .Case("aie2p", aie2p)
+      .Case("aie2ps", aie2ps)
       .Case("csky", csky)
       .Case("loongarch32", loongarch32)
       .Case("loongarch64", loongarch64)
@@ -867,6 +879,10 @@ Triple::ArchType Triple::parseArch(StringRef ArchName) {
           .Case("renderscript64", Triple::renderscript64)
           .Case("shave", Triple::shave)
           .Case("ve", Triple::ve)
+          .Case("aie", Triple::aie)
+          .Case("aie2", Triple::aie2)
+          .Case("aie2p", Triple::aie2p)
+          .Case("aie2ps", Triple::aie2ps)
           .Case("wasm32", Triple::wasm32)
           .Case("wasm64", Triple::wasm64)
           .Case("csky", Triple::csky)

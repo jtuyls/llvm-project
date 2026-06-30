@@ -114,7 +114,11 @@ public:
     renderscript32, // 32-bit RenderScript
     renderscript64, // 64-bit RenderScript
     ve,             // NEC SX-Aurora Vector Engine
-    LastArchType = ve
+    aie,            // AIE: Xilinx AIEngine (amd/aie/ port)
+    aie2,           // AIE: Xilinx AIMLEngine
+    aie2p,          // AIE: Xilinx AIMLEngine+
+    aie2ps,         // AIE: Xilinx AIMLEngineps
+    LastArchType = aie2ps
   };
   enum SubArchType {
     NoSubArch,
@@ -1116,6 +1120,13 @@ public:
 
   /// Tests whether the target is VE
   bool isVE() const { return getArch() == Triple::ve; }
+
+  // amd/aie/ port: AIE subtarget tests.
+  bool isAIE1() const { return getArch() == Triple::aie; }
+  bool isAIE2() const { return getArch() == Triple::aie2; }
+  bool isAIE2P() const { return getArch() == Triple::aie2p; }
+  bool isAIE2PS() const { return getArch() == Triple::aie2ps; }
+  bool isAIE() const { return isAIE1() || isAIE2() || isAIE2P() || isAIE2PS(); }
 
   /// Tests whether the target is wasm (32- and 64-bit).
   bool isWasm() const {
