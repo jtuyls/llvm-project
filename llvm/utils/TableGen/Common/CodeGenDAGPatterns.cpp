@@ -833,6 +833,12 @@ void TypeInfer::expandOverloads(TypeSetByHwMode::SetType &Out,
     for (MVT T : MVT::integer_scalable_vector_valuetypes())
       if (Legal.count(T))
         Out.insert(T);
+    // amd/aie/ port: also expand iAny over the AIE integer types (i48/i20), which
+    // live outside the normal integer range. Without this, "any integer" immediates
+    // (e.g. AIE's txxs<N, iAny>) drop AIE types and produce an empty type set.
+    for (MVT T : MVT::integer_aie_valuetypes())
+      if (Legal.count(T))
+        Out.insert(T);
   } else if (Out.count(MVT::fAny)) {
     Out.erase(MVT::fAny);
     for (MVT T : MVT::fp_valuetypes())

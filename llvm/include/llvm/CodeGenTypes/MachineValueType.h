@@ -607,6 +607,15 @@ namespace llvm {
                                 MVT::LAST_CHERI_CAPABILITY_VALUETYPE,
                                 force_iteration_on_noniterable_enum);
     }
+
+    // amd/aie/ port: iterate the AIE integer value types (i48/i20). Used by the
+    // TableGen iAny-expansion so AIE integer types are included when an
+    // "any integer" immediate is resolved against legal types.
+    static auto integer_aie_valuetypes() {
+      return enum_seq_inclusive(MVT::FIRST_AIE_INTEGER_VALUETYPE,
+                                MVT::LAST_AIE_INTEGER_VALUETYPE,
+                                force_iteration_on_noniterable_enum);
+    }
     /// @}
   };
 
