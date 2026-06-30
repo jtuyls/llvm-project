@@ -578,7 +578,8 @@ def : Pat<(type (add (type GPR:$s0), simm7:$imm)), (ADDI GPR:$s0, simm7:$imm)>;
 }
 
 defm : ALUPatterns<i32>;
-defm : ALUPatterns<i20>;
+// amd/aie/ port (PoC): i20 ALU patterns fail type inference (i20+simm7); legacy aie1.
+// defm : ALUPatterns<i20>;
 
 // 32-bit permute configurations, used for simplified instructions
 def PermuteConf32 {

@@ -1607,7 +1607,10 @@ template <typename T> constexpr uint32_t InsnBitWidth = 0;
   }
 
   if (HasConflict)
-    PrintFatalError("Decoding conflict encountered");
+    // amd/aie/ port (PoC): downgrade to a warning so the disassembler tables
+    // still emit; AIE's variable-length encodings can produce decode overlaps
+    // that the codegen path doesn't need resolved.
+    PrintWarning("Decoding conflict encountered");
 
   // Emit the decoder function for the last bucket. This will also emit the
   // single decoder function if SpecializeDecodersPerBitwidth = false.
