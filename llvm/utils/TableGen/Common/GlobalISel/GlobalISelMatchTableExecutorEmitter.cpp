@@ -19,6 +19,19 @@ static cl::opt<bool>
                      cl::desc("Generate extended llt names in match tables"),
                      cl::init(false));
 
+// amd/aie/ port: let a target override the Subtarget class the generated GISel
+// code derives from (AIE uses a shared AIEBaseSubtarget across subtargets).
+static cl::opt<std::string>
+    GISelSubtargetClass("gisel-subtarget-class",
+                        cl::desc("Subtarget class name for GISel emitters"),
+                        cl::init(""));
+
+static std::string getSubtargetClassName(const CodeGenTarget &Target) {
+  if (!GISelSubtargetClass.empty())
+    return GISelSubtargetClass;
+  return (Target.getName() + "Subtarget").str();
+}
+
 GlobalISelMatchTableExecutorEmitter::GlobalISelMatchTableExecutorEmitter() {
   LLT::setUseExtended(AllowExtendedLLT);
 }
@@ -50,8 +63,8 @@ void GlobalISelMatchTableExecutorEmitter::emitSubtargetFeatureBitsetImpl(
      << "::setupGeneratedPerFunctionState(MachineFunction &MF) {\n"
         "  AvailableFunctionFeatures = computeAvailableFunctionFeatures("
         "(const "
-     << getTarget().getName()
-     << "Subtarget *)&MF.getSubtarget(), &MF);\n"
+     << getSubtargetClassName(getTarget()) // amd/aie/ port
+     << " *)&MF.getSubtarget(), &MF);\n"
         "}\n";
 
   SubtargetFeatureInfo::emitComputeAvailableFeatures(
@@ -272,11 +285,11 @@ void GlobalISelMatchTableExecutorEmitter::emitPredicatesDecl(
      << "  return AvailableModuleFeatures | AvailableFunctionFeatures;\n"
      << "}\n"
      << "PredicateBitset\n"
-     << "computeAvailableModuleFeatures(const " << getTarget().getName()
-     << "Subtarget *Subtarget) const;\n"
+     << "computeAvailableModuleFeatures(const " << getSubtargetClassName(getTarget())
+     << " *Subtarget) const;\n"
      << "PredicateBitset\n"
-     << "computeAvailableFunctionFeatures(const " << getTarget().getName()
-     << "Subtarget *Subtarget,\n"
+     << "computeAvailableFunctionFeatures(const " << getSubtargetClassName(getTarget())
+     << " *Subtarget,\n"
      << "                                 const MachineFunction *MF) const;\n"
      << "void setupGeneratedPerFunctionState(MachineFunction &MF) override;\n";
 }
