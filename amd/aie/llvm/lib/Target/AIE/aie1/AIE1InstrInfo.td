@@ -2047,13 +2047,11 @@ def : Pat<(ptr0 frameindex:$fi),
 multiclass LdPat<PatFrag LoadOp, AIEInst InstInd, AIEInst InstIdx, ValueType ResType, ValueType ResTypeOut = ResType> {
   def : Pat<(ResTypeOut (LoadOp PTR:$rs1)), (InstInd PTR:$rs1)>;
   // def : Pat<(LoadOp AddrFI:$rs1), (Inst AddrFI:$rs1, 0)>;
-  // MOV_S12 can load directly to a CS register
-  def : Pat<(ResTypeOut (LoadOp (add GPR:$rs1, simm12:$imm))),
-            (InstIdx GPR:$rs1, (MOV_S12 simm12:$imm))>;
-  // MOV_S20 cannot load directly to a CS register: requires another
-  // register move
-  def : Pat<(ResTypeOut (LoadOp (add GPR:$rs1, simm20:$imm))),
-            (InstIdx GPR:$rs1, (MOV_S20 simm20:$imm))>;
+  // amd/aie/ port (PoC): GPR-indexed load patterns fail type inference on 23; legacy aie1.
+  // def : Pat<(ResTypeOut (LoadOp (add GPR:$rs1, simm12:$imm))),
+  //           (InstIdx GPR:$rs1, (MOV_S12 simm12:$imm))>;
+  // def : Pat<(ResTypeOut (LoadOp (add GPR:$rs1, simm20:$imm))),
+  //           (InstIdx GPR:$rs1, (MOV_S20 simm20:$imm))>;
   // def : Pat<(LoadOp (add AddrFI:$rs1, simm12:$imm12)),
   //           (Inst AddrFI:$rs1, simm12:$imm12)>;
   // def : Pat<(LoadOp (IsOrAdd AddrFI:$rs1, simm12:$imm12)),
@@ -2064,11 +2062,13 @@ foreach Ty = [i32, f32] in {
   defm : LdPat<load, LDB_ind, LDB_idx, Ty>;
 }
 def :  Pat<(ptr0 (load PTR:$rs1)), (LDA_ind_GPR PTR:$rs1)>;
-defm : LdPat<load, LDA_u8_ind, LDA_u8_idx, v8i1>;
-defm : LdPat<load, LDA_u16_ind, LDA_u16_idx, v16i1>;
-defm : LdPat<load, LDA_ind_PTR, LDA_idx_PTR, i20>;
-defm : LdPat<load, LDA_ind_MOD, LDA_idx_MOD, i20>;
-defm : LdPat<load, LDB_ind, LDB_idx, i20>;
+// amd/aie/ port (PoC): mask-type (v8i1/v16i1) GPR-addressed loads fail type inference; legacy aie1.
+// defm : LdPat<load, LDA_u8_ind, LDA_u8_idx, v8i1>;
+// defm : LdPat<load, LDA_u16_ind, LDA_u16_idx, v16i1>;
+// amd/aie/ port (PoC): i20 load patterns fail type inference (i20+simm); legacy aie1.
+// defm : LdPat<load, LDA_ind_PTR, LDA_idx_PTR, i20>;
+// defm : LdPat<load, LDA_ind_MOD, LDA_idx_MOD, i20>;
+// defm : LdPat<load, LDB_ind, LDB_idx, i20>;
 foreach Ty = [i32, i20] in {
 defm : LdPat<sextloadi16, LDA_s16_ind, LDA_s16_idx, Ty>;
 defm : LdPat<extloadi16 , LDA_s16_ind, LDA_s16_idx, Ty>;
@@ -2081,10 +2081,11 @@ defm : LdPat<zextloadi8 , LDA_u8_ind , LDA_u8_idx , Ty>;
 multiclass StPat<PatFrag StoreOp, AIEInst InstInd, AIEInst InstIdx, ValueType type> {
   def : Pat<(StoreOp (type GPR:$rs2), PTR:$rs1), (InstInd GPR:$rs2, PTR:$rs1)> { /*quiet warning*/ AIEInst dummy=InstIdx; }
   // def : Pat<(StoreOp GPR:$rs2, AddrFI:$rs1), (Inst GPR:$rs2, AddrFI:$rs1, 0)>;
-  def : Pat<(StoreOp (type GPR:$rs2), (add GPR:$rs1, simm12:$imm)),
-            (InstIdx GPR:$rs2, GPR:$rs1, (MOV_S12 simm12:$imm))>;
-  def : Pat<(StoreOp (type GPR:$rs2), (add GPR:$rs1, simm20:$imm)),
-            (InstIdx GPR:$rs2, GPR:$rs1, (MOV_S20 simm20:$imm))>;
+  // amd/aie/ port (PoC): GPR-indexed store patterns fail type inference on 23; legacy aie1.
+  // def : Pat<(StoreOp (type GPR:$rs2), (add GPR:$rs1, simm12:$imm)),
+  //           (InstIdx GPR:$rs2, GPR:$rs1, (MOV_S12 simm12:$imm))>;
+  // def : Pat<(StoreOp (type GPR:$rs2), (add GPR:$rs1, simm20:$imm)),
+  //           (InstIdx GPR:$rs2, GPR:$rs1, (MOV_S20 simm20:$imm))>;
 //   def : Pat<(StoreOp (type GPR:$rs2), (add AddrFI:$rs1, simm12:$imm12)),
 //             (InstIdx $rs2, $rs1, $imm12)>;
   // def : Pat<(StoreOp GPR:$rs2, (IsOrAdd AddrFI:$rs1, simm12:$imm12)),

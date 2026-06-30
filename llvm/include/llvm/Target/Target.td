@@ -647,7 +647,7 @@ class OperandRegClass<int OperIdx, RegisterClass Reg> {
 // Allows specifying instruction Itineraries based on the RegClass used.
 class ItinRegClassPair<InstrItinClass Itin, list<OperandRegClass> RegType> {
   InstrItinClass Itinerary = Itin;
-  list<OperandRegClass> RegClasses = RegType;
+  list<OperandRegClass> RegTypeList = RegType;
 }
 
 //===----------------------------------------------------------------------===//
