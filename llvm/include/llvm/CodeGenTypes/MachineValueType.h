@@ -93,19 +93,30 @@ namespace llvm {
               (SimpleTy >= MVT::FIRST_INTEGER_FIXEDLEN_VECTOR_VALUETYPE &&
                SimpleTy <= MVT::LAST_INTEGER_FIXEDLEN_VECTOR_VALUETYPE) ||
               (SimpleTy >= MVT::FIRST_INTEGER_SCALABLE_VECTOR_VALUETYPE &&
-               SimpleTy <= MVT::LAST_INTEGER_SCALABLE_VECTOR_VALUETYPE));
+               SimpleTy <= MVT::LAST_INTEGER_SCALABLE_VECTOR_VALUETYPE) ||
+              // amd/aie/ port: AIE integer/vector types report as integers.
+              (SimpleTy >= MVT::FIRST_AIE_INTEGER_VALUETYPE &&
+               SimpleTy <= MVT::LAST_AIE_INTEGER_VALUETYPE) ||
+              (SimpleTy >= MVT::FIRST_AIE_VECTOR_VALUETYPE &&
+               SimpleTy <= MVT::LAST_AIE_VECTOR_VALUETYPE));
     }
 
     /// Return true if this is an integer, not including vectors.
     bool isScalarInteger() const {
       return (SimpleTy >= MVT::FIRST_INTEGER_VALUETYPE &&
-              SimpleTy <= MVT::LAST_INTEGER_VALUETYPE);
+              SimpleTy <= MVT::LAST_INTEGER_VALUETYPE) ||
+             // amd/aie/ port: AIE scalar integer types (i48/i20).
+             (SimpleTy >= MVT::FIRST_AIE_INTEGER_VALUETYPE &&
+              SimpleTy <= MVT::LAST_AIE_INTEGER_VALUETYPE);
     }
 
     /// Return true if this is a vector value type.
     bool isVector() const {
       return (SimpleTy >= MVT::FIRST_VECTOR_VALUETYPE &&
-              SimpleTy <= MVT::LAST_VECTOR_VALUETYPE);
+              SimpleTy <= MVT::LAST_VECTOR_VALUETYPE) ||
+             // amd/aie/ port: AIE vector types (v8i48/v16i48).
+             (SimpleTy >= MVT::FIRST_AIE_VECTOR_VALUETYPE &&
+              SimpleTy <= MVT::LAST_AIE_VECTOR_VALUETYPE);
     }
 
     /// Return true if this is a vector value type where the
@@ -134,7 +145,10 @@ namespace llvm {
 
     bool isFixedLengthVector() const {
       return (SimpleTy >= MVT::FIRST_FIXEDLEN_VECTOR_VALUETYPE &&
-              SimpleTy <= MVT::LAST_FIXEDLEN_VECTOR_VALUETYPE);
+              SimpleTy <= MVT::LAST_FIXEDLEN_VECTOR_VALUETYPE) ||
+             // amd/aie/ port: AIE vectors are fixed-length.
+             (SimpleTy >= MVT::FIRST_AIE_VECTOR_VALUETYPE &&
+              SimpleTy <= MVT::LAST_AIE_VECTOR_VALUETYPE);
     }
 
     /// Return true if this is a 16-bit vector type.

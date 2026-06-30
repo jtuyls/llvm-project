@@ -3831,13 +3831,20 @@ static bool InferFromPattern(CodeGenInstruction &InstInfo,
     }
   }
 
-  if (InstInfo.mayStore != PatInfo.mayStore && !InstInfo.mayStore_Unset) {
+  // amd/aie/ port: patterns that model inaccessible memory through registers
+  // legitimately mismatch the instruction's mayLoad/mayStore flags.
+  bool modelsInaccessibleMemThroughRegs =
+      PatDef->getValueAsBit("ModelsInaccessibleMemThroughRegs");
+
+  if (!modelsInaccessibleMemThroughRegs &&
+      InstInfo.mayStore != PatInfo.mayStore && !InstInfo.mayStore_Unset) {
     Error = true;
     PrintError(PatDef->getLoc(),
                "Pattern doesn't match mayStore = " + Twine(InstInfo.mayStore));
   }
 
-  if (InstInfo.mayLoad != PatInfo.mayLoad && !InstInfo.mayLoad_Unset) {
+  if (!modelsInaccessibleMemThroughRegs &&
+      InstInfo.mayLoad != PatInfo.mayLoad && !InstInfo.mayLoad_Unset) {
     // Allow explicitly setting mayLoad = 1, even when the pattern has no loads.
     // Some targets translate immediates to loads.
     if (!InstInfo.mayLoad) {
@@ -4331,13 +4338,19 @@ void CodeGenDAGPatterns::VerifyInstructionFlags() {
     if (PatInfo.hasSideEffects && !NumSideEffects)
       Msgs.push_back("pattern has side effects, but hasSideEffects isn't set");
 
+    // amd/aie/ port: skip mem-flag verification for inaccessible-mem patterns.
+    bool modelsInaccessibleMemThroughRegs =
+        PTM.getSrcRecord()->getValueAsBit("ModelsInaccessibleMemThroughRegs");
+
     // Don't verify store flags on instructions with side effects. At least for
     // intrinsics, side effects implies mayStore.
-    if (!PatInfo.hasSideEffects && PatInfo.mayStore && !NumStores)
+    if (!modelsInaccessibleMemThroughRegs && !PatInfo.hasSideEffects &&
+        PatInfo.mayStore && !NumStores)
       Msgs.push_back("pattern may store, but mayStore isn't set");
 
     // Similarly, mayStore implies mayLoad on intrinsics.
-    if (!PatInfo.mayStore && PatInfo.mayLoad && !NumLoads)
+    if (!modelsInaccessibleMemThroughRegs && !PatInfo.mayStore &&
+        PatInfo.mayLoad && !NumLoads)
       Msgs.push_back("pattern may load, but mayLoad isn't set");
 
     // Print error messages.

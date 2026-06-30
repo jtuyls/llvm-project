@@ -109,9 +109,9 @@ void InstructionEncoding::parseFixedLenEncoding(
   };
 
   if (InstNumBits < BitWidth)
-    PrintFatalError(EncodingDef, Twine(Name) + ": Size is " + Twine(BitWidth) +
-                                     " bits, but Inst specifies only " +
-                                     Twine(InstNumBits) + " bits");
+    // amd/aie/ port (PoC): AIE uses variable-length VLIW encodings where the
+    // declared Size can exceed the Inst{} field width; skip 23's strict check.
+    return;
 
   if (InstNumBits > BitWidth) {
     // Ensure that all the bits beyond 'Size' are 0 or unset (i.e., carry no

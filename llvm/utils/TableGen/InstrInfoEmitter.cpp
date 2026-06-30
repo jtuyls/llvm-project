@@ -169,21 +169,12 @@ InstrInfoEmitter::GetOperandInfo(const CodeGenInstruction &Inst) {
         Res += ", ";
       } else if (OpR->isSubClassOf("RegisterClass"))
         Res += getQualifiedName(OpR) + "RegClassID, ";
-      else if (OpR->isSubClassOf("PointerLikeRegClass")) {
-        if (Inst.isPseudo) {
-          // TODO: Verify this is a fixed pseudo
-          PrintError(Inst.TheDef,
-                     "missing target override for pseudoinstruction "
-                     "using PointerLikeRegClass");
-          PrintNote(OpR->getLoc(),
-                    "target should define equivalent instruction "
-                    "with RegisterClassLike replacement; (use "
-                    "RemapAllTargetPseudoPointerOperands?)");
-        } else {
-          PrintError(Inst.TheDef,
-                     "non-pseudoinstruction user of PointerLikeRegClass");
-        }
-      } else
+      else if (OpR->isSubClassOf("PointerLikeRegClass"))
+        // amd/aie/ port (PoC): restore the pre-23 behavior of emitting the
+        // pointer-like reg-class kind instead of erroring on pseudos. AIE's
+        // frame-index pseudos legitimately use PointerLikeRegClass.
+        Res += utostr(OpR->getValueAsInt("RegClassKind")) + ", ";
+      else
         // -1 means the operand does not have a fixed register class.
         Res += "-1, ";
 
