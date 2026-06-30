@@ -2327,7 +2327,7 @@ let hasDelaySlot = 1 in
 let hasSideEffects = 1, mayLoad = 0, mayStore = 0,
 	 isBarrier = 1, isBranch = 1, isTerminator = 1 in {
 def J : AIE_j_instr<(outs), (ins call_symbol:$addr), [], "j", "$addr">; // br pattern?
-def JA : AIE_ja_instr<(outs), (ins mCB:$dst), [(brind mCB:$dst)], "ja", "$dst">;
+def JA : AIE_ja_instr<(outs), (ins mCB:$dst), []/*amd-aie-port: brind needs i20-ptr layer*/, "ja", "$dst">;
 }
 
 // Reads in E1, writes LR in E4, 5 branch delay slots.

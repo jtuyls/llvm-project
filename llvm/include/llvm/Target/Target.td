@@ -337,6 +337,9 @@ class RegisterClass<string namespace, list<ValueType> regTypes, int alignment,
   // model instruction operand constraints, and should have isAllocatable = 0.
   bit isAllocatable = true;
 
+  // amd/aie/ port: per-regclass opt-out of pre-RA scheduling consideration.
+  bit ConsiderInPreRAScheduling = true;
+
   // AltOrders - List of alternative allocation orders. The default order is
   // MemberList itself, and that is good enough for most targets since the
   // register allocators automatically remove reserved registers and move

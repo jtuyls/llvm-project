@@ -2390,9 +2390,12 @@ def atomic_store_128 :
 // their GPRs).
 //
 
-class Pattern<dag patternToMatch, list<dag> resultInstrs> {
+class Pattern<dag patternToMatch, list<dag> resultInstrs,
+              bit modelsInaccessibleMemThroughRegs = false> { // amd/aie/ port: 3rd arg
   dag             PatternToMatch  = patternToMatch;
   list<dag>       ResultInstrs    = resultInstrs;
+  // amd/aie/ port: AIE models inaccessible memory through registers for some patterns.
+  bit             ModelsInaccessibleMemThroughRegs = modelsInaccessibleMemThroughRegs;
   list<Predicate> Predicates      = [];  // See class Instruction in Target.td.
   int             AddedComplexity = 0;   // See class Instruction in Target.td.
   bit           GISelShouldIgnore = 0;
@@ -2401,6 +2404,9 @@ class Pattern<dag patternToMatch, list<dag> resultInstrs> {
 // Pat - A simple (but common) form of a pattern, which produces a simple result
 // not needing a full list.
 class Pat<dag pattern, dag result> : Pattern<pattern, [result]>;
+
+// amd/aie/ port: a Pat that models inaccessible memory through registers.
+class PatInaccessibleMem<dag pattern, dag result> : Pattern<pattern, [result], true>;
 
 //===----------------------------------------------------------------------===//
 // Complex pattern definitions.
