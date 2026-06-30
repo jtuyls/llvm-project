@@ -135,24 +135,31 @@ void VTEmitter::run(raw_ostream &OS) {
     bool IsScalable = VT->getValueAsBit("isScalable");
     bool IsRISCVVecTuple = VT->getValueAsBit("isRISCVVecTuple");
     bool IsCheriCapability = VT->getValueAsBit("isCheriCapability");
+    bool IsAIE = VT->getValueAsBit("isAIE"); // amd/aie/ port
     int64_t NF = VT->getValueAsInt("NF");
     bool IsNormalValueType =  VT->getValueAsBit("isNormalValueType");
     int64_t NElem = IsVector ? VT->getValueAsInt("nElem") : 0;
     StringRef EltName = IsVector ? VT->getValueAsDef("ElementType")->getName()
                                  : "INVALID_SIMPLE_VALUE_TYPE";
 
+    // AIE value types get their own ranges and are excluded from the normal
+    // integer/vector ranges (amd/aie/ port).
+    UpdateVTRange("AIE_VECTOR_VALUETYPE", Name,
+                  IsAIE && IsInteger && IsVector && !IsScalable);
+    UpdateVTRange("AIE_INTEGER_VALUETYPE", Name,
+                  IsAIE && IsInteger && !IsVector);
     UpdateVTRange("INTEGER_FIXEDLEN_VECTOR_VALUETYPE", Name,
-                  IsInteger && IsVector && !IsScalable);
+                  !IsAIE && IsInteger && IsVector && !IsScalable);
     UpdateVTRange("INTEGER_SCALABLE_VECTOR_VALUETYPE", Name,
                   IsInteger && IsScalable);
     UpdateVTRange("FP_FIXEDLEN_VECTOR_VALUETYPE", Name,
                   IsFP && IsVector && !IsScalable);
     UpdateVTRange("FP_SCALABLE_VECTOR_VALUETYPE", Name, IsFP && IsScalable);
-    UpdateVTRange("FIXEDLEN_VECTOR_VALUETYPE", Name, IsVector && !IsScalable);
+    UpdateVTRange("FIXEDLEN_VECTOR_VALUETYPE", Name, !IsAIE && IsVector && !IsScalable);
     UpdateVTRange("SCALABLE_VECTOR_VALUETYPE", Name, IsScalable);
     UpdateVTRange("RISCV_VECTOR_TUPLE_VALUETYPE", Name, IsRISCVVecTuple);
-    UpdateVTRange("VECTOR_VALUETYPE", Name, IsVector);
-    UpdateVTRange("INTEGER_VALUETYPE", Name, IsInteger && !IsVector);
+    UpdateVTRange("VECTOR_VALUETYPE", Name, !IsAIE && IsVector);
+    UpdateVTRange("INTEGER_VALUETYPE", Name, !IsAIE && IsInteger && !IsVector);
     UpdateVTRange("FP_VALUETYPE", Name, IsFP && !IsVector);
     UpdateVTRange("VALUETYPE", Name, IsNormalValueType);
     UpdateVTRange("CHERI_CAPABILITY_VALUETYPE", Name, IsCheriCapability);

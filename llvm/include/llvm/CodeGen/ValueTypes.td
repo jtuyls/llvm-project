@@ -28,6 +28,9 @@ class ValueType<int size, string llvm_name = NAME> {
   // [FIRST_VALUETYPE,LAST_VALUETYPE] range.
   bit isNormalValueType = true;
   bit isCheriCapability = false;
+  // AIE: marks a downstream AI Engine value type (excluded from the normal VT
+  // ranges; gathered into FIRST/LAST_AIE_* by VTEmitter). amd/aie/ port.
+  bit isAIE = false;
 }
 
 class VTAny : ValueType<0> {
@@ -355,6 +358,17 @@ def i64x8     : ValueType<512>;          // 8 Consecutive GPRs (AArch64)
 def aarch64svcount
               : ValueType<16>;   // AArch64 predicate-as-counter
 def spirvbuiltin : ValueType<0>; // SPIR-V's builtin type
+
+// AIE (amd/aie/ port): downstream AI Engine value types. Ported from llvm-aie's
+// explicit-slot form (VTInt<48,234>...) to LLVM 23's auto-numbered scheme — slots
+// are now assigned by definition order, so these must stay contiguous for the
+// FIRST/LAST_AIE_* ranges emitted by VTEmitter.
+let isAIE = true in {
+  def i48    : VTInt<48>;      // 48-bit acc type
+  def i20    : VTInt<20>;      // 20-bit pointers
+  def v8i48  : VTVec<8, i48>;  //  8 x i48
+  def v16i48 : VTVec<16, i48>; // 16 x i48
+}
 // AMDGPU buffer fat pointer, buffer rsrc + offset, rewritten before MIR translation.
 // FIXME: Remove this and the getPointerType() override if MVT::i160 is added.
 def amdgpuBufferFatPointer : ValueType<160>;

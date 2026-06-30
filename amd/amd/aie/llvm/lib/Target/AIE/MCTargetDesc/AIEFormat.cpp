@@ -1,0 +1,48 @@
+//===----- AIEFormat.cpp - Internal VLIW bundle representation ------------===//
+//
+// This file is licensed under the Apache License v2.0 with LLVM Exceptions.
+// See https://llvm.org/LICENSE.txt for license information.
+// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+//
+// (c) Copyright 2023-2025 Advanced Micro Devices, Inc. or its affiliates
+//
+//===----------------------------------------------------------------------===//
+// This file implements support related to the VLIW bundles
+//===----------------------------------------------------------------------===//
+
+#include "AIEFormat.h"
+#include "AIE.h"
+
+namespace llvm {
+
+bool VLIWFormat::covers(SlotBits Slots) const { return !(Slots & ~SlotSet); }
+
+const VLIWFormat *PacketFormats::getFormat(SlotBits Slots) const {
+  for (const VLIWFormat *Fmt = FormatsTable; Fmt->Opcode; Fmt++) {
+    if (Fmt->covers(Slots)) {
+      return Fmt;
+    }
+  }
+  return nullptr;
+}
+
+const VLIWFormat *PacketFormats::getFormatBySize(SlotBits Slots,
+                                                 unsigned Size) const {
+  for (const VLIWFormat *Fmt = FormatsTable; Fmt->Opcode; Fmt++) {
+    unsigned ThisSize = Fmt->getSize();
+    if (ThisSize > Size) {
+      // Formats are sorted by size. Once we are beyond the requested Size,
+      // we won't find it
+      break;
+    }
+    if (ThisSize < Size) {
+      continue;
+    }
+    if (Fmt->covers(Slots)) {
+      return Fmt;
+    }
+  }
+  return nullptr;
+}
+
+} // namespace llvm

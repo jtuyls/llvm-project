@@ -1,0 +1,41 @@
+#
+# This file is licensed under the Apache License v2.0 with LLVM Exceptions.
+# See https://llvm.org/LICENSE.txt for license information.
+# SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+#
+# (c) Copyright 2023-2025 Advanced Micro Devices, Inc. or its affiliates
+include_directories(
+  ${AMD_AIE_DIR}/llvm/lib/Target/AIE
+  ${LLVM_MAIN_SRC_DIR}/unittests/CodeGen
+  ${LLVM_BINARY_DIR}/lib/Target/AIE
+  )
+
+set(LLVM_LINK_COMPONENTS
+  AIECodeGen
+  AIEDesc
+  AIEInfo
+  CodeGen
+  CodeGenTypes
+  Core
+  GlobalISel
+  MC
+  MIRParser
+  SelectionDAG
+  Support
+  Target
+  TargetParser
+)
+
+add_llvm_target_unittest(AIETests
+  ${LLVM_MAIN_SRC_DIR}/unittests/CodeGen/ScheduleDAGMITestUtils.cpp
+  AIEScheduleDAGMITest.cpp
+  AIETestTarget.cpp
+  BundleTest.cpp
+  HazardRecognizerTest.cpp
+  StaticBitSetTest.cpp
+  SlotCountsTest.cpp
+  SlotStatisticsTest.cpp
+  VirtUnrollAliasAnalysisTest.cpp
+  )
+
+set_property(TARGET AIETests PROPERTY FOLDER "Tests/UnitTests/TargetTests")

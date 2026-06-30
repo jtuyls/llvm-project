@@ -1,0 +1,48 @@
+//===- AIE2PMCFormats.cpp --------------------------------------*- C++ -*-===//
+//
+// This file is licensed under the Apache License v2.0 with LLVM Exceptions.
+// See https://llvm.org/LICENSE.txt for license information.
+// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+//
+// (c) Copyright 2025 Advanced Micro Devices, Inc. or its affiliates
+//
+//===----------------------------------------------------------------------===//
+
+#include "AIE2PMCTargetDesc.h"
+#include "AIEMCFormats.h"
+
+#undef DEBUG_TYPE
+#define DEBUG_TYPE "mcformats"
+
+namespace llvm {
+
+#define GET_FORMATS_PACKETS_TABLE
+#define GET_FORMATS_SLOTS_DEFS
+#define GET_FORMATS_SLOTINFOS_MAPPING
+#define GET_OPCODE_FORMATS_INDEX_FUNC
+#define GET_ALTERNATE_INST_OPCODE_FUNC
+#include "AIE2PGenFormats.inc"
+namespace AIE2P {
+#define GET_FORMATS_FORMATS_DEFS
+#include "AIE2PGenFormats.inc"
+} // namespace AIE2P
+
+/***************** AIEMCFormats *******************/
+
+const MCFormatDesc *AIE2PMCFormats::getMCFormats() const {
+  return AIE2P::Formats;
+}
+
+const PacketFormats &AIE2PMCFormats::getPacketFormats() const {
+  return Formats;
+}
+
+ArrayRef<bool> AIE2PMCFormats::getIsFormatAvailable() const {
+  return FormatAvailable;
+}
+
+SmallVector<MCSlotKind, 2> AIE2PMCFormats::getLoadSlotKinds() const {
+  return {MCSlotKind::AIE2P_SLOT_LDB, MCSlotKind::AIE2P_SLOT_LDA};
+}
+
+} // end namespace llvm
