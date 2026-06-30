@@ -43,6 +43,12 @@ using namespace llvm;
 
 #define DEBUG_TYPE "subtarget-emitter"
 
+// amd/aie/ port: custom base class for the generated SubtargetInfo (AIEBaseSubtarget).
+static cl::opt<std::string>
+    STIBaseClass("base-subtargetinfo-class",
+                 cl::desc("Base SubtargetInfo class to derive from"),
+                 cl::value_desc("Base class"), cl::init("TargetSubtargetInfo"));
+
 namespace {
 
 class SubtargetEmitter : TargetFeaturesEmitter {
@@ -2137,7 +2143,7 @@ void SubtargetEmitter::emitHeader(raw_ostream &OS) {
        << " const MCInst *MI, const MCInstrInfo *MCII, "
        << "const MCSubtargetInfo &STI, unsigned CPUID);\n";
   }
-  OS << "struct " << ClassName << " : public TargetSubtargetInfo {\n"
+  OS << "struct " << ClassName << " : public " << STIBaseClass << " {\n"
      << "  explicit " << ClassName << "(const Triple &TT, StringRef CPU, "
      << "StringRef TuneCPU, StringRef FS);\n"
      << "public:\n"
@@ -2211,10 +2217,10 @@ void SubtargetEmitter::emitCtor(raw_ostream &OS, unsigned NumNames,
      << "StringRef TuneCPU, StringRef FS)\n";
 
   if (Target == "AArch64")
-    OS << "  : TargetSubtargetInfo(TT, AArch64::resolveCPUAlias(CPU),\n"
+    OS << "  : " << STIBaseClass << "(TT, AArch64::resolveCPUAlias(CPU),\n"
        << "                        AArch64::resolveCPUAlias(TuneCPU), FS, ";
   else
-    OS << "  : TargetSubtargetInfo(TT, CPU, TuneCPU, FS, ";
+    OS << "  : " << STIBaseClass << "(TT, CPU, TuneCPU, FS, ";
   if (NumNames)
     OS << "ArrayRef(" << Target << "Names, " << NumNames << "), ";
   else

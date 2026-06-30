@@ -559,6 +559,10 @@ endif()
 set(LLVM_TOOLS_BINARY_DIR ${LLVM_RUNTIME_OUTPUT_INTDIR}) # --bindir
 set(LLVM_LIBRARY_DIR      ${LLVM_LIBRARY_OUTPUT_INTDIR}) # --libdir
 set(LLVM_MAIN_SRC_DIR     ${CMAKE_CURRENT_SOURCE_DIR}  ) # --src-root
+# AMD AIE relocation helpers (amd/aie/). Defines AMD_AIE_DIR + amd_aie_*_source_dir().
+if(EXISTS "${LLVM_MAIN_SRC_DIR}/../amd/aie/cmake/AddAIE.cmake")
+  include("${LLVM_MAIN_SRC_DIR}/../amd/aie/cmake/AddAIE.cmake")
+endif()
 set(LLVM_MAIN_INCLUDE_DIR ${LLVM_MAIN_SRC_DIR}/include ) # --includedir
 set(LLVM_BINARY_DIR       ${CMAKE_CURRENT_BINARY_DIR}  ) # --prefix
 
@@ -1140,6 +1144,14 @@ set(LLVM_ENUM_TARGETMCAS "")
 set(LLVM_ENUM_EXEGESIS "")
 foreach(t ${LLVM_TARGETS_TO_BUILD})
   set( td ${LLVM_MAIN_SRC_DIR}/lib/Target/${t} )
+  # Relocated AMD targets (e.g. AIE) live under amd/aie/; redirect the config-def
+  # probe (AsmPrinters/AsmParsers/Disassemblers/MCA) there when not in-tree.
+  if( NOT IS_DIRECTORY ${td} AND COMMAND amd_aie_target_source_dir )
+    amd_aie_target_source_dir(${t} _amd_aie_td)
+    if(_amd_aie_td)
+      set(td "${_amd_aie_td}")
+    endif()
+  endif()
 
   # Make sure that any experimental targets were passed via
   # LLVM_EXPERIMENTAL_TARGETS_TO_BUILD, not LLVM_TARGETS_TO_BUILD.
@@ -1330,6 +1342,12 @@ endif()
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 include_directories( ${LLVM_INCLUDE_DIR} ${LLVM_MAIN_INCLUDE_DIR})
+
+# Relocated IntrinsicsAIE*.td under amd/aie/ — on the global TableGen/include path
+# (tablegen() derives -I from INCLUDE_DIRECTORIES). amd/aie/ port.
+if(DEFINED AMD_AIE_DIR)
+  include_directories(${AMD_AIE_DIR}/llvm/include)
+endif()
 
 # when crosscompiling import the executable targets from a file
 if(LLVM_USE_HOST_TOOLS)

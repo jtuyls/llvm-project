@@ -175,7 +175,9 @@ include "aie1/AIE1CompositeFormats.td"
 def V16I8:   PatLeaf<(v16i8 VEC128:$R)>;
 def V8I16:   PatLeaf<(v8i16 VEC128:$R)>;
 def V4I32:   PatLeaf<(v4i32 VEC128:$R)>;
-def V4F32:   PatLeaf<(v4f32 VEC128:$R)>;
+// amd/aie/ port: renamed from V4F32 to avoid a clash with the V4F32 record that
+// LLVM 23's IntrinsicsNVVM.td introduced (both visible via Intrinsics.td).
+def AIE_V4F32:   PatLeaf<(v4f32 VEC128:$R)>;
 
 /////////////////////////////////////////////////////////////////
 // Basic operations

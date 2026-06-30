@@ -27,6 +27,13 @@
 
 using namespace llvm;
 
+// amd/aie/ port: custom base class for the generated RegisterBankInfo
+// (AIEBaseRegisterBankInfo).
+static cl::opt<std::string>
+    RBBaseClass("base-register-bank-class",
+                cl::desc("Base RegisterBankInfo class to derive from"),
+                cl::value_desc("Base class"), cl::init("RegisterBankInfo"));
+
 namespace {
 class RegisterBank {
 
@@ -283,7 +290,7 @@ void RegisterBankEmitter::emitBaseClassImplementation(
 
   OS << TargetName << "GenRegisterBankInfo::" << TargetName
      << "GenRegisterBankInfo(unsigned HwMode)\n"
-     << "    : RegisterBankInfo(RegBanks, " << TargetName
+     << "    : " << RBBaseClass << "(RegBanks, " << TargetName
      << "::NumRegisterBanks, Sizes, HwMode) {\n"
      << "  // Assert that RegBank indices match their ID's\n"
      << "#ifndef NDEBUG\n"

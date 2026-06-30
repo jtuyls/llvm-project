@@ -635,6 +635,19 @@ class EncodingByHwMode<list<HwMode> Ms = [], list<InstructionEncoding> Ts = []>
 }
 
 //===----------------------------------------------------------------------===//
+// AIE (amd/aie/ port): per-operand reg-class + itinerary/reg-class pairing,
+// used by the AIE scheduler model (Instruction.ItineraryRegPairs below).
+class OperandRegClass<int OperIdx, RegisterClass Reg> {
+  RegisterClass RegClass  = Reg;
+  int OperandIdx = OperIdx;
+}
+// Allows specifying instruction Itineraries based on the RegClass used.
+class ItinRegClassPair<InstrItinClass Itin, list<OperandRegClass> RegType> {
+  InstrItinClass Itinerary = Itin;
+  list<OperandRegClass> RegClasses = RegType;
+}
+
+//===----------------------------------------------------------------------===//
 // Instruction set description - These classes correspond to the C++ classes in
 // the Target/TargetInstrInfo.h file.
 //
@@ -766,6 +779,9 @@ class Instruction : InstructionEncoding {
   bit hasNoSchedulingInfo = false;
 
   InstrItinClass Itinerary = NoItinerary;// Execution steps used for scheduling.
+  // AIE (amd/aie/ port): per-regclass itineraries + pre-RA scheduling opt-in.
+  list<ItinRegClassPair> ItineraryRegPairs = [];
+  bit ConsiderInPreRAScheduling = true;
 
   // Scheduling information from TargetSchedule.td.
   list<SchedReadWrite> SchedRW;

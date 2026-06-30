@@ -57,6 +57,14 @@ static cl::opt<bool>
                       cl::desc("Dump register information to help debugging"),
                       cl::cat(RegisterInfoCat));
 
+// amd/aie/ port: let a target derive its generated RegisterInfo from a custom
+// base class (AIE uses AIEBaseRegisterInfo).
+static cl::opt<std::string>
+    RIBaseClass("base-registerinfo-class",
+                cl::desc("Base TargetRegisterInfo class to derive from"),
+                cl::value_desc("Base class"), cl::init("TargetRegisterInfo"),
+                cl::cat(RegisterInfoCat));
+
 namespace {
 
 class RegisterInfoEmitter {
@@ -1213,7 +1221,7 @@ void RegisterInfoEmitter::runTargetHeader(raw_ostream &OS, raw_ostream &MainOS,
 
   OS << "class " << TargetName << "FrameLowering;\n\n";
 
-  OS << "struct " << ClassName << " : public TargetRegisterInfo {\n"
+  OS << "struct " << ClassName << " : public " << RIBaseClass << " {\n"
      << "  explicit " << ClassName
      << "(unsigned RA, unsigned D = 0, unsigned E = 0,\n"
      << "      unsigned PC = 0, unsigned HwMode = 0);\n";
@@ -1736,12 +1744,12 @@ void RegisterInfoEmitter::runTargetDesc(raw_ostream &OS, raw_ostream &MainOS,
 {0}::
 {0}(unsigned RA, unsigned DwarfFlavour, unsigned EHFlavour,
     unsigned PC, unsigned HwMode)
-  : TargetRegisterInfo(&{1}RegInfoDesc, {1}RegisterClasses,
+  : {2}(&{1}RegInfoDesc, {1}RegisterClasses,
       {1}SubRegIndexStrings, {1}SubRegIndexNameOffsets,
       {1}SubRegIdxRangeTable, {1}SubRegIndexLaneMaskTable,
 
   )",
-                ClassName, TargetName);
+                ClassName, TargetName, RIBaseClass);
   printMask(OS, RegBank.CoveringLanes);
   OS << formatv(R"(, {0}RegClassInfos, {0}VTLists, HwMode) {{
   InitMCRegisterInfo({0}RegDesc, {1}, RA, PC,

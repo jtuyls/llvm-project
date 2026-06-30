@@ -560,6 +560,16 @@ def llvm_i8_ty         : LLVMType<i8>;
 def llvm_i16_ty        : LLVMType<i16>;
 def llvm_i32_ty        : LLVMType<i32>;
 def llvm_i64_ty        : LLVMType<i64>;
+// AIE (amd/aie/ port): intrinsic argument types over the AIE MVTs (i20/v8i48/v16i48)
+// plus scalar/large-vector fp types the AIE intrinsics use that stock 23 lacks.
+def llvm_i20_ty        : LLVMType<i20>;
+def llvm_v8i48_ty      : LLVMType<v8i48>;    //  8 x i48
+def llvm_v16i48_ty     : LLVMType<v16i48>;   // 16 x i48
+def llvm_bf16_ty       : LLVMType<bf16>;     // bfloat
+def llvm_f16_ty        : LLVMType<f16>;      // half
+def llvm_v64bf16_ty    : LLVMType<v64bf16>;  // 64 x bfloat
+def llvm_v64f16_ty     : LLVMType<v64f16>;   // 64 x half
+def llvm_v64f32_ty     : LLVMType<v64f32>;   // 64 x float
 def llvm_i128_ty       : LLVMType<i128>;
 def llvm_half_ty       : LLVMType<f16>;
 def llvm_bfloat_ty     : LLVMType<bf16>;
@@ -3066,5 +3076,10 @@ include "llvm/IR/IntrinsicsSPIRV.td"
 include "llvm/IR/IntrinsicsVE.td"
 include "llvm/IR/IntrinsicsDirectX.td"
 include "llvm/IR/IntrinsicsLoongArch.td"
+// AIE (amd/aie/ port): the per-target intrinsic .td live under amd/aie/llvm/include.
+include "llvm/IR/IntrinsicsAIE.td"
+include "llvm/IR/IntrinsicsAIE2.td"
+include "llvm/IR/IntrinsicsAIE2P.td"
+include "llvm/IR/IntrinsicsAIE2PS.td"
 
 #endif // TEST_INTRINSICS_SUPPRESS_DEFS

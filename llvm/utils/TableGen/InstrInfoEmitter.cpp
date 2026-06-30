@@ -50,6 +50,13 @@ static cl::opt<bool> ExpandMIOperandInfo(
     cl::desc("Expand operand's MIOperandInfo DAG into suboperands"),
     cl::cat(InstrInfoEmitterCat), cl::init(true));
 
+// amd/aie/ port: custom base class for the generated InstrInfo (AIEBaseInstrInfo).
+static cl::opt<std::string>
+    IIBaseClass("base-instrinfo-class",
+                cl::desc("Base InstrInfo class to derive from"),
+                cl::value_desc("Base class"), cl::init("TargetInstrInfo"),
+                cl::cat(InstrInfoEmitterCat));
+
 namespace {
 
 class InstrInfoEmitter {
@@ -1161,7 +1168,7 @@ void InstrInfoEmitter::run(raw_ostream &OS) {
     {
       NamespaceEmitter LlvmNS(OS, "llvm");
       Twine ClassName = TargetName + "GenInstrInfo";
-      OS << "struct " << ClassName << " : public TargetInstrInfo {\n"
+      OS << "struct " << ClassName << " : public " << IIBaseClass << " {\n"
          << "  explicit " << ClassName
          << "(const TargetSubtargetInfo &STI, const TargetRegisterInfo &TRI, "
             "unsigned CFSetupOpcode = ~0u, "
@@ -1223,7 +1230,7 @@ void InstrInfoEmitter::run(raw_ostream &OS) {
        << "(const TargetSubtargetInfo &STI, const TargetRegisterInfo &TRI, "
           "unsigned CFSetupOpcode, unsigned "
           "CFDestroyOpcode, unsigned CatchRetOpcode, unsigned ReturnOpcode)\n"
-       << "  : TargetInstrInfo(TRI, CFSetupOpcode, CFDestroyOpcode, "
+       << "  : " << IIBaseClass << "(TRI, CFSetupOpcode, CFDestroyOpcode, "
           "CatchRetOpcode, "
           "ReturnOpcode";
     if (NumClassesByHwMode != 0)
