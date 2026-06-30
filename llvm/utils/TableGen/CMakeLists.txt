@@ -56,6 +56,12 @@ add_tablegen(llvm-tblgen LLVM
   GlobalISelEmitter.cpp
   InstrDocsEmitter.cpp
   InstrInfoEmitter.cpp
+  # amd/aie/ port: AIE-custom TableGen backends.
+  AIEMemoryCyclesEmitter.cpp
+  AIEPreSchedLoweringEmitter.cpp
+  AIESplitInstrTablesEmitter.cpp
+  AIEVariableInstrItineraryEmitter.cpp
+  CodeGenFormat.cpp
   llvm-tblgen.cpp
   MacroFusionPredicatorEmitter.cpp
   OptionParserEmitter.cpp
