@@ -785,6 +785,9 @@ class Instruction : InstructionEncoding {
   // AIE (amd/aie/ port): per-regclass itineraries + pre-RA scheduling opt-in.
   list<ItinRegClassPair> ItineraryRegPairs = [];
   bit ConsiderInPreRAScheduling = true;
+  // AIE (amd/aie/ port): instructions-with-patterns also carry this so the
+  // mem-flag inference (CodeGenDAGPatterns) can read it uniformly.
+  bit ModelsInaccessibleMemThroughRegs = false;
 
   // Scheduling information from TargetSchedule.td.
   list<SchedReadWrite> SchedRW;

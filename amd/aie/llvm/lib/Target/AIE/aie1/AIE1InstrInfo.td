@@ -2406,11 +2406,11 @@ def aie_stack_save  : SDNode<"AIEISD::STACK_SAVE", SDT_AIEStackSave, [SDNPHasCha
 def aie_stack_restore  : SDNode<"AIEISD::STACK_RESTORE", SDT_AIEStackRestore, [SDNPHasChain, SDNPMayLoad]>;
 
 // Pessimistically assume the stack pointer will be clobbered
-let Defs = [SP], Uses = [SP] in {
-def ADJCALLSTACKUP   : Pseudo<(outs), (ins i32imm:$amt1, i32imm:$amt2),
-                              [(callseq_start timm:$amt1, timm:$amt2)]>;
-def ADJCALLSTACKDOWN : Pseudo<(outs), (ins i32imm:$amt1, i32imm:$amt2),
-                              [(callseq_end timm:$amt1, timm:$amt2)]>;
+// amd/aie/ port (PoC): callseq patterns fail type inference on 23 (legacy aie1);
+// emptied patterns need explicit flags since they can't be inferred.
+let Defs = [SP], Uses = [SP], hasSideEffects = 1, mayLoad = 0, mayStore = 0 in {
+def ADJCALLSTACKUP   : Pseudo<(outs), (ins i32imm:$amt1, i32imm:$amt2), []>;
+def ADJCALLSTACKDOWN : Pseudo<(outs), (ins i32imm:$amt1, i32imm:$amt2), []>;
 }
 
 let hasDelaySlot = 1, Itinerary = II_RET in
