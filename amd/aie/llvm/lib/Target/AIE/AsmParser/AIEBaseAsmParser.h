@@ -92,7 +92,7 @@ public:
                    const llvm::MCInstrInfo &MII,
                    const llvm::MCTargetOptions &Options,
                    llvm::AIEBaseMCFormats &Formats)
-      : llvm::MCTargetAsmParser(STI, MII), Bundle(&Formats),
+      : llvm::MCTargetAsmParser(Options, STI, MII), Bundle(&Formats),
         Formats(Formats) {}
 
   // Parse a symbol in a call
@@ -252,7 +252,7 @@ bool AIEBaseAsmParser<Parser, BundleType, OperandType>::parseImmediate(
   case AsmToken::Identifier: {
     StringRef Identifier;
     if (getParser().parseIdentifier(Identifier))
-      return true /*ParseStatus::Failure*/;
+      return true /*MatchOperand_ParseFail*/;
 
     MCSymbol *Sym = getContext().getOrCreateSymbol(Identifier);
     Res = MCSymbolRefExpr::create(Sym, getContext());
@@ -261,7 +261,7 @@ bool AIEBaseAsmParser<Parser, BundleType, OperandType>::parseImmediate(
   case AsmToken::Minus:
   case AsmToken::Integer: {
     if (getParser().parseExpression(Res, E))
-      return true /*ParseStatus::Failure*/;
+      return true /*MatchOperand_ParseFail*/;
     break;
   }
   // parse #(global + offset)
@@ -271,7 +271,7 @@ bool AIEBaseAsmParser<Parser, BundleType, OperandType>::parseImmediate(
     const MCExpr *SubExpr;
     /// parenexpr ::= expr)
     if (getParser().parseParenExpression(SubExpr, E)) {
-      return true /*ParseStatus::Failure*/;
+      return true /*MatchOperand_ParseFail*/;
     }
     AIEMCExpr::VariantKind VK = AIEMCExpr::VK_AIE_GLOBAL;
     Res = AIEMCExpr::create(SubExpr, VK, getContext());
@@ -282,7 +282,7 @@ bool AIEBaseAsmParser<Parser, BundleType, OperandType>::parseImmediate(
     return Error(S, "immediates must be integers or identifiers");
   }
   Operands.push_back(OperandType::CreateImm(getContext(), Res, S, E));
-  return ParseStatus::Success;
+  return MatchOperand_Success;
 }
 
 template <typename Parser, typename BundleType, typename OperandType>
@@ -292,16 +292,16 @@ bool AIEBaseAsmParser<Parser, BundleType, OperandType>::
   switch (IdxToken.getKind()) {
   case AsmToken::Hash:
     if (parseImmediate(Operands))
-      return ParseStatus::Failure;
+      return MatchOperand_ParseFail;
     break;
   case AsmToken::Identifier:
     if (parseIdentifier(Operands))
-      return ParseStatus::Failure;
+      return MatchOperand_ParseFail;
     break;
   default:
     return Error(IdxToken.getLoc(), "unexpected operand");
   }
-  return ParseStatus::Success;
+  return MatchOperand_Success;
 }
 
 /// parseIndirectOrIndexedMode
@@ -331,7 +331,7 @@ bool AIEBaseAsmParser<Parser, BundleType, OperandType>::
   } else {
     Error(getLexer().getLoc(), "unexpected operand, expected ']'");
   }
-  return ParseStatus::Success;
+  return MatchOperand_Success;
 }
 
 /// parseOperand:
