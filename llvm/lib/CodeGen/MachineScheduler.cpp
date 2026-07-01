@@ -1026,6 +1026,13 @@ void ScheduleDAGMI::enterRegion(MachineBasicBlock *bb,
                                      unsigned regioninstrs)
 {
   ScheduleDAGInstrs::enterRegion(bb, begin, end, regioninstrs);
+  // amd/aie/ port: reset the scheduled-zone boundaries to null iterators so a
+  // stale CurrentTop/CurrentBottom from the previously scheduled block is not
+  // read before initQueues re-establishes them. AIE's getNumEmittedInstrs
+  // guards on top()/bottom().isValid(); a stale (still-valid) iterator from
+  // another block makes std::distance(begin(), top()) run forever.
+  CurrentTop = MachineBasicBlock::iterator();
+  CurrentBottom = MachineBasicBlock::iterator();
 
   SchedImpl->initPolicy(begin, end, regioninstrs);
 
@@ -1038,6 +1045,11 @@ void ScheduleDAGMI::enterRegion(MachineBasicBlock *bb,
   else
     D = ScheduleDAGMI::DumpDirection::Bidirectional;
   setDumpDirection(D);
+
+  // amd/aie/ port: emission cycles are per-region; drop any from the previous
+  // region so they cannot be misread for SUnits of this region.
+  BotEmissionCycles.clear();
+  TopEmissionCycles.clear();
 }
 
 // amd/aie/ port: find the insertion position for an SU with a given exposed-
@@ -1163,8 +1175,11 @@ void ScheduleDAGMI::schedule() {
   LLVM_DEBUG(dbgs() << "ScheduleDAGMI::schedule starting\n");
   LLVM_DEBUG(SchedImpl->dumpPolicy());
 
-  // Build the DAG.
-  buildSchedGraph(AA);
+  // amd/aie/ port: build the DAG via the strategy hook. For AIE this only
+  // creates SUnits for "free" instructions (fixed inter-block boundary
+  // instructions are added later by a DAG mutator) and sets up the region's
+  // free/fixed split; the base implementation just calls buildSchedGraph(AA).
+  SchedImpl->buildGraph(*this, AA);
 
   postProcessDAG();
 
@@ -1182,15 +1197,8 @@ void ScheduleDAGMI::schedule() {
   // Initialize ready queues now that the DAG and priority data are finalized.
   initQueues(TopRoots, BotRoots);
 
-  // amd/aie/ port: drop emission cycles from any previous region.
-  BotEmissionCycles.clear();
-  TopEmissionCycles.clear();
-
   bool IsTopNode = false;
   while (true) {
-    if (!checkSchedLimit())
-      break;
-
     LLVM_DEBUG(dbgs() << "** ScheduleDAGMI::schedule picking next node\n");
     // amd/aie/ port: pick a node together with its exposed-pipeline emission
     // cycle (AIE), then place it accordingly so bundle formation is correct.
@@ -1199,6 +1207,8 @@ void ScheduleDAGMI::schedule() {
     if (!SU) break;
 
     assert(!SU->isScheduled && "Node already scheduled");
+    if (!checkSchedLimit())
+      break;
 
     movePickedSU(*SU, IsTopNode, EmissionCycle);
     // Notify the scheduling strategy before updating the DAG.
