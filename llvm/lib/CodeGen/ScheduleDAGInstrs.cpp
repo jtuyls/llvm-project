@@ -798,6 +798,22 @@ void ScheduleDAGInstrs::buildSchedGraph(AAResults *AA,
                                         PressureDiffs *PDiffs,
                                         LiveIntervals *LIS,
                                         bool TrackLaneMasks) {
+  MISUnitMap.clear();
+  ScheduleDAG::clearDAG();
+
+  // Create an SUnit for each real instruction.
+  initSUnits();
+
+  // amd/aie/ port: edge construction is factored into buildEdges() so AIE can
+  // create SUnits incrementally (initSUnit) and then build the dependencies.
+  buildEdges(AA, RPTracker, PDiffs, LIS, TrackLaneMasks);
+}
+
+void ScheduleDAGInstrs::buildEdges(AAResults *AA,
+                                   RegPressureTracker *RPTracker,
+                                   PressureDiffs *PDiffs, LiveIntervals *LIS,
+                                   bool TrackLaneMasks, bool AbandonSingleDefs) {
+  (void)AbandonSingleDefs; // amd/aie/ port: honored by AIE scheduling paths.
   const TargetSubtargetInfo &ST = MF.getSubtarget();
   bool UseAA = EnableAASchedMI.getNumOccurrences() > 0 ? EnableAASchedMI
                                                        : ST.useAA();
@@ -807,11 +823,6 @@ void ScheduleDAGInstrs::buildSchedGraph(AAResults *AA,
   BarrierChain = nullptr;
 
   this->TrackLaneMasks = TrackLaneMasks;
-  MISUnitMap.clear();
-  ScheduleDAG::clearDAG();
-
-  // Create an SUnit for each real instruction.
-  initSUnits();
 
   if (PDiffs)
     PDiffs->init(SUnits.size());

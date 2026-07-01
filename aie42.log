@@ -1,0 +1,1184 @@
+ninja: Entering directory `build'
+[1/328] Generating VCSRevision.h
+[2/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/FEntryInserter.cpp.o
+[3/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/AllocationOrder.cpp.o
+[4/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/ExpandPostRAPseudos.cpp.o
+[5/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/DetectDeadLanes.cpp.o
+[6/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/BreakFalseDeps.cpp.o
+[7/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/ExecutionDomainFix.cpp.o
+[8/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/DeadMachineInstructionElim.cpp.o
+[9/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/ImplicitNullChecks.cpp.o
+[10/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/BasicBlockPathCloning.cpp.o
+[11/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/CodeGenCommonISel.cpp.o
+[12/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/CFIFixup.cpp.o
+[13/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/FinalizeISel.cpp.o
+[14/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/InitUndef.cpp.o
+[15/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/CalcSpillWeights.cpp.o
+[16/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/BasicBlockSections.cpp.o
+[17/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/BranchRelaxation.cpp.o
+[18/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/CallingConvLower.cpp.o
+[19/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/CriticalAntiDepBreaker.cpp.o
+[20/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/EarlyIfConversion.cpp.o
+[21/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/CFIInstrInserter.cpp.o
+[22/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/DwarfEHPrepare.cpp.o
+[23/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/GCRootLowering.cpp.o
+[24/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/Analysis.cpp.o
+[25/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/AtomicExpandPass.cpp.o
+[26/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/LiveIntervalCalc.cpp.o
+[27/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/DFAPacketizer.cpp.o
+[28/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/BranchFolding.cpp.o
+[29/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/InlineSpiller.cpp.o
+[30/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/LivePhysRegs.cpp.o
+[31/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/FixupStatepointCallerSaved.cpp.o
+[32/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/LiveRegUnits.cpp.o
+[33/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/InsertCodePrefetch.cpp.o
+[34/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/AggressiveAntiDepBreaker.cpp.o
+[35/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/IfConversion.cpp.o
+[36/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/LatencyPriorityQueue.cpp.o
+[37/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/LiveRangeCalc.cpp.o
+[38/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/LiveInterval.cpp.o
+[39/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/ExpandIRInsts.cpp.o
+[40/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/LiveRegMatrix.cpp.o
+[41/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/LiveRangeShrink.cpp.o
+[42/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/LiveRangeEdit.cpp.o
+[43/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/ComplexDeinterleavingPass.cpp.o
+[44/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineCombiner.cpp.o
+[45/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/LiveVariables.cpp.o
+[46/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineConvergenceVerifier.cpp.o
+[47/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/InterleavedLoadCombinePass.cpp.o
+[48/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/KCFI.cpp.o
+[49/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/LiveIntervals.cpp.o
+[50/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineLoopUtils.cpp.o
+[51/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineIDFSSAUpdater.cpp.o
+[52/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineInstrBundle.cpp.o
+[53/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/BasicTargetTransformInfo.cpp.o
+[54/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineCSE.cpp.o
+[55/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineCycleAnalysis.cpp.o
+[56/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineFrameInfo.cpp.o
+[57/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineRegisterInfo.cpp.o
+[58/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineCopyPropagation.cpp.o
+[59/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/InterleavedAccessPass.cpp.o
+[60/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineDebugify.cpp.o
+[61/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineLateInstrsCleanup.cpp.o
+[62/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineSSAContext.cpp.o
+[63/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineBasicBlock.cpp.o
+[64/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineFunctionSplitter.cpp.o
+[65/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/LiveDebugVariables.cpp.o
+[66/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineSSAUpdater.cpp.o
+[67/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/PHIEliminationUtils.cpp.o
+[68/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/PatchableFunction.cpp.o
+[69/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/OptimizePHIs.cpp.o
+[70/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineOperand.cpp.o
+[71/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MLRegAllocPriorityAdvisor.cpp.o
+[72/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineBlockPlacement.cpp.o
+[73/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineLoopInfo.cpp.o
+[74/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineTraceMetrics.cpp.o
+[75/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/CodeGenTargetMachineImpl.cpp.o
+[76/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineInstr.cpp.o
+[77/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineLICM.cpp.o
+[78/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/PostRAHazardRecognizer.cpp.o
+[79/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MLRegAllocEvictAdvisor.cpp.o
+[80/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MacroFusion.cpp.o
+[81/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/ProcessImplicitDefs.cpp.o
+[82/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MIR2Vec.cpp.o
+[83/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/PHIElimination.cpp.o
+[84/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/PostRASchedulerList.cpp.o
+[85/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineUniformityAnalysis.cpp.o
+[86/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/PeepholeOptimizer.cpp.o
+[87/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/RegisterClassInfo.cpp.o
+[88/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/RegAllocBasic.cpp.o
+[89/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/RegAllocEvictionAdvisor.cpp.o
+[90/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/RegAllocScore.cpp.o
+[91/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/RegAllocPriorityAdvisor.cpp.o
+[92/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineFunction.cpp.o
+[93/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/PseudoProbeInserter.cpp.o
+[94/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/CodeGenPrepare.cpp.o
+[95/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineOutliner.cpp.o
+[96/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/PreISelIntrinsicLowering.cpp.o
+[97/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/RegAllocBase.cpp.o
+[98/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineSink.cpp.o
+[99/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineScheduler.cpp.o
+[100/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/ReachingDefAnalysis.cpp.o
+[101/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/RegisterPressure.cpp.o
+[102/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/ModuloSchedule.cpp.o
+[103/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/RegisterScavenging.cpp.o
+[104/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MIRVRegNamerUtils.cpp.o
+[105/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineStableHash.cpp.o
+[106/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/PrologEpilogInserter.cpp.o
+[107/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/RegUsageInfoCollector.cpp.o
+[108/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/RenameIndependentSubregs.cpp.o
+[109/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MIRCanonicalizerPass.cpp.o
+[110/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/RemoveLoadsIntoFakeUses.cpp.o
+[111/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/ResetMachineFunctionPass.cpp.o
+[112/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/RegUsageInfoPropagate.cpp.o
+[113/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/RegAllocFast.cpp.o
+[114/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/RegAllocPBQP.cpp.o
+[115/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineVerifier.cpp.o
+[116/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/RegisterBankInfo.cpp.o
+[117/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/Rematerializer.cpp.o
+[118/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/RDFGraph.cpp.o
+[119/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/ScheduleDAGPrinter.cpp.o
+[120/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/ScoreboardHazardRecognizer.cpp.o
+[121/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MIRPrinter.cpp.o
+[122/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/TailDuplication.cpp.o
+[123/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachinePipeliner.cpp.o
+[124/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/ScheduleDAG.cpp.o
+[125/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/RegisterCoalescer.cpp.o
+[126/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/SwiftErrorValueTracking.cpp.o
+[127/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/TargetSchedule.cpp.o
+[128/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/StackSlotColoring.cpp.o
+[129/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/RegAllocGreedy.cpp.o
+[130/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/TailDuplicator.cpp.o
+[131/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/SwitchLoweringUtils.cpp.o
+[132/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/UnreachableBlockElim.cpp.o
+[133/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/ScheduleDAGInstrs.cpp.o
+[134/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/StackProtector.cpp.o
+[135/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/TargetFrameLoweringImpl.cpp.o
+[136/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/VirtRegMap.cpp.o
+[137/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/ShrinkWrap.cpp.o
+[138/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/SplitKit.cpp.o
+[139/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/XRayInstrumentation.cpp.o
+[140/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/SafeStack.cpp.o
+[141/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/VLIWMachineScheduler.cpp.o
+[142/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/TargetRegisterInfo.cpp.o
+[143/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/TargetInstrInfo.cpp.o
+[144/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/TypePromotion.cpp.o
+[145/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/SelectOptimize.cpp.o
+[146/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/TwoAddressInstructionPass.cpp.o
+[147/328] Building CXX object lib/CodeGen/SelectionDAG/CMakeFiles/LLVMSelectionDAG.dir/SDNodeInfo.cpp.o
+[148/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/TargetLoweringBase.cpp.o
+[149/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/WindowScheduler.cpp.o
+[150/328] Building CXX object lib/CodeGen/SelectionDAG/CMakeFiles/LLVMSelectionDAG.dir/LegalizeTypesGeneric.cpp.o
+[151/328] Building CXX object lib/CodeGen/SelectionDAG/CMakeFiles/LLVMSelectionDAG.dir/LegalizeTypes.cpp.o
+[152/328] Building CXX object lib/CodeGen/SelectionDAG/CMakeFiles/LLVMSelectionDAG.dir/ResourcePriorityQueue.cpp.o
+[153/328] Building CXX object lib/CodeGen/SelectionDAG/CMakeFiles/LLVMSelectionDAG.dir/LegalizeFloatTypes.cpp.o
+[154/328] Building CXX object lib/CodeGen/SelectionDAG/CMakeFiles/LLVMSelectionDAG.dir/ScheduleDAGVLIW.cpp.o
+[155/328] Building CXX object lib/CodeGen/SelectionDAG/CMakeFiles/LLVMSelectionDAG.dir/InstrEmitter.cpp.o
+[156/328] Building CXX object lib/CodeGen/SelectionDAG/CMakeFiles/LLVMSelectionDAG.dir/ScheduleDAGFast.cpp.o
+[157/328] Building CXX object lib/CodeGen/SelectionDAG/CMakeFiles/LLVMSelectionDAG.dir/FunctionLoweringInfo.cpp.o
+[158/328] Building CXX object lib/CodeGen/SelectionDAG/CMakeFiles/LLVMSelectionDAG.dir/SelectionDAGAddressAnalysis.cpp.o
+[159/328] Building CXX object lib/CodeGen/SelectionDAG/CMakeFiles/LLVMSelectionDAG.dir/FastISel.cpp.o
+[160/328] Building CXX object lib/CodeGen/SelectionDAG/CMakeFiles/LLVMSelectionDAG.dir/SelectionDAGPrinter.cpp.o
+[161/328] Building CXX object lib/CodeGen/SelectionDAG/CMakeFiles/LLVMSelectionDAG.dir/LegalizeVectorOps.cpp.o
+[162/328] Building CXX object lib/CodeGen/SelectionDAG/CMakeFiles/LLVMSelectionDAG.dir/ScheduleDAGSDNodes.cpp.o
+[163/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/LiveDebugValues/VarLocBasedImpl.cpp.o
+[164/328] Building CXX object lib/CodeGen/GlobalISel/CMakeFiles/LLVMGlobalISel.dir/CSEInfo.cpp.o
+[165/328] Building CXX object lib/CodeGen/SelectionDAG/CMakeFiles/LLVMSelectionDAG.dir/ScheduleDAGRRList.cpp.o
+[166/328] Building CXX object lib/CodeGen/GlobalISel/CMakeFiles/LLVMGlobalISel.dir/GISelChangeObserver.cpp.o
+[167/328] Building CXX object lib/CodeGen/SelectionDAG/CMakeFiles/LLVMSelectionDAG.dir/SelectionDAGDumper.cpp.o
+[168/328] Building CXX object lib/CodeGen/GlobalISel/CMakeFiles/LLVMGlobalISel.dir/CSEMIRBuilder.cpp.o
+[169/328] Building CXX object lib/CodeGen/SelectionDAG/CMakeFiles/LLVMSelectionDAG.dir/LegalizeIntegerTypes.cpp.o
+[170/328] Building CXX object lib/CodeGen/GlobalISel/CMakeFiles/LLVMGlobalISel.dir/GIMatchTableExecutor.cpp.o
+[171/328] Building CXX object lib/CodeGen/AsmPrinter/CMakeFiles/LLVMAsmPrinter.dir/WinException.cpp.o
+[172/328] Building CXX object lib/CodeGen/GlobalISel/CMakeFiles/LLVMGlobalISel.dir/CombinerHelperArtifacts.cpp.o
+[173/328] Building CXX object lib/CodeGen/SelectionDAG/CMakeFiles/LLVMSelectionDAG.dir/LegalizeDAG.cpp.o
+[174/328] Building CXX object lib/CodeGen/AsmPrinter/CMakeFiles/LLVMAsmPrinter.dir/DbgEntityHistoryCalculator.cpp.o
+[175/328] Building CXX object lib/CodeGen/GlobalISel/CMakeFiles/LLVMGlobalISel.dir/CombinerHelperVectorOps.cpp.o
+[176/328] Building CXX object lib/CodeGen/GlobalISel/CMakeFiles/LLVMGlobalISel.dir/CallLowering.cpp.o
+[177/328] Building CXX object lib/Object/CMakeFiles/LLVMObject.dir/IRSymtab.cpp.o
+[178/328] Building CXX object lib/CodeGen/GlobalISel/CMakeFiles/LLVMGlobalISel.dir/LegalizerInfo.cpp.o
+[179/328] Building CXX object lib/CodeGen/GlobalISel/CMakeFiles/LLVMGlobalISel.dir/CombinerHelperCasts.cpp.o
+[180/328] Linking CXX static library lib/libLLVMObject.a
+[181/328] Building CXX object lib/CodeGen/GlobalISel/CMakeFiles/LLVMGlobalISel.dir/CombinerHelperCompares.cpp.o
+[182/328] Building CXX object lib/CodeGen/GlobalISel/CMakeFiles/LLVMGlobalISel.dir/InlineAsmLowering.cpp.o
+[183/328] Building CXX object lib/CodeGen/SelectionDAG/CMakeFiles/LLVMSelectionDAG.dir/StatepointLowering.cpp.o
+[184/328] Building CXX object lib/CodeGen/GlobalISel/CMakeFiles/LLVMGlobalISel.dir/MachineFloatingPointPredicateUtils.cpp.o
+[185/328] Building CXX object lib/CodeGen/GlobalISel/CMakeFiles/LLVMGlobalISel.dir/Combiner.cpp.o
+[186/328] Building CXX object lib/CodeGen/GlobalISel/CMakeFiles/LLVMGlobalISel.dir/GISelValueTracking.cpp.o
+[187/328] Building CXX object lib/CodeGen/GlobalISel/CMakeFiles/LLVMGlobalISel.dir/InstructionSelect.cpp.o
+[188/328] Building CXX object lib/CodeGen/SelectionDAG/CMakeFiles/LLVMSelectionDAG.dir/LegalizeVectorTypes.cpp.o
+[189/328] Building CXX object lib/CodeGen/GlobalISel/CMakeFiles/LLVMGlobalISel.dir/LoadStoreOpt.cpp.o
+[190/328] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/LiveDebugValues/InstrRefBasedImpl.cpp.o
+[191/328] Building CXX object lib/CodeGen/GlobalISel/CMakeFiles/LLVMGlobalISel.dir/Legalizer.cpp.o
+[192/328] Building CXX object lib/CodeGen/GlobalISel/CMakeFiles/LLVMGlobalISel.dir/MachineIRBuilder.cpp.o
+[193/328] Linking CXX static library lib/libLLVMCodeGen.a
+[194/328] Building CXX object lib/CodeGen/GlobalISel/CMakeFiles/LLVMGlobalISel.dir/RegBankSelect.cpp.o
+[195/328] Building CXX object lib/CodeGen/GlobalISel/CMakeFiles/LLVMGlobalISel.dir/Localizer.cpp.o
+[196/328] Building CXX object lib/CodeGen/SelectionDAG/CMakeFiles/LLVMSelectionDAG.dir/SelectionDAGISel.cpp.o
+[197/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEAddressSpaceFlattening.cpp.o
+[198/328] Building CXX object lib/CodeGen/GlobalISel/CMakeFiles/LLVMGlobalISel.dir/Utils.cpp.o
+[199/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEBaseAsmPrinter.cpp.o
+[200/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEBaseFrameLowering.cpp.o
+[201/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEBaseRegisterBankInfo.cpp.o
+[202/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEBaseHardwareLoops.cpp.o
+FAILED: lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEBaseHardwareLoops.cpp.o 
+CCACHE_CPP2=yes CCACHE_HASHDIR=yes CCACHE_SLOPPINESS=pch_defines,time_macros /usr/bin/ccache /usr/bin/g++ -D_DEBUG -D_GLIBCXX_ASSERTIONS -D_GLIBCXX_USE_CXX11_ABI=1 -D_GNU_SOURCE -D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_EXTENSIVE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-uninitialized -Wno-nonnull -Wno-class-memaccess -Wno-dangling-reference -Wno-redundant-move -Wno-pessimizing-move -Wno-array-bounds -Wno-stringop-overread -Wno-dangling-pointer -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported -fdiagnostics-color -ffunction-sections -fdata-sections -O3 -DNDEBUG -std=c++17 -fvisibility=hidden -UNDEBUG -fno-exceptions -funwind-tables -fno-rtti -MD -MT lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEBaseHardwareLoops.cpp.o -MF lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEBaseHardwareLoops.cpp.o.d -o lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEBaseHardwareLoops.cpp.o -c /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseHardwareLoops.cpp
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseHardwareLoops.cpp: In member function ‘bool {anonymous}::AIEBaseHardwareLoops::processLoop(llvm::MachineLoop*)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseHardwareLoops.cpp:380:10: error: ‘class llvm::ReachingDefAnalysis’ has no member named ‘getReachingLocalUses’
+  380 |     RDA->getReachingLocalUses(LoLoop.Dec, LoLoop.Dec->getOperand(0).getReg(),
+      |          ^~~~~~~~~~~~~~~~~~~~
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Pass.h:344,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Analysis/RuntimeLibcallInfo.h:13,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/CodeGen/LibcallLoweringInfo.h:13,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/CodeGen/TargetLowering.h:32,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/CodeGen/ScheduleDAG.h:24,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseInstrInfo.h:25,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2InstrInfo.h:21,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseHardwareLoops.cpp:26:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/PassAnalysisSupport.h: In instantiation of ‘llvm::AnalysisUsage& llvm::AnalysisUsage::addRequired() [with PassClass = llvm::ReachingDefAnalysis]’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseHardwareLoops.cpp:196:40:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/PassAnalysisSupport.h:77:25: error: no matching function for call to ‘addRequiredID(llvm::AnalysisKey* (&)())’
+   77 |     return addRequiredID(PassClass::ID);
+      |            ~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/PassAnalysisSupport.h:74:27: note: candidate: ‘llvm::AnalysisUsage& llvm::AnalysisUsage::addRequiredID(char&)’ (near match)
+   74 |   LLVM_ABI AnalysisUsage &addRequiredID(char &ID);
+      |                           ^~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/PassAnalysisSupport.h:74:27: note:   conversion of argument 1 would be ill-formed:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/PassAnalysisSupport.h:77:25: error: invalid conversion from ‘llvm::AnalysisKey* (*)()’ to ‘char’ [-fpermissive]
+   77 |     return addRequiredID(PassClass::ID);
+      |            ~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+      |                         |
+      |                         llvm::AnalysisKey* (*)()
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/PassAnalysisSupport.h:77:25: error: cannot bind rvalue ‘(char)llvm::AnalysisInfoMixin<llvm::ReachingDefAnalysis>::ID’ to ‘char&’
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/PassAnalysisSupport.h:73:27: note: candidate: ‘llvm::AnalysisUsage& llvm::AnalysisUsage::addRequiredID(const void*)’ (near match)
+   73 |   LLVM_ABI AnalysisUsage &addRequiredID(const void *ID);
+      |                           ^~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/PassAnalysisSupport.h:73:27: note:   conversion of argument 1 would be ill-formed:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/PassAnalysisSupport.h:77:25: error: invalid conversion from ‘llvm::AnalysisKey* (*)()’ to ‘const void*’ [-fpermissive]
+   77 |     return addRequiredID(PassClass::ID);
+      |            ~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+      |                         |
+      |                         llvm::AnalysisKey* (*)()
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/PassAnalysisSupport.h: In instantiation of ‘AnalysisType& llvm::Pass::getAnalysis() const [with AnalysisType = llvm::ReachingDefAnalysis]’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseHardwareLoops.cpp:283:42:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/PassAnalysisSupport.h:226:37: error: no matching function for call to ‘llvm::Pass::getAnalysisID<llvm::ReachingDefAnalysis>(llvm::AnalysisKey* (*)()) const’
+  226 |   return getAnalysisID<AnalysisType>(&AnalysisType::ID);
+      |          ~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/PassAnalysisSupport.h:230:15: note: candidate: ‘AnalysisType& llvm::Pass::getAnalysisID(llvm::AnalysisID) const [with AnalysisType = llvm::ReachingDefAnalysis; llvm::AnalysisID = const void*]’ (near match)
+  230 | AnalysisType &Pass::getAnalysisID(AnalysisID PI) const {
+      |               ^~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/PassAnalysisSupport.h:230:15: note:   conversion of argument 1 would be ill-formed:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/PassAnalysisSupport.h:226:38: error: invalid conversion from ‘llvm::AnalysisKey* (*)()’ to ‘llvm::AnalysisID’ {aka ‘const void*’} [-fpermissive]
+  226 |   return getAnalysisID<AnalysisType>(&AnalysisType::ID);
+      |                                      ^~~~~~~~~~~~~~~~~
+      |                                      |
+      |                                      llvm::AnalysisKey* (*)()
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Pass.h:238:17: note: candidate: ‘template<class AnalysisType> AnalysisType& llvm::Pass::getAnalysisID(llvm::AnalysisID, llvm::Function&, bool*)’
+  238 |   AnalysisType &getAnalysisID(AnalysisID PI, Function &F,
+      |                 ^~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Pass.h:238:17: note:   candidate expects 2 arguments, 1 provided
+[203/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEBaseRegisterInfo.cpp.o
+[204/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEBaseISelLowering.cpp.o
+[205/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEClusterBaseAddress.cpp.o
+[206/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEBasePipelinerLoopInfo.cpp.o
+[207/328] Building CXX object lib/CodeGen/AsmPrinter/CMakeFiles/LLVMAsmPrinter.dir/CodeViewDebug.cpp.o
+[208/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEDataDependenceHelper.cpp.o
+FAILED: lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEDataDependenceHelper.cpp.o 
+CCACHE_CPP2=yes CCACHE_HASHDIR=yes CCACHE_SLOPPINESS=pch_defines,time_macros /usr/bin/ccache /usr/bin/g++ -D_DEBUG -D_GLIBCXX_ASSERTIONS -D_GLIBCXX_USE_CXX11_ABI=1 -D_GNU_SOURCE -D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_EXTENSIVE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-uninitialized -Wno-nonnull -Wno-class-memaccess -Wno-dangling-reference -Wno-redundant-move -Wno-pessimizing-move -Wno-array-bounds -Wno-stringop-overread -Wno-dangling-pointer -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported -fdiagnostics-color -ffunction-sections -fdata-sections -O3 -DNDEBUG -std=c++17 -fvisibility=hidden -UNDEBUG -fno-exceptions -funwind-tables -fno-rtti -MD -MT lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEDataDependenceHelper.cpp.o -MF lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEDataDependenceHelper.cpp.o.d -o lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEDataDependenceHelper.cpp.o -c /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEDataDependenceHelper.cpp
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEDataDependenceHelper.cpp: In member function ‘void llvm::AIE::DataDependenceHelper::buildEdges()’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEDataDependenceHelper.cpp:38:22: error: ‘buildEdges’ is not a member of ‘llvm::ScheduleDAGInstrs’
+   38 |   ScheduleDAGInstrs::buildEdges(Context.AA);
+      |                      ^~~~~~~~~~
+[209/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEBaseSubtarget.cpp.o
+[210/328] Building CXX object lib/CodeGen/AsmPrinter/CMakeFiles/LLVMAsmPrinter.dir/AsmPrinter.cpp.o
+[211/328] Building CXX object lib/CodeGen/GlobalISel/CMakeFiles/LLVMGlobalISel.dir/IRTranslator.cpp.o
+[212/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEBaseInstrInfo.cpp.o
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseInstrInfo.cpp: In member function ‘virtual bool llvm::AIEBaseInstrInfo::foldImmediate(llvm::MachineInstr&, llvm::MachineInstr&, llvm::Register, llvm::MachineRegisterInfo*) const’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseInstrInfo.cpp:614:29: warning: unused variable ‘TRI’ [-Wunused-variable]
+  614 |   const TargetRegisterInfo *TRI = MRI->getTargetRegisterInfo();
+      |                             ^~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseInstrInfo.cpp:615:26: warning: unused variable ‘MF’ [-Wunused-variable]
+  615 |   const MachineFunction &MF = *UseMI.getParent()->getParent();
+      |                          ^~
+[213/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEBaseTargetTransformInfo.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1Subtarget.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:21,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.cpp:11:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseFrameLowering.h:90:16: warning: ‘virtual void llvm::AIEBaseFrameLowering::adjustReg(llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag) const’ was hidden [-Woverloaded-virtual=]
+   90 |   virtual void adjustReg(MachineBasicBlock &MBB,
+      |                ^~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:29:15: note:   by ‘static void llvm::AIEFrameLowering::adjustReg(const llvm::TargetInstrInfo*, llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag)’
+   29 |   static void adjustReg(const TargetInstrInfo *TII, MachineBasicBlock &MBB,
+      |               ^~~~~~~~~
+[214/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIECallLowering.cpp.o
+[215/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEEliminateDuplicatePHI.cpp.o
+[216/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEFinalizeBundle.cpp.o
+[217/328] Building CXX object lib/CodeGen/GlobalISel/CMakeFiles/LLVMGlobalISel.dir/CombinerHelper.cpp.o
+[218/328] Building CXX object lib/CodeGen/GlobalISel/CMakeFiles/LLVMGlobalISel.dir/LegalizerHelper.cpp.o
+[219/328] Building CXX object lib/CodeGen/AsmPrinter/CMakeFiles/LLVMAsmPrinter.dir/DwarfDebug.cpp.o
+[220/328] Linking CXX static library lib/libLLVMAsmPrinter.a
+[221/328] Building CXX object lib/CodeGen/SelectionDAG/CMakeFiles/LLVMSelectionDAG.dir/TargetLowering.cpp.o
+[222/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEBaseInstructionSelector.cpp.o
+[223/328] Building CXX object lib/CodeGen/SelectionDAG/CMakeFiles/LLVMSelectionDAG.dir/SelectionDAG.cpp.o
+[224/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEGlobalCombinerPtrMods.cpp.o
+[225/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEHazardRecognizer.cpp.o
+[226/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIERegClassConstrainer.cpp.o
+[227/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIELoopClass.cpp.o
+[228/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEGlobalCombiner.cpp.o
+[229/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEISelDAGToDAG.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1Subtarget.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1TargetMachine.h:20,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEISelDAGToDAG.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEISelDAGToDAG.cpp:15:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseFrameLowering.h:90:16: warning: ‘virtual void llvm::AIEBaseFrameLowering::adjustReg(llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag) const’ was hidden [-Woverloaded-virtual=]
+   90 |   virtual void adjustReg(MachineBasicBlock &MBB,
+      |                ^~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:29:15: note:   by ‘static void llvm::AIEFrameLowering::adjustReg(const llvm::TargetInstrInfo*, llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag)’
+   29 |   static void adjustReg(const TargetInstrInfo *TII, MachineBasicBlock &MBB,
+      |               ^~~~~~~~~
+[230/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEMachineScheduler.cpp.o
+FAILED: lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEMachineScheduler.cpp.o 
+CCACHE_CPP2=yes CCACHE_HASHDIR=yes CCACHE_SLOPPINESS=pch_defines,time_macros /usr/bin/ccache /usr/bin/g++ -D_DEBUG -D_GLIBCXX_ASSERTIONS -D_GLIBCXX_USE_CXX11_ABI=1 -D_GNU_SOURCE -D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_EXTENSIVE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-uninitialized -Wno-nonnull -Wno-class-memaccess -Wno-dangling-reference -Wno-redundant-move -Wno-pessimizing-move -Wno-array-bounds -Wno-stringop-overread -Wno-dangling-pointer -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported -fdiagnostics-color -ffunction-sections -fdata-sections -O3 -DNDEBUG -std=c++17 -fvisibility=hidden -UNDEBUG -fno-exceptions -funwind-tables -fno-rtti -MD -MT lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEMachineScheduler.cpp.o -MF lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEMachineScheduler.cpp.o.d -o lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEMachineScheduler.cpp.o -c /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEMachineScheduler.cpp
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEMachineScheduler.cpp: In member function ‘virtual llvm::SUnit* llvm::AIEPostRASchedStrategy::pickNodeAndCycle(bool&, std::optional<unsigned int>&)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEMachineScheduler.cpp:626:10: error: ‘pickNodeUnidirectional’ was not declared in this scope; did you mean ‘pickNodeBidirectional’?
+  626 |     SU = pickNodeUnidirectional(Zone);
+      |          ^~~~~~~~~~~~~~~~~~~~~~
+      |          pickNodeBidirectional
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEMachineScheduler.cpp: In member function ‘virtual void llvm::AIEPostRASchedStrategy::buildGraph(llvm::ScheduleDAGMI&, llvm::AAResults*, llvm::RegPressureTracker*, llvm::PressureDiffs*, llvm::LiveIntervals*, bool)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEMachineScheduler.cpp:1794:7: error: ‘class llvm::ScheduleDAGMI’ has no member named ‘buildEdges’
+ 1794 |   DAG.buildEdges(Context->AA, RPTracker, PDiffs, LIS, OverrideTrackLaneMasks,
+      |       ^~~~~~~~~~
+[231/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEMaxLatencyFinder.cpp.o
+[232/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEMachineAlignment.cpp.o
+[233/328] Building CXX object lib/CodeGen/SelectionDAG/CMakeFiles/LLVMSelectionDAG.dir/SelectionDAGBuilder.cpp.o
+[234/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEPseudoBranchExpansion.cpp.o
+[235/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEBaseTargetMachine.cpp.o
+FAILED: lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEBaseTargetMachine.cpp.o 
+CCACHE_CPP2=yes CCACHE_HASHDIR=yes CCACHE_SLOPPINESS=pch_defines,time_macros /usr/bin/ccache /usr/bin/g++ -D_DEBUG -D_GLIBCXX_ASSERTIONS -D_GLIBCXX_USE_CXX11_ABI=1 -D_GNU_SOURCE -D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_EXTENSIVE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-uninitialized -Wno-nonnull -Wno-class-memaccess -Wno-dangling-reference -Wno-redundant-move -Wno-pessimizing-move -Wno-array-bounds -Wno-stringop-overread -Wno-dangling-pointer -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported -fdiagnostics-color -ffunction-sections -fdata-sections -O3 -DNDEBUG -std=c++17 -fvisibility=hidden -UNDEBUG -fno-exceptions -funwind-tables -fno-rtti -MD -MT lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEBaseTargetMachine.cpp.o -MF lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEBaseTargetMachine.cpp.o.d -o lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEBaseTargetMachine.cpp.o -c /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetMachine.cpp
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2FrameLowering.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2Subtarget.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2TargetMachine.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetMachine.cpp:18:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseFrameLowering.h:90:16: warning: ‘virtual void llvm::AIEBaseFrameLowering::adjustReg(llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag) const’ was hidden [-Woverloaded-virtual=]
+   90 |   virtual void adjustReg(MachineBasicBlock &MBB,
+      |                ^~~~~~~~~
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1Subtarget.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1TargetMachine.h:20,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetMachine.cpp:25:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:29:15: note:   by ‘static void llvm::AIEFrameLowering::adjustReg(const llvm::TargetInstrInfo*, llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag)’
+   29 |   static void adjustReg(const TargetInstrInfo *TII, MachineBasicBlock &MBB,
+      |               ^~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetMachine.cpp: In member function ‘virtual void llvm::AIEBasePassConfig::addPreSched2()’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetMachine.cpp:399:12: error: ‘FinalizeMachineBundlesID’ was not declared in this scope
+  399 |   addPass(&FinalizeMachineBundlesID);
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~
+[236/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIECombinerHelper.cpp.o
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIECombinerHelper.cpp: In function ‘bool {anonymous}::mayMIShiftElements(const llvm::MachineInstr*)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIECombinerHelper.cpp:114:5: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  114 |     switch (cast<GIntrinsic>(MI)->getIntrinsicID()) {
+      |     ^~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIECombinerHelper.cpp:122:3: note: here
+  122 |   default:
+      |   ^~~~~~~
+[237/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEPreISelCombiner.cpp.o
+[238/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEMultiSlotInstrMaterializer.cpp.o
+[239/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIESlotStatistics.cpp.o
+[240/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIESlotUtils.cpp.o
+[241/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIERegMemEventTracker.cpp.o
+[242/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIESubRegConstrainer.cpp.o
+[243/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEPtrModOptimizer.cpp.o
+[244/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIESpillSlotOptimization.cpp.o
+[245/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIELegalizerHelper.cpp.o
+[246/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEInterBlockScheduling.cpp.o
+[247/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIESplitInstructionRewriter.cpp.o
+[248/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIESuperRegRewriter.cpp.o
+[249/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIESuperRegUtils.cpp.o
+FAILED: lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIESuperRegUtils.cpp.o 
+CCACHE_CPP2=yes CCACHE_HASHDIR=yes CCACHE_SLOPPINESS=pch_defines,time_macros /usr/bin/ccache /usr/bin/g++ -D_DEBUG -D_GLIBCXX_ASSERTIONS -D_GLIBCXX_USE_CXX11_ABI=1 -D_GNU_SOURCE -D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_EXTENSIVE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-uninitialized -Wno-nonnull -Wno-class-memaccess -Wno-dangling-reference -Wno-redundant-move -Wno-pessimizing-move -Wno-array-bounds -Wno-stringop-overread -Wno-dangling-pointer -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported -fdiagnostics-color -ffunction-sections -fdata-sections -O3 -DNDEBUG -std=c++17 -fvisibility=hidden -UNDEBUG -fno-exceptions -funwind-tables -fno-rtti -MD -MT lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIESuperRegUtils.cpp.o -MF lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIESuperRegUtils.cpp.o.d -o lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIESuperRegUtils.cpp.o -c /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIESuperRegUtils.cpp
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIESuperRegUtils.cpp: In function ‘void llvm::AIESuperRegUtils::rewriteFullCopy(llvm::MachineInstr&, llvm::LiveIntervals&, const llvm::TargetInstrInfo&, const llvm::AIEBaseRegisterInfo&, llvm::VirtRegMap&, llvm::LiveRegMatrix&)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIESuperRegUtils.cpp:130:23: error: cannot convert ‘int’ to ‘llvm::RegState’ in assignment
+  130 |     AdditionalFlags = 0;
+      |                       ^
+      |                       |
+      |                       int
+[250/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEPostPipeliner.cpp.o
+[251/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEPostSelectOptimize.cpp.o
+[252/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIETargetObjectFile.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1Subtarget.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1TargetMachine.h:20,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIETargetObjectFile.cpp:13:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseFrameLowering.h:90:16: warning: ‘virtual void llvm::AIEBaseFrameLowering::adjustReg(llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag) const’ was hidden [-Woverloaded-virtual=]
+   90 |   virtual void adjustReg(MachineBasicBlock &MBB,
+      |                ^~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:29:15: note:   by ‘static void llvm::AIEFrameLowering::adjustReg(const llvm::TargetInstrInfo*, llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag)’
+   29 |   static void adjustReg(const TargetInstrInfo *TII, MachineBasicBlock &MBB,
+      |               ^~~~~~~~~
+[253/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIE2AsmPrinter.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/InstPrinter/AIE2InstPrinter.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2AsmPrinter.cpp:18:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/InstPrinter/AIECommonInstPrinter.h: In member function ‘void llvm::AIECommonInstPrinter::printImmOffset(const llvm::MCOperand&, const llvm::MCSubtargetInfo&, llvm::raw_ostream&)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/InstPrinter/AIECommonInstPrinter.h:54:5: warning: invalid use of incomplete type ‘const class llvm::MCAsmInfo’
+   54 |     MAI.printExpr(O, *MO.getExpr());
+      |     ^~~
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCSymbol.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/CodeGen/MachineInstr.h:32,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/CodeGen/MachineBasicBlock.h:22,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/CodeGen/MachineFunction.h:26,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/CodeGen/MachineFunctionPass.h:21,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/CodeGen/AsmPrinter.h:26,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseAsmPrinter.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2AsmPrinter.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2AsmPrinter.cpp:16:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCExpr.h:19:7: note: forward declaration of ‘class llvm::MCAsmInfo’
+   19 | class MCAsmInfo;
+      |       ^~~~~~~~~
+[254/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEPostLegalizerGenericCombiner.cpp.o
+[255/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIE2ISelLowering.cpp.o
+[256/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEPostLegalizerFinalCombiner.cpp.o
+[257/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/ReservedRegsLICM.cpp.o
+[258/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIE2FrameLowering.cpp.o
+[259/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEPreLegalizerCombiner.cpp.o
+[260/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIE2RegisterBankInfo.cpp.o
+[261/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEPostLegalizerCustomCombiner.cpp.o
+[262/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEOuterLoopPipeliner.cpp.o
+FAILED: lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEOuterLoopPipeliner.cpp.o 
+CCACHE_CPP2=yes CCACHE_HASHDIR=yes CCACHE_SLOPPINESS=pch_defines,time_macros /usr/bin/ccache /usr/bin/g++ -D_DEBUG -D_GLIBCXX_ASSERTIONS -D_GLIBCXX_USE_CXX11_ABI=1 -D_GNU_SOURCE -D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_EXTENSIVE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-uninitialized -Wno-nonnull -Wno-class-memaccess -Wno-dangling-reference -Wno-redundant-move -Wno-pessimizing-move -Wno-array-bounds -Wno-stringop-overread -Wno-dangling-pointer -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported -fdiagnostics-color -ffunction-sections -fdata-sections -O3 -DNDEBUG -std=c++17 -fvisibility=hidden -UNDEBUG -fno-exceptions -funwind-tables -fno-rtti -MD -MT lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEOuterLoopPipeliner.cpp.o -MF lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEOuterLoopPipeliner.cpp.o.d -o lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEOuterLoopPipeliner.cpp.o -c /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp:211:32: warning: ‘BranchInst’ is deprecated: Use UncondBrInst/CondBrInst/Instruction instead [-Wdeprecated-declarations]
+  211 |   BranchInst *getLatchBranch() const {
+      |                                ^~~~~
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Analysis/LoopInfo.h:17,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/Utils/AIELoopUtils.h:17,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp:39:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Instructions.h:3084:5: note: declared here
+ 3084 |     BranchInst : public Instruction {
+      |     ^~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp: In member function ‘llvm::BranchInst* {anonymous}::LoopStructure::getLatchBranch() const’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp:212:17: warning: ‘BranchInst’ is deprecated: Use UncondBrInst/CondBrInst/Instruction instead [-Wdeprecated-declarations]
+  212 |     return cast<BranchInst>(OuterLatch->getTerminator());
+      |                 ^~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Instructions.h:3084:5: note: declared here
+ 3084 |     BranchInst : public Instruction {
+      |     ^~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp: In member function ‘bool {anonymous}::AIEOuterLoopPipeliner::isInnerLoopHardwareLoop(const {anonymous}::LoopStructure&) const’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp:499:23: warning: ‘BranchInst’ is deprecated: Use UncondBrInst/CondBrInst/Instruction instead [-Wdeprecated-declarations]
+  499 |   auto *BI = dyn_cast<BranchInst>(LS.InnerLatch->getTerminator());
+      |                       ^~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Instructions.h:3084:5: note: declared here
+ 3084 |     BranchInst : public Instruction {
+      |     ^~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp:500:32: warning: ‘bool llvm::BranchInst::isConditional() const’ is deprecated: Use isa<CondBrInst> instead [-Wdeprecated-declarations]
+  500 |   if (!BI || !BI->isConditional())
+      |               ~~~~~~~~~~~~~~~~~^~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Instructions.h:3313:13: note: declared here
+ 3313 | inline bool BranchInst::isConditional() const { return isa<CondBrInst>(this); }
+      |             ^~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp:502:51: warning: ‘llvm::Value* llvm::BranchInst::getCondition() const’ is deprecated: Cast to CondBrInst [-Wdeprecated-declarations]
+  502 |   auto *Call = dyn_cast<CallInst>(BI->getCondition());
+      |                                   ~~~~~~~~~~~~~~~~^~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Instructions.h:3318:15: note: declared here
+ 3318 | inline Value *BranchInst::getCondition() const {
+      |               ^~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp: In member function ‘llvm::BasicBlock* {anonymous}::AIEOuterLoopPipeliner::clonePrologueAsWarmUp(const {anonymous}::LoopStructure&, const llvm::SmallVectorImpl<llvm::Instruction*>&, llvm::ValueToValueMapTy&)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp:664:15: warning: ‘BranchInst’ is deprecated: Use UncondBrInst/CondBrInst/Instruction instead [-Wdeprecated-declarations]
+  664 |   BranchInst::Create(LS.OuterHeader, WarmUp);
+      |               ^~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Instructions.h:3084:5: note: declared here
+ 3084 |     BranchInst : public Instruction {
+      |     ^~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp:664:21: warning: ‘static llvm::BranchInst* llvm::BranchInst::Create(llvm::BasicBlock*, llvm::InsertPosition)’ is deprecated: Use UncondBrInst::Create instead [-Wdeprecated-declarations]
+  664 |   BranchInst::Create(LS.OuterHeader, WarmUp);
+      |   ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Instructions.h:3302:20: note: declared here
+ 3302 | inline BranchInst *BranchInst::Create(BasicBlock *IfTrue,
+      |                    ^~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp: In member function ‘void {anonymous}::AIEOuterLoopPipeliner::peelLastIterationEpilogue(const {anonymous}::LoopStructure&, const llvm::SmallPtrSetImpl<llvm::Instruction*>&, const llvm::SmallVectorImpl<llvm::Instruction*>&)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp:782:15: warning: ‘BranchInst’ is deprecated: Use UncondBrInst/CondBrInst/Instruction instead [-Wdeprecated-declarations]
+  782 |   BranchInst *LatchBr = LS.getLatchBranch();
+      |               ^~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Instructions.h:3084:5: note: declared here
+ 3084 |     BranchInst : public Instruction {
+      |     ^~~~~~~~~~
+In file included from /usr/include/c++/13/cassert:44,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Analysis/InlineCost.h:21,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Transforms/Utils/Cloning.h:25,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp:58:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp:783:32: warning: ‘bool llvm::BranchInst::isConditional() const’ is deprecated: Use isa<CondBrInst> instead [-Wdeprecated-declarations]
+  783 |   assert(LatchBr->isConditional() && "Outer latch must be conditional");
+      |          ~~~~~~~~~~~~~~~~~~~~~~^~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Instructions.h:3313:13: note: declared here
+ 3313 | inline bool BranchInst::isConditional() const { return isa<CondBrInst>(this); }
+      |             ^~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp:899:15: warning: ‘BranchInst’ is deprecated: Use UncondBrInst/CondBrInst/Instruction instead [-Wdeprecated-declarations]
+  899 |   BranchInst::Create(ClonedInnerHeader, CoolEntry);
+      |               ^~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Instructions.h:3084:5: note: declared here
+ 3084 |     BranchInst : public Instruction {
+      |     ^~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp:899:21: warning: ‘static llvm::BranchInst* llvm::BranchInst::Create(llvm::BasicBlock*, llvm::InsertPosition)’ is deprecated: Use UncondBrInst::Create instead [-Wdeprecated-declarations]
+  899 |   BranchInst::Create(ClonedInnerHeader, CoolEntry);
+      |   ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Instructions.h:3302:20: note: declared here
+ 3302 | inline BranchInst *BranchInst::Create(BasicBlock *IfTrue,
+      |                    ^~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp:925:15: warning: ‘BranchInst’ is deprecated: Use UncondBrInst/CondBrInst/Instruction instead [-Wdeprecated-declarations]
+  925 |   BranchInst::Create(OrigExit, CoolExit);
+      |               ^~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Instructions.h:3084:5: note: declared here
+ 3084 |     BranchInst : public Instruction {
+      |     ^~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp:925:21: warning: ‘static llvm::BranchInst* llvm::BranchInst::Create(llvm::BasicBlock*, llvm::InsertPosition)’ is deprecated: Use UncondBrInst::Create instead [-Wdeprecated-declarations]
+  925 |   BranchInst::Create(OrigExit, CoolExit);
+      |   ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Instructions.h:3302:20: note: declared here
+ 3302 | inline BranchInst *BranchInst::Create(BasicBlock *IfTrue,
+      |                    ^~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp: In member function ‘std::optional<{anonymous}::LatchBoundInfo> {anonymous}::AIEOuterLoopPipeliner::canAdjustLoopBound(const {anonymous}::LoopStructure&) const’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp:953:23: warning: ‘BranchInst’ is deprecated: Use UncondBrInst/CondBrInst/Instruction instead [-Wdeprecated-declarations]
+  953 |   auto *BI = dyn_cast<BranchInst>(LS.OuterLatch->getTerminator());
+      |                       ^~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Instructions.h:3084:5: note: declared here
+ 3084 |     BranchInst : public Instruction {
+      |     ^~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp:954:32: warning: ‘bool llvm::BranchInst::isConditional() const’ is deprecated: Use isa<CondBrInst> instead [-Wdeprecated-declarations]
+  954 |   if (!BI || !BI->isConditional())
+      |               ~~~~~~~~~~~~~~~~~^~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Instructions.h:3313:13: note: declared here
+ 3313 | inline bool BranchInst::isConditional() const { return isa<CondBrInst>(this); }
+      |             ^~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp:956:50: warning: ‘llvm::Value* llvm::BranchInst::getCondition() const’ is deprecated: Cast to CondBrInst [-Wdeprecated-declarations]
+  956 |   auto *Cmp = dyn_cast<ICmpInst>(BI->getCondition());
+      |                                  ~~~~~~~~~~~~~~~~^~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Instructions.h:3318:15: note: declared here
+ 3318 | inline Value *BranchInst::getCondition() const {
+      |               ^~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp: In member function ‘void {anonymous}::AIEOuterLoopPipeliner::updateLoopMetadata(const {anonymous}::LoopStructure&)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp:1060:16: error: ‘updateIterCounts’ was not declared in this scope
+ 1060 |       LoopID ? updateIterCounts(
+      |                ^~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp: In member function ‘void {anonymous}::AIEOuterLoopPipeliner::convertOuterLoopToHardwareLoop(const {anonymous}::LoopStructure&, llvm::BasicBlock*, llvm::Value*, const {anonymous}::DowncountingInfo&)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp:1535:15: warning: ‘BranchInst’ is deprecated: Use UncondBrInst/CondBrInst/Instruction instead [-Wdeprecated-declarations]
+ 1535 |   BranchInst *LatchBr = LS.getLatchBranch();
+      |               ^~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Instructions.h:3084:5: note: declared here
+ 3084 |     BranchInst : public Instruction {
+      |     ^~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp:1549:41: warning: ‘llvm::Value* llvm::BranchInst::getCondition() const’ is deprecated: Cast to CondBrInst [-Wdeprecated-declarations]
+ 1549 |   Value *OldCond = LatchBr->getCondition();
+      |                    ~~~~~~~~~~~~~~~~~~~~~^~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Instructions.h:3318:15: note: declared here
+ 3318 | inline Value *BranchInst::getCondition() const {
+      |               ^~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp:1550:24: warning: ‘void llvm::BranchInst::setCondition(llvm::Value*)’ is deprecated: Cast to CondBrInst [-Wdeprecated-declarations]
+ 1550 |   LatchBr->setCondition(NewCond);
+      |   ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Instructions.h:3321:13: note: declared here
+ 3321 | inline void BranchInst::setCondition(Value *V) {
+      |             ^~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEOuterLoopPipeliner.cpp:1554:28: warning: ‘void llvm::BranchInst::swapSuccessors()’ is deprecated: Cast to CondBrInst [-Wdeprecated-declarations]
+ 1554 |     LatchBr->swapSuccessors();
+      |     ~~~~~~~~~~~~~~~~~~~~~~~^~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Instructions.h:3325:13: note: declared here
+ 3325 | inline void BranchInst::swapSuccessors() {
+      |             ^~~~~~~~~~
+[263/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIE2LegalizerInfo.cpp.o
+[264/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIE2Subtarget.cpp.o
+[265/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEUnallocatedSuperRegRewriter.cpp.o
+[266/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIE2RegisterInfo.cpp.o
+[267/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie1/AIE1DelaySlotFiller.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1Subtarget.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1TargetMachine.h:20,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1DelaySlotFiller.cpp:16:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseFrameLowering.h:90:16: warning: ‘virtual void llvm::AIEBaseFrameLowering::adjustReg(llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag) const’ was hidden [-Woverloaded-virtual=]
+   90 |   virtual void adjustReg(MachineBasicBlock &MBB,
+      |                ^~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:29:15: note:   by ‘static void llvm::AIEFrameLowering::adjustReg(const llvm::TargetInstrInfo*, llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag)’
+   29 |   static void adjustReg(const TargetInstrInfo *TII, MachineBasicBlock &MBB,
+      |               ^~~~~~~~~
+[268/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie1/AIEHazardRecognizerPRAS.cpp.o
+[269/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie1/AIE1RegisterBankInfo.cpp.o
+[270/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIE2PostLegalizerCustomCombiner.cpp.o
+[271/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIE2InstrInfo.cpp.o
+[272/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie1/AIE1AsmPrinter.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1Subtarget.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1TargetMachine.h:20,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1AsmPrinter.cpp:17:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseFrameLowering.h:90:16: warning: ‘virtual void llvm::AIEBaseFrameLowering::adjustReg(llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag) const’ was hidden [-Woverloaded-virtual=]
+   90 |   virtual void adjustReg(MachineBasicBlock &MBB,
+      |                ^~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:29:15: note:   by ‘static void llvm::AIEFrameLowering::adjustReg(const llvm::TargetInstrInfo*, llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag)’
+   29 |   static void adjustReg(const TargetInstrInfo *TII, MachineBasicBlock &MBB,
+      |               ^~~~~~~~~
+[273/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie1/AIE1FrameLowering.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.cpp:15:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseFrameLowering.h:90:16: warning: ‘virtual void llvm::AIEBaseFrameLowering::adjustReg(llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag) const’ was hidden [-Woverloaded-virtual=]
+   90 |   virtual void adjustReg(MachineBasicBlock &MBB,
+      |                ^~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:29:15: note:   by ‘static void llvm::AIEFrameLowering::adjustReg(const llvm::TargetInstrInfo*, llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag)’
+   29 |   static void adjustReg(const TargetInstrInfo *TII, MachineBasicBlock &MBB,
+      |               ^~~~~~~~~
+[274/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEWawRegRewriter.cpp.o
+[275/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie1/AIE1RegisterInfo.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1Subtarget.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1RegisterInfo.cpp:17:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseFrameLowering.h:90:16: warning: ‘virtual void llvm::AIEBaseFrameLowering::adjustReg(llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag) const’ was hidden [-Woverloaded-virtual=]
+   90 |   virtual void adjustReg(MachineBasicBlock &MBB,
+      |                ^~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:29:15: note:   by ‘static void llvm::AIEFrameLowering::adjustReg(const llvm::TargetInstrInfo*, llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag)’
+   29 |   static void adjustReg(const TargetInstrInfo *TII, MachineBasicBlock &MBB,
+      |               ^~~~~~~~~
+[276/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie1/AIE1LegalizerInfo.cpp.o
+[277/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie1/AIE1InstrInfo.cpp.o
+[278/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie1/AIE1Subtarget.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1Subtarget.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1Subtarget.cpp:15:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseFrameLowering.h:90:16: warning: ‘virtual void llvm::AIEBaseFrameLowering::adjustReg(llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag) const’ was hidden [-Woverloaded-virtual=]
+   90 |   virtual void adjustReg(MachineBasicBlock &MBB,
+      |                ^~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:29:15: note:   by ‘static void llvm::AIEFrameLowering::adjustReg(const llvm::TargetInstrInfo*, llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag)’
+   29 |   static void adjustReg(const TargetInstrInfo *TII, MachineBasicBlock &MBB,
+      |               ^~~~~~~~~
+[279/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIE2PostLegalizerGenericCombiner.cpp.o
+[280/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIE2InstructionSelector.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/InstPrinter/AIE2InstPrinter.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2InstructionSelector.cpp:21:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/InstPrinter/AIECommonInstPrinter.h: In member function ‘void llvm::AIECommonInstPrinter::printImmOffset(const llvm::MCOperand&, const llvm::MCSubtargetInfo&, llvm::raw_ostream&)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/InstPrinter/AIECommonInstPrinter.h:54:5: warning: invalid use of incomplete type ‘const class llvm::MCAsmInfo’
+   54 |     MAI.printExpr(O, *MO.getExpr());
+      |     ^~~
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCSymbol.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/CodeGen/MachineInstr.h:32,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/CodeGen/MachineBasicBlock.h:22,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/CodeGen/MachineFunction.h:26,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/CodeGen/GlobalISel/GISelChangeObserver.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/CodeGen/GlobalISel/GISelValueTracking.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/CodeGen/GlobalISel/GISelKnownBits.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2InstructionSelector.cpp:17:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCExpr.h:19:7: note: forward declaration of ‘class llvm::MCAsmInfo’
+   19 | class MCAsmInfo;
+      |       ^~~~~~~~~
+[281/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2p/AIE2PSubtarget.cpp.o
+[282/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie1/AIE1ISelLowering.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1Subtarget.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1ISelLowering.cpp:21:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseFrameLowering.h:90:16: warning: ‘virtual void llvm::AIEBaseFrameLowering::adjustReg(llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag) const’ was hidden [-Woverloaded-virtual=]
+   90 |   virtual void adjustReg(MachineBasicBlock &MBB,
+      |                ^~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:29:15: note:   by ‘static void llvm::AIEFrameLowering::adjustReg(const llvm::TargetInstrInfo*, llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag)’
+   29 |   static void adjustReg(const TargetInstrInfo *TII, MachineBasicBlock &MBB,
+      |               ^~~~~~~~~
+[283/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2p/AIE2PFrameLowering.cpp.o
+[284/328] Building CXX object lib/CodeGen/SelectionDAG/CMakeFiles/LLVMSelectionDAG.dir/DAGCombiner.cpp.o
+[285/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIE2PreLegalizerCombiner.cpp.o
+[286/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie1/AIE1InstructionSelector.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1Subtarget.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1TargetMachine.h:20,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1InstructionSelector.cpp:21:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseFrameLowering.h:90:16: warning: ‘virtual void llvm::AIEBaseFrameLowering::adjustReg(llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag) const’ was hidden [-Woverloaded-virtual=]
+   90 |   virtual void adjustReg(MachineBasicBlock &MBB,
+      |                ^~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:29:15: note:   by ‘static void llvm::AIEFrameLowering::adjustReg(const llvm::TargetInstrInfo*, llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag)’
+   29 |   static void adjustReg(const TargetInstrInfo *TII, MachineBasicBlock &MBB,
+      |               ^~~~~~~~~
+[287/328] Linking CXX static library lib/libLLVMSelectionDAG.a
+[288/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2p/AIE2PRegisterBankInfo.cpp.o
+[289/328] Linking CXX static library lib/libLLVMGlobalISel.a
+[290/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2p/AIE2PRegisterInfo.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2p/AIE2PRegisterInfo.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2p/AIE2PRegisterInfo.cpp:16:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseRegisterInfo.h: In instantiation of ‘bool llvm::isEncodableAsNegativeInt(int) [with int N = 9; unsigned int step = 4]’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2p/AIE2PRegisterInfo.cpp:210:39:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseRegisterInfo.h:156:32: warning: ‘constexpr size_t llvm::CTLog2() [with long unsigned int kValue = 4; size_t = long unsigned int]’ is deprecated: Use ConstantLog2 instead [-Wdeprecated-declarations]
+  156 |   return isInt<N + CTLog2<step>() + 1>(Value);
+      |                    ~~~~~~~~~~~~^~
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/ADT/SmallPtrSet.h:23,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/ADT/SmallSet.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseRegisterInfo.h:18:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/MathExtras.h:324:18: note: declared here
+  324 | constexpr size_t CTLog2() {
+      |                  ^~~~~~
+[291/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2p/AIE2PLegalizerInfo.cpp.o
+[292/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIE2TargetMachine.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2FrameLowering.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2Subtarget.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2TargetMachine.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2TargetMachine.cpp:15:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseFrameLowering.h:90:16: warning: ‘virtual void llvm::AIEBaseFrameLowering::adjustReg(llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag) const’ was hidden [-Woverloaded-virtual=]
+   90 |   virtual void adjustReg(MachineBasicBlock &MBB,
+      |                ^~~~~~~~~
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1Subtarget.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:21,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2TargetTransformInfo.h:21,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2TargetMachine.cpp:16:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:29:15: note:   by ‘static void llvm::AIEFrameLowering::adjustReg(const llvm::TargetInstrInfo*, llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag)’
+   29 |   static void adjustReg(const TargetInstrInfo *TII, MachineBasicBlock &MBB,
+      |               ^~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h: In instantiation of ‘class llvm::AIEBaseTTIImpl<llvm::AIE2TTIImpl>’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2TargetTransformInfo.h:33:28:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:88:19: warning: ‘llvm::InstructionCost llvm::AIEBaseTTIImpl<T>::getIntImmCost(const llvm::APInt&, llvm::Type*, llvm::TargetTransformInfo::TargetCostKind) const [with T = llvm::AIE2TTIImpl]’ can be marked override [-Wsuggest-override]
+   88 |   InstructionCost getIntImmCost(const APInt &Imm, Type *Ty, TTI::TargetCostKind CostKind) const { // amd/aie/ port: 23 returns InstructionCost
+      |                   ^~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:119:12: warning: ‘llvm::TypeSize llvm::AIEBaseTTIImpl<T>::getRegisterBitWidth(llvm::TargetTransformInfo::RegisterKind) const [with T = llvm::AIE2TTIImpl]’ can be marked override [-Wsuggest-override]
+  119 |   TypeSize getRegisterBitWidth(TargetTransformInfo::RegisterKind K) const {
+      |            ^~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:134:12: warning: ‘unsigned int llvm::AIEBaseTTIImpl<T>::getMinVectorRegisterBitWidth() const [with T = llvm::AIE2TTIImpl]’ can be marked override [-Wsuggest-override]
+  134 |   unsigned getMinVectorRegisterBitWidth() const { return 512; }
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:149:19: warning: ‘llvm::InstructionCost llvm::AIEBaseTTIImpl<T>::getArithmeticInstrCost(unsigned int, llvm::Type*, llvm::TargetTransformInfo::TargetCostKind, llvm::TargetTransformInfo::OperandValueInfo, llvm::TargetTransformInfo::OperandValueInfo, llvm::ArrayRef<const llvm::Value*>, const llvm::Instruction*) const [with T = llvm::AIE2TTIImpl]’ can be marked override [-Wsuggest-override]
+  149 |   InstructionCost getArithmeticInstrCost(
+      |                   ^~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:167:12: warning: ‘unsigned int llvm::AIEBaseTTIImpl<T>::getStoreVectorFactor(unsigned int, unsigned int, unsigned int, llvm::VectorType*) const [with T = llvm::AIE2TTIImpl]’ can be marked override [-Wsuggest-override]
+  167 |   unsigned getStoreVectorFactor(unsigned VF, unsigned StoreSizeInBits,
+      |            ^~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:179:12: warning: ‘unsigned int llvm::AIEBaseTTIImpl<T>::getLoadVectorFactor(unsigned int, unsigned int, unsigned int, llvm::VectorType*) const [with T = llvm::AIE2TTIImpl]’ can be marked override [-Wsuggest-override]
+  179 |   unsigned getLoadVectorFactor(unsigned VF, unsigned LoadSizeInBits,
+      |            ^~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:186:8: warning: ‘bool llvm::AIEBaseTTIImpl<T>::isLegalToVectorizeStoreChain(unsigned int, llvm::Align, unsigned int) const [with T = llvm::AIE2TTIImpl]’ can be marked override [-Wsuggest-override]
+  186 |   bool isLegalToVectorizeStoreChain(unsigned ChainSizeInBytes, Align Alignment,
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2TargetTransformInfo.h:44:32: warning: ‘virtual std::optional<llvm::Instruction*> llvm::AIE2TTIImpl::instCombineIntrinsic(llvm::InstCombiner&, llvm::IntrinsicInst&) const’ can be marked override [-Wsuggest-override]
+   44 |   std::optional<Instruction *> instCombineIntrinsic(InstCombiner &IC,
+      |                                ^~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2TargetTransformInfo.h:63:19: warning: ‘virtual llvm::InstructionCost llvm::AIE2TTIImpl::getMemoryOpCost(unsigned int, llvm::Type*, llvm::Align, unsigned int, llvm::TargetTransformInfo::TargetCostKind, llvm::TargetTransformInfo::OperandValueInfo, const llvm::Instruction*) const’ can be marked override [-Wsuggest-override]
+   63 |   InstructionCost getMemoryOpCost(
+      |                   ^~~~~~~~~~~~~~~
+[293/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2p/AIE2PISelLowering.cpp.o
+[294/328] Building CXX object lib/Target/AIE/MCTargetDesc/CMakeFiles/LLVMAIEDesc.dir/AIEELFObjectWriter.cpp.o
+[295/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2ps/AIE2PSFrameLowering.cpp.o
+[296/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2ps/AIE2PSSubtarget.cpp.o
+[297/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIE2TargetTransformInfo.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2FrameLowering.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2Subtarget.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2TargetMachine.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2TargetTransformInfo.h:20,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2TargetTransformInfo.cpp:11:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseFrameLowering.h:90:16: warning: ‘virtual void llvm::AIEBaseFrameLowering::adjustReg(llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag) const’ was hidden [-Woverloaded-virtual=]
+   90 |   virtual void adjustReg(MachineBasicBlock &MBB,
+      |                ^~~~~~~~~
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1Subtarget.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:21,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2TargetTransformInfo.h:21:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:29:15: note:   by ‘static void llvm::AIEFrameLowering::adjustReg(const llvm::TargetInstrInfo*, llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag)’
+   29 |   static void adjustReg(const TargetInstrInfo *TII, MachineBasicBlock &MBB,
+      |               ^~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h: In instantiation of ‘class llvm::AIEBaseTTIImpl<llvm::AIE2TTIImpl>’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2TargetTransformInfo.h:33:28:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:88:19: warning: ‘llvm::InstructionCost llvm::AIEBaseTTIImpl<T>::getIntImmCost(const llvm::APInt&, llvm::Type*, llvm::TargetTransformInfo::TargetCostKind) const [with T = llvm::AIE2TTIImpl]’ can be marked override [-Wsuggest-override]
+   88 |   InstructionCost getIntImmCost(const APInt &Imm, Type *Ty, TTI::TargetCostKind CostKind) const { // amd/aie/ port: 23 returns InstructionCost
+      |                   ^~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:119:12: warning: ‘llvm::TypeSize llvm::AIEBaseTTIImpl<T>::getRegisterBitWidth(llvm::TargetTransformInfo::RegisterKind) const [with T = llvm::AIE2TTIImpl]’ can be marked override [-Wsuggest-override]
+  119 |   TypeSize getRegisterBitWidth(TargetTransformInfo::RegisterKind K) const {
+      |            ^~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:134:12: warning: ‘unsigned int llvm::AIEBaseTTIImpl<T>::getMinVectorRegisterBitWidth() const [with T = llvm::AIE2TTIImpl]’ can be marked override [-Wsuggest-override]
+  134 |   unsigned getMinVectorRegisterBitWidth() const { return 512; }
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:149:19: warning: ‘llvm::InstructionCost llvm::AIEBaseTTIImpl<T>::getArithmeticInstrCost(unsigned int, llvm::Type*, llvm::TargetTransformInfo::TargetCostKind, llvm::TargetTransformInfo::OperandValueInfo, llvm::TargetTransformInfo::OperandValueInfo, llvm::ArrayRef<const llvm::Value*>, const llvm::Instruction*) const [with T = llvm::AIE2TTIImpl]’ can be marked override [-Wsuggest-override]
+  149 |   InstructionCost getArithmeticInstrCost(
+      |                   ^~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:167:12: warning: ‘unsigned int llvm::AIEBaseTTIImpl<T>::getStoreVectorFactor(unsigned int, unsigned int, unsigned int, llvm::VectorType*) const [with T = llvm::AIE2TTIImpl]’ can be marked override [-Wsuggest-override]
+  167 |   unsigned getStoreVectorFactor(unsigned VF, unsigned StoreSizeInBits,
+      |            ^~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:179:12: warning: ‘unsigned int llvm::AIEBaseTTIImpl<T>::getLoadVectorFactor(unsigned int, unsigned int, unsigned int, llvm::VectorType*) const [with T = llvm::AIE2TTIImpl]’ can be marked override [-Wsuggest-override]
+  179 |   unsigned getLoadVectorFactor(unsigned VF, unsigned LoadSizeInBits,
+      |            ^~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:186:8: warning: ‘bool llvm::AIEBaseTTIImpl<T>::isLegalToVectorizeStoreChain(unsigned int, llvm::Align, unsigned int) const [with T = llvm::AIE2TTIImpl]’ can be marked override [-Wsuggest-override]
+  186 |   bool isLegalToVectorizeStoreChain(unsigned ChainSizeInBytes, Align Alignment,
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2TargetTransformInfo.h:44:32: warning: ‘virtual std::optional<llvm::Instruction*> llvm::AIE2TTIImpl::instCombineIntrinsic(llvm::InstCombiner&, llvm::IntrinsicInst&) const’ can be marked override [-Wsuggest-override]
+   44 |   std::optional<Instruction *> instCombineIntrinsic(InstCombiner &IC,
+      |                                ^~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2TargetTransformInfo.h:63:19: warning: ‘virtual llvm::InstructionCost llvm::AIE2TTIImpl::getMemoryOpCost(unsigned int, llvm::Type*, llvm::Align, unsigned int, llvm::TargetTransformInfo::TargetCostKind, llvm::TargetTransformInfo::OperandValueInfo, const llvm::Instruction*) const’ can be marked override [-Wsuggest-override]
+   63 |   InstructionCost getMemoryOpCost(
+      |                   ^~~~~~~~~~~~~~~
+[298/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2ps/AIE2PSRegisterBankInfo.cpp.o
+[299/328] Building CXX object lib/Target/AIE/MCTargetDesc/CMakeFiles/LLVMAIEDesc.dir/AIEBaseMCCodeEmitter.cpp.o
+[300/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2ps/AIE2PSRegisterInfo.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSRegisterInfo.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSRegisterInfo.cpp:16:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseRegisterInfo.h: In instantiation of ‘bool llvm::isEncodableAsNegativeInt(int) [with int N = 9; unsigned int step = 4]’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSRegisterInfo.cpp:214:39:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseRegisterInfo.h:156:32: warning: ‘constexpr size_t llvm::CTLog2() [with long unsigned int kValue = 4; size_t = long unsigned int]’ is deprecated: Use ConstantLog2 instead [-Wdeprecated-declarations]
+  156 |   return isInt<N + CTLog2<step>() + 1>(Value);
+      |                    ~~~~~~~~~~~~^~
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/ADT/SmallPtrSet.h:23,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/ADT/SmallSet.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseRegisterInfo.h:18:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/MathExtras.h:324:18: note: declared here
+  324 | constexpr size_t CTLog2() {
+      |                  ^~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseRegisterInfo.h: In instantiation of ‘bool llvm::isEncodableAsNegativeInt(int) [with int N = 9; unsigned int step = 8]’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSRegisterInfo.cpp:243:39:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseRegisterInfo.h:156:32: warning: ‘constexpr size_t llvm::CTLog2() [with long unsigned int kValue = 8; size_t = long unsigned int]’ is deprecated: Use ConstantLog2 instead [-Wdeprecated-declarations]
+  156 |   return isInt<N + CTLog2<step>() + 1>(Value);
+      |                    ~~~~~~~~~~~~^~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/MathExtras.h:324:18: note: declared here
+  324 | constexpr size_t CTLog2() {
+      |                  ^~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseRegisterInfo.h: In instantiation of ‘bool llvm::isEncodableAsNegativeInt(int) [with int N = 9; unsigned int step = 16]’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSRegisterInfo.cpp:264:40:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseRegisterInfo.h:156:32: warning: ‘constexpr size_t llvm::CTLog2() [with long unsigned int kValue = 16; size_t = long unsigned int]’ is deprecated: Use ConstantLog2 instead [-Wdeprecated-declarations]
+  156 |   return isInt<N + CTLog2<step>() + 1>(Value);
+      |                    ~~~~~~~~~~~~^~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/MathExtras.h:324:18: note: declared here
+  324 | constexpr size_t CTLog2() {
+      |                  ^~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseRegisterInfo.h: In instantiation of ‘bool llvm::isEncodableAsNegativeInt(int) [with int N = 9; unsigned int step = 32]’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSRegisterInfo.cpp:281:40:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseRegisterInfo.h:156:32: warning: ‘constexpr size_t llvm::CTLog2() [with long unsigned int kValue = 32; size_t = long unsigned int]’ is deprecated: Use ConstantLog2 instead [-Wdeprecated-declarations]
+  156 |   return isInt<N + CTLog2<step>() + 1>(Value);
+      |                    ~~~~~~~~~~~~^~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/MathExtras.h:324:18: note: declared here
+  324 | constexpr size_t CTLog2() {
+      |                  ^~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseRegisterInfo.h: In instantiation of ‘bool llvm::isEncodableAsNegativeInt(int) [with int N = 9; unsigned int step = 64]’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSRegisterInfo.cpp:298:40:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseRegisterInfo.h:156:32: warning: ‘constexpr size_t llvm::CTLog2() [with long unsigned int kValue = 64; size_t = long unsigned int]’ is deprecated: Use ConstantLog2 instead [-Wdeprecated-declarations]
+  156 |   return isInt<N + CTLog2<step>() + 1>(Value);
+      |                    ~~~~~~~~~~~~^~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/MathExtras.h:324:18: note: declared here
+  324 | constexpr size_t CTLog2() {
+      |                  ^~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseRegisterInfo.h: In instantiation of ‘bool llvm::isEncodableAsNegativeInt(int) [with int N = 9; unsigned int step = 128]’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSRegisterInfo.cpp:317:41:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseRegisterInfo.h:156:32: warning: ‘constexpr size_t llvm::CTLog2() [with long unsigned int kValue = 128; size_t = long unsigned int]’ is deprecated: Use ConstantLog2 instead [-Wdeprecated-declarations]
+  156 |   return isInt<N + CTLog2<step>() + 1>(Value);
+      |                    ~~~~~~~~~~~~^~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/MathExtras.h:324:18: note: declared here
+  324 | constexpr size_t CTLog2() {
+      |                  ^~~~~~
+[301/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2ps/AIE2PSInstrInfo.cpp.o
+FAILED: lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2ps/AIE2PSInstrInfo.cpp.o 
+CCACHE_CPP2=yes CCACHE_HASHDIR=yes CCACHE_SLOPPINESS=pch_defines,time_macros /usr/bin/ccache /usr/bin/g++ -D_DEBUG -D_GLIBCXX_ASSERTIONS -D_GLIBCXX_USE_CXX11_ABI=1 -D_GNU_SOURCE -D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_EXTENSIVE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-uninitialized -Wno-nonnull -Wno-class-memaccess -Wno-dangling-reference -Wno-redundant-move -Wno-pessimizing-move -Wno-array-bounds -Wno-stringop-overread -Wno-dangling-pointer -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported -fdiagnostics-color -ffunction-sections -fdata-sections -O3 -DNDEBUG -std=c++17 -fvisibility=hidden -UNDEBUG -fno-exceptions -funwind-tables -fno-rtti -MD -MT lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2ps/AIE2PSInstrInfo.cpp.o -MF lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2ps/AIE2PSInstrInfo.cpp.o.d -o lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2ps/AIE2PSInstrInfo.cpp.o -c /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSInstrInfo.cpp
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSInstrInfo.cpp: In lambda function:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSInstrInfo.cpp:1026:56: error: invalid conversion from ‘const llvm::TargetRegisterInfo*’ to ‘unsigned int’ [-fpermissive]
+ 1026 |     loadRegFromStackSlot(MBB, I, TmpReg, FI, BounceRC, TRI, VReg, Flags);
+      |                                                        ^~~
+      |                                                        |
+      |                                                        const llvm::TargetRegisterInfo*
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/CodeGen/MachineOperand.h:17,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/CodeGen/MachineInstr.h:27,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/CodeGen/MachineBasicBlock.h:22,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/CodeGen/TargetRegisterInfo.h:22,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseRegisterInfo.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSRegisterInfo.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSInstrInfo.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSInstrInfo.cpp:16:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/CodeGen/Register.h:24:31: note:   initializing argument 1 of ‘constexpr llvm::Register::Register(unsigned int)’
+   24 |   constexpr Register(unsigned Val = 0) : Reg(Val) {}
+      |                      ~~~~~~~~~^~~~~~~
+[302/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2p/AIE2PTargetMachine.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2p/AIE2PFrameLowering.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2p/AIE2PSubtarget.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2p/AIE2PTargetMachine.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2p/AIE2PTargetMachine.cpp:15:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseFrameLowering.h:90:16: warning: ‘virtual void llvm::AIEBaseFrameLowering::adjustReg(llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag) const’ was hidden [-Woverloaded-virtual=]
+   90 |   virtual void adjustReg(MachineBasicBlock &MBB,
+      |                ^~~~~~~~~
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1Subtarget.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:21,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2p/AIE2PTargetTransformInfo.h:21,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2p/AIE2PTargetMachine.cpp:16:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:29:15: note:   by ‘static void llvm::AIEFrameLowering::adjustReg(const llvm::TargetInstrInfo*, llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag)’
+   29 |   static void adjustReg(const TargetInstrInfo *TII, MachineBasicBlock &MBB,
+      |               ^~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h: In instantiation of ‘class llvm::AIEBaseTTIImpl<llvm::AIE2PTTIImpl>’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2p/AIE2PTargetTransformInfo.h:34:29:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:88:19: warning: ‘llvm::InstructionCost llvm::AIEBaseTTIImpl<T>::getIntImmCost(const llvm::APInt&, llvm::Type*, llvm::TargetTransformInfo::TargetCostKind) const [with T = llvm::AIE2PTTIImpl]’ can be marked override [-Wsuggest-override]
+   88 |   InstructionCost getIntImmCost(const APInt &Imm, Type *Ty, TTI::TargetCostKind CostKind) const { // amd/aie/ port: 23 returns InstructionCost
+      |                   ^~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:119:12: warning: ‘llvm::TypeSize llvm::AIEBaseTTIImpl<T>::getRegisterBitWidth(llvm::TargetTransformInfo::RegisterKind) const [with T = llvm::AIE2PTTIImpl]’ can be marked override [-Wsuggest-override]
+  119 |   TypeSize getRegisterBitWidth(TargetTransformInfo::RegisterKind K) const {
+      |            ^~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:134:12: warning: ‘unsigned int llvm::AIEBaseTTIImpl<T>::getMinVectorRegisterBitWidth() const [with T = llvm::AIE2PTTIImpl]’ can be marked override [-Wsuggest-override]
+  134 |   unsigned getMinVectorRegisterBitWidth() const { return 512; }
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:149:19: warning: ‘llvm::InstructionCost llvm::AIEBaseTTIImpl<T>::getArithmeticInstrCost(unsigned int, llvm::Type*, llvm::TargetTransformInfo::TargetCostKind, llvm::TargetTransformInfo::OperandValueInfo, llvm::TargetTransformInfo::OperandValueInfo, llvm::ArrayRef<const llvm::Value*>, const llvm::Instruction*) const [with T = llvm::AIE2PTTIImpl]’ can be marked override [-Wsuggest-override]
+  149 |   InstructionCost getArithmeticInstrCost(
+      |                   ^~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:167:12: warning: ‘unsigned int llvm::AIEBaseTTIImpl<T>::getStoreVectorFactor(unsigned int, unsigned int, unsigned int, llvm::VectorType*) const [with T = llvm::AIE2PTTIImpl]’ can be marked override [-Wsuggest-override]
+  167 |   unsigned getStoreVectorFactor(unsigned VF, unsigned StoreSizeInBits,
+      |            ^~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:179:12: warning: ‘unsigned int llvm::AIEBaseTTIImpl<T>::getLoadVectorFactor(unsigned int, unsigned int, unsigned int, llvm::VectorType*) const [with T = llvm::AIE2PTTIImpl]’ can be marked override [-Wsuggest-override]
+  179 |   unsigned getLoadVectorFactor(unsigned VF, unsigned LoadSizeInBits,
+      |            ^~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:186:8: warning: ‘bool llvm::AIEBaseTTIImpl<T>::isLegalToVectorizeStoreChain(unsigned int, llvm::Align, unsigned int) const [with T = llvm::AIE2PTTIImpl]’ can be marked override [-Wsuggest-override]
+  186 |   bool isLegalToVectorizeStoreChain(unsigned ChainSizeInBytes, Align Alignment,
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2p/AIE2PTargetTransformInfo.h:52:19: warning: ‘virtual llvm::InstructionCost llvm::AIE2PTTIImpl::getMemoryOpCost(unsigned int, llvm::Type*, llvm::Align, unsigned int, llvm::TargetTransformInfo::TargetCostKind, llvm::TargetTransformInfo::OperandValueInfo, const llvm::Instruction*) const’ can be marked override [-Wsuggest-override]
+   52 |   InstructionCost getMemoryOpCost(
+      |                   ^~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2p/AIE2PTargetTransformInfo.h:58:32: warning: ‘virtual std::optional<llvm::Instruction*> llvm::AIE2PTTIImpl::instCombineIntrinsic(llvm::InstCombiner&, llvm::IntrinsicInst&) const’ can be marked override [-Wsuggest-override]
+   58 |   std::optional<Instruction *> instCombineIntrinsic(InstCombiner &IC,
+      |                                ^~~~~~~~~~~~~~~~~~~~
+[303/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2ps/AIE2PSISelLowering.cpp.o
+[304/328] Building CXX object lib/Target/AIE/InstPrinter/CMakeFiles/LLVMAIEAsmPrinter.dir/AIEInstPrinter.cpp.o
+[305/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2ps/AIE2PSLegalizerInfo.cpp.o
+[306/328] Building CXX object lib/Target/AIE/InstPrinter/CMakeFiles/LLVMAIEAsmPrinter.dir/AIE2InstPrinter.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/InstPrinter/AIE2InstPrinter.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/InstPrinter/AIE2InstPrinter.cpp:15:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/InstPrinter/AIECommonInstPrinter.h: In member function ‘void llvm::AIECommonInstPrinter::printImmOffset(const llvm::MCOperand&, const llvm::MCSubtargetInfo&, llvm::raw_ostream&)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/InstPrinter/AIECommonInstPrinter.h:54:5: warning: invalid use of incomplete type ‘const class llvm::MCAsmInfo’
+   54 |     MAI.printExpr(O, *MO.getExpr());
+      |     ^~~
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCSymbol.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCObjectWriter.h:12,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/MCTargetDesc/AIEMCTargetDesc.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/InstPrinter/AIECommonInstPrinter.h:19:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCExpr.h:19:7: note: forward declaration of ‘class llvm::MCAsmInfo’
+   19 | class MCAsmInfo;
+      |       ^~~~~~~~~
+[307/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2p/AIE2PInstrInfo.cpp.o
+[308/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2p/AIE2PPostLegalizerCustomCombiner.cpp.o
+[309/328] Building CXX object lib/Target/AIE/InstPrinter/CMakeFiles/LLVMAIEAsmPrinter.dir/AIE2PInstPrinter.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/InstPrinter/AIE2PInstPrinter.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/InstPrinter/AIE2PInstPrinter.cpp:15:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/InstPrinter/AIECommonInstPrinter.h: In member function ‘void llvm::AIECommonInstPrinter::printImmOffset(const llvm::MCOperand&, const llvm::MCSubtargetInfo&, llvm::raw_ostream&)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/InstPrinter/AIECommonInstPrinter.h:54:5: warning: invalid use of incomplete type ‘const class llvm::MCAsmInfo’
+   54 |     MAI.printExpr(O, *MO.getExpr());
+      |     ^~~
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCSymbol.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCObjectWriter.h:12,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/MCTargetDesc/AIEMCTargetDesc.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/InstPrinter/AIECommonInstPrinter.h:19:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCExpr.h:19:7: note: forward declaration of ‘class llvm::MCAsmInfo’
+   19 | class MCAsmInfo;
+      |       ^~~~~~~~~
+[310/328] Building CXX object lib/Target/AIE/InstPrinter/CMakeFiles/LLVMAIEAsmPrinter.dir/AIE2PSInstPrinter.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/InstPrinter/AIE2PSInstPrinter.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/InstPrinter/AIE2PSInstPrinter.cpp:15:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/InstPrinter/AIECommonInstPrinter.h: In member function ‘void llvm::AIECommonInstPrinter::printImmOffset(const llvm::MCOperand&, const llvm::MCSubtargetInfo&, llvm::raw_ostream&)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/InstPrinter/AIECommonInstPrinter.h:54:5: warning: invalid use of incomplete type ‘const class llvm::MCAsmInfo’
+   54 |     MAI.printExpr(O, *MO.getExpr());
+      |     ^~~
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCSymbol.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCObjectWriter.h:12,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/MCTargetDesc/AIEMCTargetDesc.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/InstPrinter/AIECommonInstPrinter.h:19:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCExpr.h:19:7: note: forward declaration of ‘class llvm::MCAsmInfo’
+   19 | class MCAsmInfo;
+      |       ^~~~~~~~~
+[311/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2p/AIE2PTargetTransformInfo.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2p/AIE2PFrameLowering.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2p/AIE2PSubtarget.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2p/AIE2PTargetMachine.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2p/AIE2PTargetTransformInfo.h:20,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2p/AIE2PTargetTransformInfo.cpp:11:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseFrameLowering.h:90:16: warning: ‘virtual void llvm::AIEBaseFrameLowering::adjustReg(llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag) const’ was hidden [-Woverloaded-virtual=]
+   90 |   virtual void adjustReg(MachineBasicBlock &MBB,
+      |                ^~~~~~~~~
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1Subtarget.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:21,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2p/AIE2PTargetTransformInfo.h:21:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:29:15: note:   by ‘static void llvm::AIEFrameLowering::adjustReg(const llvm::TargetInstrInfo*, llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag)’
+   29 |   static void adjustReg(const TargetInstrInfo *TII, MachineBasicBlock &MBB,
+      |               ^~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h: In instantiation of ‘class llvm::AIEBaseTTIImpl<llvm::AIE2PTTIImpl>’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2p/AIE2PTargetTransformInfo.h:34:29:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:88:19: warning: ‘llvm::InstructionCost llvm::AIEBaseTTIImpl<T>::getIntImmCost(const llvm::APInt&, llvm::Type*, llvm::TargetTransformInfo::TargetCostKind) const [with T = llvm::AIE2PTTIImpl]’ can be marked override [-Wsuggest-override]
+   88 |   InstructionCost getIntImmCost(const APInt &Imm, Type *Ty, TTI::TargetCostKind CostKind) const { // amd/aie/ port: 23 returns InstructionCost
+      |                   ^~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:119:12: warning: ‘llvm::TypeSize llvm::AIEBaseTTIImpl<T>::getRegisterBitWidth(llvm::TargetTransformInfo::RegisterKind) const [with T = llvm::AIE2PTTIImpl]’ can be marked override [-Wsuggest-override]
+  119 |   TypeSize getRegisterBitWidth(TargetTransformInfo::RegisterKind K) const {
+      |            ^~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:134:12: warning: ‘unsigned int llvm::AIEBaseTTIImpl<T>::getMinVectorRegisterBitWidth() const [with T = llvm::AIE2PTTIImpl]’ can be marked override [-Wsuggest-override]
+  134 |   unsigned getMinVectorRegisterBitWidth() const { return 512; }
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:149:19: warning: ‘llvm::InstructionCost llvm::AIEBaseTTIImpl<T>::getArithmeticInstrCost(unsigned int, llvm::Type*, llvm::TargetTransformInfo::TargetCostKind, llvm::TargetTransformInfo::OperandValueInfo, llvm::TargetTransformInfo::OperandValueInfo, llvm::ArrayRef<const llvm::Value*>, const llvm::Instruction*) const [with T = llvm::AIE2PTTIImpl]’ can be marked override [-Wsuggest-override]
+  149 |   InstructionCost getArithmeticInstrCost(
+      |                   ^~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:167:12: warning: ‘unsigned int llvm::AIEBaseTTIImpl<T>::getStoreVectorFactor(unsigned int, unsigned int, unsigned int, llvm::VectorType*) const [with T = llvm::AIE2PTTIImpl]’ can be marked override [-Wsuggest-override]
+  167 |   unsigned getStoreVectorFactor(unsigned VF, unsigned StoreSizeInBits,
+      |            ^~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:179:12: warning: ‘unsigned int llvm::AIEBaseTTIImpl<T>::getLoadVectorFactor(unsigned int, unsigned int, unsigned int, llvm::VectorType*) const [with T = llvm::AIE2PTTIImpl]’ can be marked override [-Wsuggest-override]
+  179 |   unsigned getLoadVectorFactor(unsigned VF, unsigned LoadSizeInBits,
+      |            ^~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:186:8: warning: ‘bool llvm::AIEBaseTTIImpl<T>::isLegalToVectorizeStoreChain(unsigned int, llvm::Align, unsigned int) const [with T = llvm::AIE2PTTIImpl]’ can be marked override [-Wsuggest-override]
+  186 |   bool isLegalToVectorizeStoreChain(unsigned ChainSizeInBytes, Align Alignment,
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2p/AIE2PTargetTransformInfo.h:52:19: warning: ‘virtual llvm::InstructionCost llvm::AIE2PTTIImpl::getMemoryOpCost(unsigned int, llvm::Type*, llvm::Align, unsigned int, llvm::TargetTransformInfo::TargetCostKind, llvm::TargetTransformInfo::OperandValueInfo, const llvm::Instruction*) const’ can be marked override [-Wsuggest-override]
+   52 |   InstructionCost getMemoryOpCost(
+      |                   ^~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2p/AIE2PTargetTransformInfo.h:58:32: warning: ‘virtual std::optional<llvm::Instruction*> llvm::AIE2PTTIImpl::instCombineIntrinsic(llvm::InstCombiner&, llvm::IntrinsicInst&) const’ can be marked override [-Wsuggest-override]
+   58 |   std::optional<Instruction *> instCombineIntrinsic(InstCombiner &IC,
+      |                                ^~~~~~~~~~~~~~~~~~~~
+[312/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2p/AIE2PPostLegalizerGenericCombiner.cpp.o
+[313/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2ps/AIE2PSPostLegalizerCustomCombiner.cpp.o
+[314/328] Building CXX object lib/Target/AIE/Utils/CMakeFiles/LLVMAIEUtils.dir/AIELoopUtils.cpp.o
+[315/328] Linking CXX static library lib/libLLVMAIEUtils.a
+[316/328] Linking CXX static library lib/libLLVMAIEAsmPrinter.a
+[317/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie1/AIE1TargetMachine.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1Subtarget.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1TargetMachine.h:20,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1TargetMachine.cpp:15:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseFrameLowering.h:90:16: warning: ‘virtual void llvm::AIEBaseFrameLowering::adjustReg(llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag) const’ was hidden [-Woverloaded-virtual=]
+   90 |   virtual void adjustReg(MachineBasicBlock &MBB,
+      |                ^~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:29:15: note:   by ‘static void llvm::AIEFrameLowering::adjustReg(const llvm::TargetInstrInfo*, llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag)’
+   29 |   static void adjustReg(const TargetInstrInfo *TII, MachineBasicBlock &MBB,
+      |               ^~~~~~~~~
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/CodeGen/BasicTTIImpl.h:28,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIETargetTransformInfo.h:22,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1TargetMachine.cpp:20:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Analysis/TargetTransformInfoImpl.h:587:27: warning: ‘virtual llvm::InstructionCost llvm::TargetTransformInfoImplBase::getIntImmCost(const llvm::APInt&, llvm::Type*, llvm::TargetTransformInfo::TargetCostKind) const’ was hidden [-Woverloaded-virtual=]
+  587 |   virtual InstructionCost getIntImmCost(const APInt &Imm, Type *Ty,
+      |                           ^~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIETargetTransformInfo.h:42:7: note:   by ‘int llvm::AIETTIImpl::getIntImmCost(const llvm::APInt&, llvm::Type*, llvm::TargetTransformInfo::TargetCostKind)’
+   42 |   int getIntImmCost(const APInt &Imm, Type *Ty, TTI::TargetCostKind CostKind) {
+      |       ^~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/CodeGen/BasicTTIImpl.h:714:8: warning: ‘void llvm::BasicTTIImplBase<T>::getUnrollingPreferences(llvm::Loop*, llvm::ScalarEvolution&, llvm::TargetTransformInfo::UnrollingPreferences&, llvm::OptimizationRemarkEmitter*) const [with T = llvm::AIETTIImpl]’ was hidden [-Woverloaded-virtual=]
+  714 |   void getUnrollingPreferences(Loop *L, ScalarEvolution &SE,
+      |        ^~~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIETargetTransformInfo.h:57:8: note:   by ‘void llvm::AIETTIImpl::getUnrollingPreferences(llvm::Loop*, llvm::ScalarEvolution&, llvm::TargetTransformInfo::UnrollingPreferences&, llvm::OptimizationRemarkEmitter*)’
+   57 |   void getUnrollingPreferences(Loop *L, ScalarEvolution &SE,
+      |        ^~~~~~~~~~~~~~~~~~~~~~~
+[318/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2p/AIE2PPreLegalizerCombiner.cpp.o
+[319/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2ps/AIE2PSTargetMachine.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSFrameLowering.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSSubtarget.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSTargetMachine.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSTargetMachine.cpp:15:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseFrameLowering.h:90:16: warning: ‘virtual void llvm::AIEBaseFrameLowering::adjustReg(llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag) const’ was hidden [-Woverloaded-virtual=]
+   90 |   virtual void adjustReg(MachineBasicBlock &MBB,
+      |                ^~~~~~~~~
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1Subtarget.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:21,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSTargetTransformInfo.h:21,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSTargetMachine.cpp:16:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:29:15: note:   by ‘static void llvm::AIEFrameLowering::adjustReg(const llvm::TargetInstrInfo*, llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag)’
+   29 |   static void adjustReg(const TargetInstrInfo *TII, MachineBasicBlock &MBB,
+      |               ^~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h: In instantiation of ‘class llvm::AIEBaseTTIImpl<llvm::AIE2PSTTIImpl>’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSTargetTransformInfo.h:34:30:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:88:19: warning: ‘llvm::InstructionCost llvm::AIEBaseTTIImpl<T>::getIntImmCost(const llvm::APInt&, llvm::Type*, llvm::TargetTransformInfo::TargetCostKind) const [with T = llvm::AIE2PSTTIImpl]’ can be marked override [-Wsuggest-override]
+   88 |   InstructionCost getIntImmCost(const APInt &Imm, Type *Ty, TTI::TargetCostKind CostKind) const { // amd/aie/ port: 23 returns InstructionCost
+      |                   ^~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:119:12: warning: ‘llvm::TypeSize llvm::AIEBaseTTIImpl<T>::getRegisterBitWidth(llvm::TargetTransformInfo::RegisterKind) const [with T = llvm::AIE2PSTTIImpl]’ can be marked override [-Wsuggest-override]
+  119 |   TypeSize getRegisterBitWidth(TargetTransformInfo::RegisterKind K) const {
+      |            ^~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:134:12: warning: ‘unsigned int llvm::AIEBaseTTIImpl<T>::getMinVectorRegisterBitWidth() const [with T = llvm::AIE2PSTTIImpl]’ can be marked override [-Wsuggest-override]
+  134 |   unsigned getMinVectorRegisterBitWidth() const { return 512; }
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:149:19: warning: ‘llvm::InstructionCost llvm::AIEBaseTTIImpl<T>::getArithmeticInstrCost(unsigned int, llvm::Type*, llvm::TargetTransformInfo::TargetCostKind, llvm::TargetTransformInfo::OperandValueInfo, llvm::TargetTransformInfo::OperandValueInfo, llvm::ArrayRef<const llvm::Value*>, const llvm::Instruction*) const [with T = llvm::AIE2PSTTIImpl]’ can be marked override [-Wsuggest-override]
+  149 |   InstructionCost getArithmeticInstrCost(
+      |                   ^~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:167:12: warning: ‘unsigned int llvm::AIEBaseTTIImpl<T>::getStoreVectorFactor(unsigned int, unsigned int, unsigned int, llvm::VectorType*) const [with T = llvm::AIE2PSTTIImpl]’ can be marked override [-Wsuggest-override]
+  167 |   unsigned getStoreVectorFactor(unsigned VF, unsigned StoreSizeInBits,
+      |            ^~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:179:12: warning: ‘unsigned int llvm::AIEBaseTTIImpl<T>::getLoadVectorFactor(unsigned int, unsigned int, unsigned int, llvm::VectorType*) const [with T = llvm::AIE2PSTTIImpl]’ can be marked override [-Wsuggest-override]
+  179 |   unsigned getLoadVectorFactor(unsigned VF, unsigned LoadSizeInBits,
+      |            ^~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:186:8: warning: ‘bool llvm::AIEBaseTTIImpl<T>::isLegalToVectorizeStoreChain(unsigned int, llvm::Align, unsigned int) const [with T = llvm::AIE2PSTTIImpl]’ can be marked override [-Wsuggest-override]
+  186 |   bool isLegalToVectorizeStoreChain(unsigned ChainSizeInBytes, Align Alignment,
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSTargetTransformInfo.h:53:19: warning: ‘virtual llvm::InstructionCost llvm::AIE2PSTTIImpl::getMemoryOpCost(unsigned int, llvm::Type*, llvm::Align, unsigned int, llvm::TargetTransformInfo::TargetCostKind, llvm::TargetTransformInfo::OperandValueInfo, const llvm::Instruction*) const’ can be marked override [-Wsuggest-override]
+   53 |   InstructionCost getMemoryOpCost(
+      |                   ^~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSTargetTransformInfo.h:59:32: warning: ‘virtual std::optional<llvm::Instruction*> llvm::AIE2PSTTIImpl::instCombineIntrinsic(llvm::InstCombiner&, llvm::IntrinsicInst&) const’ can be marked override [-Wsuggest-override]
+   59 |   std::optional<Instruction *> instCombineIntrinsic(InstCombiner &IC,
+      |                                ^~~~~~~~~~~~~~~~~~~~
+[320/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2p/AIE2PInstructionSelector.cpp.o
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2p/AIE2PInstructionSelector.cpp:760:10: warning: ‘llvm::Register {anonymous}::AIE2PInstructionSelector::createPLFRRegSequence(llvm::Register, llvm::Register, llvm::Register, llvm::MachineRegisterInfo&)’ defined but not used [-Wunused-function]
+  760 | Register AIE2PInstructionSelector::createPLFRRegSequence(
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~
+[321/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2ps/AIE2PSPostLegalizerFinalCombiner.cpp.o
+[322/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2ps/AIE2PSTargetTransformInfo.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSFrameLowering.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSSubtarget.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSTargetMachine.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSTargetTransformInfo.h:20,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSTargetTransformInfo.cpp:11:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseFrameLowering.h:90:16: warning: ‘virtual void llvm::AIEBaseFrameLowering::adjustReg(llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag) const’ was hidden [-Woverloaded-virtual=]
+   90 |   virtual void adjustReg(MachineBasicBlock &MBB,
+      |                ^~~~~~~~~
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1Subtarget.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:21,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSTargetTransformInfo.h:21:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:29:15: note:   by ‘static void llvm::AIEFrameLowering::adjustReg(const llvm::TargetInstrInfo*, llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag)’
+   29 |   static void adjustReg(const TargetInstrInfo *TII, MachineBasicBlock &MBB,
+      |               ^~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h: In instantiation of ‘class llvm::AIEBaseTTIImpl<llvm::AIE2PSTTIImpl>’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSTargetTransformInfo.h:34:30:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:88:19: warning: ‘llvm::InstructionCost llvm::AIEBaseTTIImpl<T>::getIntImmCost(const llvm::APInt&, llvm::Type*, llvm::TargetTransformInfo::TargetCostKind) const [with T = llvm::AIE2PSTTIImpl]’ can be marked override [-Wsuggest-override]
+   88 |   InstructionCost getIntImmCost(const APInt &Imm, Type *Ty, TTI::TargetCostKind CostKind) const { // amd/aie/ port: 23 returns InstructionCost
+      |                   ^~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:119:12: warning: ‘llvm::TypeSize llvm::AIEBaseTTIImpl<T>::getRegisterBitWidth(llvm::TargetTransformInfo::RegisterKind) const [with T = llvm::AIE2PSTTIImpl]’ can be marked override [-Wsuggest-override]
+  119 |   TypeSize getRegisterBitWidth(TargetTransformInfo::RegisterKind K) const {
+      |            ^~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:134:12: warning: ‘unsigned int llvm::AIEBaseTTIImpl<T>::getMinVectorRegisterBitWidth() const [with T = llvm::AIE2PSTTIImpl]’ can be marked override [-Wsuggest-override]
+  134 |   unsigned getMinVectorRegisterBitWidth() const { return 512; }
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:149:19: warning: ‘llvm::InstructionCost llvm::AIEBaseTTIImpl<T>::getArithmeticInstrCost(unsigned int, llvm::Type*, llvm::TargetTransformInfo::TargetCostKind, llvm::TargetTransformInfo::OperandValueInfo, llvm::TargetTransformInfo::OperandValueInfo, llvm::ArrayRef<const llvm::Value*>, const llvm::Instruction*) const [with T = llvm::AIE2PSTTIImpl]’ can be marked override [-Wsuggest-override]
+  149 |   InstructionCost getArithmeticInstrCost(
+      |                   ^~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:167:12: warning: ‘unsigned int llvm::AIEBaseTTIImpl<T>::getStoreVectorFactor(unsigned int, unsigned int, unsigned int, llvm::VectorType*) const [with T = llvm::AIE2PSTTIImpl]’ can be marked override [-Wsuggest-override]
+  167 |   unsigned getStoreVectorFactor(unsigned VF, unsigned StoreSizeInBits,
+      |            ^~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:179:12: warning: ‘unsigned int llvm::AIEBaseTTIImpl<T>::getLoadVectorFactor(unsigned int, unsigned int, unsigned int, llvm::VectorType*) const [with T = llvm::AIE2PSTTIImpl]’ can be marked override [-Wsuggest-override]
+  179 |   unsigned getLoadVectorFactor(unsigned VF, unsigned LoadSizeInBits,
+      |            ^~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetTransformInfo.h:186:8: warning: ‘bool llvm::AIEBaseTTIImpl<T>::isLegalToVectorizeStoreChain(unsigned int, llvm::Align, unsigned int) const [with T = llvm::AIE2PSTTIImpl]’ can be marked override [-Wsuggest-override]
+  186 |   bool isLegalToVectorizeStoreChain(unsigned ChainSizeInBytes, Align Alignment,
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSTargetTransformInfo.h:53:19: warning: ‘virtual llvm::InstructionCost llvm::AIE2PSTTIImpl::getMemoryOpCost(unsigned int, llvm::Type*, llvm::Align, unsigned int, llvm::TargetTransformInfo::TargetCostKind, llvm::TargetTransformInfo::OperandValueInfo, const llvm::Instruction*) const’ can be marked override [-Wsuggest-override]
+   53 |   InstructionCost getMemoryOpCost(
+      |                   ^~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps/AIE2PSTargetTransformInfo.h:59:32: warning: ‘virtual std::optional<llvm::Instruction*> llvm::AIE2PSTTIImpl::instCombineIntrinsic(llvm::InstCombiner&, llvm::IntrinsicInst&) const’ can be marked override [-Wsuggest-override]
+   59 |   std::optional<Instruction *> instCombineIntrinsic(InstCombiner &IC,
+      |                                ^~~~~~~~~~~~~~~~~~~~
+[323/328] Building CXX object lib/Target/AIE/MCTargetDesc/CMakeFiles/LLVMAIEDesc.dir/AIEMCCodeEmitter.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/MCTargetDesc/AIEMCCodeEmitter.cpp:15:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/MCTargetDesc/AIEBaseMCCodeEmitter.h: In instantiation of ‘void llvm::{anonymous}::getSImmOpValueXStep(const llvm::MCInst&, unsigned int, llvm::APInt&, llvm::SmallVectorImpl<llvm::MCFixup>&, const llvm::MCSubtargetInfo&) [with int N = 14; unsigned int step = 4; int offset = 0; bool isNegative = true; bool isUnsigned = false]’:
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIEGenMCCodeEmitter.inc:1249:53:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/MCTargetDesc/AIEBaseMCCodeEmitter.h:124:46: warning: ‘constexpr size_t llvm::CTLog2() [with long unsigned int kValue = 4; size_t = long unsigned int]’ is deprecated: Use ConstantLog2 instead [-Wdeprecated-declarations]
+  124 |   const unsigned FixedZeroBits = CTLog2<step>();
+      |                                  ~~~~~~~~~~~~^~
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/ADT/DenseMap.h:24,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCExpr.h:12,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCSymbol.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCObjectWriter.h:12,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/MCTargetDesc/AIEMCTargetDesc.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/Utils/AIEBaseInfo.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/MCTargetDesc/AIEFormat.h:16,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/MCTargetDesc/AIEMCFormats.h:17,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/MCTargetDesc/AIEMCFixupKinds.h:14,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/MCTargetDesc/AIEBaseMCCodeEmitter.h:15:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/MathExtras.h:324:18: note: declared here
+  324 | constexpr size_t CTLog2() {
+      |                  ^~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/MCTargetDesc/AIEBaseMCCodeEmitter.h: In instantiation of ‘void llvm::{anonymous}::getSImmOpValueXStep(const llvm::MCInst&, unsigned int, llvm::APInt&, llvm::SmallVectorImpl<llvm::MCFixup>&, const llvm::MCSubtargetInfo&) [with int N = 4; unsigned int step = 4; int offset = 0; bool isNegative = false; bool isUnsigned = false]’:
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIEGenMCCodeEmitter.inc:1349:52:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/MCTargetDesc/AIEBaseMCCodeEmitter.h:124:46: warning: ‘constexpr size_t llvm::CTLog2() [with long unsigned int kValue = 4; size_t = long unsigned int]’ is deprecated: Use ConstantLog2 instead [-Wdeprecated-declarations]
+  124 |   const unsigned FixedZeroBits = CTLog2<step>();
+      |                                  ~~~~~~~~~~~~^~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/MathExtras.h:324:18: note: declared here
+  324 | constexpr size_t CTLog2() {
+      |                  ^~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/MCTargetDesc/AIEBaseMCCodeEmitter.h: In instantiation of ‘void llvm::{anonymous}::getSImmOpValueXStep(const llvm::MCInst&, unsigned int, llvm::APInt&, llvm::SmallVectorImpl<llvm::MCFixup>&, const llvm::MCSubtargetInfo&) [with int N = 5; unsigned int step = 32; int offset = 0; bool isNegative = false; bool isUnsigned = false]’:
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIEGenMCCodeEmitter.inc:1371:53:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/MCTargetDesc/AIEBaseMCCodeEmitter.h:124:46: warning: ‘constexpr size_t llvm::CTLog2() [with long unsigned int kValue = 32; size_t = long unsigned int]’ is deprecated: Use ConstantLog2 instead [-Wdeprecated-declarations]
+  124 |   const unsigned FixedZeroBits = CTLog2<step>();
+      |                                  ~~~~~~~~~~~~^~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/MathExtras.h:324:18: note: declared here
+  324 | constexpr size_t CTLog2() {
+      |                  ^~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/MCTargetDesc/AIEBaseMCCodeEmitter.h: In instantiation of ‘void llvm::{anonymous}::getSImmOpValueXStep(const llvm::MCInst&, unsigned int, llvm::APInt&, llvm::SmallVectorImpl<llvm::MCFixup>&, const llvm::MCSubtargetInfo&) [with int N = 7; unsigned int step = 32; int offset = 0; bool isNegative = true; bool isUnsigned = false]’:
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIEGenMCCodeEmitter.inc:3650:53:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/MCTargetDesc/AIEBaseMCCodeEmitter.h:124:46: warning: ‘constexpr size_t llvm::CTLog2() [with long unsigned int kValue = 32; size_t = long unsigned int]’ is deprecated: Use ConstantLog2 instead [-Wdeprecated-declarations]
+  124 |   const unsigned FixedZeroBits = CTLog2<step>();
+      |                                  ~~~~~~~~~~~~^~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/MathExtras.h:324:18: note: declared here
+  324 | constexpr size_t CTLog2() {
+      |                  ^~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/MCTargetDesc/AIEBaseMCCodeEmitter.h: In instantiation of ‘void llvm::{anonymous}::getSImmOpValueXStep(const llvm::MCInst&, unsigned int, llvm::APInt&, llvm::SmallVectorImpl<llvm::MCFixup>&, const llvm::MCSubtargetInfo&) [with int N = 7; unsigned int step = 4; int offset = 0; bool isNegative = true; bool isUnsigned = false]’:
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIEGenMCCodeEmitter.inc:4082:52:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/MCTargetDesc/AIEBaseMCCodeEmitter.h:124:46: warning: ‘constexpr size_t llvm::CTLog2() [with long unsigned int kValue = 4; size_t = long unsigned int]’ is deprecated: Use ConstantLog2 instead [-Wdeprecated-declarations]
+  124 |   const unsigned FixedZeroBits = CTLog2<step>();
+      |                                  ~~~~~~~~~~~~^~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/MathExtras.h:324:18: note: declared here
+  324 | constexpr size_t CTLog2() {
+      |                  ^~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/MCTargetDesc/AIEBaseMCCodeEmitter.h: In instantiation of ‘void llvm::{anonymous}::getSImmOpValueXStep(const llvm::MCInst&, unsigned int, llvm::APInt&, llvm::SmallVectorImpl<llvm::MCFixup>&, const llvm::MCSubtargetInfo&) [with int N = 7; unsigned int step = 16; int offset = 0; bool isNegative = true; bool isUnsigned = false]’:
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIEGenMCCodeEmitter.inc:4252:53:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/MCTargetDesc/AIEBaseMCCodeEmitter.h:124:46: warning: ‘constexpr size_t llvm::CTLog2() [with long unsigned int kValue = 16; size_t = long unsigned int]’ is deprecated: Use ConstantLog2 instead [-Wdeprecated-declarations]
+  124 |   const unsigned FixedZeroBits = CTLog2<step>();
+      |                                  ~~~~~~~~~~~~^~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/MathExtras.h:324:18: note: declared here
+  324 | constexpr size_t CTLog2() {
+      |                  ^~~~~~
+[324/328] Linking CXX static library lib/libLLVMAIEDesc.a
+[325/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2ps/AIE2PSPostLegalizerGenericCombiner.cpp.o
+[326/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2ps/AIE2PSPreLegalizerCombiner.cpp.o
+[327/328] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2ps/AIE2PSInstructionSelector.cpp.o
+ninja: build stopped: cannot make progress due to previous errors.
+DONE_RC=1

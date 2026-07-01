@@ -456,6 +456,10 @@ LLVM_ABI extern char &FinalizeISelID;
 /// UnpackMachineBundles - This pass unpack machine instruction bundles.
 LLVM_ABI extern char &UnpackMachineBundlesID;
 
+/// amd/aie/ port: FinalizeMachineBundles - This pass finalize machine
+/// instruction bundles (created from the BundleWith* flags).
+LLVM_ABI extern char &FinalizeMachineBundlesID;
+
 LLVM_ABI FunctionPass *createUnpackMachineBundlesLegacy(
     std::function<bool(const MachineFunction &)> Ftor);
 

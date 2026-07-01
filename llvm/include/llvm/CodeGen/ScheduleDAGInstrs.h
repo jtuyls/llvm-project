@@ -361,6 +361,12 @@ namespace llvm {
     // node number (nullopt for debug/pseudo instructions).
     std::optional<unsigned> initSUnit(MachineInstr &MI);
 
+    // amd/aie/ port: build dependency edges over already-created SUnits
+    // (factored out of buildSchedGraph for AIE's iterative scheduling).
+    void buildEdges(AAResults *AA, RegPressureTracker *RPTracker = nullptr,
+                    PressureDiffs *PDiffs = nullptr, LiveIntervals *LIS = nullptr,
+                    bool TrackLaneMasks = false, bool AbandonSingleDefs = false);
+
     /// Adds dependencies from instructions in the current list of
     /// instructions being scheduled to scheduling barrier. We want to make sure
     /// instructions which define registers that are either used by the

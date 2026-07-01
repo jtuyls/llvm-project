@@ -92,6 +92,26 @@ bool UnpackMachineBundlesLegacy::runOnMachineFunction(MachineFunction &MF) {
   return unpackBundles(MF, PredicateFtor);
 }
 
+// amd/aie/ port: 23 dropped the FinalizeMachineBundles legacy pass; AIE's
+// post-scheduling pipeline still relies on it to form bundles.
+namespace {
+class FinalizeMachineBundles : public MachineFunctionPass {
+public:
+  static char ID; // Pass identification
+  FinalizeMachineBundles() : MachineFunctionPass(ID) {
+    initializeFinalizeMachineBundlesPass(*PassRegistry::getPassRegistry());
+  }
+  bool runOnMachineFunction(MachineFunction &MF) override {
+    return llvm::finalizeBundles(MF);
+  }
+};
+} // end anonymous namespace
+
+char FinalizeMachineBundles::ID = 0;
+char &llvm::FinalizeMachineBundlesID = FinalizeMachineBundles::ID;
+INITIALIZE_PASS(FinalizeMachineBundles, "finalize-mi-bundles",
+                "Finalize machine instruction bundles", false, false)
+
 FunctionPass *llvm::createUnpackMachineBundlesLegacy(
     std::function<bool(const MachineFunction &)> Ftor) {
   return new UnpackMachineBundlesLegacy(std::move(Ftor));

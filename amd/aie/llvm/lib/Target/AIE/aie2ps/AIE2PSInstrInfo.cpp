@@ -1023,7 +1023,7 @@ void AIE2PSInstrInfo::loadRegFromStackSlot(
   auto bounceViaRegClass = [&](const TargetRegisterClass *BounceRC) {
     MachineRegisterInfo &MRI = MBB.getParent()->getRegInfo();
     Register TmpReg = MRI.createVirtualRegister(BounceRC);
-    loadRegFromStackSlot(MBB, I, TmpReg, FI, BounceRC, TRI, VReg, Flags);
+    loadRegFromStackSlot(MBB, I, TmpReg, FI, BounceRC, VReg, Flags);
     BuildMI(MBB, I, DL, get(AIE2PS::COPY), DstReg)
         .addReg(TmpReg, getKillRegState(true));
     return;

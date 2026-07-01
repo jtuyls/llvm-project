@@ -338,6 +338,7 @@ LLVM_ABI void initializeInitUndefLegacyPass(PassRegistry &);
 LLVM_ABI void initializeUniformityInfoWrapperPassPass(PassRegistry &);
 LLVM_ABI void initializeUnifyLoopExitsLegacyPassPass(PassRegistry &);
 LLVM_ABI void initializeUnpackMachineBundlesLegacyPass(PassRegistry &);
+LLVM_ABI void initializeFinalizeMachineBundlesPass(PassRegistry &); // amd/aie/ port
 LLVM_ABI void initializeUnreachableBlockElimLegacyPassPass(PassRegistry &);
 LLVM_ABI void initializeUnreachableMachineBlockElimLegacyPass(PassRegistry &);
 LLVM_ABI void initializeVerifierLegacyPassPass(PassRegistry &);

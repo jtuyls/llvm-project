@@ -1427,6 +1427,9 @@ public:
 
   SUnit *pickNodeBidirectional(bool &IsTopNode);
 
+  // amd/aie/ port: unidirectional pick used by AIE's post-RA strategy.
+  SUnit *pickNodeUnidirectional(SchedBoundary &Zone);
+
   void scheduleTree(unsigned SubtreeID) override {
     llvm_unreachable("PostRA scheduler does not support subtree analysis.");
   }

@@ -278,6 +278,57 @@ getNumericOperands(const MDNode *LoopID, const char *MDName) {
   return std::nullopt;
 }
 
+static MDNode *createIterCountMetadata(LLVMContext &Context, StringRef Name,
+                                       const SmallVector<int64_t, 2> &Values) {
+  Metadata *MDs[3];
+  MDs[0] = MDString::get(Context, Name);
+  size_t Op = 1;
+  for (auto V : Values)
+    MDs[Op++] =
+        ConstantAsMetadata::get(ConstantInt::get(Type::getInt32Ty(Context), V));
+  return MDNode::get(Context, {MDs, Op});
+}
+
+MDNode *llvm::updateIterCounts(LLVMContext &Context, MDNode *LoopID,
+                               std::function<int64_t(int64_t)> FixMin,
+                               std::function<int64_t(int64_t)> FixMax) {
+  if (!LoopID)
+    return LoopID;
+
+  const char *const IterCountName = "llvm.loop.itercount.range";
+  SmallVector<Metadata *, 4> MDs;
+  SmallVector<int64_t, 2> IterCounts;
+  bool Found = false;
+
+  for (unsigned Lop = 1; Lop < LoopID->getNumOperands(); ++Lop) {
+    MDNode *Node = cast<MDNode>(LoopID->getOperand(Lop));
+    if (Node->getNumOperands()) {
+      MDString *S = dyn_cast<MDString>(Node->getOperand(0));
+      if (S && S->getString() == IterCountName) {
+        if (Node->getNumOperands() > 1)
+          if (ConstantInt *IntMD =
+                  mdconst::extract_or_null<ConstantInt>(Node->getOperand(1)))
+            IterCounts.push_back(FixMin(IntMD->getSExtValue()));
+        if (Node->getNumOperands() > 2)
+          if (ConstantInt *IntMD =
+                  mdconst::extract_or_null<ConstantInt>(Node->getOperand(2)))
+            IterCounts.push_back(FixMax(IntMD->getSExtValue()));
+        Found = true;
+        continue;
+      }
+    }
+    MDs.push_back(Node);
+  }
+
+  if (!Found)
+    return LoopID;
+
+  MDs.push_back(createIterCountMetadata(Context, IterCountName, IterCounts));
+  MDNode *NewLoopID = MDNode::get(Context, MDs);
+  NewLoopID->replaceOperandWith(0, NewLoopID);
+  return NewLoopID;
+}
+
 std::optional<int64_t> llvm::getMinTripCount(const MDNode *LoopID) {
   auto Operands = getNumericOperands(LoopID, AIELLVMLoopIterCount);
   if (!Operands)

@@ -180,7 +180,7 @@ public:
 class AIEBaseHardwareLoops : public MachineFunctionPass {
   MachineFunction *MF = nullptr;
   MachineLoopInfo *MLI = nullptr;
-  ReachingDefAnalysis *RDA = nullptr;
+  ReachingDefInfo *RDA = nullptr; // amd/aie/ port
   const AIEBaseInstrInfo *TII = nullptr;
   MachineRegisterInfo *MRI = nullptr;
   const TargetRegisterInfo *TRI = nullptr;
@@ -193,7 +193,7 @@ public:
   void getAnalysisUsage(AnalysisUsage &AU) const override {
     AU.setPreservesCFG();
     AU.addRequired<MachineLoopInfoWrapperPass>();
-    AU.addRequired<ReachingDefAnalysis>();
+    AU.addRequired<ReachingDefInfoWrapperPass>();
     MachineFunctionPass::getAnalysisUsage(AU);
     AU.addRequired<MachineOptimizationRemarkEmitterPass>();
   }
@@ -280,7 +280,7 @@ bool AIEBaseHardwareLoops::runOnMachineFunction(MachineFunction &mf) {
                     << " ------------- \n");
 
   MLI = &getAnalysis<MachineLoopInfoWrapperPass>().getLI();
-  RDA = &getAnalysis<ReachingDefAnalysis>();
+  RDA = &getAnalysis<ReachingDefInfoWrapperPass>().getRDI();
   MF->getProperties().set(MachineFunctionProperties::Property::TracksLiveness);
   MRI = &MF->getRegInfo();
   TII = static_cast<const AIEBaseInstrInfo *>(mf.getSubtarget().getInstrInfo());

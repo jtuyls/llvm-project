@@ -4466,6 +4466,25 @@ void PostGenericScheduler::pickNodeFromQueue(SchedBoundary &Zone,
 }
 
 /// Pick the best candidate node from either the top or bottom queue.
+// amd/aie/ port: unidirectional pick used by AIE's post-RA strategy.
+SUnit *PostGenericScheduler::pickNodeUnidirectional(SchedBoundary &Zone) {
+  // Bump cycle until there's at least an SU available for scheduling.
+  SUnit *SU = Zone.pickOnlyChoice();
+  if (SU) {
+    tracePick(Only1, Zone.isTop());
+    return SU;
+  }
+
+  CandPolicy NoPolicy;
+  SchedCandidate Cand(NoPolicy);
+  setPolicy(Cand.Policy, /*IsPostRA=*/true, Zone, nullptr);
+  pickNodeFromQueue(Zone, Cand);
+  assert(Cand.Reason != NoCand && "failed to find a candidate");
+  tracePick(Cand);
+  SU = Cand.SU;
+  return SU;
+}
+
 SUnit *PostGenericScheduler::pickNodeBidirectional(bool &IsTopNode) {
   // FIXME: This is similiar to GenericScheduler::pickNodeBidirectional. Factor
   // out common parts.

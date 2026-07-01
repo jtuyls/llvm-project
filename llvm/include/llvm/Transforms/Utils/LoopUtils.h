@@ -358,6 +358,9 @@ getLoopEstimatedTripCount(Loop *L,
                           unsigned *EstimatedLoopInvocationWeight = nullptr);
 
 // amd/aie/ port: AIE loop-metadata trip-count / initiation-interval helpers.
+LLVM_ABI MDNode *updateIterCounts(LLVMContext &Context, MDNode *LoopID,
+                                  std::function<int64_t(int64_t)> FixMin,
+                                  std::function<int64_t(int64_t)> FixMax);
 LLVM_ABI std::optional<int64_t> getMinTripCount(const MDNode *LoopID);
 LLVM_ABI std::optional<int64_t> getMinTripCount(Loop *L,
                                                 ScalarEvolution *SE = nullptr);

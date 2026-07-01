@@ -127,7 +127,7 @@ void rewriteFullCopy(MachineInstr &CopyMI, LiveIntervals &LIS,
             .addReg(SrcReg, RegState::NoFlags, SubRegIdx)
             .getInstr();
     // Only for the first copy set the undefined flag
-    AdditionalFlags = 0;
+    AdditionalFlags = RegState::NoFlags; // amd/aie/ port
 
     LLVM_DEBUG(dbgs() << "        to " << *PartCopy);
     LIS.InsertMachineInstrInMaps(*PartCopy);
