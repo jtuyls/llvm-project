@@ -1,0 +1,274 @@
+ninja: Entering directory `build'
+[1/7] Building CXX object lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE1AsmParser.cpp.o
+FAILED: lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE1AsmParser.cpp.o 
+CCACHE_CPP2=yes CCACHE_HASHDIR=yes CCACHE_SLOPPINESS=pch_defines,time_macros /usr/bin/ccache /usr/bin/g++ -D_DEBUG -D_GLIBCXX_ASSERTIONS -D_GLIBCXX_USE_CXX11_ABI=1 -D_GNU_SOURCE -D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_EXTENSIVE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AsmParser -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-uninitialized -Wno-nonnull -Wno-class-memaccess -Wno-dangling-reference -Wno-redundant-move -Wno-pessimizing-move -Wno-array-bounds -Wno-stringop-overread -Wno-dangling-pointer -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported -fdiagnostics-color -ffunction-sections -fdata-sections -O3 -DNDEBUG -std=c++17 -fvisibility=hidden -UNDEBUG -fno-exceptions -funwind-tables -fno-rtti -MD -MT lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE1AsmParser.cpp.o -MF lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE1AsmParser.cpp.o.d -o lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE1AsmParser.cpp.o -c /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE1AsmParser.cpp
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE1AsmParser.cpp:13:10: fatal error: llvm/MC/MCParser/MCAsmLexer.h: No such file or directory
+   13 | #include "llvm/MC/MCParser/MCAsmLexer.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+[2/7] Building CXX object lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2AsmParser.cpp.o
+FAILED: lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2AsmParser.cpp.o 
+CCACHE_CPP2=yes CCACHE_HASHDIR=yes CCACHE_SLOPPINESS=pch_defines,time_macros /usr/bin/ccache /usr/bin/g++ -D_DEBUG -D_GLIBCXX_ASSERTIONS -D_GLIBCXX_USE_CXX11_ABI=1 -D_GNU_SOURCE -D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_EXTENSIVE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AsmParser -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-uninitialized -Wno-nonnull -Wno-class-memaccess -Wno-dangling-reference -Wno-redundant-move -Wno-pessimizing-move -Wno-array-bounds -Wno-stringop-overread -Wno-dangling-pointer -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported -fdiagnostics-color -ffunction-sections -fdata-sections -O3 -DNDEBUG -std=c++17 -fvisibility=hidden -UNDEBUG -fno-exceptions -funwind-tables -fno-rtti -MD -MT lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2AsmParser.cpp.o -MF lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2AsmParser.cpp.o.d -o lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2AsmParser.cpp.o -c /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2AsmParser.cpp
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2AsmParser.cpp:13:10: fatal error: llvm/MC/MCParser/MCAsmLexer.h: No such file or directory
+   13 | #include "llvm/MC/MCParser/MCAsmLexer.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+[3/7] Building CXX object lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2PSAsmParser.cpp.o
+FAILED: lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2PSAsmParser.cpp.o 
+CCACHE_CPP2=yes CCACHE_HASHDIR=yes CCACHE_SLOPPINESS=pch_defines,time_macros /usr/bin/ccache /usr/bin/g++ -D_DEBUG -D_GLIBCXX_ASSERTIONS -D_GLIBCXX_USE_CXX11_ABI=1 -D_GNU_SOURCE -D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_EXTENSIVE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AsmParser -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-uninitialized -Wno-nonnull -Wno-class-memaccess -Wno-dangling-reference -Wno-redundant-move -Wno-pessimizing-move -Wno-array-bounds -Wno-stringop-overread -Wno-dangling-pointer -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported -fdiagnostics-color -ffunction-sections -fdata-sections -O3 -DNDEBUG -std=c++17 -fvisibility=hidden -UNDEBUG -fno-exceptions -funwind-tables -fno-rtti -MD -MT lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2PSAsmParser.cpp.o -MF lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2PSAsmParser.cpp.o.d -o lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2PSAsmParser.cpp.o -c /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2PSAsmParser.cpp
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2PSAsmParser.cpp:13:10: fatal error: llvm/MC/MCParser/MCAsmLexer.h: No such file or directory
+   13 | #include "llvm/MC/MCParser/MCAsmLexer.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+[4/7] Building CXX object lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2PAsmParser.cpp.o
+FAILED: lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2PAsmParser.cpp.o 
+CCACHE_CPP2=yes CCACHE_HASHDIR=yes CCACHE_SLOPPINESS=pch_defines,time_macros /usr/bin/ccache /usr/bin/g++ -D_DEBUG -D_GLIBCXX_ASSERTIONS -D_GLIBCXX_USE_CXX11_ABI=1 -D_GNU_SOURCE -D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_EXTENSIVE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AsmParser -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-uninitialized -Wno-nonnull -Wno-class-memaccess -Wno-dangling-reference -Wno-redundant-move -Wno-pessimizing-move -Wno-array-bounds -Wno-stringop-overread -Wno-dangling-pointer -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported -fdiagnostics-color -ffunction-sections -fdata-sections -O3 -DNDEBUG -std=c++17 -fvisibility=hidden -UNDEBUG -fno-exceptions -funwind-tables -fno-rtti -MD -MT lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2PAsmParser.cpp.o -MF lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2PAsmParser.cpp.o.d -o lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2PAsmParser.cpp.o -c /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2PAsmParser.cpp
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2PAsmParser.cpp:14:10: fatal error: llvm/MC/MCParser/MCAsmLexer.h: No such file or directory
+   14 | #include "llvm/MC/MCParser/MCAsmLexer.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+[5/7] Building CXX object lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIEBaseOperand.cpp.o
+FAILED: lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIEBaseOperand.cpp.o 
+CCACHE_CPP2=yes CCACHE_HASHDIR=yes CCACHE_SLOPPINESS=pch_defines,time_macros /usr/bin/ccache /usr/bin/g++ -D_DEBUG -D_GLIBCXX_ASSERTIONS -D_GLIBCXX_USE_CXX11_ABI=1 -D_GNU_SOURCE -D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_EXTENSIVE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AsmParser -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-uninitialized -Wno-nonnull -Wno-class-memaccess -Wno-dangling-reference -Wno-redundant-move -Wno-pessimizing-move -Wno-array-bounds -Wno-stringop-overread -Wno-dangling-pointer -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported -fdiagnostics-color -ffunction-sections -fdata-sections -O3 -DNDEBUG -std=c++17 -fvisibility=hidden -UNDEBUG -fno-exceptions -funwind-tables -fno-rtti -MD -MT lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIEBaseOperand.cpp.o -MF lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIEBaseOperand.cpp.o.d -o lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIEBaseOperand.cpp.o -c /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseOperand.cpp
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseOperand.cpp:11:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseOperand.h:95:8: error: ‘void llvm::AIEBaseOperand::print(llvm::raw_ostream&) const’ marked ‘override’, but does not override
+   95 |   void print(raw_ostream &OS) const override;
+      |        ^~~~~
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseOperand.h:17:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCParser/MCParsedAsmOperand.h:93:16: warning: ‘virtual void llvm::MCParsedAsmOperand::print(llvm::raw_ostream&, const llvm::MCAsmInfo&) const’ was hidden [-Woverloaded-virtual=]
+   93 |   virtual void print(raw_ostream &, const MCAsmInfo &) const = 0;
+      |                ^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseOperand.h:95:8: note:   by ‘void llvm::AIEBaseOperand::print(llvm::raw_ostream&) const’
+   95 |   void print(raw_ostream &OS) const override;
+      |        ^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseOperand.cpp: In member function ‘void llvm::AIEBaseOperand::print(llvm::raw_ostream&) const’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseOperand.cpp:48:8: error: no match for ‘operator<<’ (operand types are ‘llvm::raw_ostream’ and ‘const llvm::MCExpr’)
+   48 |     OS << *getImm();
+      |     ~~ ^~ ~~~~~~~~~
+      |     |     |
+      |     |     const llvm::MCExpr
+      |     llvm::raw_ostream
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/FormatVariadicDetails.h:15,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/BinaryFormat/Dwarf.h:27,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCContext.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseOperand.h:15:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:204:16: note: candidate: ‘llvm::raw_ostream& llvm::raw_ostream::operator<<(char)’
+  204 |   raw_ostream &operator<<(char C) {
+      |                ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:204:32: note:   no known conversion for argument 1 from ‘const llvm::MCExpr’ to ‘char’
+  204 |   raw_ostream &operator<<(char C) {
+      |                           ~~~~~^
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:211:16: note: candidate: ‘llvm::raw_ostream& llvm::raw_ostream::operator<<(unsigned char)’
+  211 |   raw_ostream &operator<<(unsigned char C) {
+      |                ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:211:41: note:   no known conversion for argument 1 from ‘const llvm::MCExpr’ to ‘unsigned char’
+  211 |   raw_ostream &operator<<(unsigned char C) {
+      |                           ~~~~~~~~~~~~~~^
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:218:16: note: candidate: ‘llvm::raw_ostream& llvm::raw_ostream::operator<<(signed char)’
+  218 |   raw_ostream &operator<<(signed char C) {
+      |                ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:218:39: note:   no known conversion for argument 1 from ‘const llvm::MCExpr’ to ‘signed char’
+  218 |   raw_ostream &operator<<(signed char C) {
+      |                           ~~~~~~~~~~~~^
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:225:16: note: candidate: ‘llvm::raw_ostream& llvm::raw_ostream::operator<<(llvm::StringRef)’
+  225 |   raw_ostream &operator<<(StringRef Str) {
+      |                ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:225:37: note:   no known conversion for argument 1 from ‘const llvm::MCExpr’ to ‘llvm::StringRef’
+  225 |   raw_ostream &operator<<(StringRef Str) {
+      |                           ~~~~~~~~~~^~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:254:16: note: candidate: ‘llvm::raw_ostream& llvm::raw_ostream::operator<<(const char*)’
+  254 |   raw_ostream &operator<<(const char *Str) {
+      |                ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:254:39: note:   no known conversion for argument 1 from ‘const llvm::MCExpr’ to ‘const char*’
+  254 |   raw_ostream &operator<<(const char *Str) {
+      |                           ~~~~~~~~~~~~^~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:261:16: note: candidate: ‘llvm::raw_ostream& llvm::raw_ostream::operator<<(const std::string&)’
+  261 |   raw_ostream &operator<<(const std::string &Str) {
+      |                ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:261:46: note:   no known conversion for argument 1 from ‘const llvm::MCExpr’ to ‘const std::string&’ {aka ‘const std::__cxx11::basic_string<char>&’}
+  261 |   raw_ostream &operator<<(const std::string &Str) {
+      |                           ~~~~~~~~~~~~~~~~~~~^~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:266:16: note: candidate: ‘llvm::raw_ostream& llvm::raw_ostream::operator<<(const std::string_view&)’
+  266 |   raw_ostream &operator<<(const std::string_view &Str) {
+      |                ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:266:51: note:   no known conversion for argument 1 from ‘const llvm::MCExpr’ to ‘const std::string_view&’ {aka ‘const std::basic_string_view<char>&’}
+  266 |   raw_ostream &operator<<(const std::string_view &Str) {
+      |                           ~~~~~~~~~~~~~~~~~~~~~~~~^~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:270:16: note: candidate: ‘llvm::raw_ostream& llvm::raw_ostream::operator<<(const llvm::SmallVectorImpl<char>&)’
+  270 |   raw_ostream &operator<<(const SmallVectorImpl<char> &Str) {
+      |                ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:270:56: note:   no known conversion for argument 1 from ‘const llvm::MCExpr’ to ‘const llvm::SmallVectorImpl<char>&’
+  270 |   raw_ostream &operator<<(const SmallVectorImpl<char> &Str) {
+      |                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:274:16: note: candidate: ‘llvm::raw_ostream& llvm::raw_ostream::operator<<(long unsigned int)’
+  274 |   raw_ostream &operator<<(unsigned long N);
+      |                ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:274:41: note:   no known conversion for argument 1 from ‘const llvm::MCExpr’ to ‘long unsigned int’
+  274 |   raw_ostream &operator<<(unsigned long N);
+      |                           ~~~~~~~~~~~~~~^
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:275:16: note: candidate: ‘llvm::raw_ostream& llvm::raw_ostream::operator<<(long int)’
+  275 |   raw_ostream &operator<<(long N);
+      |                ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:275:32: note:   no known conversion for argument 1 from ‘const llvm::MCExpr’ to ‘long int’
+  275 |   raw_ostream &operator<<(long N);
+      |                           ~~~~~^
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:276:16: note: candidate: ‘llvm::raw_ostream& llvm::raw_ostream::operator<<(long long unsigned int)’
+  276 |   raw_ostream &operator<<(unsigned long long N);
+      |                ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:276:46: note:   no known conversion for argument 1 from ‘const llvm::MCExpr’ to ‘long long unsigned int’
+  276 |   raw_ostream &operator<<(unsigned long long N);
+      |                           ~~~~~~~~~~~~~~~~~~~^
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:277:16: note: candidate: ‘llvm::raw_ostream& llvm::raw_ostream::operator<<(long long int)’
+  277 |   raw_ostream &operator<<(long long N);
+      |                ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:277:37: note:   no known conversion for argument 1 from ‘const llvm::MCExpr’ to ‘long long int’
+  277 |   raw_ostream &operator<<(long long N);
+      |                           ~~~~~~~~~~^
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:278:16: note: candidate: ‘llvm::raw_ostream& llvm::raw_ostream::operator<<(const void*)’
+  278 |   raw_ostream &operator<<(const void *P);
+      |                ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:278:39: note:   no known conversion for argument 1 from ‘const llvm::MCExpr’ to ‘const void*’
+  278 |   raw_ostream &operator<<(const void *P);
+      |                           ~~~~~~~~~~~~^
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:280:16: note: candidate: ‘llvm::raw_ostream& llvm::raw_ostream::operator<<(unsigned int)’
+  280 |   raw_ostream &operator<<(unsigned int N) {
+      |                ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:280:40: note:   no known conversion for argument 1 from ‘const llvm::MCExpr’ to ‘unsigned int’
+  280 |   raw_ostream &operator<<(unsigned int N) {
+      |                           ~~~~~~~~~~~~~^
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:284:16: note: candidate: ‘llvm::raw_ostream& llvm::raw_ostream::operator<<(int)’
+  284 |   raw_ostream &operator<<(int N) {
+      |                ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:284:31: note:   no known conversion for argument 1 from ‘const llvm::MCExpr’ to ‘int’
+  284 |   raw_ostream &operator<<(int N) {
+      |                           ~~~~^
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:288:16: note: candidate: ‘llvm::raw_ostream& llvm::raw_ostream::operator<<(double)’
+  288 |   raw_ostream &operator<<(double N);
+      |                ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:288:34: note:   no known conversion for argument 1 from ‘const llvm::MCExpr’ to ‘double’
+  288 |   raw_ostream &operator<<(double N);
+      |                           ~~~~~~~^
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:294:16: note: candidate: ‘llvm::raw_ostream& llvm::raw_ostream::operator<<(Colors)’
+  294 |   raw_ostream &operator<<(Colors C);
+      |                ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:294:34: note:   no known conversion for argument 1 from ‘const llvm::MCExpr’ to ‘llvm::raw_ostream::Colors’
+  294 |   raw_ostream &operator<<(Colors C);
+      |                           ~~~~~~~^
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:308:16: note: candidate: ‘llvm::raw_ostream& llvm::raw_ostream::operator<<(const llvm::format_object_base&)’
+  308 |   raw_ostream &operator<<(const format_object_base &Fmt);
+      |                ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:308:53: note:   no known conversion for argument 1 from ‘const llvm::MCExpr’ to ‘const llvm::format_object_base&’
+  308 |   raw_ostream &operator<<(const format_object_base &Fmt);
+      |                           ~~~~~~~~~~~~~~~~~~~~~~~~~~^~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:311:16: note: candidate: ‘llvm::raw_ostream& llvm::raw_ostream::operator<<(const llvm::FormattedString&)’
+  311 |   raw_ostream &operator<<(const FormattedString &);
+      |                ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:311:27: note:   no known conversion for argument 1 from ‘const llvm::MCExpr’ to ‘const llvm::FormattedString&’
+  311 |   raw_ostream &operator<<(const FormattedString &);
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:314:16: note: candidate: ‘llvm::raw_ostream& llvm::raw_ostream::operator<<(const llvm::FormattedNumber&)’
+  314 |   raw_ostream &operator<<(const FormattedNumber &);
+      |                ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:314:27: note:   no known conversion for argument 1 from ‘const llvm::MCExpr’ to ‘const llvm::FormattedNumber&’
+  314 |   raw_ostream &operator<<(const FormattedNumber &);
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:317:16: note: candidate: ‘llvm::raw_ostream& llvm::raw_ostream::operator<<(const llvm::formatv_object_base&)’
+  317 |   raw_ostream &operator<<(const formatv_object_base &);
+      |                ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:317:27: note:   no known conversion for argument 1 from ‘const llvm::MCExpr’ to ‘const llvm::formatv_object_base&’
+  317 |   raw_ostream &operator<<(const formatv_object_base &);
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:320:16: note: candidate: ‘llvm::raw_ostream& llvm::raw_ostream::operator<<(const llvm::FormattedBytes&)’
+  320 |   raw_ostream &operator<<(const FormattedBytes &);
+      |                ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:320:27: note:   no known conversion for argument 1 from ‘const llvm::MCExpr’ to ‘const llvm::FormattedBytes&’
+  320 |   raw_ostream &operator<<(const FormattedBytes &);
+      |                           ^~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:427:1: note: candidate: ‘template<class OStream, class T> std::enable_if_t<((! is_reference_v<OStream>) && is_base_of_v<llvm::raw_ostream, OStream>), OStream&&> llvm::operator<<(OStream&&, const T&)’
+  427 | operator<<(OStream &&OS, const T &Value) {
+      | ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:427:1: note:   template argument deduction/substitution failed:
+In file included from /usr/include/c++/13/optional:37,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/ADT/DenseMapInfo.h:21,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCRegister.h:12,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/CodeGen/Register.h:12,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseOperand.h:14:
+/usr/include/c++/13/type_traits: In substitution of ‘template<bool _Cond, class _Tp> using std::enable_if_t = typename std::enable_if::type [with bool _Cond = false; _Tp = llvm::raw_ostream&]’:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:427:1:   required by substitution of ‘template<class OStream, class T> std::enable_if_t<((! is_reference_v<OStream>) && is_base_of_v<llvm::raw_ostream, OStream>), OStream&&> llvm::operator<<(OStream&&, const T&) [with OStream = llvm::raw_ostream&; T = llvm::MCExpr]’
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseOperand.cpp:48:19:   required from here
+/usr/include/c++/13/type_traits:2610:11: error: no type named ‘type’ in ‘struct std::enable_if<false, llvm::raw_ostream&>’
+ 2610 |     using enable_if_t = typename enable_if<_Cond, _Tp>::type;
+      |           ^~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:846:14: note: candidate: ‘template<class T, class> llvm::raw_ostream& llvm::operator<<(raw_ostream&, const std::optional<_Tp>&)’
+  846 | raw_ostream &operator<<(raw_ostream &OS, const std::optional<T> &O) {
+      |              ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:846:14: note:   template argument deduction/substitution failed:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseOperand.cpp:48:19: note:   ‘const llvm::MCExpr’ is not derived from ‘const std::optional<_Tp>’
+   48 |     OS << *getImm();
+      |                   ^
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCContext.h:17:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/ADT/Twine.h:544:21: note: candidate: ‘llvm::raw_ostream& llvm::operator<<(raw_ostream&, const Twine&)’
+  544 | inline raw_ostream &operator<<(raw_ostream &OS, const Twine &RHS) {
+      |                     ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/ADT/Twine.h:544:62: note:   no known conversion for argument 2 from ‘const llvm::MCExpr’ to ‘const llvm::Twine&’
+  544 | inline raw_ostream &operator<<(raw_ostream &OS, const Twine &RHS) {
+      |                                                 ~~~~~~~~~~~~~^~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:827:21: note: candidate: ‘llvm::raw_ostream& llvm::operator<<(raw_ostream&, const indent&)’
+  827 | inline raw_ostream &operator<<(raw_ostream &OS, const indent &Indent) {
+      |                     ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:827:63: note:   no known conversion for argument 2 from ‘const llvm::MCExpr’ to ‘const llvm::indent&’
+  827 | inline raw_ostream &operator<<(raw_ostream &OS, const indent &Indent) {
+      |                                                 ~~~~~~~~~~~~~~^~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:842:23: note: candidate: ‘llvm::raw_ostream& llvm::operator<<(raw_ostream&, std::nullopt_t)’
+  842 | LLVM_ABI raw_ostream &operator<<(raw_ostream &OS, std::nullopt_t);
+      |                       ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/raw_ostream.h:842:51: note:   no known conversion for argument 2 from ‘const llvm::MCExpr’ to ‘std::nullopt_t’
+  842 | LLVM_ABI raw_ostream &operator<<(raw_ostream &OS, std::nullopt_t);
+      |                                                   ^~~~~~~~~~~~~~
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/TargetParser/Triple.h:14,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/BinaryFormat/Dwarf.h:28:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/VersionTuple.h:213:23: note: candidate: ‘llvm::raw_ostream& llvm::operator<<(raw_ostream&, const VersionTuple&)’
+  213 | LLVM_ABI raw_ostream &operator<<(raw_ostream &Out, const VersionTuple &V);
+      |                       ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Support/VersionTuple.h:213:72: note:   no known conversion for argument 2 from ‘const llvm::MCExpr’ to ‘const llvm::VersionTuple&’
+  213 | LLVM_ABI raw_ostream &operator<<(raw_ostream &Out, const VersionTuple &V);
+      |                                                    ~~~~~~~~~~~~~~~~~~~~^
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCAsmMacro.h:12,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCContext.h:20:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/ADT/APInt.h:2212:21: note: candidate: ‘llvm::raw_ostream& llvm::operator<<(raw_ostream&, const APInt&)’
+ 2212 | inline raw_ostream &operator<<(raw_ostream &OS, const APInt &I) {
+      |                     ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/ADT/APInt.h:2212:62: note:   no known conversion for argument 2 from ‘const llvm::MCExpr’ to ‘const llvm::APInt&’
+ 2212 | inline raw_ostream &operator<<(raw_ostream &OS, const APInt &I) {
+      |                                                 ~~~~~~~~~~~~~^
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCSection.h:21,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCContext.h:24:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCInst.h:251:21: note: candidate: ‘llvm::raw_ostream& llvm::operator<<(raw_ostream&, const MCOperand&)’
+  251 | inline raw_ostream& operator<<(raw_ostream &OS, const MCOperand &MO) {
+      |                     ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCInst.h:251:66: note:   no known conversion for argument 2 from ‘const llvm::MCExpr’ to ‘const llvm::MCOperand&’
+  251 | inline raw_ostream& operator<<(raw_ostream &OS, const MCOperand &MO) {
+      |                                                 ~~~~~~~~~~~~~~~~~^~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCInst.h:256:21: note: candidate: ‘llvm::raw_ostream& llvm::operator<<(raw_ostream&, const MCInst&)’
+  256 | inline raw_ostream& operator<<(raw_ostream &OS, const MCInst &MI) {
+      |                     ^~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCInst.h:256:63: note:   no known conversion for argument 2 from ‘const llvm::MCExpr’ to ‘const llvm::MCInst&’
+  256 | inline raw_ostream& operator<<(raw_ostream &OS, const MCInst &MI) {
+      |                                                 ~~~~~~~~~~~~~~^~
+In file included from /usr/include/c++/13/memory:78,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/ADT/STLExtras.h:36,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/ADT/DenseMap.h:20,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCContext.h:12:
+/usr/include/c++/13/bits/unique_ptr.h: In instantiation of ‘std::__detail::__unique_ptr_t<_Tp> std::make_unique(_Args&& ...) [with _Tp = llvm::AIEBaseOperand; _Args = {llvm::AIEBaseOperand::KindTy, llvm::MCContext&}; __detail::__unique_ptr_t<_Tp> = __detail::__unique_ptr_t<llvm::AIEBaseOperand>]’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseOperand.cpp:18:45:   required from here
+/usr/include/c++/13/bits/unique_ptr.h:1070:30: error: invalid new-expression of abstract class type ‘llvm::AIEBaseOperand’
+ 1070 |     { return unique_ptr<_Tp>(new _Tp(std::forward<_Args>(__args)...)); }
+      |                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseOperand.h:22:8: note:   because the following virtual functions are pure within ‘llvm::AIEBaseOperand’:
+   22 | struct AIEBaseOperand : public MCParsedAsmOperand {
+      |        ^~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCParser/MCParsedAsmOperand.h:93:16: note:     ‘virtual void llvm::MCParsedAsmOperand::print(llvm::raw_ostream&, const llvm::MCAsmInfo&) const’
+   93 |   virtual void print(raw_ostream &, const MCAsmInfo &) const = 0;
+      |                ^~~~~
+ninja: build stopped: cannot make progress due to previous errors.
+DONE_RC=1
