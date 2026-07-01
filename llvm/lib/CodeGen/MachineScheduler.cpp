@@ -2912,25 +2912,13 @@ void SchedBoundary::releaseNode(SUnit *SU, unsigned ReadyCycle, bool InPQueue,
   // Check for interlocks first. For the purpose of other heuristics, an
   // instruction that cannot issue appears as if it's not in the ReadyQueue.
   bool IsBuffered = SchedModel->getMicroOpBufferSize() != 0;
-  bool HazardDetected = !IsBuffered && ReadyCycle > CurrCycle;
-  if (HazardDetected)
-    LLVM_DEBUG(dbgs().indent(2) << "hazard: SU(" << SU->NodeNum
-                                << ") ReadyCycle = " << ReadyCycle
-                                << " is later than CurrCycle = " << CurrCycle
-                                << " on an unbuffered resource" << "\n");
-  else
-    HazardDetected = checkHazard(SU);
+  // amd/aie/ port: defer to the strategy's isAvailableNode so AIE's exposed-
+  // pipeline (delta-cycle) availability is honored.
+  bool IsAvailable =
+      SchedImpl->isAvailableNode(*SU, *this, /*VerifyReadyCycle=*/!IsBuffered);
 
-  if (!HazardDetected && Available.size() >= ReadyListLimit) {
-    HazardDetected = true;
-    LLVM_DEBUG(dbgs().indent(2) << "hazard: Available Q is full (size: "
-                                << Available.size() << ")\n");
-  }
-
-  if (!HazardDetected) {
+  if (IsAvailable && Available.size() < ReadyListLimit) {
     Available.push(SU);
-    LLVM_DEBUG(dbgs().indent(2)
-               << "Move SU(" << SU->NodeNum << ") into Available Q\n");
 
     if (InPQueue)
       Pending.remove(Pending.begin() + Idx);
@@ -3249,7 +3237,8 @@ SUnit *SchedBoundary::pickOnlyChoice() {
 
   // Defer any ready instrs that now have a hazard.
   for (ReadyQueue::iterator I = Available.begin(); I != Available.end();) {
-    if (checkHazard(*I)) {
+    // amd/aie/ port: use the strategy's availability (exposed-pipeline aware).
+    if (!SchedImpl->isAvailableNode(**I, *this, /*VerifyReadyCycle=*/false)) {
       Pending.push(*I);
       I = Available.remove(I);
       continue;
