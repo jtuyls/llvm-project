@@ -198,6 +198,39 @@ void ScheduleDAGInstrs::makeMaps() {
     MISUnitMap[SU.getInstr()] = &SU;
 }
 
+// amd/aie/ port: create a single SUnit for MI incrementally.
+std::optional<unsigned> ScheduleDAGInstrs::initSUnit(MachineInstr &MI) {
+  if (MI.isDebugOrPseudoInstr())
+    return {};
+
+  SUnit &SU = SUnits.emplace_back(&MI, (unsigned)SUnits.size());
+  SU.isCall = MI.isCall();
+  SU.isCommutable = MI.isCommutable();
+
+  // Assign the Latency field of SU using target-provided information.
+  SU.Latency = SchedModel.computeInstrLatency(SU.getInstr());
+
+  // If this SUnit uses a reserved or unbuffered resource, mark it as such.
+  if (SchedModel.hasInstrSchedModel()) {
+    const MCSchedClassDesc *SC = getSchedClass(&SU);
+    for (const MCWriteProcResEntry &PRE :
+         make_range(SchedModel.getWriteProcResBegin(SC),
+                    SchedModel.getWriteProcResEnd(SC))) {
+      switch (SchedModel.getProcResource(PRE.ProcResourceIdx)->BufferSize) {
+      case 0:
+        SU.hasReservedResource = true;
+        break;
+      case 1:
+        SU.isUnbuffered = true;
+        break;
+      default:
+        break;
+      }
+    }
+  }
+  return SU.NodeNum;
+}
+
 void ScheduleDAGInstrs::finishBlock() {
   // Subclasses should no longer refer to the old block.
   BB = nullptr;

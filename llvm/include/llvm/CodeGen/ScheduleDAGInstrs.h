@@ -357,6 +357,10 @@ namespace llvm {
     // AIE's iterative scheduling where SUnits are stable across schedule calls).
     void makeMaps();
 
+    // amd/aie/ port: create a single SUnit for MI incrementally, returning its
+    // node number (nullopt for debug/pseudo instructions).
+    std::optional<unsigned> initSUnit(MachineInstr &MI);
+
     /// Adds dependencies from instructions in the current list of
     /// instructions being scheduled to scheduling barrier. We want to make sure
     /// instructions which define registers that are either used by the

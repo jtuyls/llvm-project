@@ -357,6 +357,12 @@ LLVM_ABI std::optional<unsigned>
 getLoopEstimatedTripCount(Loop *L,
                           unsigned *EstimatedLoopInvocationWeight = nullptr);
 
+// amd/aie/ port: AIE loop-metadata trip-count / initiation-interval helpers.
+LLVM_ABI std::optional<int64_t> getMinTripCount(const MDNode *LoopID);
+LLVM_ABI std::optional<int64_t> getMinTripCount(Loop *L,
+                                                ScalarEvolution *SE = nullptr);
+LLVM_ABI std::optional<int64_t> getInitiationInterval(const MDNode *LoopID);
+
 /// Set \c llvm.loop.estimated_trip_count with the value \p EstimatedTripCount
 /// in the loop metadata of \p L.  Return false if the implementation is unable
 /// to handle the loop form of \p L (e.g., \p L must have a latch block that

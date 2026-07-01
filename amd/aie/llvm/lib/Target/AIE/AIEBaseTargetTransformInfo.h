@@ -85,7 +85,7 @@ protected:
   virtual ~AIEBaseTTIImpl() = default;
 
 public:
-  int getIntImmCost(const APInt &Imm, Type *Ty, TTI::TargetCostKind CostKind) const {
+  InstructionCost getIntImmCost(const APInt &Imm, Type *Ty, TTI::TargetCostKind CostKind) const { // amd/aie/ port: 23 returns InstructionCost
     // TODO Handle Target Specific constant cost
     //  Larger constants require an add.
     return TTI::TCC_Basic;

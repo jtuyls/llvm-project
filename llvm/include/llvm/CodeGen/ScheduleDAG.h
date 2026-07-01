@@ -773,6 +773,9 @@ class TargetRegisterInfo;
     LLVM_ABI ScheduleDAGTopologicalSort(std::vector<SUnit> &SUnits,
                                         SUnit *ExitSU);
 
+    // amd/aie/ port: index into the underlying SUnits by node number.
+    SUnit &getSUnit(int Index) const { return SUnits[Index]; }
+
     /// Add a SUnit without predecessors to the end of the topological order. It
     /// also must be the first new node added to the DAG.
     LLVM_ABI void AddSUnitWithoutPredecessors(const SUnit *SU);

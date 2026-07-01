@@ -250,6 +250,69 @@ void llvm::addStringMetadataToLoop(Loop *TheLoop, const char *StringMD,
   TheLoop->setLoopID(NewLoopID);
 }
 
+// amd/aie/ port: AIE loop metadata helpers (added to core LLVM by llvm-aie).
+static const char *AIELLVMLoopIterCount = "llvm.loop.itercount.range";
+static const char *AIELLVMLoopInitiationInterval =
+    "llvm.loop.pipeline.initiationinterval";
+
+static std::optional<std::vector<int64_t>>
+getNumericOperands(const MDNode *LoopID, const char *MDName) {
+  if (LoopID == nullptr)
+    return std::nullopt;
+  assert(LoopID->getNumOperands() > 0 && "requires at least one operand");
+  assert(dyn_cast<MDNode>(LoopID->getOperand(0)) == LoopID &&
+         "invalid loop metadata");
+  for (unsigned I = 1, E = LoopID->getNumOperands(); I < E; ++I) {
+    const MDNode *MD = dyn_cast<MDNode>(LoopID->getOperand(I));
+    if (MD == nullptr)
+      continue;
+    const MDString *S = dyn_cast<MDString>(MD->getOperand(0));
+    if (S && S->getString() == MDName) {
+      std::vector<int64_t> Operands;
+      for (unsigned Op = 1; Op < MD->getNumOperands(); Op++)
+        Operands.push_back(
+            mdconst::extract<ConstantInt>(MD->getOperand(Op))->getSExtValue());
+      return Operands;
+    }
+  }
+  return std::nullopt;
+}
+
+std::optional<int64_t> llvm::getMinTripCount(const MDNode *LoopID) {
+  auto Operands = getNumericOperands(LoopID, AIELLVMLoopIterCount);
+  if (!Operands)
+    return std::nullopt;
+  const std::vector<int64_t> &Values = *Operands;
+  assert(Values.size() == 1 || Values.size() == 2);
+  return Values[0];
+}
+
+std::optional<int64_t> llvm::getInitiationInterval(const MDNode *LoopID) {
+  auto Operands = getNumericOperands(LoopID, AIELLVMLoopInitiationInterval);
+  if (!Operands)
+    return std::nullopt;
+  const std::vector<int64_t> &Values = *Operands;
+  assert(Values.size() == 1);
+  return Values.at(0);
+}
+
+std::optional<int64_t> llvm::getMinTripCount(Loop *L, ScalarEvolution *SE) {
+  std::optional<int64_t> MinTripCount = getMinTripCount(L->getLoopID());
+  if (MinTripCount.has_value())
+    return MinTripCount;
+  if (SE && L->isRotatedForm()) {
+    if (SE->hasLoopInvariantBackedgeTakenCount(L)) {
+      const SCEV *BackedgeTakenCount = SE->getBackedgeTakenCount(L);
+      if (const SCEVConstant *CT = dyn_cast<SCEVConstant>(BackedgeTakenCount)) {
+        addStringMetadataToLoop(L, AIELLVMLoopIterCount,
+                                CT->getValue()->getSExtValue() + 1);
+        return CT->getValue()->getSExtValue() + 1;
+      }
+    }
+  }
+  return std::nullopt;
+}
+
 std::optional<ElementCount>
 llvm::getOptionalElementCountLoopAttribute(const Loop *TheLoop) {
   std::optional<int> Width =

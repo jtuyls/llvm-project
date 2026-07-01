@@ -422,7 +422,7 @@ bool AIELegalizerHelper::legalizeG_SEXT_INREG(LegalizerHelper &Helper,
   const Register DestReg = MI.getOperand(0).getReg();
   const LLT DestRegTy = MRI.getType(DestReg);
   if (DestRegTy != S32) {
-    Helper.lowerSextInreg(MI);
+    Helper.lower(MI, 0, LLT{}) /* amd/aie/ port: 23 folds SEXT_INREG into lower() */;
     return true;
   }
 
@@ -446,7 +446,7 @@ bool AIELegalizerHelper::legalizeG_SEXT_INREG(LegalizerHelper &Helper,
   }
 
   // For other cases use default lowering
-  Helper.lowerSextInreg(MI);
+  Helper.lower(MI, 0, LLT{}) /* amd/aie/ port: 23 folds SEXT_INREG into lower() */;
 
   return true;
 }
