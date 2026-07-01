@@ -565,6 +565,14 @@ public:
     return false;
   }
 
+  // amd/aie/ port: AIE pre-lowers the return before formal args (predetermined
+  // return assignments).
+  virtual bool mustPreLowerReturn() const { return false; }
+  virtual bool preLowerReturn(const Value *RetVal, ArrayRef<Register> VRegs,
+                              FunctionLoweringInfo &FLI) const {
+    return false;
+  }
+
   /// This hook must be implemented to lower the incoming (formal)
   /// arguments, described by \p VRegs, for GlobalISel. Each argument
   /// must end up in the related virtual registers described by \p VRegs.

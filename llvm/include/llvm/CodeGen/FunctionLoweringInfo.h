@@ -293,6 +293,14 @@ public:
   /// Get the call site currently being processed, if any. Return zero if none.
   unsigned getCurrentCallSite() { return CurCallSite; }
 
+  /// amd/aie/ port: saved context when using CallLowering::preLowerReturn().
+  struct SavedRetCCState {
+    const Value *RetVal = nullptr;
+    SmallVector<Register, 4> AssignedRegs;
+    unsigned ReservedStackSize = 0;
+  };
+  std::optional<SavedRetCCState> PreDeterminedRetAssignments;
+
 private:
   /// LiveOutRegInfo - Information about live out vregs.
   IndexedMap<LiveOutInfo, VirtReg2IndexFunctor> LiveOutRegInfo;
