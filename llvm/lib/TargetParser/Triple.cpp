@@ -1255,6 +1255,11 @@ static Triple::ObjectFormatType getDefaultFormat(const Triple &T) {
   case Triple::ve:
   case Triple::xcore:
   case Triple::xtensa:
+  // amd/aie/ port: AIE object format is ELF.
+  case Triple::aie:
+  case Triple::aie2:
+  case Triple::aie2p:
+  case Triple::aie2ps:
     return Triple::ELF;
 
   case Triple::mipsel:
@@ -1983,6 +1988,13 @@ unsigned Triple::getArchPointerBitWidth(llvm::Triple::ArchType Arch) {
   case llvm::Triple::msp430:
     return 16;
 
+  // amd/aie/ port: AIE uses 20-bit pointers.
+  case llvm::Triple::aie:
+  case llvm::Triple::aie2:
+  case llvm::Triple::aie2p:
+  case llvm::Triple::aie2ps:
+    return 20;
+
   case llvm::Triple::aarch64_32:
   case llvm::Triple::amdil:
   case llvm::Triple::arc:
@@ -2456,6 +2468,11 @@ bool Triple::isLittleEndian() const {
   switch (getArch()) {
   case Triple::aarch64:
   case Triple::aarch64_32:
+  // amd/aie/ port: AIE is little-endian.
+  case Triple::aie:
+  case Triple::aie2:
+  case Triple::aie2p:
+  case Triple::aie2ps:
   case Triple::amdgcn:
   case Triple::amdil64:
   case Triple::amdil:

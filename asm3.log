@@ -1,0 +1,14 @@
+ninja: Entering directory `build'
+[1/12] Generating VCSRevision.h
+[2/12] Building CXX object lib/Object/CMakeFiles/LLVMObject.dir/IRSymtab.cpp.o
+[3/12] Linking CXX static library lib/libLLVMObject.a
+[4/12] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/DeadMachineInstructionElim.cpp.o
+[5/12] Building CXX object lib/Analysis/CMakeFiles/LLVMAnalysis.dir/BasicAliasAnalysis.cpp.o
+[6/12] Linking CXX static library lib/libLLVMAnalysis.a
+[7/12] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachineBlockPlacement.cpp.o
+[8/12] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/MachinePipeliner.cpp.o
+[9/12] Building CXX object lib/CodeGen/AsmPrinter/CMakeFiles/LLVMAsmPrinter.dir/AsmPrinter.cpp.o
+[10/12] Linking CXX static library lib/libLLVMCodeGen.a
+[11/12] Linking CXX static library lib/libLLVMAsmPrinter.a
+[12/12] Linking CXX executable bin/llc
+DONE_RC=0
