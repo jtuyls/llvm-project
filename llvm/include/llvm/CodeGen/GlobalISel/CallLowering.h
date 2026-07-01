@@ -51,6 +51,9 @@ public:
   struct BaseArgInfo {
     Type *Ty;
     SmallVector<ISD::ArgFlagsTy, 4> Flags;
+    /// amd/aie/ port: true if this is not a vararg (23 dropped IsFixed; AIE's
+    /// calling-convention lowering still reads it).
+    bool IsFixed = true;
 
     BaseArgInfo(Type *Ty,
                 ArrayRef<ISD::ArgFlagsTy> Flags = ArrayRef<ISD::ArgFlagsTy>())

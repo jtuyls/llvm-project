@@ -14,6 +14,7 @@
 //===----------------------------------------------------------------------===//
 
 #include "AIE.h"
+#include "llvm/IR/Operator.h" // amd/aie/ port: GEPOperator
 #include "llvm/IR/PassManager.h"
 #include "llvm/Passes/PassBuilder.h"
 using namespace llvm;

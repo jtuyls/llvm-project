@@ -14,6 +14,7 @@
 //===----------------------------------------------------------------------===//
 
 #include "AIEBaseAliasAnalysis.h"
+#include "llvm/IR/Operator.h" // amd/aie/ port: GEPOperator
 #include "AIE.h"
 #include "llvm/Analysis/AliasAnalysis.h"
 #include "llvm/Analysis/MemoryLocation.h"

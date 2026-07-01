@@ -578,6 +578,20 @@ public:
   LLVM_ABI LegalizeResult lowerVAArg(MachineInstr &MI);
 };
 
+// amd/aie/ port: 23 dropped the free createLibcall helpers (keeping only the
+// LegalizerHelper members); AIE's legalizer helper calls the free versions.
+LLVM_ABI LegalizerHelper::LegalizeResult
+createLibcall(MachineIRBuilder &MIRBuilder, const char *Name,
+              const CallLowering::ArgInfo &Result,
+              ArrayRef<CallLowering::ArgInfo> Args, CallingConv::ID CC,
+              LostDebugLocObserver &LocObserver, MachineInstr *MI = nullptr);
+
+LLVM_ABI LegalizerHelper::LegalizeResult
+createLibcall(MachineIRBuilder &MIRBuilder, RTLIB::Libcall Libcall,
+              const CallLowering::ArgInfo &Result,
+              ArrayRef<CallLowering::ArgInfo> Args,
+              LostDebugLocObserver &LocObserver, MachineInstr *MI = nullptr);
+
 } // End namespace llvm.
 
 #endif

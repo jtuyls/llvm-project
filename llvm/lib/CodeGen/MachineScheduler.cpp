@@ -2717,9 +2717,9 @@ SchedBoundary::getNextResourceCycle(const MCSchedClassDesc *SC, unsigned PIdx,
 /// can dispatch per cycle.
 ///
 /// TODO: Also check whether the SU must start a new group.
-bool SchedBoundary::checkHazard(SUnit *SU) {
+bool SchedBoundary::checkHazard(SUnit *SU, int DeltaCycles) {
   if (HazardRec->isEnabled()
-      && HazardRec->getHazardType(SU) != ScheduleHazardRecognizer::NoHazard) {
+      && HazardRec->getHazardType(SU, DeltaCycles) != ScheduleHazardRecognizer::NoHazard) {
     LLVM_DEBUG(dbgs().indent(2)
                << "hazard: SU(" << SU->NodeNum << ") reported by HazardRec\n");
     return true;

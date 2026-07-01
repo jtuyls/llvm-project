@@ -1091,7 +1091,9 @@ public:
            !SchedModel->getProcResource(PIdx)->BufferSize;
   }
 
-  LLVM_ABI bool checkHazard(SUnit *SU);
+  // amd/aie/ port: AIE passes a (possibly negative) delta-cycle to model
+  // exposed-pipeline hazards.
+  LLVM_ABI bool checkHazard(SUnit *SU, int DeltaCycles = 0);
 
   LLVM_ABI unsigned findMaxLatency(ArrayRef<SUnit *> ReadySUs);
 

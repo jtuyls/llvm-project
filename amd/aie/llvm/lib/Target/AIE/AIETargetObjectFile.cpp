@@ -34,14 +34,14 @@ void AIEELFTargetObjectFile::Initialize(MCContext &Ctx,
 
 static MCSection *getDataSectionWithAlign(const GlobalObject &GO,
                                           MCContext &Ctx) {
-  auto Align = std::to_string(GO.getAlignment());
+  auto Align = std::to_string(GO.getAlign().valueOrOne().value());
   return Ctx.getELFSection(".data.align." + Align, ELF::SHT_PROGBITS,
                            ELF::SHF_WRITE | ELF::SHF_ALLOC);
 }
 
 static MCSection *getBssSectionWithAlign(const GlobalObject &GO,
                                          MCContext &Ctx) {
-  auto Align = std::to_string(GO.getAlignment());
+  auto Align = std::to_string(GO.getAlign().valueOrOne().value());
   return Ctx.getELFSection(".bss.align." + Align, ELF::SHT_NOBITS,
                            ELF::SHF_ALLOC | ELF::SHF_WRITE);
 }

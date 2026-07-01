@@ -644,6 +644,60 @@ LegalizerHelper::LegalizeResult LegalizerHelper::createLibcall(
   return createLibcall(Name.data(), Result, Args, CC, LocObserver, MI);
 }
 
+// amd/aie/ port: free createLibcall helpers (23 kept only the members).
+LegalizerHelper::LegalizeResult
+llvm::createLibcall(MachineIRBuilder &MIRBuilder, const char *Name,
+                    const CallLowering::ArgInfo &Result,
+                    ArrayRef<CallLowering::ArgInfo> Args,
+                    const CallingConv::ID CC, LostDebugLocObserver &LocObserver,
+                    MachineInstr *MI) {
+  auto &CLI = *MIRBuilder.getMF().getSubtarget().getCallLowering();
+
+  CallLowering::CallLoweringInfo Info;
+  Info.CallConv = CC;
+  Info.Callee = MachineOperand::CreateES(Name);
+  Info.OrigRet = Result;
+  if (MI)
+    Info.IsTailCall =
+        (Result.Ty->isVoidTy() ||
+         Result.Ty == MIRBuilder.getMF().getFunction().getReturnType()) &&
+        isLibCallInTailPosition(Result, *MI, MIRBuilder.getTII(),
+                                *MIRBuilder.getMRI());
+
+  std::copy(Args.begin(), Args.end(), std::back_inserter(Info.OrigArgs));
+  if (!CLI.lowerCall(MIRBuilder, Info))
+    return LegalizerHelper::UnableToLegalize;
+
+  if (MI && Info.LoweredTailCall) {
+    assert(Info.IsTailCall && "Lowered tail call when it wasn't a tail call?");
+    LocObserver.checkpoint(true);
+    do {
+      MachineInstr *Next = MI->getNextNode();
+      assert(Next &&
+             (Next->isCopy() || Next->isReturn() || Next->isDebugInstr()) &&
+             "Expected instr following MI to be return or debug inst?");
+      Next->eraseFromParent();
+    } while (MI->getNextNode());
+    LocObserver.checkpoint(false);
+  }
+  return LegalizerHelper::Legalized;
+}
+
+LegalizerHelper::LegalizeResult
+llvm::createLibcall(MachineIRBuilder &MIRBuilder, RTLIB::Libcall Libcall,
+                    const CallLowering::ArgInfo &Result,
+                    ArrayRef<CallLowering::ArgInfo> Args,
+                    LostDebugLocObserver &LocObserver, MachineInstr *MI) {
+  auto &TLI = *MIRBuilder.getMF().getSubtarget().getTargetLowering();
+  RTLIB::LibcallImpl Impl = TLI.getLibcallImpl(Libcall);
+  if (Impl == RTLIB::Unsupported)
+    return LegalizerHelper::UnableToLegalize;
+  StringRef Name = TLI.getLibcallImplName(Impl);
+  const CallingConv::ID CC = TLI.getLibcallCallingConv(Libcall);
+  return createLibcall(MIRBuilder, Name.data(), Result, Args, CC, LocObserver,
+                       MI);
+}
+
 // Useful for libcalls where all operands have the same type.
 LegalizerHelper::LegalizeResult
 LegalizerHelper::simpleLibcall(MachineInstr &MI, MachineIRBuilder &MIRBuilder,
