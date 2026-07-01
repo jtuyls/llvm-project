@@ -359,6 +359,11 @@ protected:
   MachineBlockFrequencyInfo *MBFI;
   std::unique_ptr<MachineSchedStrategy> SchedImpl;
 
+  // amd/aie/ port: per-SUnit emission cycle chosen by pickNodeAndCycle, used to
+  // place instructions at their exposed-pipeline cycle (AIE).
+  DenseMap<const SUnit *, unsigned> BotEmissionCycles;
+  DenseMap<const SUnit *, unsigned> TopEmissionCycles;
+
   /// Ordered list of DAG postprocessing steps.
   std::vector<std::unique_ptr<ScheduleDAGMutation>> Mutations;
 
@@ -420,6 +425,12 @@ public:
   /// Implement ScheduleDAGInstrs interface for scheduling a sequence of
   /// reorderable instructions.
   void schedule() override;
+
+  // amd/aie/ port: move the picked SU to its exposed-pipeline emission cycle.
+  void movePickedSU(const SUnit &SU, bool IsTopNode,
+                    std::optional<unsigned> EmissionCycle);
+  MachineBasicBlock::iterator
+  findInsertPosForCycle(std::optional<unsigned> EmissionCycle, bool IsTopNode);
 
   void startBlock(MachineBasicBlock *bb) override;
   void finishBlock() override;

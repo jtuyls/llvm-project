@@ -1040,6 +1040,90 @@ void ScheduleDAGMI::enterRegion(MachineBasicBlock *bb,
   setDumpDirection(D);
 }
 
+// amd/aie/ port: find the insertion position for an SU with a given exposed-
+// pipeline emission cycle (AIE). Instructions are kept ordered by emission cycle
+// within the scheduled zone so bundle formation groups them correctly.
+MachineBasicBlock::iterator
+ScheduleDAGMI::findInsertPosForCycle(std::optional<unsigned> OptEmissionCycle,
+                                     bool IsTopNode) {
+  if (!OptEmissionCycle) {
+    if (IsTopNode)
+      return top();
+    return bottom();
+  }
+
+  auto HasGreaterEmissionCycle = [&](const MachineInstr &MI,
+                                     unsigned EmissionCycle) {
+    SUnit *PosSU = getSUnit(const_cast<MachineInstr *>(&MI));
+    if (!PosSU)
+      return true;
+    auto PosCycleIt = BotEmissionCycles.find(PosSU);
+    assert(PosCycleIt != BotEmissionCycles.end() &&
+           "Some SUs are missing an EmissionCycle");
+    return PosCycleIt->getSecond() > EmissionCycle;
+  };
+
+  auto HasLessOrEqEmissionCycle = [&](const MachineInstr &MI,
+                                      unsigned EmissionCycle) {
+    SUnit *PosSU = getSUnit(const_cast<MachineInstr *>(&MI));
+    if (!PosSU)
+      return true;
+    auto PosCycleIt = TopEmissionCycles.find(PosSU);
+    assert(PosCycleIt != TopEmissionCycles.end() &&
+           "Some SUs are missing an EmissionCycle");
+    return PosCycleIt->getSecond() <= EmissionCycle;
+  };
+
+  if (IsTopNode)
+    return std::lower_bound(begin(), top(), *OptEmissionCycle,
+                            HasLessOrEqEmissionCycle);
+  return std::lower_bound(bottom(), end(), *OptEmissionCycle,
+                          HasGreaterEmissionCycle);
+}
+
+// amd/aie/ port: move the picked SU into the scheduled zone at the position
+// dictated by its exposed-pipeline emission cycle.
+void ScheduleDAGMI::movePickedSU(const SUnit &SU, bool IsTopNode,
+                                 std::optional<unsigned> EmissionCycle) {
+  MachineInstr *MI = SU.getInstr();
+  if (IsTopNode) {
+    assert(SU.isTopReady() && "node still has unscheduled dependencies");
+    if (EmissionCycle)
+      TopEmissionCycles[&SU] = *EmissionCycle;
+    MachineBasicBlock::iterator InsertPos =
+        findInsertPosForCycle(EmissionCycle, IsTopNode);
+    if (InsertPos != CurrentTop) {
+      if (&*CurrentTop == MI)
+        CurrentTop = nextIfDebug(++CurrentTop, CurrentBottom);
+      moveInstruction(MI, InsertPos);
+    } else if (&*CurrentTop == MI) {
+      CurrentTop = nextIfDebug(++CurrentTop, CurrentBottom);
+    } else {
+      moveInstruction(MI, CurrentTop);
+    }
+  } else {
+    assert(SU.isBottomReady() && "node still has unscheduled dependencies");
+    if (EmissionCycle)
+      BotEmissionCycles[&SU] = *EmissionCycle;
+    MachineBasicBlock::iterator PriorII =
+        priorNonDebug(CurrentBottom, CurrentTop);
+    MachineBasicBlock::iterator InsertPos =
+        findInsertPosForCycle(EmissionCycle, IsTopNode);
+    if (InsertPos != CurrentBottom) {
+      if (&*CurrentTop == MI)
+        CurrentTop = nextIfDebug(++CurrentTop, PriorII);
+      moveInstruction(MI, InsertPos);
+    } else if (&*PriorII == MI) {
+      CurrentBottom = PriorII;
+    } else {
+      if (&*CurrentTop == MI)
+        CurrentTop = nextIfDebug(++CurrentTop, PriorII);
+      moveInstruction(MI, CurrentBottom);
+      CurrentBottom = MI;
+    }
+  }
+}
+
 /// This is normally called from the main scheduler loop but may also be invoked
 /// by the scheduling strategy to perform additional code motion.
 void ScheduleDAGMI::moveInstruction(
@@ -1098,37 +1182,25 @@ void ScheduleDAGMI::schedule() {
   // Initialize ready queues now that the DAG and priority data are finalized.
   initQueues(TopRoots, BotRoots);
 
+  // amd/aie/ port: drop emission cycles from any previous region.
+  BotEmissionCycles.clear();
+  TopEmissionCycles.clear();
+
   bool IsTopNode = false;
   while (true) {
     if (!checkSchedLimit())
       break;
 
     LLVM_DEBUG(dbgs() << "** ScheduleDAGMI::schedule picking next node\n");
-    SUnit *SU = SchedImpl->pickNode(IsTopNode);
+    // amd/aie/ port: pick a node together with its exposed-pipeline emission
+    // cycle (AIE), then place it accordingly so bundle formation is correct.
+    std::optional<unsigned> EmissionCycle;
+    SUnit *SU = SchedImpl->pickNodeAndCycle(IsTopNode, EmissionCycle);
     if (!SU) break;
 
     assert(!SU->isScheduled && "Node already scheduled");
 
-    MachineInstr *MI = SU->getInstr();
-    if (IsTopNode) {
-      assert(SU->isTopReady() && "node still has unscheduled dependencies");
-      if (&*CurrentTop == MI)
-        CurrentTop = nextIfDebug(++CurrentTop, CurrentBottom);
-      else
-        moveInstruction(MI, CurrentTop);
-    } else {
-      assert(SU->isBottomReady() && "node still has unscheduled dependencies");
-      MachineBasicBlock::iterator priorII =
-        priorNonDebug(CurrentBottom, CurrentTop);
-      if (&*priorII == MI)
-        CurrentBottom = priorII;
-      else {
-        if (&*CurrentTop == MI)
-          CurrentTop = nextIfDebug(++CurrentTop, priorII);
-        moveInstruction(MI, CurrentBottom);
-        CurrentBottom = MI;
-      }
-    }
+    movePickedSU(*SU, IsTopNode, EmissionCycle);
     // Notify the scheduling strategy before updating the DAG.
     // This sets the scheduled node's ReadyCycle to CurrCycle. When updateQueues
     // runs, it can then use the accurate ReadyCycle time to determine whether
