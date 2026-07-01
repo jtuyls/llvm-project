@@ -47,6 +47,7 @@
 #include "llvm/Analysis/OptimizationRemarkEmitter.h"
 #include "llvm/Analysis/ValueTracking.h"
 #include "llvm/CodeGen/DFAPacketizer.h"
+#include "llvm/CodeGen/ResourceCycle.h" // amd/aie/ port
 #include "llvm/CodeGen/LiveIntervals.h"
 #include "llvm/CodeGen/MachineBasicBlock.h"
 #include "llvm/CodeGen/MachineDominators.h"
@@ -4047,9 +4048,9 @@ int ResourceManager::calculateResMIIDFA() const {
   for (SUnit &SU : DAG->SUnits)
     FuncUnitOrder.push(SU.getInstr());
 
-  SmallVector<std::unique_ptr<DFAPacketizer>, 8> Resources;
+  SmallVector<std::unique_ptr<ResourceCycle>, 8> Resources; // amd/aie/ port
   Resources.push_back(
-      std::unique_ptr<DFAPacketizer>(TII->CreateTargetScheduleState(*ST)));
+      std::unique_ptr<ResourceCycle>(TII->CreateTargetScheduleState(*ST)));
 
   while (!FuncUnitOrder.empty()) {
     MachineInstr *MI = FuncUnitOrder.top();
@@ -4087,7 +4088,7 @@ int ResourceManager::calculateResMIIDFA() const {
       auto *NewResource = TII->CreateTargetScheduleState(*ST);
       assert(NewResource->canReserveResources(*MI) && "Reserve error.");
       NewResource->reserveResources(*MI);
-      Resources.push_back(std::unique_ptr<DFAPacketizer>(NewResource));
+      Resources.push_back(std::unique_ptr<ResourceCycle>(NewResource));
     }
   }
 

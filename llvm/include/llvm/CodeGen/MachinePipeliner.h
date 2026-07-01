@@ -43,6 +43,7 @@
 #include "llvm/ADT/STLExtras.h"
 #include "llvm/ADT/SetVector.h"
 #include "llvm/CodeGen/DFAPacketizer.h"
+#include "llvm/CodeGen/ResourceCycle.h" // amd/aie/ port
 #include "llvm/CodeGen/MachineDominators.h"
 #include "llvm/CodeGen/MachineOptimizationRemarkEmitter.h"
 #include "llvm/CodeGen/MachineScheduler.h"
@@ -648,7 +649,7 @@ private:
   ScheduleDAGInstrs *DAG;
   const bool UseDFA;
   /// DFA resources for each slot
-  llvm::SmallVector<std::unique_ptr<DFAPacketizer>> DFAResources;
+  llvm::SmallVector<std::unique_ptr<ResourceCycle>> DFAResources; // amd/aie/ port
   /// Modulo Reservation Table. When a resource with ID R is consumed in cycle
   /// C, it is counted in MRT[C mod II][R]. (Used when UseDFA == F)
   llvm::SmallVector<llvm::SmallVector<uint64_t, DefaultProcResSize>> MRT;
