@@ -3920,7 +3920,13 @@ bool IRTranslator::mayTranslateUserTypes(const User &U) const {
   // we prevent any instructions using them by default in all targets that do
   // not explicitly enable it via LLT::setUseExtended(true).
   // SPIRV target is exception.
-  return TM.getTargetTriple().isSPIRV() ||
+  // amd/aie/ port: AIE also handles bf16 explicitly. It treats bf16 as a
+  // scalar(16) bag-of-bits and custom-lowers bf16 arithmetic in its legalizer
+  // (see AIE2LegalizerInfo G_FADD/G_FSUB customFor / bf16 intrinsics), exactly
+  // as it did in LLVM 21 before this gate existed. Enabling extended LLTs
+  // globally instead would change s32 to Kind::INTEGER and break AIE's
+  // (non-extended) GISel selector tables, so opt in by triple here.
+  return TM.getTargetTriple().isSPIRV() || TM.getTargetTriple().isAIE() ||
          (!U.getType()->getScalarType()->isBFloatTy() &&
           !any_of(U.operands(), [](Value *V) {
             return V->getType()->getScalarType()->isBFloatTy();
