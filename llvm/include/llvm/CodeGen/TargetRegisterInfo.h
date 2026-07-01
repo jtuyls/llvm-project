@@ -615,6 +615,11 @@ public:
   /// function.  Used by MachineRegisterInfo::isConstantPhysReg().
   virtual bool isConstantPhysReg(MCRegister PhysReg) const { return false; }
 
+  // amd/aie/ port: AIE marks some reserved regs as simplifiable.
+  virtual bool isSimplifiableReservedReg(MCRegister PhysReg) const {
+    return false;
+  }
+
   /// Returns true if the register class is considered divergent.
   virtual bool isDivergentRegClass(const TargetRegisterClass *RC) const {
     return false;

@@ -42,6 +42,7 @@
 namespace llvm {
 
 class DFAPacketizer;
+class ResourceCycle; // amd/aie/ port
 class InstrItineraryData;
 class LiveIntervals;
 class LiveVariables;
@@ -2062,8 +2063,12 @@ public:
   virtual void breakPartialRegDependency(MachineInstr &MI, unsigned OpNum,
                                          const TargetRegisterInfo *TRI) const {}
 
+  /// amd/aie/ port: AIE hoists cheap instructions in MachineLICM even when cheap.
+  virtual bool canHoistCheapInst(const MachineInstr &MI) const { return false; }
+
   /// Create machine specific model for scheduling.
-  virtual DFAPacketizer *
+  /// amd/aie/ port: AIE changed the base return type to ResourceCycle.
+  virtual ResourceCycle *
   CreateTargetScheduleState(const TargetSubtargetInfo &) const {
     return nullptr;
   }

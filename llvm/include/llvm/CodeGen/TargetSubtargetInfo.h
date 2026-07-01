@@ -240,6 +240,16 @@ public:
   /// Override generic scheduling policy within a region.
   ///
   /// This is a convenient way for targets that don't provide any custom
+  // amd/aie/ port: AIE-added scheduler/regalloc hooks.
+  virtual bool forcePostRAScheduling() const { return false; }
+  virtual unsigned getCriticalPathLimit() const {
+    return getSchedModel().MispredictPenalty / 2;
+  }
+  virtual std::optional<Register>
+  getSpillGroupOriginal(const MachineFunction &MF, Register VirtReg) const {
+    return std::nullopt;
+  }
+
   /// scheduling heuristics (no custom MachineSchedStrategy) to make
   /// changes to the generic scheduling policy.
   virtual void overrideSchedPolicy(MachineSchedPolicy &Policy,
