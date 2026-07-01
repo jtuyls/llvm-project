@@ -328,6 +328,9 @@ namespace llvm {
     // scheduler / dependence helpers.
     virtual bool mayAlias(SUnit *SUa, SUnit *SUb, bool TBAA) { return true; }
 
+    // amd/aie/ port: AIE accesses the current block.
+    MachineBasicBlock *getBB() const { return BB; }
+
     /// Initialize the DAG and common scheduler state for a new
     /// scheduling region. This does not actually create the DAG, only clears
     /// it. The scheduling driver may call BuildSchedGraph multiple times per

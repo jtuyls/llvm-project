@@ -149,6 +149,7 @@ public:
       : TargetFeaturesEmitter(R), TGT(R), SchedModels(TGT.getSchedModels()) {}
 
   void run(raw_ostream &O) override;
+  void EmitNumResources(raw_ostream &OS); // amd/aie/ port
 };
 
 } // end anonymous namespace
@@ -2058,10 +2059,34 @@ void SubtargetEmitter::emitMcInstrAnalysisPredicateFunctions(raw_ostream &OS) {
     PE.expandSTIPredicate(OS, Fn);
 }
 
+// amd/aie/ port: emit a GET_NUM_RESOURCES block with each processor's resource
+// count, consumed by the AIE scheduler (AIEMaxNumResources.h).
+void SubtargetEmitter::EmitNumResources(raw_ostream &OS) {
+  if (SchedModels.hasItineraries()) {
+    for (const CodeGenProcModel &ProcModel : SchedModels.procModels()) {
+      StringRef Name = ProcModel.ItinsDef->getName();
+      ConstRecVec FUs = ProcModel.ItinsDef->getValueAsListOfDefs("FU");
+      if (FUs.empty())
+        continue;
+      OS << "#ifdef GET_NUM_RESOURCES\n"
+            "#undef GET_NUM_RESOURCES\n"
+            "namespace " << Name << " {\n"
+            "const int NumResources = " << FUs.size() << ";\n"
+            "} // namespace " << Name << "\n"
+            "#endif // GET_NUM_RESOURCES\n";
+    }
+  }
+}
+
 FeatureMapTy SubtargetEmitter::emitEnums(raw_ostream &OS) {
-  IfDefEmitter IfDef(OS, "GET_SUBTARGETINFO_ENUM");
-  NamespaceEmitter NS(OS, "llvm");
-  return enumeration(OS);
+  FeatureMapTy FeatureMap;
+  {
+    IfDefEmitter IfDef(OS, "GET_SUBTARGETINFO_ENUM");
+    NamespaceEmitter NS(OS, "llvm");
+    FeatureMap = enumeration(OS);
+  }
+  EmitNumResources(OS);
+  return FeatureMap;
 }
 
 std::tuple<unsigned, unsigned, unsigned>
