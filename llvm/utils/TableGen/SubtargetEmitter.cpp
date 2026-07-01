@@ -379,6 +379,11 @@ void SubtargetEmitter::formItineraryStageString(const std::string &Name,
     }
 
     int TimeInc = Stage->getValueAsInt("TimeInc");
+    // amd/aie/ port: a negative TimeInc means "advance by Cycles"; normalize it
+    // here (matches llvm-aie) so consumers reading NextCycles_ directly see the
+    // real value.
+    if (TimeInc < 0)
+      TimeInc = Cycles;
     ItinString += ", " + itostr(TimeInc);
 
     int Kind = Stage->getValueAsInt("Kind");
