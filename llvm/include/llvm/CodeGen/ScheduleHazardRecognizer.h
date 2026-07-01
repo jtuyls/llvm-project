@@ -129,6 +129,9 @@ public:
   // exposed-pipeline bookkeeping (StartBlock before scheduling, EndBlock after).
   virtual void StartBlock(MachineBasicBlock *MBB) {}
   virtual void EndBlock(MachineBasicBlock *MBB) {}
+
+  // amd/aie/ port: emit noops when no instruction can be issued this cycle.
+  virtual bool emitNoopsIfNoInstructionsAvailable() { return false; }
 };
 
 } // end namespace llvm

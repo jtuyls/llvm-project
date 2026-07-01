@@ -55,6 +55,9 @@ class VirtRegMap {
   /// mapping.
   IndexedMap<Register, VirtReg2IndexFunctor> Virt2SplitMap;
 
+  /// amd/aie/ port: virtual register -> required physical register mapping.
+  IndexedMap<Register, VirtReg2IndexFunctor> Virt2RequiredPhysMap;
+
   /// Virt2ShapeMap - For X86 AMX register whose register is bound shape
   /// information.
   DenseMap<Register, ShapeT> Virt2ShapeMap;
@@ -96,6 +99,24 @@ public:
   /// creates a mapping for the specified virtual register to
   /// the specified physical register
   LLVM_ABI void assignVirt2Phys(Register virtReg, MCRegister physReg);
+
+  // amd/aie/ port: "required physical register" mapping for AIE sub-register
+  // constraining.
+  bool hasRequiredPhys(Register virtReg) const {
+    return getRequiredPhys(virtReg).isValid();
+  }
+  MCRegister getRequiredPhys(Register virtReg) const {
+    assert(virtReg.isVirtual());
+    return MCRegister::from(Virt2RequiredPhysMap[virtReg]);
+  }
+  LLVM_ABI void setRequiredPhys(Register virtReg, MCPhysReg physReg);
+  LLVM_ABI void unsetRequiredPhys(Register virtReg);
+
+  /// amd/aie/ port: remove the split-from mapping for virtReg (own original).
+  void clearSplitFromReg(Register virtReg) {
+    assert(virtReg.isVirtual());
+    Virt2SplitMap[virtReg] = Register();
+  }
 
   bool isShapeMapEmpty() const { return Virt2ShapeMap.empty(); }
 

@@ -62,6 +62,8 @@ class ScheduleHazardRecognizer;
 class SDNode;
 class SelectionDAG;
 class SMSchedule;
+class SUnit; // amd/aie/ port
+class ScheduleDAGTopologicalSort; // amd/aie/ port
 class SwingSchedulerDAG;
 class RegScavenger;
 class TargetRegisterClass;
@@ -829,6 +831,21 @@ public:
   class LLVM_ABI PipelinerLoopInfo {
   public:
     virtual ~PipelinerLoopInfo();
+
+    // amd/aie/ port: AIE pipeliner hooks.
+    /// Return the different node orders to try when looking for a valid
+    /// schedule at a given II.
+    virtual SmallVector<ArrayRef<SUnit *>, 4>
+    getNodeOrders(ArrayRef<SUnit *> DefaultSMSOrder,
+                  const ScheduleDAGTopologicalSort &Topo) {
+      return {DefaultSMSOrder};
+    }
+    /// Return true if \p SMS can be scheduled and register-allocated by the
+    /// target or false if the II should be increased.
+    virtual bool canAcceptII(SMSchedule &SMS) { return true; }
+    /// Called from the modulo schedule expander before any other modification.
+    virtual void startExpand() {}
+
     /// Return true if the given instruction should not be pipelined and should
     /// be ignored. An example could be a loop comparison, or induction variable
     /// update with no users being pipelined.

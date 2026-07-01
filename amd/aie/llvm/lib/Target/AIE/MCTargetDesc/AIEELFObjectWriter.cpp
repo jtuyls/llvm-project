@@ -42,8 +42,8 @@ public:
   }
 
 protected:
-  unsigned getRelocType(MCContext &Ctx, const MCValue &Target,
-                        const MCFixup &Fixup, bool IsPCRel) const override;
+  unsigned getRelocType(const MCFixup &Fixup, const MCValue &Target,
+                        bool IsPCRel) const override;
 };
 }
 
@@ -131,8 +131,8 @@ static unsigned getRelocTypeAIE2PS(const MCFixup &Fixup) {
   }
 }
 
-unsigned AIEELFObjectWriter::getRelocType(MCContext &Ctx, const MCValue &Target,
-                                          const MCFixup &Fixup,
+unsigned AIEELFObjectWriter::getRelocType(const MCFixup &Fixup,
+                                          const MCValue &Target,
                                           bool IsPCRel) const {
   // NOTE: Their is no pc-relative call in AIE1/2 so the value of IsPCRel isn't
   // relevant.

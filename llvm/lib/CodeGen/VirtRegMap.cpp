@@ -72,6 +72,7 @@ void VirtRegMap::init(MachineFunction &mf) {
   Virt2StackSlotMap.clear();
   Virt2SplitMap.clear();
   Virt2ShapeMap.clear();
+  Virt2RequiredPhysMap.clear(); // amd/aie/ port
 
   grow();
 }
@@ -81,6 +82,18 @@ void VirtRegMap::grow() {
   Virt2PhysMap.resize(NumRegs);
   Virt2StackSlotMap.resize(NumRegs);
   Virt2SplitMap.resize(NumRegs);
+  Virt2RequiredPhysMap.resize(NumRegs); // amd/aie/ port
+}
+
+// amd/aie/ port: required-physreg mapping.
+void VirtRegMap::setRequiredPhys(Register virtReg, MCPhysReg physReg) {
+  assert(virtReg.isVirtual());
+  Virt2RequiredPhysMap[virtReg] = physReg;
+}
+
+void VirtRegMap::unsetRequiredPhys(Register virtReg) {
+  assert(virtReg.isVirtual());
+  Virt2RequiredPhysMap[virtReg] = MCRegister();
 }
 
 void VirtRegMap::assignVirt2Phys(Register virtReg, MCRegister physReg) {
