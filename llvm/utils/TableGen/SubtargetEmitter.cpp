@@ -454,9 +454,16 @@ void SubtargetEmitter::emitStageAndOperandCycleData(
       OS << "\n// Functional units for \"" << Name << "\"\n";
       NamespaceEmitter FUNamespace(OS, (Name + Twine("FU")).str());
 
+      // amd/aie/ port: emit FU values through a FUNCUNIT_REPRESENTATION macro so
+      // targets can choose bitmask (default) or index representation. AIE
+      // #defines it to (x) (an index) because it tracks FUs in a StaticBitSet
+      // keyed by index rather than a 64-bit mask.
+      OS << "#ifndef FUNCUNIT_REPRESENTATION\n"
+         << "#define FUNCUNIT_REPRESENTATION(x) (1ULL << (x))\n"
+         << "#endif\n";
       for (const auto &[Idx, FU] : enumerate(FUs))
-        OS << "  const InstrStage::FuncUnits " << FU->getName() << " = 1ULL << "
-           << Idx << ";\n";
+        OS << "  const InstrStage::FuncUnits " << FU->getName()
+           << " = FUNCUNIT_REPRESENTATION(" << Idx << ");\n";
     }
 
     ConstRecVec BPs = ProcModel.ItinsDef->getValueAsListOfDefs("BP");
