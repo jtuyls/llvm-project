@@ -13,6 +13,7 @@
 
 #include "AIEBaseSubtarget.h"
 #include "llvm/CodeGen/GlobalISel/Combiner.h"
+#include "llvm/CodeGen/GlobalISel/GISelKnownBits.h" // amd/aie/ port: GISelKnownBits alias shim
 #include "llvm/CodeGen/GlobalISel/CombinerHelper.h"
 #include "llvm/CodeGen/GlobalISel/CombinerInfo.h"
 

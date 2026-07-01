@@ -51,7 +51,7 @@ InstructionCost AIE2PSTTIImpl::getMemoryOpCost(unsigned Opcode, Type *Src,
                                                unsigned AddressSpace,
                                                TTI::TargetCostKind CostKind,
                                                TTI::OperandValueInfo OpInfo,
-                                               const Instruction *I) {
+                                               const Instruction *I) const {
   // Try AIE-specific cost model first
   InstructionCost Cost =
       Common.getMemoryOpCost(Opcode, Src, Alignment, AddressSpace, DL);

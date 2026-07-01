@@ -195,6 +195,7 @@ public:
 };
 
 class ScheduleDAGMI;
+class SchedBoundary; // amd/aie/ port: referenced by MachineSchedStrategy::isAvailableNode
 
 /// Define a generic scheduling policy for targets that don't provide their own
 /// MachineSchedStrategy. This can be overriden for each scheduling region
@@ -298,9 +299,38 @@ public:
   /// instruction and updated scheduled/remaining flags in the DAG nodes.
   virtual void schedNode(SUnit *SU, bool IsTopNode) = 0;
 
-  // amd/aie/ port: AIE strategy hooks for per-function enter/leave.
-  virtual void enterFunction(MachineFunction *MF) {}
-  virtual void leaveFunction() {}
+  // amd/aie/ port: AIE strategy hooks for per-function/per-block iteration and
+  // overridable DAG construction / availability checks.
+  virtual void enterFunction(MachineFunction *MF) {
+    CurrFn = MF;
+    NextMBB = CurrFn->begin();
+  }
+  virtual void leaveFunction() {
+    assert(NextMBB == CurrFn->end());
+    CurrFn = nullptr;
+  }
+  virtual MachineBasicBlock *nextBlock() {
+    return NextMBB == CurrFn->end() ? nullptr : &(*NextMBB++);
+  }
+
+  /// This can override DAG construction and postprocessing (useful for
+  /// iterative scheduling, where the graph is invariant over schedule() calls).
+  virtual void buildGraph(ScheduleDAGMI &DAG, AAResults *AA,
+                          RegPressureTracker *RPTracker = nullptr,
+                          PressureDiffs *PDiffs = nullptr,
+                          LiveIntervals *LIS = nullptr,
+                          bool TrackLaneMasks = false);
+
+  /// Variant of \p pickNode which allows specifying a cycle in which to emit
+  /// the instruction (bottom nodes only).
+  virtual SUnit *pickNodeAndCycle(bool &IsTopNode,
+                                  std::optional<unsigned> &BotEmissionCycle) {
+    return pickNode(IsTopNode);
+  }
+
+  /// Whether or not \p SU can be moved to the Available queue of \p Zone.
+  virtual bool isAvailableNode(SUnit &SU, SchedBoundary &Zone,
+                               bool VerifyReadyCycle);
 
   /// When all predecessor dependencies have been resolved, free this node for
   /// top-down scheduling.
@@ -309,6 +339,11 @@ public:
   /// When all successor dependencies have been resolved, free this node for
   /// bottom-up scheduling.
   virtual void releaseBottomNode(SUnit *SU) = 0;
+
+private:
+  // amd/aie/ port: state backing enterFunction/nextBlock iteration.
+  MachineFunction *CurrFn = nullptr;
+  MachineFunction::iterator NextMBB;
 };
 
 /// ScheduleDAGMI is an implementation of ScheduleDAGInstrs that simply

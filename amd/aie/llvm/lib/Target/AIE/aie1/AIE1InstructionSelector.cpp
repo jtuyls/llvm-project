@@ -14,6 +14,7 @@
 //===----------------------------------------------------------------------===//
 
 #include "InstPrinter/AIEInstPrinter.h"
+#include "llvm/CodeGen/GlobalISel/GISelKnownBits.h" // amd/aie/ port: GISelKnownBits alias shim
 #include "MCTargetDesc/AIEMCTargetDesc.h"
 #include "aie1/AIE1RegisterBankInfo.h"
 #include "aie1/AIE1RegisterInfo.h"

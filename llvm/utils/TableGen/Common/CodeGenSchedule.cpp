@@ -844,6 +844,18 @@ void CodeGenSchedModels::collectSchedClasses() {
     // ProcIdx == 0 indicates the class applies to all processors.
     unsigned SCIdx = addSchedClass(ItinDef, Writes, Reads, /*ProcIndices*/ {0});
     InstrClassMap[Inst->TheDef] = SCIdx;
+
+    // amd/aie/ port: read the alternative itineraries (AIE variant itinerary
+    // classes, e.g. II_*_RS/_P/_M/_DC/_DJ/_DN) and add a SchedClass for each so
+    // their Sched::II_* enum members are emitted.
+    std::vector<const Record *> AltItinary =
+        Inst->TheDef->getValueAsListOfDefs("ItineraryRegPairs");
+    for (const Record *AltItin : AltItinary) {
+      const Record *AltItinDef = AltItin->getValueAsDef("Itinerary");
+      if (!Inst->TheDef->isValueUnset("SchedRW"))
+        findRWs(Inst->TheDef->getValueAsListOfDefs("SchedRW"), Writes, Reads);
+      addSchedClass(AltItinDef, Writes, Reads, /*ProcIndices*/ {0});
+    }
   }
   // Create classes for InstRW defs.
   LLVM_DEBUG(dbgs() << "\n+++ SCHED CLASSES (createInstRWClass) +++\n");

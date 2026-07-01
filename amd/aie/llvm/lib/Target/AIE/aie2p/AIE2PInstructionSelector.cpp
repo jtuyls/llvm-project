@@ -14,6 +14,7 @@
 //===----------------------------------------------------------------------===//
 
 #include "AIE2PRegisterBankInfo.h"
+#include "llvm/CodeGen/GlobalISel/GISelKnownBits.h" // amd/aie/ port: GISelKnownBits alias shim
 #include "AIE2PRegisterInfo.h"
 #include "AIE2PTargetMachine.h"
 #include "AIEBaseInstructionSelector.h"

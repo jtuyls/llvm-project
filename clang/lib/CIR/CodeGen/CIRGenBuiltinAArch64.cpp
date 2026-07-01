@@ -23,6 +23,10 @@
 // of them and passing down to LLVM lowering.
 #include "llvm/IR/Intrinsics.h"
 #include "llvm/IR/IntrinsicsAArch64.h"
+#include "llvm/IR/IntrinsicsAIE.h" // amd/aie/ port
+#include "llvm/IR/IntrinsicsAIE2.h"
+#include "llvm/IR/IntrinsicsAIE2P.h"
+#include "llvm/IR/IntrinsicsAIE2PS.h"
 
 #include "mlir/IR/BuiltinTypes.h"
 #include "mlir/IR/Value.h"

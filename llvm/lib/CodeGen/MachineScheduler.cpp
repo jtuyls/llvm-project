@@ -296,6 +296,22 @@ static const unsigned MinSubtreeSize = 8;
 // Pin the vtables to this file.
 void MachineSchedStrategy::anchor() {}
 
+// amd/aie/ port: default (non-AIE) implementations for the AIE-added virtuals.
+void MachineSchedStrategy::buildGraph(ScheduleDAGMI &DAG, AAResults *AA,
+                                      RegPressureTracker *RPTracker,
+                                      PressureDiffs *PDiffs, LiveIntervals *LIS,
+                                      bool TrackLaneMasks) {
+  DAG.buildSchedGraph(AA, RPTracker, PDiffs, LIS, TrackLaneMasks);
+}
+
+bool MachineSchedStrategy::isAvailableNode(SUnit &SU, SchedBoundary &Zone,
+                                           bool VerifyReadyCycle) {
+  unsigned ReadyCycle = Zone.isTop() ? SU.TopReadyCycle : SU.BotReadyCycle;
+  if (VerifyReadyCycle && ReadyCycle > Zone.getCurrCycle())
+    return false;
+  return !Zone.checkHazard(&SU);
+}
+
 void ScheduleDAGMutation::anchor() {}
 
 //===----------------------------------------------------------------------===//

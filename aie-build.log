@@ -1,0 +1,456 @@
+ninja: Entering directory `build'
+[1/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/ABIBreak.cpp.o
+[2/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/AutoConvert.cpp.o
+[3/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/COM.cpp.o
+[4/2077] Building CXX object lib/Demangle/CMakeFiles/LLVMDemangle.dir/MicrosoftDemangleNodes.cpp.o
+[5/2077] Building CXX object lib/Demangle/CMakeFiles/LLVMDemangle.dir/Demangle.cpp.o
+[6/2077] Building CXX object lib/Demangle/CMakeFiles/LLVMDemangle.dir/MicrosoftDemangle.cpp.o
+[7/2077] Building CXX object lib/Demangle/CMakeFiles/LLVMDemangle.dir/RustDemangle.cpp.o
+[8/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/BuryPointer.cpp.o
+[9/2077] Building CXX object lib/Demangle/CMakeFiles/LLVMDemangle.dir/DLangDemangle.cpp.o
+[10/2077] Building CXX object lib/Demangle/CMakeFiles/LLVMDemangle.dir/ItaniumDemangle.cpp.o
+[11/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/circular_raw_ostream.cpp.o
+[12/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/AArch64BuildAttributes.cpp.o
+[13/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Base64.cpp.o
+[14/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/ARMWinEH.cpp.o
+[15/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Allocator.cpp.o
+[16/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/AArch64AttributeParser.cpp.o
+[17/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/BinaryStreamReader.cpp.o
+[18/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/BinaryStreamError.cpp.o
+[19/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/BinaryStreamWriter.cpp.o
+[20/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/ARMBuildAttributes.cpp.o
+[21/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/BinaryStreamRef.cpp.o
+[22/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/BranchProbability.cpp.o
+[23/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/CachePruning.cpp.o
+[24/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/APFloat.cpp.o
+[25/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/ConvertUTF.cpp.o
+[26/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/APInt.cpp.o
+[27/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/AllocToken.cpp.o
+[28/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Compression.cpp.o
+[29/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Chrono.cpp.o
+[30/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/AMDGPUMetadata.cpp.o
+[31/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Caching.cpp.o
+[32/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/APSInt.cpp.o
+[33/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/ARMAttributeParser.cpp.o
+[34/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/ExtensibleRTTI.cpp.o
+[35/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/BlockFrequency.cpp.o
+[36/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/ConvertEBCDIC.cpp.o
+[37/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/BalancedPartitioning.cpp.o
+[38/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/CRC.cpp.o
+[39/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/APFixedPoint.cpp.o
+[40/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/CrashRecoveryContext.cpp.o
+[41/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/CodeGenCoverage.cpp.o
+[42/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/CommandLine.cpp.o
+[43/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/DeltaTree.cpp.o
+[44/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/ConvertUTFWrapper.cpp.o
+[45/2077] Linking CXX static library lib/libLLVMDemangle.a
+[46/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/CSKYAttributes.cpp.o
+[47/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/DeltaAlgorithm.cpp.o
+[48/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/DataExtractor.cpp.o
+[49/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/CSKYAttributeParser.cpp.o
+[50/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/DivisionByConstantInfo.cpp.o
+[51/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/ELFAttributes.cpp.o
+[52/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/DAGDeltaAlgorithm.cpp.o
+[53/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Debug.cpp.o
+[54/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/DebugCounter.cpp.o
+[55/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/DXILABI.cpp.o
+[56/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Error.cpp.o
+[57/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/DJB.cpp.o
+[58/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/DynamicAPInt.cpp.o
+[59/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/FormattedStream.cpp.o
+[60/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/GlobPattern.cpp.o
+[61/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/FoldingSet.cpp.o
+[62/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/ErrorHandling.cpp.o
+[63/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/FileCollector.cpp.o
+[64/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/FileOutputBuffer.cpp.o
+[65/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/FloatingPointMode.cpp.o
+[66/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/FormatVariadic.cpp.o
+[67/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/MemAlloc.cpp.o
+[68/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/GraphWriter.cpp.o
+[69/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Hash.cpp.o
+[70/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/HexagonAttributeParser.cpp.o
+[71/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/ExponentialBackoff.cpp.o
+[72/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/InstructionCost.cpp.o
+[73/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/ELFAttrParserCompact.cpp.o
+[74/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/InitLLVM.cpp.o
+[75/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/IntEqClasses.cpp.o
+[76/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/FileUtilities.cpp.o
+[77/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/HexagonAttributes.cpp.o
+[78/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/ELFAttrParserExtended.cpp.o
+[79/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/IntervalMap.cpp.o
+[80/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Jobserver.cpp.o
+[81/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/LEB128.cpp.o
+[82/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/MathExtras.cpp.o
+[83/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/KnownBits.cpp.o
+[84/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Locale.cpp.o
+[85/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/LineIterator.cpp.o
+[86/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/JSON.cpp.o
+[87/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/KnownFPClass.cpp.o
+[88/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Optional.cpp.o
+[89/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/ModRef.cpp.o
+[90/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/ManagedStatic.cpp.o
+[91/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/MemoryBuffer.cpp.o
+[92/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/OptimizedStructLayout.cpp.o
+[93/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/MD5.cpp.o
+[94/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/MSP430Attributes.cpp.o
+[95/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/MemoryBufferRef.cpp.o
+[96/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Regex.cpp.o
+[97/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/OptionStrCmp.cpp.o
+[98/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/RewriteBuffer.cpp.o
+[99/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/RewriteRope.cpp.o
+[100/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/RISCVAttributes.cpp.o
+[101/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/MSP430AttributeParser.cpp.o
+[102/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/PluginLoader.cpp.o
+[103/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/LockFileManager.cpp.o
+[104/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/RISCVISAUtils.cpp.o
+[105/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/PGOOptions.cpp.o
+[106/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/NativeFormatting.cpp.o
+[107/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/PrettyStackTrace.cpp.o
+[108/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/RISCVAttributeParser.cpp.o
+[109/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/IntegerInclusiveInterval.cpp.o
+[110/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/ScaledNumber.cpp.o
+[111/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/SHA256.cpp.o
+[112/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Parallel.cpp.o
+[113/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/SHA1.cpp.o
+[114/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Mustache.cpp.o
+[115/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Signposts.cpp.o
+[116/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/RandomNumberGenerator.cpp.o
+[117/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/SmallPtrSet.cpp.o
+[118/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/SlowDynamicAPInt.cpp.o
+[119/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/SmallVector.cpp.o
+[120/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/SipHash.cpp.o
+[121/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/StringSaver.cpp.o
+[122/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/SystemUtils.cpp.o
+[123/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/SourceMgr.cpp.o
+[124/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/ScopedPrinter.cpp.o
+[125/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/StringExtras.cpp.o
+[126/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/SpecialCaseList.cpp.o
+[127/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/SuffixTreeNode.cpp.o
+[128/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/StringRef.cpp.o
+[129/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/UnicodeNameToCodepointGenerated.cpp.o
+[130/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/StringMap.cpp.o
+[131/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Statistic.cpp.o
+[132/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/TarWriter.cpp.o
+[133/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/SuffixTree.cpp.o
+[134/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/TextEncoding.cpp.o
+[135/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/UnicodeCaseFold.cpp.o
+[136/2077] Building C object lib/Support/CMakeFiles/LLVMSupport.dir/regerror.c.o
+[137/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Unicode.cpp.o
+[138/2077] Building C object lib/Support/CMakeFiles/LLVMSupport.dir/regstrlcpy.c.o
+[139/2077] Building C object lib/Support/CMakeFiles/LLVMSupport.dir/regcomp.c.o
+[140/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Twine.cpp.o
+[141/2077] Building C object lib/Support/CMakeFiles/LLVMSupport.dir/regexec.c.o
+[142/2077] Building C object lib/Support/CMakeFiles/LLVMSupport.dir/regfree.c.o
+[143/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Atomic.cpp.o
+[144/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/VersionTuple.cpp.o
+[145/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Timer.cpp.o
+[146/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/ToolOutputFile.cpp.o
+[147/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/TrieRawHashMap.cpp.o
+[148/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/zOSLibFunctions.cpp.o
+[149/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/VirtualOutputError.cpp.o
+[150/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Watchdog.cpp.o
+[151/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/UnicodeNameToCodepoint.cpp.o
+[152/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/ThreadPool.cpp.o
+[153/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/VirtualOutputConfig.cpp.o
+[154/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/TimeProfiler.cpp.o
+[155/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Valgrind.cpp.o
+[156/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/YAMLParser.cpp.o
+[157/2077] Building ASM object lib/Support/BLAKE3/CMakeFiles/LLVMSupportBlake3.dir/blake3_sse2_x86-64_unix.S.o
+[158/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/raw_ostream_proxy.cpp.o
+[159/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/WithColor.cpp.o
+[160/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/raw_os_ostream.cpp.o
+[161/2077] Building ASM object lib/Support/BLAKE3/CMakeFiles/LLVMSupportBlake3.dir/blake3_sse41_x86-64_unix.S.o
+[162/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/VirtualOutputBackends.cpp.o
+[163/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Errno.cpp.o
+[164/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/VirtualOutputBackend.cpp.o
+[165/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/VirtualFileSystem.cpp.o
+[166/2077] Building ASM object lib/Support/BLAKE3/CMakeFiles/LLVMSupportBlake3.dir/blake3_avx2_x86-64_unix.S.o
+[167/2077] Building ASM object lib/Support/BLAKE3/CMakeFiles/LLVMSupportBlake3.dir/blake3_avx512_x86-64_unix.S.o
+[168/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/YAMLTraits.cpp.o
+[169/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/raw_ostream.cpp.o
+[170/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/raw_socket_stream.cpp.o
+[171/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/ProgramStack.cpp.o
+[172/2077] Building CXX object utils/TableGen/CMakeFiles/llvm-min-tblgen.dir/llvm-min-tblgen.cpp.o
+[173/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/VirtualOutputFile.cpp.o
+[174/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/xxhash.cpp.o
+[175/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/DynamicLibrary.cpp.o
+[176/2077] Building C object lib/Support/BLAKE3/CMakeFiles/LLVMSupportBlake3.dir/blake3_dispatch.c.o
+[177/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Memory.cpp.o
+[178/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Z3Solver.cpp.o
+[179/2077] Building C object lib/Support/BLAKE3/CMakeFiles/LLVMSupportBlake3.dir/blake3_neon.c.o
+[180/2077] Building C object lib/Support/BLAKE3/CMakeFiles/LLVMSupportBlake3.dir/blake3_portable.c.o
+[181/2077] Building C object lib/Support/BLAKE3/CMakeFiles/LLVMSupportBlake3.dir/blake3.c.o
+[182/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Path.cpp.o
+[183/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Program.cpp.o
+[184/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/RWMutex.cpp.o
+[185/2077] Building CXX object lib/TableGen/CMakeFiles/LLVMTableGen.dir/StringMatcher.cpp.o
+[186/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Threading.cpp.o
+[187/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Process.cpp.o
+[188/2077] Building CXX object lib/TableGen/CMakeFiles/LLVMTableGen.dir/DetailedRecordsBackend.cpp.o
+[189/2077] Building CXX object lib/TableGen/CMakeFiles/LLVMTableGen.dir/StringToOffsetTable.cpp.o
+[190/2077] Generating VCSRevision.h
+[191/2077] Building CXX object lib/TableGen/CMakeFiles/LLVMTableGen.dir/TableGenBackendSkeleton.cpp.o
+[192/2077] Building CXX object lib/TableGen/CMakeFiles/LLVMTableGen.dir/TableGenBackend.cpp.o
+[193/2077] Building CXX object lib/TableGen/CMakeFiles/LLVMTableGen.dir/SetTheory.cpp.o
+[194/2077] Building CXX object lib/TableGen/CMakeFiles/LLVMTableGen.dir/TGTimer.cpp.o
+[195/2077] Building CXX object lib/TableGen/CMakeFiles/LLVMTableGen.dir/TGParser.cpp.o
+[196/2077] Building CXX object lib/TableGen/CMakeFiles/LLVMTableGen.dir/Error.cpp.o
+[197/2077] Building CXX object lib/Support/CMakeFiles/LLVMSupport.dir/Signals.cpp.o
+[198/2077] Building CXX object lib/TableGen/CMakeFiles/LLVMTableGen.dir/TGLexer.cpp.o
+[199/2077] Building CXX object lib/TableGen/CMakeFiles/LLVMTableGen.dir/JSONBackend.cpp.o
+[200/2077] Building CXX object lib/TableGen/CMakeFiles/LLVMTableGen.dir/Main.cpp.o
+[201/2077] Building CXX object lib/TableGen/CMakeFiles/LLVMTableGen.dir/Record.cpp.o
+[202/2077] Building CXX object utils/TableGen/Basic/CMakeFiles/obj.LLVMTableGenBasic.dir/ARMTargetDefEmitter.cpp.o
+[203/2077] Building CXX object utils/TableGen/Basic/CMakeFiles/obj.LLVMTableGenBasic.dir/Attributes.cpp.o
+[204/2077] Building CXX object lib/TableGen/CMakeFiles/LLVMTableGen.dir/Parser.cpp.o
+[205/2077] Building CXX object utils/TableGen/Basic/CMakeFiles/obj.LLVMTableGenBasic.dir/DirectiveEmitter.cpp.o
+[206/2077] Building CXX object utils/TableGen/Basic/CMakeFiles/obj.LLVMTableGenBasic.dir/CodeGenIntrinsics.cpp.o
+[207/2077] Building CXX object utils/TableGen/Basic/CMakeFiles/obj.LLVMTableGenBasic.dir/IntrinsicEmitter.cpp.o
+[208/2077] Building CXX object utils/TableGen/Basic/CMakeFiles/obj.LLVMTableGenBasic.dir/RuntimeLibcallsEmitter.cpp.o
+[209/2077] Building CXX object utils/TableGen/Basic/CMakeFiles/obj.LLVMTableGenBasic.dir/SDNodeProperties.cpp.o
+[210/2077] Building CXX object utils/TableGen/Basic/CMakeFiles/obj.LLVMTableGenBasic.dir/RISCVTargetDefEmitter.cpp.o
+[211/2077] Building CXX object utils/TableGen/Basic/CMakeFiles/obj.LLVMTableGenBasic.dir/RuntimeLibcalls.cpp.o
+[212/2077] Building CXX object utils/TableGen/Basic/CMakeFiles/obj.LLVMTableGenBasic.dir/TableGen.cpp.o
+[213/2077] Building CXX object utils/TableGen/Basic/CMakeFiles/obj.LLVMTableGenBasic.dir/TargetLibraryInfoEmitter.cpp.o
+[214/2077] Building CXX object utils/TableGen/Basic/CMakeFiles/obj.LLVMTableGenBasic.dir/TargetFeaturesEmitter.cpp.o
+[215/2077] Building CXX object utils/TableGen/Basic/CMakeFiles/obj.LLVMTableGenBasic.dir/VTEmitter.cpp.o
+[216/2077] Linking CXX static library lib/libLLVMSupport.a
+[217/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/Line.cpp.o
+[218/2077] Linking CXX static library lib/libLLVMTableGen.a
+[219/2077] Linking CXX executable bin/llvm-min-tblgen
+[220/2077] Building TargetLibraryInfo.inc...
+[221/2077] Building CXX object lib/Frontend/Directive/CMakeFiles/LLVMFrontendDirective.dir/Spelling.cpp.o
+[222/2077] Building GenVT.inc...
+[223/2077] Building Attributes.inc...
+[224/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/CodeViewError.cpp.o
+[225/2077] Building CXX object lib/DebugInfo/MSF/CMakeFiles/LLVMDebugInfoMSF.dir/MSFError.cpp.o
+[226/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/Formatters.cpp.o
+[227/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/DebugSubsection.cpp.o
+[228/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/DebugSymbolRVASubsection.cpp.o
+[229/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/DebugSubsectionRecord.cpp.o
+[230/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/DebugSymbolsSubsection.cpp.o
+[231/2077] Building IntrinsicEnums.inc...
+FAILED: include/llvm/IR/IntrinsicEnums.inc /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicEnums.inc 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-min-tblgen -gen-intrinsic-enums -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td --write-if-changed -o IntrinsicEnums.inc -d IntrinsicEnums.inc.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicEnums.inc.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/d5b38b60b474f337aa2ca25172094f6309ff3de8b86c0f801d42c6c821e4d363.d
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td:3075:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include/llvm/IR/IntrinsicsAIE2.td:61:49: error: Variable not defined: 'llvm_v64bf16_ty'
+      : DefaultAttrsIntrinsic<[llvm_v8i64_ty], [llvm_v64bf16_ty, llvm_v32bf16_ty, llvm_i128_ty, llvm_i32_ty],
+                                                ^
+[232/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/DebugCrossExSubsection.cpp.o
+[233/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/DebugFrameDataSubsection.cpp.o
+[234/2077] Building IntrinsicsAArch64.h...
+FAILED: include/llvm/IR/IntrinsicsAArch64.h /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsAArch64.h 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-min-tblgen -gen-intrinsic-enums -intrinsic-prefix=aarch64 -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td --write-if-changed -o IntrinsicsAArch64.h -d IntrinsicsAArch64.h.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsAArch64.h.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/63f81098fa853bb3f7c0fb33c27604e8e8a149c840f75544b0378117f046f283.d
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td:3075:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include/llvm/IR/IntrinsicsAIE2.td:61:49: error: Variable not defined: 'llvm_v64bf16_ty'
+      : DefaultAttrsIntrinsic<[llvm_v8i64_ty], [llvm_v64bf16_ty, llvm_v32bf16_ty, llvm_i128_ty, llvm_i32_ty],
+                                                ^
+[235/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/AppendingTypeTableBuilder.cpp.o
+[236/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/DebugInlineeLinesSubsection.cpp.o
+[237/2077] Building CXX object lib/DebugInfo/MSF/CMakeFiles/LLVMDebugInfoMSF.dir/MSFCommon.cpp.o
+[238/2077] Building IntrinsicsAMDGPU.h...
+FAILED: include/llvm/IR/IntrinsicsAMDGPU.h /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsAMDGPU.h 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-min-tblgen -gen-intrinsic-enums -intrinsic-prefix=amdgcn -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td --write-if-changed -o IntrinsicsAMDGPU.h -d IntrinsicsAMDGPU.h.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsAMDGPU.h.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/036297d2ca05afec43dba49003211fe53af8d5117a57b2a4eb19e2c6cddfd91f.d
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td:3075:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include/llvm/IR/IntrinsicsAIE2.td:61:49: error: Variable not defined: 'llvm_v64bf16_ty'
+      : DefaultAttrsIntrinsic<[llvm_v8i64_ty], [llvm_v64bf16_ty, llvm_v32bf16_ty, llvm_i128_ty, llvm_i32_ty],
+                                                ^
+[239/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/DebugStringTableSubsection.cpp.o
+[240/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/DebugLinesSubsection.cpp.o
+[241/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/DebugCrossImpSubsection.cpp.o
+[242/2077] Building IntrinsicsBPF.h...
+FAILED: include/llvm/IR/IntrinsicsBPF.h /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsBPF.h 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-min-tblgen -gen-intrinsic-enums -intrinsic-prefix=bpf -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td --write-if-changed -o IntrinsicsBPF.h -d IntrinsicsBPF.h.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsBPF.h.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/b9438af3b45c88be42d985c51c9bedb99b02568241581c372a224c9ff182e81e.d
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td:3075:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include/llvm/IR/IntrinsicsAIE2.td:61:49: error: Variable not defined: 'llvm_v64bf16_ty'
+      : DefaultAttrsIntrinsic<[llvm_v8i64_ty], [llvm_v64bf16_ty, llvm_v32bf16_ty, llvm_i128_ty, llvm_i32_ty],
+                                                ^
+[243/2077] Building IntrinsicImpl.inc...
+FAILED: include/llvm/IR/IntrinsicImpl.inc /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicImpl.inc 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-min-tblgen -gen-intrinsic-impl -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td --write-if-changed -o IntrinsicImpl.inc -d IntrinsicImpl.inc.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicImpl.inc.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/db214411b6e0a46541215c7c314859b2eb534a6a950783b9e44db5dc50bacc05.d
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td:3075:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include/llvm/IR/IntrinsicsAIE2.td:61:49: error: Variable not defined: 'llvm_v64bf16_ty'
+      : DefaultAttrsIntrinsic<[llvm_v8i64_ty], [llvm_v64bf16_ty, llvm_v32bf16_ty, llvm_i128_ty, llvm_i32_ty],
+                                                ^
+[244/2077] Building IntrinsicsDirectX.h...
+FAILED: include/llvm/IR/IntrinsicsDirectX.h /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsDirectX.h 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-min-tblgen -gen-intrinsic-enums -intrinsic-prefix=dx -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td --write-if-changed -o IntrinsicsDirectX.h -d IntrinsicsDirectX.h.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsDirectX.h.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/c1a2ff73e1a8f3c1c856974e6b3caad80e694927a13c1b5aba62da3a1b754e23.d
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td:3075:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include/llvm/IR/IntrinsicsAIE2.td:61:49: error: Variable not defined: 'llvm_v64bf16_ty'
+      : DefaultAttrsIntrinsic<[llvm_v8i64_ty], [llvm_v64bf16_ty, llvm_v32bf16_ty, llvm_i128_ty, llvm_i32_ty],
+                                                ^
+[245/2077] Building OMP.h.inc...
+[246/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/CodeViewRecordIO.cpp.o
+[247/2077] Building OMP.inc...
+[248/2077] Building RuntimeLibcalls.inc...
+[249/2077] Building IntrinsicsARM.h...
+FAILED: include/llvm/IR/IntrinsicsARM.h /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsARM.h 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-min-tblgen -gen-intrinsic-enums -intrinsic-prefix=arm -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td --write-if-changed -o IntrinsicsARM.h -d IntrinsicsARM.h.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsARM.h.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/80dba12817a108e283f2f9587ac448da20f4b080c0f1291b4fdd1b24cc93775f.d
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td:3075:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include/llvm/IR/IntrinsicsAIE2.td:61:49: error: Variable not defined: 'llvm_v64bf16_ty'
+      : DefaultAttrsIntrinsic<[llvm_v8i64_ty], [llvm_v64bf16_ty, llvm_v32bf16_ty, llvm_i128_ty, llvm_i32_ty],
+                                                ^
+[250/2077] Building IntrinsicsLoongArch.h...
+FAILED: include/llvm/IR/IntrinsicsLoongArch.h /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsLoongArch.h 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-min-tblgen -gen-intrinsic-enums -intrinsic-prefix=loongarch -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td --write-if-changed -o IntrinsicsLoongArch.h -d IntrinsicsLoongArch.h.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsLoongArch.h.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/fd1485fa190e04fb8c54d725d48c4f1a18b4290e4feccc0f2bd29fffe0c37b4c.d
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td:3075:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include/llvm/IR/IntrinsicsAIE2.td:61:49: error: Variable not defined: 'llvm_v64bf16_ty'
+      : DefaultAttrsIntrinsic<[llvm_v8i64_ty], [llvm_v64bf16_ty, llvm_v32bf16_ty, llvm_i128_ty, llvm_i32_ty],
+                                                ^
+[251/2077] Building IntrinsicsMips.h...
+FAILED: include/llvm/IR/IntrinsicsMips.h /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsMips.h 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-min-tblgen -gen-intrinsic-enums -intrinsic-prefix=mips -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td --write-if-changed -o IntrinsicsMips.h -d IntrinsicsMips.h.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsMips.h.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/fbe3b27d068a59c04806327f7f0188ef8bf889c77f85a5bb177cf212704bc803.d
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td:3075:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include/llvm/IR/IntrinsicsAIE2.td:61:49: error: Variable not defined: 'llvm_v64bf16_ty'
+      : DefaultAttrsIntrinsic<[llvm_v8i64_ty], [llvm_v64bf16_ty, llvm_v32bf16_ty, llvm_i128_ty, llvm_i32_ty],
+                                                ^
+[252/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/DebugChecksumsSubsection.cpp.o
+[253/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/DebugSubsectionVisitor.cpp.o
+[254/2077] Building IntrinsicsHexagon.h...
+FAILED: include/llvm/IR/IntrinsicsHexagon.h /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsHexagon.h 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-min-tblgen -gen-intrinsic-enums -intrinsic-prefix=hexagon -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td --write-if-changed -o IntrinsicsHexagon.h -d IntrinsicsHexagon.h.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsHexagon.h.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/a5fc490ba4f5fc2bee91e80f8c8ba64028359d7db05e93655108349f067cd629.d
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td:3075:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include/llvm/IR/IntrinsicsAIE2.td:61:49: error: Variable not defined: 'llvm_v64bf16_ty'
+      : DefaultAttrsIntrinsic<[llvm_v8i64_ty], [llvm_v64bf16_ty, llvm_v32bf16_ty, llvm_i128_ty, llvm_i32_ty],
+                                                ^
+[255/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/RecordSerialization.cpp.o
+[256/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/ContinuationRecordBuilder.cpp.o
+[257/2077] Building IntrinsicsPowerPC.h...
+FAILED: include/llvm/IR/IntrinsicsPowerPC.h /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsPowerPC.h 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-min-tblgen -gen-intrinsic-enums -intrinsic-prefix=ppc -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td --write-if-changed -o IntrinsicsPowerPC.h -d IntrinsicsPowerPC.h.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsPowerPC.h.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/428f0f957e2c2446912e9509663e0866cf474bf2d64c8c203c3d0bd7d81108dd.d
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td:3075:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include/llvm/IR/IntrinsicsAIE2.td:61:49: error: Variable not defined: 'llvm_v64bf16_ty'
+      : DefaultAttrsIntrinsic<[llvm_v8i64_ty], [llvm_v64bf16_ty, llvm_v32bf16_ty, llvm_i128_ty, llvm_i32_ty],
+                                                ^
+[258/2077] Building CXX object lib/CodeGenTypes/CMakeFiles/LLVMCodeGenTypes.dir/LowLevelType.cpp.o
+[259/2077] Linking CXX static library lib/libLLVMFrontendDirective.a
+[260/2077] Building IntrinsicsNVPTX.h...
+FAILED: include/llvm/IR/IntrinsicsNVPTX.h /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsNVPTX.h 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-min-tblgen -gen-intrinsic-enums -intrinsic-prefix=nvvm -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td --write-if-changed -o IntrinsicsNVPTX.h -d IntrinsicsNVPTX.h.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsNVPTX.h.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/2e406d970ef8dbd46702a5a53a971cf61ed24feddbcf83b0a42da5511a1f6f7e.d
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td:3075:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include/llvm/IR/IntrinsicsAIE2.td:61:49: error: Variable not defined: 'llvm_v64bf16_ty'
+      : DefaultAttrsIntrinsic<[llvm_v8i64_ty], [llvm_v64bf16_ty, llvm_v32bf16_ty, llvm_i128_ty, llvm_i32_ty],
+                                                ^
+[261/2077] Building IntrinsicsR600.h...
+FAILED: include/llvm/IR/IntrinsicsR600.h /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsR600.h 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-min-tblgen -gen-intrinsic-enums -intrinsic-prefix=r600 -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td --write-if-changed -o IntrinsicsR600.h -d IntrinsicsR600.h.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsR600.h.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/d8f242a7e21065d1b1035718a1348b867e5578c81ed60e59acfa070b047a24aa.d
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td:3075:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include/llvm/IR/IntrinsicsAIE2.td:61:49: error: Variable not defined: 'llvm_v64bf16_ty'
+      : DefaultAttrsIntrinsic<[llvm_v8i64_ty], [llvm_v64bf16_ty, llvm_v32bf16_ty, llvm_i128_ty, llvm_i32_ty],
+                                                ^
+[262/2077] Building IntrinsicsS390.h...
+FAILED: include/llvm/IR/IntrinsicsS390.h /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsS390.h 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-min-tblgen -gen-intrinsic-enums -intrinsic-prefix=s390 -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td --write-if-changed -o IntrinsicsS390.h -d IntrinsicsS390.h.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsS390.h.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/a46dc1628a7b4001142191cd42a9f7b6c364fea31c5df07c93d72b3d843521be.d
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td:3075:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include/llvm/IR/IntrinsicsAIE2.td:61:49: error: Variable not defined: 'llvm_v64bf16_ty'
+      : DefaultAttrsIntrinsic<[llvm_v8i64_ty], [llvm_v64bf16_ty, llvm_v32bf16_ty, llvm_i128_ty, llvm_i32_ty],
+                                                ^
+[263/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/SimpleTypeSerializer.cpp.o
+[264/2077] Building IntrinsicsRISCV.h...
+FAILED: include/llvm/IR/IntrinsicsRISCV.h /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsRISCV.h 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-min-tblgen -gen-intrinsic-enums -intrinsic-prefix=riscv -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td --write-if-changed -o IntrinsicsRISCV.h -d IntrinsicsRISCV.h.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsRISCV.h.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/076db30c531a16a7fbd807ea7129616bb881ef64af7c0f242c7a4eed329fc86d.d
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td:3075:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include/llvm/IR/IntrinsicsAIE2.td:61:49: error: Variable not defined: 'llvm_v64bf16_ty'
+      : DefaultAttrsIntrinsic<[llvm_v8i64_ty], [llvm_v64bf16_ty, llvm_v32bf16_ty, llvm_i128_ty, llvm_i32_ty],
+                                                ^
+[265/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/GlobalTypeTableBuilder.cpp.o
+[266/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/StringsAndChecksums.cpp.o
+[267/2077] Building IntrinsicsVE.h...
+FAILED: include/llvm/IR/IntrinsicsVE.h /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsVE.h 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-min-tblgen -gen-intrinsic-enums -intrinsic-prefix=ve -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td --write-if-changed -o IntrinsicsVE.h -d IntrinsicsVE.h.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsVE.h.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/e5fe9abeecf919ec0360ff8e164e81857c5e622581e87d1af8dcdfde5ff414a1.d
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td:3075:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include/llvm/IR/IntrinsicsAIE2.td:61:49: error: Variable not defined: 'llvm_v64bf16_ty'
+      : DefaultAttrsIntrinsic<[llvm_v8i64_ty], [llvm_v64bf16_ty, llvm_v32bf16_ty, llvm_i128_ty, llvm_i32_ty],
+                                                ^
+[268/2077] Linking CXX static library lib/libLLVMCodeGenTypes.a
+[269/2077] Building IntrinsicsSPIRV.h...
+FAILED: include/llvm/IR/IntrinsicsSPIRV.h /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsSPIRV.h 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-min-tblgen -gen-intrinsic-enums -intrinsic-prefix=spv -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td --write-if-changed -o IntrinsicsSPIRV.h -d IntrinsicsSPIRV.h.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsSPIRV.h.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/674d890776eb3a350e08575f9194c5439cbdda121bd32bb478b2a3d83dfc475e.d
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td:3075:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include/llvm/IR/IntrinsicsAIE2.td:61:49: error: Variable not defined: 'llvm_v64bf16_ty'
+      : DefaultAttrsIntrinsic<[llvm_v8i64_ty], [llvm_v64bf16_ty, llvm_v32bf16_ty, llvm_i128_ty, llvm_i32_ty],
+                                                ^
+[270/2077] Building IntrinsicsWebAssembly.h...
+FAILED: include/llvm/IR/IntrinsicsWebAssembly.h /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsWebAssembly.h 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-min-tblgen -gen-intrinsic-enums -intrinsic-prefix=wasm -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td --write-if-changed -o IntrinsicsWebAssembly.h -d IntrinsicsWebAssembly.h.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsWebAssembly.h.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/e3577c696950753e3538f3c96f04d2cae3ca414ed7683c33c44e618d4353ba80.d
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td:3075:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include/llvm/IR/IntrinsicsAIE2.td:61:49: error: Variable not defined: 'llvm_v64bf16_ty'
+      : DefaultAttrsIntrinsic<[llvm_v8i64_ty], [llvm_v64bf16_ty, llvm_v32bf16_ty, llvm_i128_ty, llvm_i32_ty],
+                                                ^
+[271/2077] Building IntrinsicsX86.h...
+FAILED: include/llvm/IR/IntrinsicsX86.h /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsX86.h 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-min-tblgen -gen-intrinsic-enums -intrinsic-prefix=x86 -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td --write-if-changed -o IntrinsicsX86.h -d IntrinsicsX86.h.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsX86.h.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/4d85e5e4bea4b1ffb80656094b37e70288cafa6aa7dacd61247e56cc840f0082.d
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td:3075:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include/llvm/IR/IntrinsicsAIE2.td:61:49: error: Variable not defined: 'llvm_v64bf16_ty'
+      : DefaultAttrsIntrinsic<[llvm_v8i64_ty], [llvm_v64bf16_ty, llvm_v32bf16_ty, llvm_i128_ty, llvm_i32_ty],
+                                                ^
+[272/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/MergingTypeTableBuilder.cpp.o
+[273/2077] Building ARMTargetParserDef.inc...
+FAILED: include/llvm/TargetParser/ARMTargetParserDef.inc /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/TargetParser/ARMTargetParserDef.inc 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/TargetParser && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-min-tblgen -gen-arm-target-def -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/TargetParser -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target/ARM -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include /home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target/ARM/ARM.td --write-if-changed -o ARMTargetParserDef.inc -d ARMTargetParserDef.inc.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/TargetParser /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/TargetParser /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/TargetParser/ARMTargetParserDef.inc.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/7cd06f6909d5fc386ff1966ac7b2bf0de4e39a9523f70f002798c8a00202bddc.d
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target/ARM/ARM.td:16:
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Target/Target.td:15:
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td:3075:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include/llvm/IR/IntrinsicsAIE2.td:61:49: error: Variable not defined: 'llvm_v64bf16_ty'
+      : DefaultAttrsIntrinsic<[llvm_v8i64_ty], [llvm_v64bf16_ty, llvm_v32bf16_ty, llvm_i128_ty, llvm_i32_ty],
+                                                ^
+[274/2077] Building AArch64TargetParserDef.inc...
+FAILED: include/llvm/TargetParser/AArch64TargetParserDef.inc /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/TargetParser/AArch64TargetParserDef.inc 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/TargetParser && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-min-tblgen -gen-arm-target-def -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/TargetParser -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target/AArch64 -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include /home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target/AArch64/AArch64.td --write-if-changed -o AArch64TargetParserDef.inc -d AArch64TargetParserDef.inc.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/TargetParser /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/TargetParser /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/TargetParser/AArch64TargetParserDef.inc.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/719a6029d116f1d6024e754ddd5b2480b3aa84af0b517176d14ea8e9384f6de3.d
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target/AArch64/AArch64.td:16:
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Target/Target.td:15:
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td:3075:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include/llvm/IR/IntrinsicsAIE2.td:61:49: error: Variable not defined: 'llvm_v64bf16_ty'
+      : DefaultAttrsIntrinsic<[llvm_v8i64_ty], [llvm_v64bf16_ty, llvm_v32bf16_ty, llvm_i128_ty, llvm_i32_ty],
+                                                ^
+[275/2077] Building RISCVTargetParserDef.inc...
+FAILED: include/llvm/TargetParser/RISCVTargetParserDef.inc /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/TargetParser/RISCVTargetParserDef.inc 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/TargetParser && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-min-tblgen -gen-riscv-target-def -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/TargetParser -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target/RISCV -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include /home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target/RISCV/RISCV.td --write-if-changed -o RISCVTargetParserDef.inc -d RISCVTargetParserDef.inc.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/TargetParser /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/TargetParser /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/TargetParser/RISCVTargetParserDef.inc.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/4b01719e7f18693660fef94cc20bd671fa4627bf392bff083c36441c1929422f.d
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target/RISCV/RISCV.td:9:
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Target/Target.td:15:
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td:3075:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include/llvm/IR/IntrinsicsAIE2.td:61:49: error: Variable not defined: 'llvm_v64bf16_ty'
+      : DefaultAttrsIntrinsic<[llvm_v8i64_ty], [llvm_v64bf16_ty, llvm_v32bf16_ty, llvm_i128_ty, llvm_i32_ty],
+                                                ^
+[276/2077] Building PPCGenTargetFeatures.inc...
+FAILED: include/llvm/TargetParser/PPCGenTargetFeatures.inc /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/TargetParser/PPCGenTargetFeatures.inc 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/TargetParser && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-min-tblgen -gen-target-features -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target/PowerPC -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/TargetParser -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include /home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target/PowerPC/PPC.td --write-if-changed -o PPCGenTargetFeatures.inc -d PPCGenTargetFeatures.inc.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/TargetParser /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/TargetParser /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/TargetParser/PPCGenTargetFeatures.inc.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/08fe5b6ebf3df1227018fda26cd86445456d5793162241b82759b8c55669cabd.d
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target/PowerPC/PPC.td:15:
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/Target/Target.td:15:
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td:3075:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include/llvm/IR/IntrinsicsAIE2.td:61:49: error: Variable not defined: 'llvm_v64bf16_ty'
+      : DefaultAttrsIntrinsic<[llvm_v8i64_ty], [llvm_v64bf16_ty, llvm_v32bf16_ty, llvm_i128_ty, llvm_i32_ty],
+                                                ^
+[277/2077] Building IntrinsicsXCore.h...
+FAILED: include/llvm/IR/IntrinsicsXCore.h /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsXCore.h 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-min-tblgen -gen-intrinsic-enums -intrinsic-prefix=xcore -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td --write-if-changed -o IntrinsicsXCore.h -d IntrinsicsXCore.h.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR /home/jtuyls/iree-ai/llvm-aie-port/build/include/llvm/IR/IntrinsicsXCore.h.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/38e1d7978c13c71b3c6056656ed27255a8c997e6e6ed2b7298c5250bab0bdb8e.d
+Included from /home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/IR/Intrinsics.td:3075:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include/llvm/IR/IntrinsicsAIE2.td:61:49: error: Variable not defined: 'llvm_v64bf16_ty'
+      : DefaultAttrsIntrinsic<[llvm_v8i64_ty], [llvm_v64bf16_ty, llvm_v32bf16_ty, llvm_i128_ty, llvm_i32_ty],
+                                                ^
+[278/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/LazyRandomTypeCollection.cpp.o
+[279/2077] Building CXX object lib/DebugInfo/MSF/CMakeFiles/LLVMDebugInfoMSF.dir/MappedBlockStream.cpp.o
+[280/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/RecordName.cpp.o
+[281/2077] Building CXX object lib/DebugInfo/MSF/CMakeFiles/LLVMDebugInfoMSF.dir/MSFBuilder.cpp.o
+[282/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/CVSymbolVisitor.cpp.o
+[283/2077] Linking CXX static library lib/libLLVMDebugInfoMSF.a
+[284/2077] Building CXX object lib/Bitstream/Reader/CMakeFiles/LLVMBitstreamReader.dir/BitstreamReader.cpp.o
+[285/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/CVTypeVisitor.cpp.o
+[286/2077] Linking CXX static library lib/libLLVMBitstreamReader.a
+[287/2077] Building CXX object lib/Plugins/CMakeFiles/LLVMPlugins.dir/PassPlugin.cpp.o
+[288/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/TypeHashing.cpp.o
+[289/2077] Linking CXX static library lib/libLLVMPlugins.a
+[290/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/TypeTableCollection.cpp.o
+[291/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/SymbolSerializer.cpp.o
+[292/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/TypeIndex.cpp.o
+[293/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/TypeRecordHelpers.cpp.o
+[294/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/TypeIndexDiscovery.cpp.o
+[295/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/TypeStreamMerger.cpp.o
+[296/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/SymbolRecordMapping.cpp.o
+[297/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/SymbolRecordHelpers.cpp.o
+[298/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/TypeDumpVisitor.cpp.o
+[299/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/SymbolDumper.cpp.o
+[300/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/TypeRecordMapping.cpp.o
+[301/2077] Building CXX object lib/DebugInfo/CodeView/CMakeFiles/LLVMDebugInfoCodeView.dir/EnumTables.cpp.o
+[302/2077] Linking CXX static library lib/libLLVMDebugInfoCodeView.a
+ninja: build stopped: cannot make progress due to previous errors.

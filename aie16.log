@@ -1,0 +1,204 @@
+ninja: Entering directory `build'
+[1/192] Building AIE2GenGlobalISel.inc...
+FAILED: lib/Target/AIE/AIE2GenGlobalISel.inc /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2GenGlobalISel.inc 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen -gen-global-isel -gisel-subtarget-class AIEBaseSubtarget --warn-on-skipped-patterns -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -I /home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2.td --write-if-changed -o AIE2GenGlobalISel.inc -d AIE2GenGlobalISel.inc.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2GenGlobalISel.inc.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/fd099a882150d7f5c0ca7b51617fe9b25b590b5ce9c750df8843da1c58e7c1cc.d
+llvm-tblgen: Unknown command line argument '-gisel-subtarget-class'.  Try: '/home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help'
+llvm-tblgen: Did you mean '--base-subtargetinfo-class'?
+llvm-tblgen: Too many positional arguments specified!
+Can specify at most 1 positional arguments: See: /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help
+[2/192] Building AIE2GenPostLegalizerGICustomCombiner.inc...
+FAILED: lib/Target/AIE/AIE2GenPostLegalizerGICustomCombiner.inc /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2GenPostLegalizerGICustomCombiner.inc 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen -gen-global-isel-combiner -gisel-subtarget-class AIEBaseSubtarget -combiners="AIE2PostLegalizerCustomCombiner" -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -I /home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2.td --write-if-changed -o AIE2GenPostLegalizerGICustomCombiner.inc -d AIE2GenPostLegalizerGICustomCombiner.inc.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2GenPostLegalizerGICustomCombiner.inc.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/9ee881d3287a5c902e96b6b9fa94722d96c82f35c9972095476df9ddc2713b4b.d
+llvm-tblgen: Unknown command line argument '-gisel-subtarget-class'.  Try: '/home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help'
+llvm-tblgen: Did you mean '--base-subtargetinfo-class'?
+llvm-tblgen: Too many positional arguments specified!
+Can specify at most 1 positional arguments: See: /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help
+[3/192] Building AIE2GenPostLegalizerGIGenericCombiner.inc...
+FAILED: lib/Target/AIE/AIE2GenPostLegalizerGIGenericCombiner.inc /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2GenPostLegalizerGIGenericCombiner.inc 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen -gen-global-isel-combiner -gisel-subtarget-class AIEBaseSubtarget -combiners="AIE2PostLegalizerGenericCombiner" -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -I /home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2.td --write-if-changed -o AIE2GenPostLegalizerGIGenericCombiner.inc -d AIE2GenPostLegalizerGIGenericCombiner.inc.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2GenPostLegalizerGIGenericCombiner.inc.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/15d9e6bfa6ba13eb137263d5391fbf99e30b0012d64ae9e61e7e5512c040dd46.d
+llvm-tblgen: Unknown command line argument '-gisel-subtarget-class'.  Try: '/home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help'
+llvm-tblgen: Did you mean '--base-subtargetinfo-class'?
+llvm-tblgen: Too many positional arguments specified!
+Can specify at most 1 positional arguments: See: /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help
+[4/192] Building AIE2GenPreLegalizerGICombiner.inc...
+FAILED: lib/Target/AIE/AIE2GenPreLegalizerGICombiner.inc /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2GenPreLegalizerGICombiner.inc 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen -gen-global-isel-combiner -gisel-subtarget-class AIEBaseSubtarget -combiners="AIE2PreLegalizerCombiner" -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -I /home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2.td --write-if-changed -o AIE2GenPreLegalizerGICombiner.inc -d AIE2GenPreLegalizerGICombiner.inc.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2GenPreLegalizerGICombiner.inc.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/135cf447daae5b92b96e73eda4816235c054e8ebc7774b497b264a0ae885e1c3.d
+llvm-tblgen: Unknown command line argument '-gisel-subtarget-class'.  Try: '/home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help'
+llvm-tblgen: Did you mean '--base-subtargetinfo-class'?
+llvm-tblgen: Too many positional arguments specified!
+Can specify at most 1 positional arguments: See: /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help
+[5/192] Building AIE2PGenGlobalISel.inc...
+FAILED: lib/Target/AIE/AIE2PGenGlobalISel.inc /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PGenGlobalISel.inc 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen -gen-global-isel -gisel-subtarget-class AIEBaseSubtarget --warn-on-skipped-patterns -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -I /home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2p /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2P.td --write-if-changed -o AIE2PGenGlobalISel.inc -d AIE2PGenGlobalISel.inc.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PGenGlobalISel.inc.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/39b9cc73f037bc39ac50a89582ecf3f0b2212161bb4b17cf6950470d90c651bd.d
+llvm-tblgen: Unknown command line argument '-gisel-subtarget-class'.  Try: '/home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help'
+llvm-tblgen: Did you mean '--base-subtargetinfo-class'?
+llvm-tblgen: Too many positional arguments specified!
+Can specify at most 1 positional arguments: See: /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help
+[6/192] Building AIE2PGenPostLegalizerGICustomCombiner.inc...
+FAILED: lib/Target/AIE/AIE2PGenPostLegalizerGICustomCombiner.inc /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PGenPostLegalizerGICustomCombiner.inc 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen -gen-global-isel-combiner -gisel-subtarget-class AIEBaseSubtarget -combiners="AIE2PPostLegalizerCustomCombiner" -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -I /home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2p /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2P.td --write-if-changed -o AIE2PGenPostLegalizerGICustomCombiner.inc -d AIE2PGenPostLegalizerGICustomCombiner.inc.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PGenPostLegalizerGICustomCombiner.inc.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/9d5a4c8cec047012fb3e2701be366014b124ada5d13b9c43d5bfde5c92f71a99.d
+llvm-tblgen: Unknown command line argument '-gisel-subtarget-class'.  Try: '/home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help'
+llvm-tblgen: Did you mean '--base-subtargetinfo-class'?
+llvm-tblgen: Too many positional arguments specified!
+Can specify at most 1 positional arguments: See: /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help
+[7/192] Building AIE2PGenPostLegalizerGIGenericCombiner.inc...
+FAILED: lib/Target/AIE/AIE2PGenPostLegalizerGIGenericCombiner.inc /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PGenPostLegalizerGIGenericCombiner.inc 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen -gen-global-isel-combiner -gisel-subtarget-class AIEBaseSubtarget -combiners="AIE2PPostLegalizerGenericCombiner" -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -I /home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2p /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2P.td --write-if-changed -o AIE2PGenPostLegalizerGIGenericCombiner.inc -d AIE2PGenPostLegalizerGIGenericCombiner.inc.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PGenPostLegalizerGIGenericCombiner.inc.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/9017f5d6ecd21d6736c072d0feec7b120a0f1cf3207c90c97928eadf1f710658.d
+llvm-tblgen: Unknown command line argument '-gisel-subtarget-class'.  Try: '/home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help'
+llvm-tblgen: Did you mean '--base-subtargetinfo-class'?
+llvm-tblgen: Too many positional arguments specified!
+Can specify at most 1 positional arguments: See: /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help
+[8/192] Building AIE2PGenPreLegalizerGICombiner.inc...
+FAILED: lib/Target/AIE/AIE2PGenPreLegalizerGICombiner.inc /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PGenPreLegalizerGICombiner.inc 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen -gen-global-isel-combiner -gisel-subtarget-class AIEBaseSubtarget -combiners="AIE2PPreLegalizerCombiner" -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -I /home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2p /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2P.td --write-if-changed -o AIE2PGenPreLegalizerGICombiner.inc -d AIE2PGenPreLegalizerGICombiner.inc.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PGenPreLegalizerGICombiner.inc.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/cf7ef5f90a369086cd659b7ca8f322fd806292f1f3d5b08612e859d70a76edb3.d
+llvm-tblgen: Unknown command line argument '-gisel-subtarget-class'.  Try: '/home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help'
+llvm-tblgen: Did you mean '--base-subtargetinfo-class'?
+llvm-tblgen: Too many positional arguments specified!
+Can specify at most 1 positional arguments: See: /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help
+[9/192] Building AIE2PSGenGlobalISel.inc...
+FAILED: lib/Target/AIE/AIE2PSGenGlobalISel.inc /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenGlobalISel.inc 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen -gen-global-isel -gisel-subtarget-class AIEBaseSubtarget --warn-on-skipped-patterns -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -I /home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2PS.td --write-if-changed -o AIE2PSGenGlobalISel.inc -d AIE2PSGenGlobalISel.inc.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenGlobalISel.inc.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/e052986a5da75b82aca875cf697c3ba626755d0049ed0633bcbfb9a0f4fe0392.d
+llvm-tblgen: Unknown command line argument '-gisel-subtarget-class'.  Try: '/home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help'
+llvm-tblgen: Did you mean '--base-subtargetinfo-class'?
+llvm-tblgen: Too many positional arguments specified!
+Can specify at most 1 positional arguments: See: /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help
+[10/192] Building AIE2PSGenPostLegalizerGICustomCombiner.inc...
+FAILED: lib/Target/AIE/AIE2PSGenPostLegalizerGICustomCombiner.inc /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenPostLegalizerGICustomCombiner.inc 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen -gen-global-isel-combiner -gisel-subtarget-class AIEBaseSubtarget -combiners="AIE2PSPostLegalizerCustomCombiner" -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -I /home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2PS.td --write-if-changed -o AIE2PSGenPostLegalizerGICustomCombiner.inc -d AIE2PSGenPostLegalizerGICustomCombiner.inc.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenPostLegalizerGICustomCombiner.inc.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/7efaf9c95a2f15d3184d3bc3f27b2e8f46cdd98b7b7942e555076b00a904434f.d
+llvm-tblgen: Unknown command line argument '-gisel-subtarget-class'.  Try: '/home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help'
+llvm-tblgen: Did you mean '--base-subtargetinfo-class'?
+llvm-tblgen: Too many positional arguments specified!
+Can specify at most 1 positional arguments: See: /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help
+[11/192] Building AIE2PSGenPostLegalizerGIFinalCombiner.inc...
+FAILED: lib/Target/AIE/AIE2PSGenPostLegalizerGIFinalCombiner.inc /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenPostLegalizerGIFinalCombiner.inc 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen -gen-global-isel-combiner -gisel-subtarget-class AIEBaseSubtarget -combiners="AIE2PSPostLegalizerFinalCombiner" -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -I /home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2PS.td --write-if-changed -o AIE2PSGenPostLegalizerGIFinalCombiner.inc -d AIE2PSGenPostLegalizerGIFinalCombiner.inc.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenPostLegalizerGIFinalCombiner.inc.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/a77f651f3743f4339ed486107e6590f4eb97c0df7daeac64f9b18e7b90b33a38.d
+llvm-tblgen: Unknown command line argument '-gisel-subtarget-class'.  Try: '/home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help'
+llvm-tblgen: Did you mean '--base-subtargetinfo-class'?
+llvm-tblgen: Too many positional arguments specified!
+Can specify at most 1 positional arguments: See: /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help
+[12/192] Building AIE2PSGenPostLegalizerGIGenericCombiner.inc...
+FAILED: lib/Target/AIE/AIE2PSGenPostLegalizerGIGenericCombiner.inc /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenPostLegalizerGIGenericCombiner.inc 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen -gen-global-isel-combiner -gisel-subtarget-class AIEBaseSubtarget -combiners="AIE2PSPostLegalizerGenericCombiner" -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -I /home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2PS.td --write-if-changed -o AIE2PSGenPostLegalizerGIGenericCombiner.inc -d AIE2PSGenPostLegalizerGIGenericCombiner.inc.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenPostLegalizerGIGenericCombiner.inc.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/35bbfb59a5ce982319964c03247a82ea3b4eb9433a99d79a9363ce1ac3107676.d
+llvm-tblgen: Unknown command line argument '-gisel-subtarget-class'.  Try: '/home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help'
+llvm-tblgen: Did you mean '--base-subtargetinfo-class'?
+llvm-tblgen: Too many positional arguments specified!
+Can specify at most 1 positional arguments: See: /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help
+[13/192] Building AIE2PSGenPreLegalizerGICombiner.inc...
+FAILED: lib/Target/AIE/AIE2PSGenPreLegalizerGICombiner.inc /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenPreLegalizerGICombiner.inc 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen -gen-global-isel-combiner -gisel-subtarget-class AIEBaseSubtarget -combiners="AIE2PSPreLegalizerCombiner" -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -I /home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie2ps /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2PS.td --write-if-changed -o AIE2PSGenPreLegalizerGICombiner.inc -d AIE2PSGenPreLegalizerGICombiner.inc.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenPreLegalizerGICombiner.inc.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/659a2e971e7749adea3f327578e9541b44e680c9faed1a14b946eebb6db89929.d
+llvm-tblgen: Unknown command line argument '-gisel-subtarget-class'.  Try: '/home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help'
+llvm-tblgen: Did you mean '--base-subtargetinfo-class'?
+llvm-tblgen: Too many positional arguments specified!
+Can specify at most 1 positional arguments: See: /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help
+[14/192] Building AIEGenGlobalISel.inc...
+FAILED: lib/Target/AIE/AIEGenGlobalISel.inc /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIEGenGlobalISel.inc 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen -gen-global-isel -gisel-subtarget-class AIEBaseSubtarget -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -I /home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1.td --write-if-changed -o AIEGenGlobalISel.inc -d AIEGenGlobalISel.inc.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIEGenGlobalISel.inc.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/17137ce2a547c4e7fdf2fb334a4593c5a59f29f1b6c0d6d68a77f37dad952009.d
+llvm-tblgen: Unknown command line argument '-gisel-subtarget-class'.  Try: '/home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help'
+llvm-tblgen: Did you mean '--base-subtargetinfo-class'?
+llvm-tblgen: Too many positional arguments specified!
+Can specify at most 1 positional arguments: See: /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help
+[15/192] Building AIEGenPreISelGICombiner.inc...
+FAILED: lib/Target/AIE/AIEGenPreISelGICombiner.inc /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIEGenPreISelGICombiner.inc 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen -gen-global-isel-combiner -gisel-subtarget-class AIEBaseSubtarget -combiners="AIEPreISelCombiner" -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -I /home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2.td --write-if-changed -o AIEGenPreISelGICombiner.inc -d AIEGenPreISelGICombiner.inc.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIEGenPreISelGICombiner.inc.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/b87d2cdc27d989faac0a293ca9467feab272e5d8f34c42555831abb4e6cd9dfb.d
+llvm-tblgen: Unknown command line argument '-gisel-subtarget-class'.  Try: '/home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help'
+llvm-tblgen: Did you mean '--base-subtargetinfo-class'?
+llvm-tblgen: Too many positional arguments specified!
+Can specify at most 1 positional arguments: See: /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen --help
+[16/192] Building AIEGenMCCodeEmitter.inc...
+Included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1.td:28:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1InstrInfo.td:2047:59: warning: unused template argument: LdPat::InstIdx
+multiclass LdPat<PatFrag LoadOp, AIEInst InstInd, AIEInst InstIdx, ValueType ResType, ValueType ResTypeOut = ResType> {
+                                                          ^
+[17/192] Building AIEGenDisassemblerTables.inc...
+Included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1.td:28:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1InstrInfo.td:2047:59: warning: unused template argument: LdPat::InstIdx
+multiclass LdPat<PatFrag LoadOp, AIEInst InstInd, AIEInst InstIdx, ValueType ResType, ValueType ResTypeOut = ResType> {
+                                                          ^
+[18/192] Building AIEGenMCPseudoLowering.inc...
+Included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1.td:28:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1InstrInfo.td:2047:59: warning: unused template argument: LdPat::InstIdx
+multiclass LdPat<PatFrag LoadOp, AIEInst InstInd, AIEInst InstIdx, ValueType ResType, ValueType ResTypeOut = ResType> {
+                                                          ^
+[19/192] Building AIEGenFormats.inc...
+Included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1.td:28:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1InstrInfo.td:2047:59: warning: unused template argument: LdPat::InstIdx
+multiclass LdPat<PatFrag LoadOp, AIEInst InstInd, AIEInst InstIdx, ValueType ResType, ValueType ResTypeOut = ResType> {
+                                                          ^
+[20/192] Building AIEGenAsmWriter.inc...
+Included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1.td:28:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1InstrInfo.td:2047:59: warning: unused template argument: LdPat::InstIdx
+multiclass LdPat<PatFrag LoadOp, AIEInst InstInd, AIEInst InstIdx, ValueType ResType, ValueType ResTypeOut = ResType> {
+                                                          ^
+[21/192] Building AIEGenRegisterBank.inc...
+Included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1.td:28:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1InstrInfo.td:2047:59: warning: unused template argument: LdPat::InstIdx
+multiclass LdPat<PatFrag LoadOp, AIEInst InstInd, AIEInst InstIdx, ValueType ResType, ValueType ResTypeOut = ResType> {
+                                                          ^
+[22/192] Building AIEGenCallingConv.inc...
+Included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1.td:28:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1InstrInfo.td:2047:59: warning: unused template argument: LdPat::InstIdx
+multiclass LdPat<PatFrag LoadOp, AIEInst InstInd, AIEInst InstIdx, ValueType ResType, ValueType ResTypeOut = ResType> {
+                                                          ^
+[23/192] Building AIEGenAsmMatcher.inc...
+Included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1.td:28:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1InstrInfo.td:2047:59: warning: unused template argument: LdPat::InstIdx
+multiclass LdPat<PatFrag LoadOp, AIEInst InstInd, AIEInst InstIdx, ValueType ResType, ValueType ResTypeOut = ResType> {
+                                                          ^
+[24/192] Building AIEGenRegisterInfo.inc...
+Included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1.td:28:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1InstrInfo.td:2047:59: warning: unused template argument: LdPat::InstIdx
+multiclass LdPat<PatFrag LoadOp, AIEInst InstInd, AIEInst InstIdx, ValueType ResType, ValueType ResTypeOut = ResType> {
+                                                          ^
+[25/192] Building AIEGenInstrInfo.inc...
+FAILED: lib/Target/AIE/AIEGenInstrInfo.inc /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIEGenInstrInfo.inc 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen -gen-instr-info -base-instrinfo-class AIEBaseInstrInfo -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -I /home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1.td --write-if-changed -o AIEGenInstrInfo.inc -d AIEGenInstrInfo.inc.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIEGenInstrInfo.inc.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/4f611a11a08f4f15dbbe26e4255496a76aaff110836f98c0ee4c6a1047066bdf.d
+Included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1.td:28:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1InstrInfo.td:2047:59: warning: unused template argument: LdPat::InstIdx
+multiclass LdPat<PatFrag LoadOp, AIEInst InstInd, AIEInst InstIdx, ValueType ResType, ValueType ResTypeOut = ResType> {
+                                                          ^
+Type set is empty for each HW mode:
+possible type contradiction in the pattern below (use -print-records with llvm-tblgen to see all expanded records).
+anonymous_14351: 	(MOV_U20_I20:{ *:[i32 f32 v8i1 v16i1] } (imm:{ *:[i20] }):$imm)
+Generated from record:
+anonymous_14351 {	// Pattern Pat
+  dag PatternToMatch = (i20 (tuimm:$imm));
+  list<dag> ResultInstrs = [(MOV_U20_I20 imm:$imm)];
+  bit ModelsInaccessibleMemThroughRegs = 0;
+  list<Predicate> Predicates = [];
+  int AddedComplexity = -10;
+  bit GISelShouldIgnore = 0;
+}
+Included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1.td:28:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1InstrInfo.td:318:1: error: Type set is empty for each HW mode in 'anonymous_14351'
+def : Pat<(i20 (tuimm:$imm)), (MOV_U20_I20 imm:$imm)> { let AddedComplexity = -10; }
+^
+[26/192] Building AIEGenDAGISel.inc...
+FAILED: lib/Target/AIE/AIEGenDAGISel.inc /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIEGenDAGISel.inc 
+cd /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE && /home/jtuyls/iree-ai/llvm-aie-port/build/bin/llvm-tblgen -gen-dag-isel -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -I /home/jtuyls/iree-ai/llvm-aie-port/llvm/lib/Target -omit-comments /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1.td --write-if-changed -o AIEGenDAGISel.inc -d AIEGenDAGISel.inc.d && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/jtuyls/iree-ai/llvm-aie-port/llvm /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE /home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIEGenDAGISel.inc.d /home/jtuyls/iree-ai/llvm-aie-port/build/CMakeFiles/d/2e4c0e17cc8758b3e83cacda29e5870085405fb7ec29ba14fe70af5a8e1f58c1.d
+Included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1.td:28:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1InstrInfo.td:2047:59: warning: unused template argument: LdPat::InstIdx
+multiclass LdPat<PatFrag LoadOp, AIEInst InstInd, AIEInst InstIdx, ValueType ResType, ValueType ResTypeOut = ResType> {
+                                                          ^
+Type set is empty for each HW mode:
+possible type contradiction in the pattern below (use -print-records with llvm-tblgen to see all expanded records).
+anonymous_14351: 	(MOV_U20_I20:{ *:[i32 f32 v8i1 v16i1] } (imm:{ *:[i20] }):$imm)
+Generated from record:
+anonymous_14351 {	// Pattern Pat
+  dag PatternToMatch = (i20 (tuimm:$imm));
+  list<dag> ResultInstrs = [(MOV_U20_I20 imm:$imm)];
+  bit ModelsInaccessibleMemThroughRegs = 0;
+  list<Predicate> Predicates = [];
+  int AddedComplexity = -10;
+  bit GISelShouldIgnore = 0;
+}
+Included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1.td:28:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1InstrInfo.td:318:1: error: Type set is empty for each HW mode in 'anonymous_14351'
+def : Pat<(i20 (tuimm:$imm)), (MOV_U20_I20 imm:$imm)> { let AddedComplexity = -10; }
+^
+[27/192] Building AIEGenSubtargetInfo.inc...
+Included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1.td:28:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1InstrInfo.td:2047:59: warning: unused template argument: LdPat::InstIdx
+multiclass LdPat<PatFrag LoadOp, AIEInst InstInd, AIEInst InstIdx, ValueType ResType, ValueType ResTypeOut = ResType> {
+                                                          ^
+ninja: build stopped: cannot make progress due to previous errors.
+DONE_RC=1
