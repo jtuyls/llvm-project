@@ -113,7 +113,7 @@ void AIEBaseMCCodeEmitter::getMachineOpValue(const MCInst &MI,
     MCFixupKind FixupKind =
         MCFixupKinds->findFixupfromFixupFields(MI, FormatSize, FixupFields);
 
-    Fixups.push_back(MCFixup::create(0, Expr, FixupKind, MI.getLoc()));
+    Fixups.push_back(MCFixup::create(0, Expr, FixupKind));
     ++MCNumFixups;
 
     // These bits will be relocated lately, the intermediate immediate encoding

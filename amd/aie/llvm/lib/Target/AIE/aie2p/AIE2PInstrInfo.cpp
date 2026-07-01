@@ -49,8 +49,8 @@ namespace {
 const AIE2PMCFormats AIE2PFormats;
 } // namespace
 
-AIE2PInstrInfo::AIE2PInstrInfo()
-    : AIE2PGenInstrInfo(AIE2P::ADJCALLSTACKUP, AIE2P::ADJCALLSTACKDOWN) {
+AIE2PInstrInfo::AIE2PInstrInfo(const AIEBaseSubtarget &STI, const TargetRegisterInfo &TRI)
+    : AIE2PGenInstrInfo(STI, TRI, AIE2P::ADJCALLSTACKUP, AIE2P::ADJCALLSTACKDOWN) {
   FormatInterface = &AIE2PFormats;
   FuncUnitWrapper::setFormatInterface(FormatInterface);
 }

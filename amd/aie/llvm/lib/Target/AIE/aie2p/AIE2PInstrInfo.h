@@ -24,10 +24,11 @@
 #include "AIE2PGenInstrInfo.inc"
 
 namespace llvm {
+class AIEBaseSubtarget; // amd/aie/ port
 
 class AIE2PInstrInfo : public AIE2PGenInstrInfo {
 public:
-  AIE2PInstrInfo();
+  AIE2PInstrInfo(const AIEBaseSubtarget &STI, const TargetRegisterInfo &TRI);
 
   unsigned getReturnOpcode() const override;
   unsigned getCallOpcode(const MachineFunction &CallerF, bool IsIndirect,

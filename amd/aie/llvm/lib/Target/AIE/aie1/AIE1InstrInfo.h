@@ -25,10 +25,11 @@
 #include "AIEGenInstrInfo.inc"
 
 namespace llvm {
+class AIEBaseSubtarget; // amd/aie/ port
 
 class AIEInstrInfo : public AIEGenInstrInfo {
 public:
-  AIEInstrInfo();
+  AIEInstrInfo(const AIEBaseSubtarget &STI, const TargetRegisterInfo &TRI);
 
   /// Allocate and return a hazard recognizer to use for this target when
   /// scheduling the machine instructions after register allocation.

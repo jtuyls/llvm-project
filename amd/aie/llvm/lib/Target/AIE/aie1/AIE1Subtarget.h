@@ -38,8 +38,8 @@ class AIESubtarget final : public AIEGenSubtargetInfo {
   std::string CPUName;
   AIEBaseAddrSpaceInfo AddrSpaceInfo;
   AIEFrameLowering FrameLowering;
-  AIEInstrInfo InstrInfo;
   AIERegisterInfo RegInfo;
+  AIEInstrInfo InstrInfo;
   AIE1TargetLowering TLInfo;
   InstrItineraryData InstrItins;
   SelectionDAGTargetInfo TSInfo;

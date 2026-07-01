@@ -620,7 +620,7 @@ void AIE1TargetLowering::analyzeCallOperands(
     MVT ArgVT = Outs[i].VT;
     ISD::ArgFlagsTy ArgFlags = Outs[i].Flags;
     CCAssignFn *AssignFn = CCAssignFnForCall(UsesVarargCC);
-    if (AssignFn(i, ArgVT, ArgVT, CCValAssign::Full, ArgFlags, CCInfo)) {
+    if (AssignFn(i, ArgVT, ArgVT, CCValAssign::Full, ArgFlags, /*OrigTy=*/nullptr, CCInfo)) {
 #ifndef NDEBUG
       dbgs() << "Call operand #" << i << " has unhandled type "
              << EVT(ArgVT).getEVTString() << '\n';

@@ -26,10 +26,11 @@
 #include "AIE2GenInstrInfo.inc"
 
 namespace llvm {
+class AIEBaseSubtarget; // amd/aie/ port
 
 class AIE2InstrInfo : public AIE2GenInstrInfo {
 public:
-  AIE2InstrInfo();
+  AIE2InstrInfo(const AIEBaseSubtarget &STI, const TargetRegisterInfo &TRI);
 
   unsigned getReturnOpcode() const override;
   unsigned getCallOpcode(const MachineFunction &CallerF, bool IsIndirect,

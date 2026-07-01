@@ -1394,8 +1394,7 @@ bool AIE2PSInstructionSelector::selectVLD_FIFO_BFP640(
   MI.cloneMemRefs(I);
 
   // Constrain the load instruction operands first
-  if (!constrainSelectedInstRegOperands(*MI, TII, TRI, RBI))
-    return false;
+  constrainSelectedInstRegOperands(*MI, TII, TRI, RBI); // amd/aie/ port: void in 23
 
   // Extract BFP640 components from the combined register
   if (!extractBFP640SubReg(CombinedBFP, BFPMantissa, BFPSubtile, BFPExp, MRI))
@@ -1487,8 +1486,7 @@ bool AIE2PSInstructionSelector::selectVLD_FIFO_BFP768(
   MI.cloneMemRefs(I);
 
   // Constrain the load instruction operands first
-  if (!constrainSelectedInstRegOperands(*MI, TII, TRI, RBI))
-    return false;
+  constrainSelectedInstRegOperands(*MI, TII, TRI, RBI); // amd/aie/ port: void in 23
 
   // Extract intermediate registers from combined BFP768 (FEX register)
   if (!extractBFP768SubReg(CombinedBFP, BFPMantissa1, BFPMantissa2, BFPSign1,

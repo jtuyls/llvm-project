@@ -9,11 +9,12 @@
 //===----------------------------------------------------------------------===//
 
 #include "AIEMCAsmInfo.h"
+#include "llvm/MC/MCTargetOptions.h" // amd/aie/ port
 using namespace llvm;
 
 void AIEMCAsmInfo::anchor() {}
 
-AIEMCAsmInfo::AIEMCAsmInfo(const Triple &TT) {
+AIEMCAsmInfo::AIEMCAsmInfo(const Triple &TT) : MCAsmInfoELF(MCTargetOptions()) { // amd/aie/ port
   SupportsDebugInformation = true;
   Data16bitsDirective = "\t.short\t";
   Data32bitsDirective = "\t.word\t";

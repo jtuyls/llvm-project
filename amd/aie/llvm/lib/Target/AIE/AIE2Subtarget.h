@@ -40,8 +40,8 @@ class AIE2Subtarget : public AIE2GenSubtargetInfo {
   std::string CPUName;
   AIE2AddrSpaceInfo AddrSpaceInfo;
   AIE2FrameLowering FrameLowering;
-  AIE2InstrInfo InstrInfo;
   AIE2RegisterInfo RegInfo;
+  AIE2InstrInfo InstrInfo;
   AIE2TargetLowering TLInfo;
   InstrItineraryData InstrItins;
   SelectionDAGTargetInfo TSInfo;

@@ -36,8 +36,8 @@ class AIE2PSSubtarget : public AIE2PSGenSubtargetInfo {
   // FIXME: Do we need a custom AIE2PSAddrSpaceInfo?
   AIE2AddrSpaceInfo AddrSpaceInfo;
   AIE2PSFrameLowering FrameLowering;
-  AIE2PSInstrInfo InstrInfo;
   AIE2PSRegisterInfo RegInfo;
+  AIE2PSInstrInfo InstrInfo;
   AIE2PSTargetLowering TLInfo;
   InstrItineraryData InstrItins;
   SelectionDAGTargetInfo TSInfo;

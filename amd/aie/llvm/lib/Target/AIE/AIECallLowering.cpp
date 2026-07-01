@@ -66,7 +66,7 @@ struct AIEValueAssigner : public CallLowering::ValueAssigner {
       AIEBaseTargetLowering::alignFirstVASlot(State);
       UsesVarargCC = true;
     }
-    if (getAssignFn(!Info.IsFixed)(ValNo, ValVT, LocVT, LocInfo, Flags, State))
+    if (getAssignFn(!Info.IsFixed)(ValNo, ValVT, LocVT, LocInfo, Flags, /*OrigTy=*/nullptr, State))
       return true;
     StackSize = State.getStackSize();
     return false;

@@ -97,7 +97,7 @@ bool AIEMCExpr::evaluateAsConstant(int64_t &Res) const {
   if (Kind == VK_AIE_CALL)
     return false;
 
-  if (!getSubExpr()->evaluateAsRelocatable(Value, nullptr, nullptr))
+  if (!getSubExpr()->evaluateAsRelocatable(Value, nullptr))
     return false;
 
   if (!Value.isAbsolute())
