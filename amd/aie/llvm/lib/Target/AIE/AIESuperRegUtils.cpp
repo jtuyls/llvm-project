@@ -111,7 +111,7 @@ void rewriteFullCopy(MachineInstr &CopyMI, LiveIntervals &LIS,
   const std::set<int> CopySubRegs =
       TRI.getSubRegSplit(MRI.getRegClass(DstReg)->getID());
 
-  unsigned AdditionalFlags = RegState::Undef;
+  RegState AdditionalFlags = RegState::Undef; // amd/aie/ port
   SmallSet<Register, 8> RegistersToRepair;
   for (int SubRegIdx : CopySubRegs) {
     if ((LiveSrcLanes & TRI.getSubRegIndexLaneMask(SubRegIdx)).none()) {

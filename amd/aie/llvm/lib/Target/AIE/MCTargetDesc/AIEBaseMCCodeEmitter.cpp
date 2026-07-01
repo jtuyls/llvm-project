@@ -229,7 +229,7 @@ SmallVector<MCFixup> AIEBaseMCCodeEmitter::translateFixupsInComposite(
         SubInst, FormatSize, TranslatedFields);
     // Create a new MCFixup and push it into the saving container
     TranslatedFixups.push_back(MCFixup::create(
-        0, Fixup.getValue(), MCFixupKind(TranslatedFixup), Fixup.getLoc()));
+        0, Fixup.getValue(), MCFixupKind(TranslatedFixup)));
   }
   BaseFixups.clear();
   return TranslatedFixups;

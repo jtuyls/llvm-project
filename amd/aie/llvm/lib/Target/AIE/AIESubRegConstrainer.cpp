@@ -160,7 +160,7 @@ void AIESubRegConstrainer::processTiedOperands(const TiedRegOperands &Ties,
       Register SrcReg = MI.getOperand(SrcOp.OpIdx).getReg();
       const unsigned SrcSubRegIdx = MI.getOperand(SrcOp.OpIdx).getSubReg();
       MIB.addReg(SrcReg,
-                 MI.getOperand(SrcOp.OpIdx).isUndef() ? RegState::Undef : 0,
+                 MI.getOperand(SrcOp.OpIdx).isUndef() ? RegState::Undef : RegState::NoFlags,
                  SrcSubRegIdx);
       MIB.addImm(SrcOp.SubRegIdx);
     }

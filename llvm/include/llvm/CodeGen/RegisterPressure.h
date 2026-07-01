@@ -457,6 +457,9 @@ public:
 
   ArrayRef<unsigned> getLiveThru() const { return LiveThruPressure; }
 
+  /// amd/aie/ port: expose the current live-register set.
+  const LiveRegSet &getLiveRegs() const { return LiveRegs; }
+
   /// Get the resulting register pressure over the traversed region.
   /// This result is complete if closeRegion() was explicitly invoked.
   RegisterPressure &getPressure() { return P; }

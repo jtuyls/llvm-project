@@ -34,8 +34,8 @@ public:
 
   // Return true if the given relocation must be with a symbol rather than
   // section plus offset.
+  // amd/aie/ port: 23 dropped the MCSymbol param.
   bool needsRelocateWithSymbol(const MCValue &Val,
-                               const MCSymbol &Sym,
                                unsigned Type) const override {
     // TODO: this is very conservative,
     return true;

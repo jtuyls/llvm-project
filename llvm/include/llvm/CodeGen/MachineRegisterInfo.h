@@ -975,6 +975,13 @@ public:
     return getReservedRegs().test(PhysReg.id());
   }
 
+  /// amd/aie/ port: a physreg can be simplified if it isn't reserved, or the
+  /// target marks the reserved reg as simplifiable.
+  bool canSimplifyPhysReg(MCRegister PhysReg) const {
+    return !isReserved(PhysReg) ||
+           getTargetRegisterInfo()->isSimplifiableReservedReg(PhysReg);
+  }
+
   /// Returns true when the given register unit is considered reserved.
   ///
   /// Register units are considered reserved when for at least one of their

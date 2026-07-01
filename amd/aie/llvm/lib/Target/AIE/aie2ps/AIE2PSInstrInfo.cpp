@@ -909,8 +909,7 @@ void AIE2PSInstrInfo::storeRegToStackSlot(MachineBasicBlock &MBB,
     Register TmpReg = MRI.createVirtualRegister(BounceRC);
     BuildMI(MBB, I, DL, get(AIE2PS::COPY), TmpReg)
         .addReg(SrcReg, getKillRegState(IsKill));
-    return storeRegToStackSlot(MBB, I, TmpReg, /*IsKill*/ true, FI, BounceRC,
-                               TRI, VReg, Flags);
+    return storeRegToStackSlot(MBB, I, TmpReg, /*IsKill*/ true, FI, BounceRC, VReg, Flags);
   };
 
   if (regClassMatches(AIE2PS::eRRegClass, RC, SrcReg)) {
