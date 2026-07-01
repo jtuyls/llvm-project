@@ -14,7 +14,8 @@ using namespace llvm;
 
 void AIEMCAsmInfo::anchor() {}
 
-AIEMCAsmInfo::AIEMCAsmInfo(const Triple &TT) : MCAsmInfoELF(MCTargetOptions()) { // amd/aie/ port
+AIEMCAsmInfo::AIEMCAsmInfo(const Triple &TT, const MCTargetOptions &Options)
+    : MCAsmInfoELF(Options) { // amd/aie/ port: forward real Options (stored by ref)
   SupportsDebugInformation = true;
   Data16bitsDirective = "\t.short\t";
   Data32bitsDirective = "\t.word\t";

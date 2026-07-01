@@ -110,7 +110,7 @@ static MCSubtargetInfo *createAIEMCSubtargetInfo(const Triple &TT,
 static MCAsmInfo *createAIEMCAsmInfo(const MCRegisterInfo &MRI,
                                      const Triple &TT,
                                      const MCTargetOptions &Options) {
-  MCAsmInfo *MAI = new AIEMCAsmInfo(TT);
+  MCAsmInfo *MAI = new AIEMCAsmInfo(TT, Options);
 
   // Initial state of the frame pointer is SP.
   MCCFIInstruction Inst = MCCFIInstruction::cfiDefCfa(nullptr, AIE::SP, 0);

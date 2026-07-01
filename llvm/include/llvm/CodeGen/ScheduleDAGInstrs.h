@@ -386,6 +386,11 @@ namespace llvm {
     /// whole MachineFunction. By default does nothing.
     virtual void finalizeSchedule() {}
 
+    // amd/aie/ port: per-function scheduling setup + block iteration driver
+    // (AIE's inter-block scheduler controls block order/fixpoint via nextBlock).
+    virtual void startSchedule(MachineFunction *MF) {}
+    virtual MachineBasicBlock *nextBlock() { return nullptr; }
+
     void dumpNode(const SUnit &SU) const override;
     void dump() const override;
 

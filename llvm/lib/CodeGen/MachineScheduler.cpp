@@ -838,8 +838,11 @@ void MachineSchedulerBase::scheduleRegions(ScheduleDAGInstrs &Scheduler,
   //
   // TODO: Visit blocks in global postorder or postorder within the bottom-up
   // loop tree. Then we can optionally compute global RegPressure.
-  for (MachineFunction::iterator MBB = MF->begin(), MBBEnd = MF->end();
-       MBB != MBBEnd; ++MBB) {
+  // amd/aie/ port: let the scheduler drive block iteration (AIE's inter-block
+  // scheduler visits blocks in its own order / to a fixpoint via nextBlock()).
+  Scheduler.startSchedule(MF);
+  for (MachineBasicBlock *MBB = Scheduler.nextBlock(); MBB;
+       MBB = Scheduler.nextBlock()) {
 
     Scheduler.startBlock(&*MBB);
 

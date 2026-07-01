@@ -25,7 +25,7 @@ class AIEMCAsmInfo : public MCAsmInfoELF {
   void anchor() override;
 
 public:
-  explicit AIEMCAsmInfo(const Triple &TT);
+  AIEMCAsmInfo(const Triple &TT, const MCTargetOptions &Options);
 };
 
 } // end namespace llvm

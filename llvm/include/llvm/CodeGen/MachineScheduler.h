@@ -424,6 +424,12 @@ public:
   void startBlock(MachineBasicBlock *bb) override;
   void finishBlock() override;
 
+  // amd/aie/ port: forward the per-function/block-iteration hooks to the
+  // strategy so AIE's inter-block scheduler drives block order.
+  void startSchedule(MachineFunction *MF) override { SchedImpl->enterFunction(MF); }
+  MachineBasicBlock *nextBlock() override { return SchedImpl->nextBlock(); }
+  void finalizeSchedule() override { SchedImpl->leaveFunction(); }
+
   /// Change the position of an instruction within the basic block and update
   /// live ranges and region boundary iterators.
   void moveInstruction(MachineInstr *MI, MachineBasicBlock::iterator InsertPos);

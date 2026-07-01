@@ -1,0 +1,166 @@
+ninja: Entering directory `build'
+[1/9] Generating VCSRevision.h
+[2/9] Building CXX object lib/Target/AIE/MCTargetDesc/CMakeFiles/LLVMAIEDesc.dir/AIEMCAsmInfo.cpp.o
+[3/9] Building CXX object lib/Object/CMakeFiles/LLVMObject.dir/IRSymtab.cpp.o
+[4/9] Linking CXX static library lib/libLLVMObject.a
+[5/9] Building CXX object lib/Target/AIE/MCTargetDesc/CMakeFiles/LLVMAIEDesc.dir/AIEMCTargetDesc.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/MCTargetDesc/AIEMCTargetDesc.cpp:55:
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PGenSubtargetInfo.inc:115:54: warning: left shift count >= width of type [-Wshift-count-overflow]
+  115 |   const InstrStage::FuncUnits ST_FIFO_WR_PORT = 1ULL << 64;
+      |                                                 ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PGenSubtargetInfo.inc:116:44: warning: left shift count >= width of type [-Wshift-count-overflow]
+  116 |   const InstrStage::FuncUnits TM_AD = 1ULL << 65;
+      |                                       ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PGenSubtargetInfo.inc:117:48: warning: left shift count >= width of type [-Wshift-count-overflow]
+  117 |   const InstrStage::FuncUnits UPS__H__A = 1ULL << 66;
+      |                                           ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PGenSubtargetInfo.inc:118:48: warning: left shift count >= width of type [-Wshift-count-overflow]
+  118 |   const InstrStage::FuncUnits UPS__H__K = 1ULL << 67;
+      |                                           ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PGenSubtargetInfo.inc:119:52: warning: left shift count >= width of type [-Wshift-count-overflow]
+  119 |   const InstrStage::FuncUnits UPS__H__OMUXL = 1ULL << 68;
+      |                                               ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PGenSubtargetInfo.inc:120:45: warning: left shift count >= width of type [-Wshift-count-overflow]
+  120 |   const InstrStage::FuncUnits UPS__K = 1ULL << 69;
+      |                                        ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PGenSubtargetInfo.inc:121:49: warning: left shift count >= width of type [-Wshift-count-overflow]
+  121 |   const InstrStage::FuncUnits UPS__L__KL = 1ULL << 70;
+      |                                            ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PGenSubtargetInfo.inc:122:52: warning: left shift count >= width of type [-Wshift-count-overflow]
+  122 |   const InstrStage::FuncUnits UPS__L__OMUXL = 1ULL << 71;
+      |                                               ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PGenSubtargetInfo.inc:123:48: warning: left shift count >= width of type [-Wshift-count-overflow]
+  123 |   const InstrStage::FuncUnits UPS__OMUX = 1ULL << 72;
+      |                                           ~~~~~^~~~~
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/MCTargetDesc/AIEMCTargetDesc.cpp:60:
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:115:45: warning: left shift count >= width of type [-Wshift-count-overflow]
+  115 |   const InstrStage::FuncUnits LCKREQ = 1ULL << 64;
+      |                                        ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:116:54: warning: left shift count >= width of type [-Wshift-count-overflow]
+  116 |   const InstrStage::FuncUnits LD_FIFO_RA_PORT = 1ULL << 65;
+      |                                                 ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:117:54: warning: left shift count >= width of type [-Wshift-count-overflow]
+  117 |   const InstrStage::FuncUnits LD_FIFO_WA_PORT = 1ULL << 66;
+      |                                                 ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:118:44: warning: left shift count >= width of type [-Wshift-count-overflow]
+  118 |   const InstrStage::FuncUnits LE_WM = 1ULL << 67;
+      |                                       ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:119:44: warning: left shift count >= width of type [-Wshift-count-overflow]
+  119 |   const InstrStage::FuncUnits LS_WM = 1ULL << 68;
+      |                                       ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:120:51: warning: left shift count >= width of type [-Wshift-count-overflow]
+  120 |   const InstrStage::FuncUnits L_RS_L0_PORT = 1ULL << 69;
+      |                                              ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:121:51: warning: left shift count >= width of type [-Wshift-count-overflow]
+  121 |   const InstrStage::FuncUnits L_WA_L0_PORT = 1ULL << 70;
+      |                                              ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:122:51: warning: left shift count >= width of type [-Wshift-count-overflow]
+  122 |   const InstrStage::FuncUnits L_WM_L0_PORT = 1ULL << 71;
+      |                                              ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:123:48: warning: left shift count >= width of type [-Wshift-count-overflow]
+  123 |   const InstrStage::FuncUnits M_RM_PORT = 1ULL << 72;
+      |                                           ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:124:48: warning: left shift count >= width of type [-Wshift-count-overflow]
+  124 |   const InstrStage::FuncUnits M_WM_PORT = 1ULL << 73;
+      |                                           ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:125:50: warning: left shift count >= width of type [-Wshift-count-overflow]
+  125 |   const InstrStage::FuncUnits PSA_ACCH_IN = 1ULL << 74;
+      |                                             ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:126:52: warning: left shift count >= width of type [-Wshift-count-overflow]
+  126 |   const InstrStage::FuncUnits PSA_ACCH_IN_S = 1ULL << 75;
+      |                                               ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:127:50: warning: left shift count >= width of type [-Wshift-count-overflow]
+  127 |   const InstrStage::FuncUnits PSA_ACCL_IN = 1ULL << 76;
+      |                                             ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:128:52: warning: left shift count >= width of type [-Wshift-count-overflow]
+  128 |   const InstrStage::FuncUnits PSA_ACCL_IN_S = 1ULL << 77;
+      |                                               ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:129:49: warning: left shift count >= width of type [-Wshift-count-overflow]
+  129 |   const InstrStage::FuncUnits PSA_MMODEH = 1ULL << 78;
+      |                                            ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:130:47: warning: left shift count >= width of type [-Wshift-count-overflow]
+  130 |   const InstrStage::FuncUnits PSA_RSRC = 1ULL << 79;
+      |                                          ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:131:50: warning: left shift count >= width of type [-Wshift-count-overflow]
+  131 |   const InstrStage::FuncUnits PSA_SUMH__A = 1ULL << 80;
+      |                                             ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:132:48: warning: left shift count >= width of type [-Wshift-count-overflow]
+  132 |   const InstrStage::FuncUnits P_RM_PORT = 1ULL << 81;
+      |                                           ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:133:48: warning: left shift count >= width of type [-Wshift-count-overflow]
+  133 |   const InstrStage::FuncUnits P_WM_PORT = 1ULL << 82;
+      |                                           ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:134:59: warning: left shift count >= width of type [-Wshift-count-overflow]
+  134 |   const InstrStage::FuncUnits RSRC_EXECUTION_TRACE = 1ULL << 83;
+      |                                                      ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:135:42: warning: left shift count >= width of type [-Wshift-count-overflow]
+  135 |   const InstrStage::FuncUnits SCD = 1ULL << 84;
+      |                                     ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:136:46: warning: left shift count >= width of type [-Wshift-count-overflow]
+  136 |   const InstrStage::FuncUnits SCD_CTL = 1ULL << 85;
+      |                                         ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:137:52: warning: left shift count >= width of type [-Wshift-count-overflow]
+  137 |   const InstrStage::FuncUnits SCD_EXPAND_IN = 1ULL << 86;
+      |                                               ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:138:54: warning: left shift count >= width of type [-Wshift-count-overflow]
+  138 |   const InstrStage::FuncUnits SCD_EXPAND_INHH = 1ULL << 87;
+      |                                                 ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:139:54: warning: left shift count >= width of type [-Wshift-count-overflow]
+  139 |   const InstrStage::FuncUnits SCD_INCR__O_POS = 1ULL << 88;
+      |                                                 ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:140:44: warning: left shift count >= width of type [-Wshift-count-overflow]
+  140 |   const InstrStage::FuncUnits TM_AD = 1ULL << 89;
+      |                                       ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:141:47: warning: left shift count >= width of type [-Wshift-count-overflow]
+  141 |   const InstrStage::FuncUnits UPS_F__A = 1ULL << 90;
+      |                                          ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:142:49: warning: left shift count >= width of type [-Wshift-count-overflow]
+  142 |   const InstrStage::FuncUnits UPS_F__A_L = 1ULL << 91;
+      |                                            ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:143:48: warning: left shift count >= width of type [-Wshift-count-overflow]
+  143 |   const InstrStage::FuncUnits UPS__H__A = 1ULL << 92;
+      |                                           ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:144:52: warning: left shift count >= width of type [-Wshift-count-overflow]
+  144 |   const InstrStage::FuncUnits UPS__H__OMUXL = 1ULL << 93;
+      |                                               ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:145:45: warning: left shift count >= width of type [-Wshift-count-overflow]
+  145 |   const InstrStage::FuncUnits UPS__K = 1ULL << 94;
+      |                                        ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:146:48: warning: left shift count >= width of type [-Wshift-count-overflow]
+  146 |   const InstrStage::FuncUnits UPS__L__K = 1ULL << 95;
+      |                                           ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:147:49: warning: left shift count >= width of type [-Wshift-count-overflow]
+  147 |   const InstrStage::FuncUnits UPS__L__KL = 1ULL << 96;
+      |                                            ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:148:52: warning: left shift count >= width of type [-Wshift-count-overflow]
+  148 |   const InstrStage::FuncUnits UPS__L__OMUXL = 1ULL << 97;
+      |                                               ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:149:48: warning: left shift count >= width of type [-Wshift-count-overflow]
+  149 |   const InstrStage::FuncUnits UPS__OMUX = 1ULL << 98;
+      |                                           ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:150:47: warning: left shift count >= width of type [-Wshift-count-overflow]
+  150 |   const InstrStage::FuncUnits VCTRL_IN = 1ULL << 99;
+      |                                          ~~~~~^~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:151:54: warning: left shift count >= width of type [-Wshift-count-overflow]
+  151 |   const InstrStage::FuncUnits VCTRL_SUB0_CG1U = 1ULL << 100;
+      |                                                 ~~~~~^~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:152:45: warning: left shift count >= width of type [-Wshift-count-overflow]
+  152 |   const InstrStage::FuncUnits X_EGWL = 1ULL << 101;
+      |                                        ~~~~~^~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:153:48: warning: left shift count >= width of type [-Wshift-count-overflow]
+  153 |   const InstrStage::FuncUnits X_EXP_ELL = 1ULL << 102;
+      |                                           ~~~~~^~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:154:44: warning: left shift count >= width of type [-Wshift-count-overflow]
+  154 |   const InstrStage::FuncUnits Y_EGY = 1ULL << 103;
+      |                                       ~~~~~^~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:155:46: warning: left shift count >= width of type [-Wshift-count-overflow]
+  155 |   const InstrStage::FuncUnits Y_EXP_E = 1ULL << 104;
+      |                                         ~~~~~^~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIE2PSGenSubtargetInfo.inc:156:47: warning: left shift count >= width of type [-Wshift-count-overflow]
+  156 |   const InstrStage::FuncUnits ZACC_DML = 1ULL << 105;
+      |                                          ~~~~~^~~~~~
+[6/9] Linking CXX static library lib/libLLVMAIEDesc.a
+[7/9] Building CXX object lib/CodeGen/AsmPrinter/CMakeFiles/LLVMAsmPrinter.dir/AsmPrinter.cpp.o
+[8/9] Linking CXX static library lib/libLLVMAsmPrinter.a
+[9/9] Linking CXX executable bin/llc
+DONE_RC=0
