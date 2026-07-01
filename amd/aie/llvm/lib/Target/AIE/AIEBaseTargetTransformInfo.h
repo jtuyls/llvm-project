@@ -85,7 +85,7 @@ protected:
   virtual ~AIEBaseTTIImpl() = default;
 
 public:
-  int getIntImmCost(const APInt &Imm, Type *Ty, TTI::TargetCostKind CostKind) {
+  int getIntImmCost(const APInt &Imm, Type *Ty, TTI::TargetCostKind CostKind) const {
     // TODO Handle Target Specific constant cost
     //  Larger constants require an add.
     return TTI::TCC_Basic;
@@ -150,7 +150,7 @@ public:
       unsigned Opcode, Type *Ty, TTI::TargetCostKind CostKind,
       TTI::OperandValueInfo Opd1Info = {TTI::OK_AnyValue, TTI::OP_None},
       TTI::OperandValueInfo Opd2Info = {TTI::OK_AnyValue, TTI::OP_None},
-      ArrayRef<const Value *> Args = {}, const Instruction *CxtI = nullptr) {
+      ArrayRef<const Value *> Args = {}, const Instruction *CxtI = nullptr) const {
     if (auto *VTy = dyn_cast<FixedVectorType>(Ty)) {
       if (VTy->getPrimitiveSizeInBits() < 512)
         return InstructionCost::getInvalid();
