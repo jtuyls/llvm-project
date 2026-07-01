@@ -1,9 +1,0 @@
-ninja: Entering directory `build'
-[1/7] Generating VCSRevision.h
-[2/7] Building CXX object lib/Object/CMakeFiles/LLVMObject.dir/IRSymtab.cpp.o
-[3/7] Linking CXX static library lib/libLLVMObject.a
-[4/7] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2ps/AIE2PSInstrInfo.cpp.o
-[5/7] Building CXX object lib/CodeGen/AsmPrinter/CMakeFiles/LLVMAsmPrinter.dir/AsmPrinter.cpp.o
-[6/7] Linking CXX static library lib/libLLVMAsmPrinter.a
-[7/7] Linking CXX static library lib/libLLVMAIECodeGen.a
-DONE_RC=0
