@@ -98,11 +98,14 @@ void SubtargetFeatureInfo::emitNameTable(
 }
 
 void SubtargetFeatureInfo::emitComputeAvailableFeatures(
-    StringRef TargetName, StringRef ClassName, StringRef FuncName,
+    StringRef SubtargetClassName, StringRef ClassName, StringRef FuncName,
     const SubtargetFeatureInfoMap &SubtargetFeatures, raw_ostream &OS,
     StringRef ExtraParams, const std::map<std::string, unsigned> *HwModes) {
+  // amd/aie/ port: first arg is the full subtarget class name (callers pass the
+  // GISel -gisel-subtarget-class override) so the definition's subtarget type
+  // matches the declaration's.
   OS << "PredicateBitset " << ClassName << "::\n"
-     << FuncName << "(const " << TargetName << "Subtarget *Subtarget";
+     << FuncName << "(const " << SubtargetClassName << " *Subtarget";
   if (!ExtraParams.empty())
     OS << ", " << ExtraParams;
   OS << ") const {\n";

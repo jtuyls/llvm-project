@@ -55,8 +55,11 @@ void GlobalISelMatchTableExecutorEmitter::emitSubtargetFeatureBitsetImpl(
                   return X.second.mustRecomputePerFunction();
                 });
 
+  // amd/aie/ port: pass the (possibly overridden) subtarget class name so the
+  // emitted definition matches the declaration.
+  const std::string STIClassName = getSubtargetClassName(getTarget());
   SubtargetFeatureInfo::emitComputeAvailableFeatures(
-      getTarget().getName(), getClassName(), "computeAvailableModuleFeatures",
+      STIClassName, getClassName(), "computeAvailableModuleFeatures",
       ModuleFeatures, OS, "", &HwModes);
 
   OS << "void " << getClassName()
@@ -68,7 +71,7 @@ void GlobalISelMatchTableExecutorEmitter::emitSubtargetFeatureBitsetImpl(
         "}\n";
 
   SubtargetFeatureInfo::emitComputeAvailableFeatures(
-      getTarget().getName(), getClassName(), "computeAvailableFunctionFeatures",
+      STIClassName, getClassName(), "computeAvailableFunctionFeatures",
       FunctionFeatures, OS, "const MachineFunction *MF");
 
   // Emit a table containing the PredicateBitsets objects needed by the matcher

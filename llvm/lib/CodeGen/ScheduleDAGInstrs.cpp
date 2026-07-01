@@ -190,6 +190,14 @@ void ScheduleDAGInstrs::startBlock(MachineBasicBlock *bb) {
   BB = bb;
 }
 
+// amd/aie/ port: rebuild the MachineInstr->SUnit reverse-lookup map.
+void ScheduleDAGInstrs::makeMaps() {
+  // At this point all SUnits are allocated and their addresses are stable.
+  MISUnitMap.clear();
+  for (auto &SU : SUnits)
+    MISUnitMap[SU.getInstr()] = &SU;
+}
+
 void ScheduleDAGInstrs::finishBlock() {
   // Subclasses should no longer refer to the old block.
   BB = nullptr;

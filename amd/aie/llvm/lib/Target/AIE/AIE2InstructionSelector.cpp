@@ -1723,9 +1723,9 @@ bool AIE2InstructionSelector::select512BitG_AIE_LOAD_UPS(
     UPSI.eraseFromParent();
     AMI.MemI.eraseFromParent();
 
-    constrainSelectedInstRegOperands(*LoadLower, TII, TRI, RBI) &&
-           constrainSelectedInstRegOperands(*LoadHigher, TII, TRI, RBI) &&
-           RBI.constrainGenericRegister(DstReg, AIE2::ACC1024RegClass, MRI);
+    constrainSelectedInstRegOperands(*LoadLower, TII, TRI, RBI);
+    constrainSelectedInstRegOperands(*LoadHigher, TII, TRI, RBI);
+    RBI.constrainGenericRegister(DstReg, AIE2::ACC1024RegClass, MRI);
     return true;
   }
   case AIE2::G_AIE_OFFSET_LOAD: {
@@ -1775,9 +1775,9 @@ bool AIE2InstructionSelector::select512BitG_AIE_LOAD_UPS(
     UPSI.eraseFromParent();
     AMI.MemI.eraseFromParent();
 
-    constrainSelectedInstRegOperands(*LoadLower, TII, TRI, RBI) &&
-           constrainSelectedInstRegOperands(*LoadHigher, TII, TRI, RBI) &&
-           RBI.constrainGenericRegister(DstReg, AIE2::ACC1024RegClass, MRI);
+    constrainSelectedInstRegOperands(*LoadLower, TII, TRI, RBI);
+    constrainSelectedInstRegOperands(*LoadHigher, TII, TRI, RBI);
+    RBI.constrainGenericRegister(DstReg, AIE2::ACC1024RegClass, MRI);
     return true;
   }
   default:
@@ -2855,7 +2855,7 @@ bool AIE2InstructionSelector::select512BitG_AIE_STORE_SRS(
                            SignReg);
 
     AMI.MemI.eraseFromParent();
-    constrainSelectedInstRegOperands(*StoreLower, TII, TRI, RBI) &&
+    constrainSelectedInstRegOperands(*StoreLower, TII, TRI, RBI);
            constrainSelectedInstRegOperands(*StoreHigher, TII, TRI, RBI);
     return true;
   }
@@ -2903,7 +2903,7 @@ bool AIE2InstructionSelector::select512BitG_AIE_STORE_SRS(
                            SignReg);
 
     AMI.MemI.eraseFromParent();
-    constrainSelectedInstRegOperands(*StoreLower, TII, TRI, RBI) &&
+    constrainSelectedInstRegOperands(*StoreLower, TII, TRI, RBI);
            constrainSelectedInstRegOperands(*StoreHigher, TII, TRI, RBI);
     return true;
   }
@@ -3099,7 +3099,7 @@ bool AIE2InstructionSelector::select512BitG_AIE_LOAD_STORE(
     addSplitMemOperands(AMI.MemI, StoreHigher, StoreLower, 0, 2);
 
     AMI.MemI.eraseFromParent();
-    constrainSelectedInstRegOperands(*StoreLower, TII, TRI, RBI) &&
+    constrainSelectedInstRegOperands(*StoreLower, TII, TRI, RBI);
            constrainSelectedInstRegOperands(*StoreHigher, TII, TRI, RBI);
     return true;
   }
@@ -3141,7 +3141,7 @@ bool AIE2InstructionSelector::select512BitG_AIE_LOAD_STORE(
     addSplitMemOperands(AMI.MemI, StoreHigher, StoreLower, 0, 2);
 
     AMI.MemI.eraseFromParent();
-    constrainSelectedInstRegOperands(*StoreLower, TII, TRI, RBI) &&
+    constrainSelectedInstRegOperands(*StoreLower, TII, TRI, RBI);
            constrainSelectedInstRegOperands(*StoreHigher, TII, TRI, RBI);
     return true;
   }
@@ -3172,8 +3172,8 @@ bool AIE2InstructionSelector::select512BitG_AIE_LOAD_STORE(
 
     Register SrcDstReg = AMI.SrcDstOp.getReg();
     AMI.MemI.eraseFromParent();
-    constrainSelectedInstRegOperands(*LoadLower, TII, TRI, RBI) &&
-           constrainSelectedInstRegOperands(*LoadHigher, TII, TRI, RBI) &&
+    constrainSelectedInstRegOperands(*LoadLower, TII, TRI, RBI);
+           constrainSelectedInstRegOperands(*LoadHigher, TII, TRI, RBI);
            RBI.constrainGenericRegister(SrcDstReg, *RC512, MRI);
     return true;
   }
@@ -3214,8 +3214,8 @@ bool AIE2InstructionSelector::select512BitG_AIE_LOAD_STORE(
 
     Register SrcDstReg = AMI.SrcDstOp.getReg();
     AMI.MemI.eraseFromParent();
-    constrainSelectedInstRegOperands(*LoadLower, TII, TRI, RBI) &&
-           constrainSelectedInstRegOperands(*LoadHigher, TII, TRI, RBI) &&
+    constrainSelectedInstRegOperands(*LoadLower, TII, TRI, RBI);
+           constrainSelectedInstRegOperands(*LoadHigher, TII, TRI, RBI);
            RBI.constrainGenericRegister(SrcDstReg, *RC512, MRI);
     return true;
   }

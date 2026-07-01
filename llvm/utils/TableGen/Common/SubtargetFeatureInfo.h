@@ -80,7 +80,7 @@ struct SubtargetFeatureInfo {
   /// \param ExtraParams Additional arguments to the generated function.
   /// \param HwModes Map of HwMode conditions to check.
   static void emitComputeAvailableFeatures(
-      StringRef TargetName, StringRef ClassName, StringRef FuncName,
+      StringRef SubtargetClassName, StringRef ClassName, StringRef FuncName,
       const SubtargetFeatureInfoMap &SubtargetFeatures, raw_ostream &OS,
       StringRef ExtraParams = "",
       const std::map<std::string, unsigned> *HwModes = nullptr);

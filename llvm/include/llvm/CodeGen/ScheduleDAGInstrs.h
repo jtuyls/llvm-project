@@ -353,6 +353,10 @@ namespace llvm {
                          LiveIntervals *LIS = nullptr,
                          bool TrackLaneMasks = false);
 
+    // amd/aie/ port: rebuild the MachineInstr->SUnit reverse-lookup map (used by
+    // AIE's iterative scheduling where SUnits are stable across schedule calls).
+    void makeMaps();
+
     /// Adds dependencies from instructions in the current list of
     /// instructions being scheduled to scheduling barrier. We want to make sure
     /// instructions which define registers that are either used by the

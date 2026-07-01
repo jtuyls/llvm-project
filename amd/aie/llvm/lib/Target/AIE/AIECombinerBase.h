@@ -30,7 +30,8 @@ protected:
                   GISelCSEInfo *CSEInfo, const RuleConfigT &RC,
                   const AIEBaseSubtarget &STI, MachineDominatorTree *MDT,
                   const LegalizerInfo *LI, bool IsPreLegalize)
-      : Combiner(MF, CInfo, TPC, &KB, CSEInfo),
+      // amd/aie/ port: 23 Combiner ctor dropped the TargetPassConfig param.
+      : Combiner(MF, CInfo, &KB, CSEInfo),
         Helper(Observer, B, IsPreLegalize, &KB, MDT, LI), RuleConfig(RC),
         STI(STI) {}
 };

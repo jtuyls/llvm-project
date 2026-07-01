@@ -325,6 +325,7 @@ enum {
   EM_VE = 251,            // NEC SX-Aurora VE
   EM_CSKY = 252,          // C-SKY 32-bit processor
   EM_LOONGARCH = 258,     // LoongArch
+  EM_AIE = 264            // amd/aie/ port: AMD/Xilinx AIEngine architecture
 };
 
 // Object file classes.
@@ -458,6 +459,20 @@ enum : unsigned {
   EF_ARM_EABI_VER4 = 0x04000000U,
   EF_ARM_EABI_VER5 = 0x05000000U,
   EF_ARM_EABIMASK = 0xFF000000U
+};
+
+// amd/aie/ port: AIEngine specific e_flags
+enum : unsigned {
+  EF_AIE_AIE1 = 0x00000001,    // AMD-Xilinx AIEngine
+  EF_AIE_AIE2 = 0x00000002,    // AMD-Xilinx AIE-ML
+  EF_AIE_AIE2P = 0x00000003,   // AMD-Xilinx AIE-ML P
+  EF_AIE_AIE2PS = 0x00000004,  // AMD-Xilinx AIE-ML PS
+  EF_AIE_AIEMASK = 0x00000007, // AIE Arch Selection Mask
+};
+
+// amd/aie/ port: ELF Relocation types for AIE
+enum {
+#include "ELFRelocs/AIE.def"
 };
 
 // ELF Relocation types for ARM
