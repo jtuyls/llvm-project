@@ -891,9 +891,11 @@ void AIE2PInstrInfo::storeRegToStackSlot(MachineBasicBlock &MBB,
                                          MachineBasicBlock::iterator I,
                                          Register SrcReg, bool IsKill, int FI,
                                          const TargetRegisterClass *RC,
-                                         const TargetRegisterInfo *TRI,
                                          Register VReg,
                                          MachineInstr::MIFlag Flags) const {
+  const TargetRegisterInfo *TRI =
+      MBB.getParent()->getSubtarget().getRegisterInfo();
+  (void)TRI;
   DebugLoc DL;
   if (I != MBB.end())
     DL = I->getDebugLoc();
@@ -976,8 +978,11 @@ void AIE2PInstrInfo::storeRegToStackSlot(MachineBasicBlock &MBB,
 // Load a register to a stack slot.  Used in eliminating FrameIndex pseudo-ops.
 void AIE2PInstrInfo::loadRegFromStackSlot(
     MachineBasicBlock &MBB, MachineBasicBlock::iterator I, Register DstReg,
-    int FI, const TargetRegisterClass *RC, const TargetRegisterInfo *TRI,
-    Register VReg, MachineInstr::MIFlag Flags) const {
+    int FI, const TargetRegisterClass *RC,
+    Register VReg, unsigned SubReg, MachineInstr::MIFlag Flags) const {
+  const TargetRegisterInfo *TRI =
+      MBB.getParent()->getSubtarget().getRegisterInfo();
+  (void)TRI;
   DebugLoc DL;
   if (I != MBB.end())
     DL = I->getDebugLoc();

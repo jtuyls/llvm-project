@@ -436,9 +436,9 @@ void AIESpillSlotOptimization::emitSubRegAccess(
   // Use TII methods to create spill/reload with correct pseudo opcodes.
   if (SP.IsStore) {
     TII->storeRegToStackSlot(MBB, MI.getIterator(), SI.Reg, IsKill, R.NewFI,
-                             R.RC, TRI, Register());
+                             R.RC, Register());
   } else {
-    TII->loadRegFromStackSlot(MBB, MI.getIterator(), SI.Reg, R.NewFI, R.RC, TRI,
+    TII->loadRegFromStackSlot(MBB, MI.getIterator(), SI.Reg, R.NewFI, R.RC,
                               Register());
   }
 
