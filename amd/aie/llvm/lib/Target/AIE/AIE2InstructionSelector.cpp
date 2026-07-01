@@ -3079,9 +3079,9 @@ bool AIE2InstructionSelector::select512BitG_AIE_LOAD_STORE(
   case AIE2::G_AIE_POSTINC_2D_STORE:
   case AIE2::G_AIE_POSTINC_3D_STORE: {
     auto LowerBits = MIB.buildInstr(TargetOpcode::COPY, {Low256}, {})
-                         .addReg(AMI.SrcDstOp.getReg(), 0, AIE2::sub_256_lo);
+                         .addReg(AMI.SrcDstOp.getReg(), RegState::NoFlags, AIE2::sub_256_lo);
     auto HigherBits = MIB.buildInstr(TargetOpcode::COPY, {High256}, {})
-                          .addReg(AMI.SrcDstOp.getReg(), 0, AIE2::sub_256_hi);
+                          .addReg(AMI.SrcDstOp.getReg(), RegState::NoFlags, AIE2::sub_256_hi);
 
     auto StoreHigher = MIB.buildInstr(*LSO.OffsetOpcode, {}, {})
                            .addReg(HigherBits.getReg(0))
@@ -3105,9 +3105,9 @@ bool AIE2InstructionSelector::select512BitG_AIE_LOAD_STORE(
   }
   case AIE2::G_AIE_OFFSET_STORE: {
     auto LowerBits = MIB.buildInstr(TargetOpcode::COPY, {Low256}, {})
-                         .addReg(AMI.SrcDstOp.getReg(), 0, AIE2::sub_256_lo);
+                         .addReg(AMI.SrcDstOp.getReg(), RegState::NoFlags, AIE2::sub_256_lo);
     auto HigherBits = MIB.buildInstr(TargetOpcode::COPY, {High256}, {})
-                          .addReg(AMI.SrcDstOp.getReg(), 0, AIE2::sub_256_hi);
+                          .addReg(AMI.SrcDstOp.getReg(), RegState::NoFlags, AIE2::sub_256_hi);
 
     MachineInstrBuilder StoreHigher;
     if (LSO.FitsImmediateRange) {

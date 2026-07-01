@@ -686,8 +686,7 @@ bool AIE2PInstructionSelector::selectCascadeStreamInsn(MachineInstr &I,
         CascadeMV =
             MIB.buildInstr(OpCode, {DstReg}, {}).addReg(CopyPosReg.getReg(0));
         auto DestMI = MIB.buildInstr(TargetOpcode::COPY, {CascadeReg}, {})
-                          .addReg(CascadeMV->getOperand(0).getReg(), 0,
-                                  AIE2P::sub_1024_acc_lo);
+                          .addReg(CascadeMV->getOperand(0).getReg(), RegState::NoFlags, AIE2P::sub_1024_acc_lo);
         constrainOperandRegClass(*MF, TRI, MRI, TII, RBI, *DestMI,
                                  AIE2P::ACC1024RegClass, DestMI->getOperand(0));
       }
@@ -709,8 +708,7 @@ bool AIE2PInstructionSelector::selectCascadeStreamInsn(MachineInstr &I,
                         .addReg(CopyPosPtrInReg.getReg(0));
         RBI.constrainGenericRegister(R31, AIE2P::mR31_scdRegClass, MRI);
         auto DestMI = MIB.buildInstr(TargetOpcode::COPY, {CascadeReg}, {})
-                          .addReg(CascadeMV->getOperand(0).getReg(), 0,
-                                  AIE2P::sub_1024_acc_lo);
+                          .addReg(CascadeMV->getOperand(0).getReg(), RegState::NoFlags, AIE2P::sub_1024_acc_lo);
         constrainOperandRegClass(*MF, TRI, MRI, TII, RBI, *DestMI,
                                  AIE2P::ACC1024RegClass, DestMI->getOperand(0));
       }

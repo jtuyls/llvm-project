@@ -4872,8 +4872,7 @@ bool AIE2PSInstructionSelector::selectCascadeStreamInsn(
   // Helper to extract ACC1024 sub-register from an ACC2048 result.
   auto ExtractACC1024 = [&]() {
     auto DestMI = MIB.buildInstr(TargetOpcode::COPY, {CascadeReg}, {})
-                      .addReg(CascadeMV->getOperand(0).getReg(), 0,
-                              AIE2PS::sub_1024_acc_lo);
+                      .addReg(CascadeMV->getOperand(0).getReg(), RegState::NoFlags, AIE2PS::sub_1024_acc_lo);
     constrainOperandRegClass(*MF, TRI, MRI, TII, RBI, *DestMI,
                              AIE2PS::ACC1024RegClass, DestMI->getOperand(0));
   };
