@@ -569,9 +569,9 @@ bool AIE2InstructionSelector::selectG_STORE(MachineInstr &I,
     Register Low256 = MRI.createVirtualRegister(RC);
     Register High256 = MRI.createVirtualRegister(RC);
     auto LowerBits = MIB.buildInstr(TargetOpcode::COPY, {Low256}, {})
-                         .addReg(StoreReg, 0, AIE2::sub_256_lo);
+                         .addReg(StoreReg, RegState::NoFlags, AIE2::sub_256_lo);
     auto HigherBits = MIB.buildInstr(TargetOpcode::COPY, {High256}, {})
-                          .addReg(StoreReg, 0, AIE2::sub_256_hi);
+                          .addReg(StoreReg, RegState::NoFlags, AIE2::sub_256_hi);
     auto StoreHigher =
         MIB.buildInstr(StoreOpc, {}, {HigherBits.getReg(0), PtrReg})
             .addImm(32 + Offset);
@@ -591,9 +591,9 @@ bool AIE2InstructionSelector::selectG_STORE(MachineInstr &I,
     Register Low512 = MRI.createVirtualRegister(RC);
     Register High512 = MRI.createVirtualRegister(RC);
     auto Lower512Bits = MIB.buildInstr(TargetOpcode::COPY, {Low512}, {})
-                            .addReg(SrcReg, 0, AIE2::sub_512_lo);
+                            .addReg(SrcReg, RegState::NoFlags, AIE2::sub_512_lo);
     auto Higher512Bits = MIB.buildInstr(TargetOpcode::COPY, {High512}, {})
-                             .addReg(SrcReg, 0, AIE2::sub_512_hi);
+                             .addReg(SrcReg, RegState::NoFlags, AIE2::sub_512_hi);
     constrainSelectedInstRegOperands(*Lower512Bits, TII, TRI, RBI);
     constrainSelectedInstRegOperands(*Higher512Bits, TII, TRI, RBI);
 
@@ -2811,9 +2811,9 @@ bool AIE2InstructionSelector::select512BitG_AIE_STORE_SRS(
   case AIE2::G_AIE_POSTINC_2D_STORE:
   case AIE2::G_AIE_POSTINC_3D_STORE: {
     auto LowerBits = MIB.buildInstr(TargetOpcode::COPY, {Low512}, {})
-                         .addReg(SrcReg, 0, AIE2::sub_512_lo);
+                         .addReg(SrcReg, RegState::NoFlags, AIE2::sub_512_lo);
     auto HigherBits = MIB.buildInstr(TargetOpcode::COPY, {High512}, {})
-                          .addReg(SrcReg, 0, AIE2::sub_512_hi);
+                          .addReg(SrcReg, RegState::NoFlags, AIE2::sub_512_hi);
     auto StoreHigher = MIB.buildInstr(*LSO.OffsetOpcode)
                            .addReg(AMI.PtrOp.getReg())
                            .addImm(32) // Offset
@@ -2841,9 +2841,9 @@ bool AIE2InstructionSelector::select512BitG_AIE_STORE_SRS(
   }
   case AIE2::G_AIE_OFFSET_STORE: {
     auto LowerBits = MIB.buildInstr(TargetOpcode::COPY, {Low512}, {})
-                         .addReg(SrcReg, 0, AIE2::sub_512_lo);
+                         .addReg(SrcReg, RegState::NoFlags, AIE2::sub_512_lo);
     auto HigherBits = MIB.buildInstr(TargetOpcode::COPY, {High512}, {})
-                          .addReg(SrcReg, 0, AIE2::sub_512_hi);
+                          .addReg(SrcReg, RegState::NoFlags, AIE2::sub_512_hi);
 
     MachineInstrBuilder StoreHigher;
     if (LSO.FitsImmediateRange) {
@@ -3384,9 +3384,9 @@ bool AIE2InstructionSelector::selectVLDSparseOP_Pseudo(
         getVLDSparseOpcode(I), {OutPtrLow, OutSparseVecLow}, {PtrIn});
 
     auto VecCopyMI = MIB.buildInstr(TargetOpcode::COPY, {VecOut}, {})
-                         .addReg(OutSparseVecLow, 0, AIE2::sub_sparse_x);
+                         .addReg(OutSparseVecLow, RegState::NoFlags, AIE2::sub_sparse_x);
     auto MaskCopyMI = MIB.buildInstr(TargetOpcode::COPY, {MaskOut}, {})
-                          .addReg(OutSparseVecLow, 0, AIE2::sub_sparse_q);
+                          .addReg(OutSparseVecLow, RegState::NoFlags, AIE2::sub_sparse_q);
     constrainOperandRegClass(*MF, TRI, MRI, TII, RBI, *VecCopyMI,
                              AIE2::VEC512RegClass, VecCopyMI->getOperand(0));
     constrainOperandRegClass(*MF, TRI, MRI, TII, RBI, *MaskCopyMI,
@@ -3416,9 +3416,9 @@ bool AIE2InstructionSelector::selectVLDSparseOP_Pseudo(
         getVLDSparseOpcode(I), {OutPtrLow, OutSparseVecLow}, {PtrIn});
 
     auto VecCopyMI = MIB.buildInstr(TargetOpcode::COPY, {VecOut}, {})
-                         .addReg(OutSparseVecLow, 0, AIE2::sub_sparse_x);
+                         .addReg(OutSparseVecLow, RegState::NoFlags, AIE2::sub_sparse_x);
     auto MaskCopyMI = MIB.buildInstr(TargetOpcode::COPY, {MaskOut}, {})
-                          .addReg(OutSparseVecLow, 0, AIE2::sub_sparse_q);
+                          .addReg(OutSparseVecLow, RegState::NoFlags, AIE2::sub_sparse_q);
     constrainOperandRegClass(*MF, TRI, MRI, TII, RBI, *VecCopyMI,
                              AIE2::VEC512RegClass, VecCopyMI->getOperand(0));
     constrainOperandRegClass(*MF, TRI, MRI, TII, RBI, *MaskCopyMI,
@@ -3451,9 +3451,9 @@ bool AIE2InstructionSelector::selectVLDSparseOP_Pseudo(
         getVLDSparseOpcode(I), {OutPtr, OutSparseVec}, {PtrIn, InSparseVecSeq});
 
     auto VecCopyMI = MIB.buildInstr(TargetOpcode::COPY, {VecOut}, {})
-                         .addReg(OutSparseVec, 0, AIE2::sub_sparse_x);
+                         .addReg(OutSparseVec, RegState::NoFlags, AIE2::sub_sparse_x);
     auto MaskCopyMI = MIB.buildInstr(TargetOpcode::COPY, {MaskOut}, {})
-                          .addReg(OutSparseVec, 0, AIE2::sub_sparse_q);
+                          .addReg(OutSparseVec, RegState::NoFlags, AIE2::sub_sparse_q);
     auto PtrCopyMI = MIB.buildInstr(TargetOpcode::COPY, {PtrOut}, {OutPtr});
 
     constrainOperandRegClass(*MF, TRI, MRI, TII, RBI, *PtrCopyMI,

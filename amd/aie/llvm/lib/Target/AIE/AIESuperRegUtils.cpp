@@ -124,7 +124,7 @@ void rewriteFullCopy(MachineInstr &CopyMI, LiveIntervals &LIS,
         BuildMI(*CopyMI.getParent(), CopyMI, CopyMI.getDebugLoc(),
                 TII.get(TargetOpcode::COPY))
             .addReg(DstReg, RegState::Define | AdditionalFlags, SubRegIdx)
-            .addReg(SrcReg, 0, SubRegIdx)
+            .addReg(SrcReg, RegState::NoFlags, SubRegIdx)
             .getInstr();
     // Only for the first copy set the undefined flag
     AdditionalFlags = 0;

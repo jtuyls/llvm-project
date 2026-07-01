@@ -247,17 +247,17 @@ public:
     const Register WReg = MRI.createVirtualRegister(&AIE2PS::VEC256RegClass);
     auto MI =
         MIB.buildInstr(TargetOpcode::COPY, {WReg}, {})
-            .addReg(XReg, 0, low ? AIE2PS::sub_256_lo : AIE2PS::sub_256_hi);
+            .addReg(XReg, RegState::NoFlags, low ? AIE2PS::sub_256_lo : AIE2PS::sub_256_hi);
     constrainOperandRegClass(*MF, TRI, MRI, TII, RBI, *MI,
                              AIE2PS::VEC512RegClass, MI->getOperand(1));
     const Register GReg = MRI.createVirtualRegister(&AIE2PS::mGsRegClass);
     MI = MIB.buildInstr(TargetOpcode::COPY, {GReg}, {})
-             .addReg(GGReg, 0, low ? AIE2PS::sub_lo_exp : AIE2PS::sub_hi_exp);
+             .addReg(GGReg, RegState::NoFlags, low ? AIE2PS::sub_lo_exp : AIE2PS::sub_hi_exp);
     constrainOperandRegClass(*MF, TRI, MRI, TII, RBI, *MI, AIE2PS::mGGsRegClass,
                              MI->getOperand(1));
     const Register EReg = MRI.createVirtualRegister(&AIE2PS::mEsRegClass);
     MI = MIB.buildInstr(TargetOpcode::COPY, {EReg}, {})
-             .addReg(EEReg, 0, low ? AIE2PS::sub_lo_exp : AIE2PS::sub_hi_exp);
+             .addReg(EEReg, RegState::NoFlags, low ? AIE2PS::sub_lo_exp : AIE2PS::sub_hi_exp);
     constrainOperandRegClass(*MF, TRI, MRI, TII, RBI, *MI, AIE2PS::mEEsRegClass,
                              MI->getOperand(1));
     MIB.buildInstr(TargetOpcode::REG_SEQUENCE, {DstReg}, {})
@@ -2337,11 +2337,11 @@ void AIE2PSInstructionSelector::extractBFP320SubReg(const Register SrcBFP320Reg,
                                                     const Register GReg,
                                                     const Register EReg) {
   MIB.buildInstr(TargetOpcode::COPY, {WReg}, {})
-      .addReg(SrcBFP320Reg, 0, AIE2PS::sub_bfp_v256);
+      .addReg(SrcBFP320Reg, RegState::NoFlags, AIE2PS::sub_bfp_v256);
   MIB.buildInstr(TargetOpcode::COPY, {GReg}, {})
-      .addReg(SrcBFP320Reg, 0, AIE2PS::sub_bfp_g32);
+      .addReg(SrcBFP320Reg, RegState::NoFlags, AIE2PS::sub_bfp_g32);
   MIB.buildInstr(TargetOpcode::COPY, {EReg}, {})
-      .addReg(SrcBFP320Reg, 0, AIE2PS::sub_bfp_e32);
+      .addReg(SrcBFP320Reg, RegState::NoFlags, AIE2PS::sub_bfp_e32);
   return;
 }
 
@@ -2359,7 +2359,7 @@ bool AIE2PSInstructionSelector::extractBFP640SubReg(
   const Register BFP320LReg =
       MRI.createVirtualRegister(&AIE2PS::mEWlv_bisRegClass);
   MIB.buildInstr(TargetOpcode::COPY, {BFP320LReg}, {})
-      .addReg(SrcBFP640Reg, 0, AIE2PS::sub_bfp320_lo);
+      .addReg(SrcBFP640Reg, RegState::NoFlags, AIE2PS::sub_bfp320_lo);
 
   const Register W0Reg = MRI.createVirtualRegister(&AIE2PS::VEC256RegClass);
   const Register G0Reg = MRI.createVirtualRegister(&AIE2PS::mGsRegClass);
@@ -2368,7 +2368,7 @@ bool AIE2PSInstructionSelector::extractBFP640SubReg(
 
   const Register BFP320HReg = MRI.createVirtualRegister(&AIE2PS::mEWhvRegClass);
   MIB.buildInstr(TargetOpcode::COPY, {BFP320HReg}, {})
-      .addReg(SrcBFP640Reg, 0, AIE2PS::sub_bfp320_hi);
+      .addReg(SrcBFP640Reg, RegState::NoFlags, AIE2PS::sub_bfp320_hi);
 
   const Register W1Reg = MRI.createVirtualRegister(&AIE2PS::VEC256RegClass);
   const Register G1Reg = MRI.createVirtualRegister(&AIE2PS::mGsRegClass);
@@ -2408,13 +2408,13 @@ bool AIE2PSInstructionSelector::extractBFP384SubReg(
     return false;
 
   MIB.buildInstr(TargetOpcode::COPY, {DstMantissaReg}, {})
-      .addReg(DstBFP384Reg, 0, AIE2PS::sub_few_bfp_w);
+      .addReg(DstBFP384Reg, RegState::NoFlags, AIE2PS::sub_few_bfp_w);
   MIB.buildInstr(TargetOpcode::COPY, {DstSignBitReg}, {})
-      .addReg(DstBFP384Reg, 0, AIE2PS::sub_few_bfp_f64);
+      .addReg(DstBFP384Reg, RegState::NoFlags, AIE2PS::sub_few_bfp_f64);
   MIB.buildInstr(TargetOpcode::COPY, {DstSubTileReg}, {})
-      .addReg(DstBFP384Reg, 0, AIE2PS::sub_few_bfp_g32);
+      .addReg(DstBFP384Reg, RegState::NoFlags, AIE2PS::sub_few_bfp_g32);
   MIB.buildInstr(TargetOpcode::COPY, {DstExpReg}, {})
-      .addReg(DstBFP384Reg, 0, AIE2PS::sub_few_bfp_e32);
+      .addReg(DstBFP384Reg, RegState::NoFlags, AIE2PS::sub_few_bfp_e32);
   return true;
 }
 
@@ -2448,13 +2448,13 @@ bool AIE2PSInstructionSelector::extractBFP768SubReg(
   // Each fex register is 768 bits with subregisters: two 384 bits few
   const Register BFP384_lo = MRI.createVirtualRegister(&AIE2PS::mFEWmRegClass);
   MIB.buildInstr(TargetOpcode::COPY, {BFP384_lo}, {})
-      .addReg(DstBFP768Reg, 0, AIE2PS::sub_bfp384_lo);
+      .addReg(DstBFP768Reg, RegState::NoFlags, AIE2PS::sub_bfp384_lo);
   extractBFP384SubReg(BFP384_lo, DstMantissa0Reg, DstSign0Reg, DstSubTile0Reg,
                       DstExp0Reg, MRI);
 
   const Register BFP384_hi = MRI.createVirtualRegister(&AIE2PS::mFEWmRegClass);
   MIB.buildInstr(TargetOpcode::COPY, {BFP384_hi}, {})
-      .addReg(DstBFP768Reg, 0, AIE2PS::sub_bfp384_hi);
+      .addReg(DstBFP768Reg, RegState::NoFlags, AIE2PS::sub_bfp384_hi);
   extractBFP384SubReg(BFP384_hi, DstMantissa1Reg, DstSign1Reg, DstSubTile1Reg,
                       DstExp1Reg, MRI);
   return true;

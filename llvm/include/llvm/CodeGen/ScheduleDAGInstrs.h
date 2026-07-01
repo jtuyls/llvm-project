@@ -324,6 +324,10 @@ namespace llvm {
     /// Cleans up after scheduling in the given block.
     virtual void finishBlock();
 
+    // amd/aie/ port: AIE-added memory-disambiguation hook overridden by the AIE
+    // scheduler / dependence helpers.
+    virtual bool mayAlias(SUnit *SUa, SUnit *SUb, bool TBAA) { return true; }
+
     /// Initialize the DAG and common scheduler state for a new
     /// scheduling region. This does not actually create the DAG, only clears
     /// it. The scheduling driver may call BuildSchedGraph multiple times per

@@ -607,9 +607,9 @@ bool AIE2PInstructionSelector::selectVCONVbfp16(MachineInstr &I,
     MachineInstrBuilder MI = MIB.buildInstr(OpCode, {DstReg}, {SrcReg});
 
     auto MantCopyMI = MIB.buildInstr(TargetOpcode::COPY, {DstReg1}, {})
-                          .addReg(DstReg, 0, AIE2P::sub_bfp16_x);
+                          .addReg(DstReg, RegState::NoFlags, AIE2P::sub_bfp16_x);
     auto ExpCopyMI = MIB.buildInstr(TargetOpcode::COPY, {DstReg2}, {})
-                         .addReg(DstReg, 0, AIE2P::sub_bfp16_e);
+                         .addReg(DstReg, RegState::NoFlags, AIE2P::sub_bfp16_e);
     constrainOperandRegClass(*MF, TRI, MRI, TII, RBI, *MantCopyMI,
                              AIE2P::VEC512RegClass, MantCopyMI->getOperand(0));
     constrainOperandRegClass(*MF, TRI, MRI, TII, RBI, *ExpCopyMI,
@@ -636,9 +636,9 @@ bool AIE2PInstructionSelector::selectVCONVbfp16(MachineInstr &I,
     MachineInstrBuilder MI = MIB.buildInstr(OpCode, {DstReg}, {SrcReg});
 
     auto MantCopyMI = MIB.buildInstr(TargetOpcode::COPY, {DstReg1}, {})
-                          .addReg(DstReg, 0, AIE2P::sub_bfp16_x);
+                          .addReg(DstReg, RegState::NoFlags, AIE2P::sub_bfp16_x);
     auto ExpCopyMI = MIB.buildInstr(TargetOpcode::COPY, {DstReg2}, {})
-                         .addReg(DstReg, 0, AIE2P::sub_bfp16_e);
+                         .addReg(DstReg, RegState::NoFlags, AIE2P::sub_bfp16_e);
     constrainOperandRegClass(*MF, TRI, MRI, TII, RBI, *MantCopyMI,
                              AIE2P::VEC512RegClass, MantCopyMI->getOperand(0));
     constrainOperandRegClass(*MF, TRI, MRI, TII, RBI, *ExpCopyMI,
@@ -772,9 +772,9 @@ bool AIE2PInstructionSelector::buildAndConstrainFifoLoadCopies(
     MachineRegisterInfo &MRI) {
 
   auto CopyMI1 = MIB.buildInstr(TargetOpcode::COPY, {MantissaDst}, {})
-                     .addReg(Bfp16VecDest, 0, AIE2P::sub_bfp16_x);
+                     .addReg(Bfp16VecDest, RegState::NoFlags, AIE2P::sub_bfp16_x);
   auto CopyMI2 = MIB.buildInstr(TargetOpcode::COPY, {ExponentDst}, {})
-                     .addReg(Bfp16VecDest, 0, AIE2P::sub_bfp16_e);
+                     .addReg(Bfp16VecDest, RegState::NoFlags, AIE2P::sub_bfp16_e);
 
   return constrainOperandRegClass(*MF, TRI, MRI, TII, RBI, *CopyMI2,
                                   AIE2P::EXPVEC64RegClass,
@@ -3792,9 +3792,9 @@ bool AIE2PInstructionSelector ::selectVSHUFFLE_BFP(MachineInstr &I,
       MIB.buildInstr(OpCode, {DstReg}, {Src1Reg, Src2Reg, Mode});
 
   auto MantCopyMI = MIB.buildInstr(TargetOpcode::COPY, {DstMant}, {})
-                        .addReg(DstReg, 0, AIE2P::sub_bfp16_x);
+                        .addReg(DstReg, RegState::NoFlags, AIE2P::sub_bfp16_x);
   auto ExpCopyMI = MIB.buildInstr(TargetOpcode::COPY, {DstExp}, {})
-                       .addReg(DstReg, 0, AIE2P::sub_bfp16_e);
+                       .addReg(DstReg, RegState::NoFlags, AIE2P::sub_bfp16_e);
   constrainOperandRegClass(*MF, TRI, MRI, TII, RBI, *MantCopyMI,
                            AIE2P::VEC512RegClass, MantCopyMI->getOperand(0));
 

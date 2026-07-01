@@ -130,10 +130,11 @@ bool AIE2PSTargetLowering::functionArgumentNeedsConsecutiveRegisters(
   return false;
 }
 
-bool AIE2PSTargetLowering::getTgtMemIntrinsic(IntrinsicInfo &Info,
-                                              const CallInst &I,
+void AIE2PSTargetLowering::getTgtMemIntrinsic(SmallVectorImpl<IntrinsicInfo> &Infos,
+                                              const CallBase &I,
                                               MachineFunction &MF,
                                               unsigned Intrinsic) const {
+  IntrinsicInfo Info;
   switch (Intrinsic) {
   case Intrinsic::aie2ps_fifo_ld_fill:
   case Intrinsic::aie2ps_fifo_ld_fillx:
@@ -158,7 +159,8 @@ bool AIE2PSTargetLowering::getTgtMemIntrinsic(IntrinsicInfo &Info,
     Info.ptrVal = I.getArgOperand(0);
     Info.align = Align(1); // Can we somehow recover the original alignment?
     Info.flags = MachineMemOperand::MOLoad;
-    return true;
+    Infos.push_back(Info);
+    return;
 
   case Intrinsic::aie2ps_fifo_st_push_512:
   case Intrinsic::aie2ps_fifo_st_push_BFP384:
@@ -180,7 +182,8 @@ bool AIE2PSTargetLowering::getTgtMemIntrinsic(IntrinsicInfo &Info,
     Info.ptrVal = I.getArgOperand(0);
     Info.align = Align(4); // Can we somehow recover the original alignment?
     Info.flags = MachineMemOperand::MOStore;
-    return true;
+    Infos.push_back(Info);
+    return;
   }
-  return false;
+  return;
 }

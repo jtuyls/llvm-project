@@ -1112,7 +1112,7 @@ bool AIEBaseInstructionSelector::selectG_TRUNC(MachineInstr &I,
   if (SrcSize == 64) {
     Register DstReg = I.getOperand(0).getReg();
     MachineInstrBuilder MI = MIB.buildInstr(TargetOpcode::COPY, {DstReg}, {})
-                                 .addReg(SrcReg, 0, SubRegIdx);
+                                 .addReg(SrcReg, RegState::NoFlags, SubRegIdx);
     I.eraseFromParent();
     return selectCopy(*MI.getInstr(), MRI);
   } else if (SrcTy.isVector()) {
@@ -1274,7 +1274,7 @@ bool AIEBaseInstructionSelector::selectG_AIE_UNPAD_VECTOR(
 
   // Select using a COPY to a 256-bit register.
   MachineInstr *CopyMI = MIB.buildInstr(TargetOpcode::COPY, {DstReg}, {})
-                             .addReg(SrcReg, 0, getSub256LoIdx());
+                             .addReg(SrcReg, RegState::NoFlags, getSub256LoIdx());
   constrainOperandRegClass(MF, TRI, MRI, TII, RBI, *CopyMI, getVEC256RegClass(),
                            CopyMI->getOperand(0));
   I.eraseFromParent();

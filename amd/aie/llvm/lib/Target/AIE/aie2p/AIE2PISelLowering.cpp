@@ -99,10 +99,11 @@ bool AIE2PTargetLowering::functionArgumentNeedsConsecutiveRegisters(
   return false;
 }
 
-bool AIE2PTargetLowering::getTgtMemIntrinsic(IntrinsicInfo &Info,
-                                             const CallInst &I,
+void AIE2PTargetLowering::getTgtMemIntrinsic(SmallVectorImpl<IntrinsicInfo> &Infos,
+                                             const CallBase &I,
                                              MachineFunction &MF,
                                              unsigned Intrinsic) const {
+  IntrinsicInfo Info;
   switch (Intrinsic) {
   case Intrinsic::aie2p_fifo_ld_fill:
   case Intrinsic::aie2p_fifo_ld_fillx:
@@ -127,7 +128,8 @@ bool AIE2PTargetLowering::getTgtMemIntrinsic(IntrinsicInfo &Info,
     Info.ptrVal = I.getArgOperand(0);
     Info.align = Align(1); // Can we somehow recover the original alignment?
     Info.flags = MachineMemOperand::MOLoad;
-    return true;
+    Infos.push_back(Info);
+    return;
 
   case Intrinsic::aie2p_fifo_st_push_512_bfp16:
   case Intrinsic::aie2p_fifo_st_push_576_bfp16:
@@ -148,9 +150,10 @@ bool AIE2PTargetLowering::getTgtMemIntrinsic(IntrinsicInfo &Info,
     Info.ptrVal = I.getArgOperand(0);
     Info.align = Align(4); // Can we somehow recover the original alignment?
     Info.flags = MachineMemOperand::MOStore;
-    return true;
+    Infos.push_back(Info);
+    return;
   }
-  return false;
+  return;
 }
 
 MVT AIE2PTargetLowering::getRegisterTypeForCallingConvAssignment(

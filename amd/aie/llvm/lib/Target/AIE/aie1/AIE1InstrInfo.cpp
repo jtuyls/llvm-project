@@ -489,7 +489,7 @@ void AIEInstrInfo::storeRegToStackSlot(MachineBasicBlock &MBB,
     // Spill high and low separately
     // FIXME : seems to write to the same location twice
     BuildMI(MBB, I, DL, get(AIE::ST_SPIL_GPR))
-        .addReg(SrcReg, 0, AIE::sub_32_lo)
+        .addReg(SrcReg, RegState::NoFlags, AIE::sub_32_lo)
         .addFrameIndex(FI)
         .addMemOperand(CreateMMO(FI));
     BuildMI(MBB, I, DL, get(AIE::ST_SPIL_GPR))
