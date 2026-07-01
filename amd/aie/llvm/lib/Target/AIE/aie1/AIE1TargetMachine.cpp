@@ -79,7 +79,7 @@ TargetPassConfig *AIETargetMachine::createPassConfig(PassManagerBase &PM) {
 
 TargetTransformInfo
 AIETargetMachine::getTargetTransformInfo(const Function &F) const {
-  return TargetTransformInfo(AIETTIImpl(this, F));
+  return TargetTransformInfo(std::make_unique<AIETTIImpl>(this, F)); // amd/aie/ port: 23 takes unique_ptr
 }
 
 bool AIEPassConfig::addInstSelector() {

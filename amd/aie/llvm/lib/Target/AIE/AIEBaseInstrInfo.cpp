@@ -613,7 +613,7 @@ bool AIEBaseInstrInfo::foldImmediate(MachineInstr &UseMI, MachineInstr &DefMI,
   const MCInstrDesc &NewMCID = get(*NewOpc);
   const TargetRegisterInfo *TRI = MRI->getTargetRegisterInfo();
   const MachineFunction &MF = *UseMI.getParent()->getParent();
-  if (const TargetRegisterClass *OpRC = getRegClass(NewMCID, 0, TRI, MF)) {
+  if (const TargetRegisterClass *OpRC = getRegClass(NewMCID, 0)) {
     if (!MRI->constrainRegClass(DstReg, OpRC))
       return false;
   }
@@ -638,7 +638,7 @@ AIEBaseInstrInfo::getMBBSizeInBytes(const MachineBasicBlock &MBB) const {
   return Size;
 }
 
-unsigned computeRegStateFlags(const MachineOperand &RegOp) {
+RegState computeRegStateFlags(const MachineOperand &RegOp) {
   assert(RegOp.isReg() && "Not a register operand");
   assert(!RegOp.getSubReg() && "RegOp has SubReg flags set");
   return getDefRegState(RegOp.isDef()) | getKillRegState(RegOp.isKill()) |
@@ -703,7 +703,7 @@ void AIEBaseInstrInfo::expandSpillPseudo(
   const MachineOperand &RegOp = MI.getOperand(0);
   Register Reg = RegOp.getReg();
   assert(Reg.isPhysical() && "Expected physical register for spill expansion");
-  unsigned RegFlags = computeRegStateFlags(RegOp);
+  RegState RegFlags = computeRegStateFlags(RegOp);
   int64_t Offset =
       OffsetVal.has_value() ? *OffsetVal : MI.getOperand(1).getImm();
   auto &MBB = *MI.getParent();

@@ -4445,7 +4445,7 @@ bool AIE2PSInstructionSelector::selectWideG_AIE_LOAD_STORE(
     for (int SubRegIdx = SplitFactor - 1; SubRegIdx >= 0; SubRegIdx--) {
       const unsigned Offset = SubRegIdx * 64;
       auto Copy = MIB.buildInstr(TargetOpcode::COPY, {SubRegs[SubRegIdx]}, {})
-                      .addReg(AMI.SrcDstOp.getReg(), 0,
+                      .addReg(AMI.SrcDstOp.getReg(), RegState::NoFlags,
                               SubRegIdxes[SubRegIdx % SubRegIdxes.size()]);
       MachineInstrBuilder StoreInstr;
       if (SubRegIdx == 0) {
@@ -4474,7 +4474,7 @@ bool AIE2PSInstructionSelector::selectWideG_AIE_LOAD_STORE(
     for (unsigned SubRegIdx = 0; SubRegIdx < SplitFactor; ++SubRegIdx) {
       const unsigned Offset = SubRegIdx * 64;
       auto Copy = MIB.buildInstr(TargetOpcode::COPY, {SubRegs[SubRegIdx]}, {})
-                      .addReg(AMI.SrcDstOp.getReg(), 0,
+                      .addReg(AMI.SrcDstOp.getReg(), RegState::NoFlags,
                               SubRegIdxes[SubRegIdx % SubRegIdxes.size()]);
       MachineInstrBuilder StoreInstr;
       if (SubRegIdx == 0) {

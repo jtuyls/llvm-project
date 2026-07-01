@@ -9,6 +9,7 @@
 //===----------------------------------------------------------------------===//
 
 #include "AIETargetObjectFile.h"
+#include "llvm/IR/GlobalVariable.h" // amd/aie/ port
 #include "aie1/AIE1TargetMachine.h"
 #include "llvm/BinaryFormat/ELF.h"
 #include "llvm/MC/MCContext.h"

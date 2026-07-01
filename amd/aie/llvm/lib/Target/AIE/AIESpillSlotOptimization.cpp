@@ -85,7 +85,7 @@ struct SpillPoint {
   int FI = -1;
   bool IsStore = false;
   bool DecomposeProfitable = false;
-  unsigned RegFlags = 0;
+  RegState RegFlags = RegState::NoFlags; // amd/aie/ port
   SmallVector<SubRegInfo, 8> SubRegs;
 
   SpillPoint(MachineInstr &MI, int FI, uint64_t SlotSize,
@@ -431,7 +431,7 @@ void AIESpillSlotOptimization::emitSubRegAccess(
 
   MachineInstr &MI = *SP.MI;
   MachineBasicBlock &MBB = *MI.getParent();
-  const bool IsKill = SP.RegFlags & RegState::Kill;
+  const bool IsKill = (SP.RegFlags & RegState::Kill) != RegState::NoFlags;
 
   // Use TII methods to create spill/reload with correct pseudo opcodes.
   if (SP.IsStore) {
@@ -444,7 +444,7 @@ void AIESpillSlotOptimization::emitSubRegAccess(
 
   MachineInstr &NewMI = *std::prev(MI.getIterator());
   // Make sure to copy Renamable Attributes for MachineCopy Coalescing
-  const bool IsRenamable = SP.RegFlags & RegState::Renamable;
+  const bool IsRenamable = (SP.RegFlags & RegState::Renamable) != RegState::NoFlags;
   NewMI.getOperand(0).setIsRenamable(IsRenamable);
   LLVM_DEBUG(dbgs() << "    Created spill for " << printReg(SI.Reg, TRI)
                     << " -> %stack." << R.NewFI << "\n");
