@@ -298,6 +298,7 @@ namespace CallingConv {
     CHERIoT_LibraryCall = 127,
 
     /// The highest possible ID. Must be some 2^k - 1.
+    AIE_PreserveAll_Vec = 200, // amd/aie/ port
     MaxID = 1023
   };
 

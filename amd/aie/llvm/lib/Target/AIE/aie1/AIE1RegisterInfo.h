@@ -42,8 +42,7 @@ struct AIERegisterInfo : public AIEGenRegisterInfo {
 
   Register getFrameRegister(const MachineFunction &MF) const override;
 
-  const TargetRegisterClass *getPointerRegClass(const MachineFunction &MF,
-                                                unsigned Kind) const override;
+  const TargetRegisterClass *getPointerRegClass(unsigned Kind) const override;
 
   bool requiresRegisterScavenging(const MachineFunction &MF) const override {
     return true;
