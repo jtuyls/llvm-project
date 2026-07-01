@@ -139,14 +139,6 @@ public:
     }
 
     SlotBits NewSlots = FormatInterface->getSlotInfo(FinalSlot)->getSlotSet();
-    if (OccupiedSlots & NewSlots) { // amd/aie/ port: diagnostic
-      llvm::errs() << "AIE-BUNDLE-CONFLICT OpCode=" << OpCode
-                   << " NewSlots=" << NewSlots << " OccupiedSlots=" << OccupiedSlots
-                   << " bundle-size=" << Instrs.size() << "\n";
-      if constexpr (std::is_same_v<I, llvm::MachineInstr>)
-        for (auto *EI : Instrs)
-          llvm::errs() << "  in-bundle: op=" << EI->getOpcode() << " " << *EI;
-    }
     assert(!(OccupiedSlots & NewSlots) && "Selected slot already occupied");
     SlotMap[FinalSlot] = Instr;
     OccupiedSlots |= NewSlots;

@@ -1,0 +1,10 @@
+ninja: Entering directory `build'
+[1/8] Generating VCSRevision.h
+[2/8] Building CXX object lib/Object/CMakeFiles/LLVMObject.dir/IRSymtab.cpp.o
+[3/8] Linking CXX static library lib/libLLVMObject.a
+[4/8] Building CXX object lib/CodeGen/CMakeFiles/LLVMCodeGen.dir/ScheduleDAGInstrs.cpp.o
+[5/8] Linking CXX static library lib/libLLVMCodeGen.a
+[6/8] Building CXX object lib/CodeGen/AsmPrinter/CMakeFiles/LLVMAsmPrinter.dir/AsmPrinter.cpp.o
+[7/8] Linking CXX static library lib/libLLVMAsmPrinter.a
+[8/8] Linking CXX executable bin/llc
+DONE_RC=0

@@ -2962,7 +2962,6 @@ unsigned SchedBoundary::countResource(const MCSchedClassDesc *SC, unsigned PIdx,
 
 /// Move the boundary of scheduled code by one SUnit.
 void SchedBoundary::bumpNode(SUnit *SU, int DeltaCycles) {
-  (void)DeltaCycles; // amd/aie/ port: honored by AIE's scheduler overrides.
   // checkHazard should prevent scheduling multiple instructions per cycle that
   // exceed the issue width.
   const MCSchedClassDesc *SC = DAG->getSchedClass(SU);
@@ -3096,7 +3095,10 @@ void SchedBoundary::bumpNode(SUnit *SU, int DeltaCycles) {
       // scheduling, clear the pipeline state before emitting.
       HazardRec->Reset();
     }
-    HazardRec->EmitInstruction(SU);
+    // amd/aie/ port: thread DeltaCycles so AIE emits into the scoreboard at the
+    // correct (exposed-pipeline) cycle; otherwise later hazard checks miss the
+    // resources of already-scheduled instructions.
+    HazardRec->EmitInstruction(SU, DeltaCycles);
     // Scheduling an instruction may have made pending instructions available.
     CheckPending = true;
   }
