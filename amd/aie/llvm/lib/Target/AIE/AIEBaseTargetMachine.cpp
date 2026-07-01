@@ -205,6 +205,12 @@ AIEBaseTargetMachine::AIEBaseTargetMachine(const Target &T, const Triple &TT,
   initAsmInfo();
   EnableCustomAliasAnalysis = EnableCustomAliasAnalysisOpt;
 
+  // amd/aie/ port: AIE represents bfloat16 (and other non-default LLTs) in
+  // GlobalISel. LLVM 23 gates such types behind LLT::setUseExtended(true)
+  // (IRTranslator::mayTranslateUserTypes rejects bf16 otherwise, as AArch64 /
+  // WebAssembly do). llvm-aie predates this gate; enable it here.
+  LLT::setUseExtended(true);
+
   setMBBPlacementOpts();
   setAliasAnalysisOpts();
   setPipelinerOpts();
