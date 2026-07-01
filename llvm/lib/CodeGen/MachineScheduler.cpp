@@ -2914,8 +2914,8 @@ void SchedBoundary::releaseNode(SUnit *SU, unsigned ReadyCycle, bool InPQueue,
   bool IsBuffered = SchedModel->getMicroOpBufferSize() != 0;
   // amd/aie/ port: defer to the strategy's isAvailableNode so AIE's exposed-
   // pipeline (delta-cycle) availability is honored.
-  bool IsAvailable =
-      SchedImpl->isAvailableNode(*SU, *this, /*VerifyReadyCycle=*/!IsBuffered);
+  bool IsAvailable = DAG->getSchedImpl()->isAvailableNode(
+      *SU, *this, /*VerifyReadyCycle=*/!IsBuffered);
 
   if (IsAvailable && Available.size() < ReadyListLimit) {
     Available.push(SU);
@@ -3238,7 +3238,8 @@ SUnit *SchedBoundary::pickOnlyChoice() {
   // Defer any ready instrs that now have a hazard.
   for (ReadyQueue::iterator I = Available.begin(); I != Available.end();) {
     // amd/aie/ port: use the strategy's availability (exposed-pipeline aware).
-    if (!SchedImpl->isAvailableNode(**I, *this, /*VerifyReadyCycle=*/false)) {
+    if (!DAG->getSchedImpl()->isAvailableNode(**I, *this,
+                                              /*VerifyReadyCycle=*/false)) {
       Pending.push(*I);
       I = Available.remove(I);
       continue;

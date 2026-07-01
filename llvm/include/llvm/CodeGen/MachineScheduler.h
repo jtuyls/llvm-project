@@ -435,6 +435,10 @@ public:
   void startBlock(MachineBasicBlock *bb) override;
   void finishBlock() override;
 
+  // amd/aie/ port: expose the strategy so SchedBoundary can query AIE's
+  // exposed-pipeline availability (isAvailableNode).
+  MachineSchedStrategy *getSchedImpl() const { return SchedImpl.get(); }
+
   // amd/aie/ port: forward the per-function/block-iteration hooks to the
   // strategy so AIE's inter-block scheduler drives block order.
   void startSchedule(MachineFunction *MF) override { SchedImpl->enterFunction(MF); }
