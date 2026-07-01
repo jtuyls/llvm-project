@@ -290,6 +290,11 @@ void ScheduleDAGInstrs::addSchedBarrierDeps() {
       }
     }
   }
+  // amd/aie/ port: DAG construction can run with BB = nullptr (AIE's
+  // DataDependenceHelper). In that mode there is no region/successor info to
+  // consult, so stop here rather than dereferencing a null BB.
+  if (!BB)
+    return;
   if (!ExitMI || (!ExitMI->isCall() && !ExitMI->isBarrier())) {
     // For others, e.g. fallthrough, conditional branch, assume the exit
     // uses all the registers that are livein to the successor blocks.
