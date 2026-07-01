@@ -14,6 +14,7 @@
 //===--------------------------------------------------------------------===//
 
 #include "AIECombinerBase.h"
+#include "llvm/CodeGen/GlobalISel/LegalizerInfo.h" // amd/aie/ port: LegalityQuery complete type
 #include "AIECombinerHelper.h"
 #include "AIECombiners.h"
 #include "llvm/CodeGen/GlobalISel/CSEInfo.h"

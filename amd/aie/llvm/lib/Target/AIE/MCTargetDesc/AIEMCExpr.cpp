@@ -14,6 +14,7 @@
 //===----------------------------------------------------------------------===//
 
 #include "AIEMCExpr.h"
+#include "llvm/MC/MCAsmInfo.h" // amd/aie/ port: MCAsmInfo::printExpr
 #include "AIE.h"
 #include "llvm/MC/MCAssembler.h"
 #include "llvm/MC/MCContext.h"
@@ -37,19 +38,18 @@ void AIEMCExpr::printImpl(raw_ostream &OS, const MCAsmInfo *MAI) const {
   bool isSymRefExpr = Expr->getKind() == ExprKind::SymbolRef;
   if (!isSymRefExpr)
     OS << '(';
-  Expr->print(OS, MAI);
+  // amd/aie/ port: MCExpr::print is private in 23; MCAsmInfo is its friend.
+  if (MAI)
+    MAI->printExpr(OS, *Expr);
   if (!isSymRefExpr)
     OS << ')';
 }
 
 
 bool AIEMCExpr::evaluateAsRelocatableImpl(MCValue &Res,
-                                            const MCAssembler *Layout,
-                                            const MCFixup *Fixup) const {
-  // if (Kind == VK_AIE_PCREL_LO && evaluatePCRelLo(Res, Layout, Fixup))
-  //   return true;
-
-  if (!getSubExpr()->evaluateAsRelocatable(Res, Layout, Fixup))
+                                          const MCAssembler *Layout) const {
+  // amd/aie/ port: 23 dropped the trailing MCFixup* param.
+  if (!getSubExpr()->evaluateAsRelocatable(Res, Layout))
     return false;
 
   // // Some custom fixup types are not valid with symbol difference expressions

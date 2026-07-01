@@ -27,7 +27,7 @@ public:
       : AIEBaseAsmBackend(STI, OSABI, Options) {}
   ~AIE1AsmBackend() override {}
 
-  unsigned getNumFixupKinds() const override {
+  unsigned getNumFixupKinds() const { // amd/aie/ port: 23 removed the base virtual
     return AIE::NumTargetFixupKinds;
   }
 

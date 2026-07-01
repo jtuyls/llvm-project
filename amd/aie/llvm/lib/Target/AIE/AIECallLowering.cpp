@@ -124,7 +124,8 @@ struct AIEOutgoingValueHandler : public CallLowering::OutgoingValueHandler {
   }
 
   void assignValueToReg(Register ValVReg, Register PhysReg,
-                        const CCValAssign &VA) override {
+                        const CCValAssign &VA,
+                        ISD::ArgFlagsTy Flags) override { // amd/aie/ port: 23 added Flags
     assert(VA.isRegLoc() && "Value shouldn't be assigned to reg");
     assert(VA.getLocReg() == PhysReg && "Assigning to the wrong reg?");
 
@@ -350,9 +351,10 @@ struct AIEIncomingValueHandler : public CallLowering::IncomingValueHandler {
   }
 
   void assignValueToReg(Register ValVReg, Register PhysReg,
-                        const CCValAssign &VA) override {
+                        const CCValAssign &VA,
+                        ISD::ArgFlagsTy Flags) override { // amd/aie/ port: 23 added Flags
     markPhysRegUsed(PhysReg);
-    IncomingValueHandler::assignValueToReg(ValVReg, PhysReg, VA);
+    IncomingValueHandler::assignValueToReg(ValVReg, PhysReg, VA, Flags);
   }
 
   /// Marking a physical register as used is different between formal

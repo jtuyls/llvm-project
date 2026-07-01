@@ -51,7 +51,7 @@ public:
     }
 
     assert(MO.isExpr() && "Unknown operand kind in printOperand");
-    MO.getExpr()->print(O, &MAI);
+    MAI.printExpr(O, *MO.getExpr());
   }
   virtual void printInstruction(const MCInst *MI, uint64_t Address,
                                 const MCSubtargetInfo &STI, raw_ostream &O) = 0;

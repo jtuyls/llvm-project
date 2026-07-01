@@ -29,15 +29,15 @@ static uint64_t adjustFixupValue(const MCFixup &Fixup, uint64_t Value,
   }
 }
 
-void AIEBaseAsmBackend::applyFixup(const MCAssembler &Asm, const MCFixup &Fixup,
-                                   const MCValue &Target,
-                                   MutableArrayRef<char> Data, uint64_t Value,
-                                   bool IsResolved,
-                                   const MCSubtargetInfo *STI) const {
+// amd/aie/ port: 23 signature — MCFragment (not MCAssembler), raw uint8_t* Data
+// that already points at the fixup offset, no trailing MCSubtargetInfo*.
+void AIEBaseAsmBackend::applyFixup(const MCFragment &F, const MCFixup &Fixup,
+                                   const MCValue &Target, uint8_t *Data,
+                                   uint64_t Value, bool IsResolved) {
   if (!Value)
     return; // Doesn't change encoding.
 
-  MCContext &Ctx = Asm.getContext();
+  MCContext &Ctx = getContext();
 
   // Apply any target-specific value adjustments.
   Value = adjustFixupValue(Fixup, Value, Ctx);
@@ -47,16 +47,12 @@ void AIEBaseAsmBackend::applyFixup(const MCAssembler &Asm, const MCFixup &Fixup,
   // Shift the value into position.
   Value <<= Info.TargetOffset;
 
-  unsigned Offset = Fixup.getOffset();
   unsigned NumBytes = alignTo(Info.TargetSize + Info.TargetOffset, 8) / 8;
 
-  assert(Offset + NumBytes <= Data.size() && "Invalid fixup offset!");
-
-  // For each byte of the fragment that the fixup touches, mask in the
-  // bits from the fixup value.
-  for (unsigned i = 0; i != NumBytes; ++i) {
-    Data[Offset + i] |= uint8_t((Value >> (i * 8)) & 0xff);
-  }
+  // For each byte of the fixup that the value touches, mask in the bits from
+  // the fixup value. In 23, Data already points at the fixup offset.
+  for (unsigned i = 0; i != NumBytes; ++i)
+    Data[i] |= uint8_t((Value >> (i * 8)) & 0xff);
 }
 
 std::unique_ptr<MCObjectTargetWriter>
