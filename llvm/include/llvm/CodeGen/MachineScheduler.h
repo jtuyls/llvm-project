@@ -298,6 +298,10 @@ public:
   /// instruction and updated scheduled/remaining flags in the DAG nodes.
   virtual void schedNode(SUnit *SU, bool IsTopNode) = 0;
 
+  // amd/aie/ port: AIE strategy hooks for per-function enter/leave.
+  virtual void enterFunction(MachineFunction *MF) {}
+  virtual void leaveFunction() {}
+
   /// When all predecessor dependencies have been resolved, free this node for
   /// top-down scheduling.
   virtual void releaseTopNode(SUnit *SU) = 0;
@@ -418,9 +422,9 @@ protected:
   void findRootsAndBiasEdges(SmallVectorImpl<SUnit*> &TopRoots,
                              SmallVectorImpl<SUnit*> &BotRoots);
 
-  void releaseSucc(SUnit *SU, SDep *SuccEdge);
+  virtual void releaseSucc(SUnit *SU, SDep *SuccEdge); // amd/aie/ port: re-virtualized
   void releaseSuccessors(SUnit *SU);
-  void releasePred(SUnit *SU, SDep *PredEdge);
+  virtual void releasePred(SUnit *SU, SDep *PredEdge); // amd/aie/ port: re-virtualized
   void releasePredecessors(SUnit *SU);
 };
 
