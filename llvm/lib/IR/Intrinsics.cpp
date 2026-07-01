@@ -287,6 +287,10 @@ DecodeIITType(unsigned &NextElt, ArrayRef<unsigned char> Infos,
   case IIT_I16:
     OutputTable.push_back(IITDescriptor::get(IITDescriptor::Integer, 16));
     return;
+  // amd/aie/ port: AIE 20-bit integer intrinsic type.
+  case IIT_I20:
+    OutputTable.push_back(IITDescriptor::get(IITDescriptor::Integer, 20));
+    return;
   case IIT_I32:
     OutputTable.push_back(IITDescriptor::get(IITDescriptor::Integer, 32));
     return;

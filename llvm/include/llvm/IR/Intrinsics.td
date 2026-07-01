@@ -312,6 +312,8 @@ def IIT_I8   : IIT_Int<8,   2>;
 def IIT_I16  : IIT_Int<16,  3>;
 def IIT_I32  : IIT_Int<32,  4>;
 def IIT_I64  : IIT_Int<64,  5>;
+// amd/aie/ port: AIE's 20-bit integer intrinsic type (matches llvm-aie encoding).
+def IIT_I20  : IIT_Int<20, 59>;
 def IIT_F16  : IIT_VT<f16,  6>;
 def IIT_F32  : IIT_VT<f32,  7>;
 def IIT_F64  : IIT_VT<f64,  8>;
