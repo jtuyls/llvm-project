@@ -453,7 +453,7 @@ static void createSubRegCopies(ArrayRef<Register> DstRegs, Register SrcReg,
     Register DstReg = DstRegs[Idx];
     unsigned SubReg = SubRegs[Idx];
     MIB.buildInstr(TargetOpcode::COPY, {DstReg}, {})
-        .addReg(SrcReg, /*flags=*/0, SubReg);
+        .addReg(SrcReg, /*flags=*/RegState::NoFlags, SubReg);
   }
 }
 
@@ -1220,7 +1220,7 @@ bool AIEBaseInstructionSelector::selectExtractI128(MachineInstr &I,
 
   // Select using a COPY to a 128-bit register.
   MachineInstr *CopyMI = MIB.buildInstr(TargetOpcode::COPY, {DstReg}, {})
-                             .addReg(SrcReg, 0, SubReg);
+                             .addReg(SrcReg, RegState::NoFlags, SubReg);
   constrainOperandRegClass(MF, TRI, MRI, TII, RBI, *CopyMI, getVEC128RegClass(),
                            CopyMI->getOperand(0));
 
