@@ -58,8 +58,8 @@ private:
 
 public:
   AIEAsmParser(const MCSubtargetInfo &STI, MCAsmParser &Parser,
-               const MCInstrInfo &MII, const MCTargetOptions &Options)
-      : AIEBaseAsmParser(STI, MII, Options, FormatInterface) {
+               const MCInstrInfo &MII)
+      : AIEBaseAsmParser(STI, MII, FormatInterface) {
     // TODO: There might be some stuff we want to initialize
     setAvailableFeatures(ComputeAvailableFeatures(getSTI().getFeatureBits()));
   }
@@ -134,7 +134,7 @@ bool AIEAsmParser::parseIdentifier(OperandVector &Operands) {
   MCRegister RegNo;
   SMLoc Begin;
   SMLoc End;
-  if (parseRegister(RegNo, Begin, End) == MatchOperand_Success) {
+  if (!parseRegister(RegNo, Begin, End)) {
     Operands.push_back(AIEOperand::CreateReg(getContext(), RegNo, Begin, End));
   } else if (matchTokenString(getTok().getString())) {
     // Instructions such as VMOV_mv_mcd have operands that are not immediates or
@@ -145,7 +145,7 @@ bool AIEAsmParser::parseIdentifier(OperandVector &Operands) {
     Lex();
   } else
     return Error(Begin, "operand is not a register, nor a known identifier");
-  return MatchOperand_Success;
+  return false; /* amd/aie/ port: bool success */
 }
 
 void LLVMInitializeAIE1AsmParser() {

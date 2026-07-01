@@ -90,9 +90,8 @@ public:
 
   AIEBaseAsmParser(const llvm::MCSubtargetInfo &STI,
                    const llvm::MCInstrInfo &MII,
-                   const llvm::MCTargetOptions &Options,
                    llvm::AIEBaseMCFormats &Formats)
-      : llvm::MCTargetAsmParser(Options, STI, MII), Bundle(&Formats),
+      : llvm::MCTargetAsmParser(STI, MII), Bundle(&Formats),
         Formats(Formats) {}
 
   // Parse a symbol in a call
@@ -282,7 +281,7 @@ bool AIEBaseAsmParser<Parser, BundleType, OperandType>::parseImmediate(
     return Error(S, "immediates must be integers or identifiers");
   }
   Operands.push_back(OperandType::CreateImm(getContext(), Res, S, E));
-  return MatchOperand_Success;
+  return false; /* amd/aie/ port: bool success */
 }
 
 template <typename Parser, typename BundleType, typename OperandType>
@@ -292,16 +291,16 @@ bool AIEBaseAsmParser<Parser, BundleType, OperandType>::
   switch (IdxToken.getKind()) {
   case AsmToken::Hash:
     if (parseImmediate(Operands))
-      return MatchOperand_ParseFail;
+      return true; /* amd/aie/ port: bool error */
     break;
   case AsmToken::Identifier:
     if (parseIdentifier(Operands))
-      return MatchOperand_ParseFail;
+      return true; /* amd/aie/ port: bool error */
     break;
   default:
     return Error(IdxToken.getLoc(), "unexpected operand");
   }
-  return MatchOperand_Success;
+  return false; /* amd/aie/ port: bool success */
 }
 
 /// parseIndirectOrIndexedMode
@@ -331,7 +330,7 @@ bool AIEBaseAsmParser<Parser, BundleType, OperandType>::
   } else {
     Error(getLexer().getLoc(), "unexpected operand, expected ']'");
   }
-  return MatchOperand_Success;
+  return false; /* amd/aie/ port: bool success */
 }
 
 /// parseOperand:

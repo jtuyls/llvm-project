@@ -1,0 +1,228 @@
+ninja: Entering directory `build'
+[1/6] Building CXX object lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE1AsmParser.cpp.o
+FAILED: lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE1AsmParser.cpp.o 
+CCACHE_CPP2=yes CCACHE_HASHDIR=yes CCACHE_SLOPPINESS=pch_defines,time_macros /usr/bin/ccache /usr/bin/g++ -D_DEBUG -D_GLIBCXX_ASSERTIONS -D_GLIBCXX_USE_CXX11_ABI=1 -D_GNU_SOURCE -D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_EXTENSIVE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AsmParser -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-uninitialized -Wno-nonnull -Wno-class-memaccess -Wno-dangling-reference -Wno-redundant-move -Wno-pessimizing-move -Wno-array-bounds -Wno-stringop-overread -Wno-dangling-pointer -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported -fdiagnostics-color -ffunction-sections -fdata-sections -O3 -DNDEBUG -std=c++17 -fvisibility=hidden -UNDEBUG -fno-exceptions -funwind-tables -fno-rtti -MD -MT lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE1AsmParser.cpp.o -MF lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE1AsmParser.cpp.o.d -o lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE1AsmParser.cpp.o -c /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE1AsmParser.cpp
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE1AsmParser.cpp:34:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h: In member function ‘virtual bool {anonymous}::AIEBaseAsmParser<Parser, BundleType, OperandType>::parseImmediate(llvm::OperandVector&)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h:285:10: error: ‘MatchOperand_Success’ was not declared in this scope; did you mean ‘Match_Success’?
+  285 |   return MatchOperand_Success;
+      |          ^~~~~~~~~~~~~~~~~~~~
+      |          Match_Success
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h: In member function ‘bool {anonymous}::AIEBaseAsmParser<Parser, BundleType, OperandType>::parseSingleIndirectOrIndexedModeOperand(llvm::OperandVector&)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h:295:14: error: ‘MatchOperand_ParseFail’ was not declared in this scope
+  295 |       return MatchOperand_ParseFail;
+      |              ^~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h:299:14: error: ‘MatchOperand_ParseFail’ was not declared in this scope
+  299 |       return MatchOperand_ParseFail;
+      |              ^~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h:304:10: error: ‘MatchOperand_Success’ was not declared in this scope; did you mean ‘Match_Success’?
+  304 |   return MatchOperand_Success;
+      |          ^~~~~~~~~~~~~~~~~~~~
+      |          Match_Success
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h: In member function ‘bool {anonymous}::AIEBaseAsmParser<Parser, BundleType, OperandType>::parseIndirectOrIndexedMode(llvm::OperandVector&)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h:334:10: error: ‘MatchOperand_Success’ was not declared in this scope; did you mean ‘Match_Success’?
+  334 |   return MatchOperand_Success;
+      |          ^~~~~~~~~~~~~~~~~~~~
+      |          Match_Success
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE1AsmParser.cpp: In member function ‘virtual bool {anonymous}::AIEAsmParser::parseIdentifier(llvm::OperandVector&)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE1AsmParser.cpp:137:43: error: ‘MatchOperand_Success’ was not declared in this scope; did you mean ‘Match_Success’?
+  137 |   if (parseRegister(RegNo, Begin, End) == MatchOperand_Success) {
+      |                                           ^~~~~~~~~~~~~~~~~~~~
+      |                                           Match_Success
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE1AsmParser.cpp:148:10: error: ‘MatchOperand_Success’ was not declared in this scope; did you mean ‘Match_Success’?
+  148 |   return MatchOperand_Success;
+      |          ^~~~~~~~~~~~~~~~~~~~
+      |          Match_Success
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h: In instantiation of ‘{anonymous}::AIEBaseAsmParser<Parser, BundleType, OperandType>::AIEBaseAsmParser(const llvm::MCSubtargetInfo&, const llvm::MCInstrInfo&, const llvm::MCTargetOptions&, llvm::AIEBaseMCFormats&) [with Parser = {anonymous}::AIEAsmParser; BundleType = llvm::AIE::Bundle<llvm::MCInst>; OperandType = {anonymous}::AIEOperand]’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE1AsmParser.cpp:62:60:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h:96:24: error: no matching function for call to ‘llvm::MCTargetAsmParser::MCTargetAsmParser(const llvm::MCTargetOptions&, const llvm::MCSubtargetInfo&, const llvm::MCInstrInfo&)’
+   96 |         Formats(Formats) {}
+      |                        ^
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE1AsmParser.cpp:24:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCParser/MCTargetAsmParser.h:348:3: note: candidate: ‘llvm::MCTargetAsmParser::MCTargetAsmParser(const llvm::MCSubtargetInfo&, const llvm::MCInstrInfo&)’
+  348 |   MCTargetAsmParser(const MCSubtargetInfo &STI, const MCInstrInfo &MII);
+      |   ^~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCParser/MCTargetAsmParser.h:348:3: note:   candidate expects 2 arguments, 3 provided
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE1AsmParser.cpp:28:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/TargetRegistry.h: In instantiation of ‘static llvm::MCTargetAsmParser* llvm::RegisterMCAsmParser<MCAsmParserImpl>::Allocator(const llvm::MCSubtargetInfo&, llvm::MCAsmParser&, const llvm::MCInstrInfo&) [with MCAsmParserImpl = {anonymous}::AIEAsmParser]’:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/TargetRegistry.h:1343:44:   required from ‘llvm::RegisterMCAsmParser<MCAsmParserImpl>::RegisterMCAsmParser(llvm::Target&) [with MCAsmParserImpl = {anonymous}::AIEAsmParser]’
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE1AsmParser.cpp:152:56:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/TargetRegistry.h:1349:12: error: no matching function for call to ‘{anonymous}::AIEAsmParser::AIEAsmParser(const llvm::MCSubtargetInfo&, llvm::MCAsmParser&, const llvm::MCInstrInfo&)’
+ 1349 |     return new MCAsmParserImpl(STI, P, MII);
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE1AsmParser.cpp:60:3: note: candidate: ‘{anonymous}::AIEAsmParser::AIEAsmParser(const llvm::MCSubtargetInfo&, llvm::MCAsmParser&, const llvm::MCInstrInfo&, const llvm::MCTargetOptions&)’
+   60 |   AIEAsmParser(const MCSubtargetInfo &STI, MCAsmParser &Parser,
+      |   ^~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE1AsmParser.cpp:60:3: note:   candidate expects 4 arguments, 3 provided
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE1AsmParser.cpp:73:
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIEGenAsmMatcher.inc: At global scope:
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIEGenAsmMatcher.inc:2289:13: warning: ‘llvm::ParseStatus {anonymous}::AIEAsmParser::MatchOperandParserImpl(llvm::OperandVector&, llvm::StringRef, bool)’ defined but not used [-Wunused-function]
+ 2289 | ParseStatus AIEAsmParser::
+      |             ^~~~~~~~~~~~
+[2/6] Building CXX object lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2AsmParser.cpp.o
+FAILED: lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2AsmParser.cpp.o 
+CCACHE_CPP2=yes CCACHE_HASHDIR=yes CCACHE_SLOPPINESS=pch_defines,time_macros /usr/bin/ccache /usr/bin/g++ -D_DEBUG -D_GLIBCXX_ASSERTIONS -D_GLIBCXX_USE_CXX11_ABI=1 -D_GNU_SOURCE -D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_EXTENSIVE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AsmParser -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-uninitialized -Wno-nonnull -Wno-class-memaccess -Wno-dangling-reference -Wno-redundant-move -Wno-pessimizing-move -Wno-array-bounds -Wno-stringop-overread -Wno-dangling-pointer -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported -fdiagnostics-color -ffunction-sections -fdata-sections -O3 -DNDEBUG -std=c++17 -fvisibility=hidden -UNDEBUG -fno-exceptions -funwind-tables -fno-rtti -MD -MT lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2AsmParser.cpp.o -MF lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2AsmParser.cpp.o.d -o lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2AsmParser.cpp.o -c /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2AsmParser.cpp
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2AsmParser.cpp:34:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h: In member function ‘virtual bool {anonymous}::AIEBaseAsmParser<Parser, BundleType, OperandType>::parseImmediate(llvm::OperandVector&)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h:285:10: error: ‘MatchOperand_Success’ was not declared in this scope; did you mean ‘Match_Success’?
+  285 |   return MatchOperand_Success;
+      |          ^~~~~~~~~~~~~~~~~~~~
+      |          Match_Success
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h: In member function ‘bool {anonymous}::AIEBaseAsmParser<Parser, BundleType, OperandType>::parseSingleIndirectOrIndexedModeOperand(llvm::OperandVector&)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h:295:14: error: ‘MatchOperand_ParseFail’ was not declared in this scope
+  295 |       return MatchOperand_ParseFail;
+      |              ^~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h:299:14: error: ‘MatchOperand_ParseFail’ was not declared in this scope
+  299 |       return MatchOperand_ParseFail;
+      |              ^~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h:304:10: error: ‘MatchOperand_Success’ was not declared in this scope; did you mean ‘Match_Success’?
+  304 |   return MatchOperand_Success;
+      |          ^~~~~~~~~~~~~~~~~~~~
+      |          Match_Success
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h: In member function ‘bool {anonymous}::AIEBaseAsmParser<Parser, BundleType, OperandType>::parseIndirectOrIndexedMode(llvm::OperandVector&)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h:334:10: error: ‘MatchOperand_Success’ was not declared in this scope; did you mean ‘Match_Success’?
+  334 |   return MatchOperand_Success;
+      |          ^~~~~~~~~~~~~~~~~~~~
+      |          Match_Success
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2AsmParser.cpp: In member function ‘virtual bool {anonymous}::AIE2AsmParser::parseIdentifier(llvm::OperandVector&)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2AsmParser.cpp:202:43: error: ‘MatchOperand_Success’ was not declared in this scope; did you mean ‘Match_Success’?
+  202 |   if (parseRegister(RegNo, Begin, End) == MatchOperand_Success) {
+      |                                           ^~~~~~~~~~~~~~~~~~~~
+      |                                           Match_Success
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2AsmParser.cpp:225:10: error: ‘MatchOperand_Success’ was not declared in this scope; did you mean ‘Match_Success’?
+  225 |   return MatchOperand_Success;
+      |          ^~~~~~~~~~~~~~~~~~~~
+      |          Match_Success
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h: In instantiation of ‘{anonymous}::AIEBaseAsmParser<Parser, BundleType, OperandType>::AIEBaseAsmParser(const llvm::MCSubtargetInfo&, const llvm::MCInstrInfo&, const llvm::MCTargetOptions&, llvm::AIEBaseMCFormats&) [with Parser = {anonymous}::AIE2AsmParser; BundleType = llvm::AIE::Bundle<llvm::MCInst>; OperandType = {anonymous}::AIE2Operand]’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2AsmParser.cpp:62:60:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h:96:24: error: no matching function for call to ‘llvm::MCTargetAsmParser::MCTargetAsmParser(const llvm::MCTargetOptions&, const llvm::MCSubtargetInfo&, const llvm::MCInstrInfo&)’
+   96 |         Formats(Formats) {}
+      |                        ^
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2AsmParser.cpp:24:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCParser/MCTargetAsmParser.h:348:3: note: candidate: ‘llvm::MCTargetAsmParser::MCTargetAsmParser(const llvm::MCSubtargetInfo&, const llvm::MCInstrInfo&)’
+  348 |   MCTargetAsmParser(const MCSubtargetInfo &STI, const MCInstrInfo &MII);
+      |   ^~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCParser/MCTargetAsmParser.h:348:3: note:   candidate expects 2 arguments, 3 provided
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2AsmParser.cpp:28:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/TargetRegistry.h: In instantiation of ‘static llvm::MCTargetAsmParser* llvm::RegisterMCAsmParser<MCAsmParserImpl>::Allocator(const llvm::MCSubtargetInfo&, llvm::MCAsmParser&, const llvm::MCInstrInfo&) [with MCAsmParserImpl = {anonymous}::AIE2AsmParser]’:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/TargetRegistry.h:1343:44:   required from ‘llvm::RegisterMCAsmParser<MCAsmParserImpl>::RegisterMCAsmParser(llvm::Target&) [with MCAsmParserImpl = {anonymous}::AIE2AsmParser]’
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2AsmParser.cpp:229:58:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/TargetRegistry.h:1349:12: error: no matching function for call to ‘{anonymous}::AIE2AsmParser::AIE2AsmParser(const llvm::MCSubtargetInfo&, llvm::MCAsmParser&, const llvm::MCInstrInfo&)’
+ 1349 |     return new MCAsmParserImpl(STI, P, MII);
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2AsmParser.cpp:60:3: note: candidate: ‘{anonymous}::AIE2AsmParser::AIE2AsmParser(const llvm::MCSubtargetInfo&, llvm::MCAsmParser&, const llvm::MCInstrInfo&, const llvm::MCTargetOptions&)’
+   60 |   AIE2AsmParser(const MCSubtargetInfo &STI, MCAsmParser &Parser,
+      |   ^~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2AsmParser.cpp:60:3: note:   candidate expects 4 arguments, 3 provided
+[3/6] Building CXX object lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2PAsmParser.cpp.o
+FAILED: lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2PAsmParser.cpp.o 
+CCACHE_CPP2=yes CCACHE_HASHDIR=yes CCACHE_SLOPPINESS=pch_defines,time_macros /usr/bin/ccache /usr/bin/g++ -D_DEBUG -D_GLIBCXX_ASSERTIONS -D_GLIBCXX_USE_CXX11_ABI=1 -D_GNU_SOURCE -D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_EXTENSIVE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AsmParser -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-uninitialized -Wno-nonnull -Wno-class-memaccess -Wno-dangling-reference -Wno-redundant-move -Wno-pessimizing-move -Wno-array-bounds -Wno-stringop-overread -Wno-dangling-pointer -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported -fdiagnostics-color -ffunction-sections -fdata-sections -O3 -DNDEBUG -std=c++17 -fvisibility=hidden -UNDEBUG -fno-exceptions -funwind-tables -fno-rtti -MD -MT lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2PAsmParser.cpp.o -MF lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2PAsmParser.cpp.o.d -o lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2PAsmParser.cpp.o -c /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2PAsmParser.cpp
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2PAsmParser.cpp:34:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h: In member function ‘virtual bool {anonymous}::AIEBaseAsmParser<Parser, BundleType, OperandType>::parseImmediate(llvm::OperandVector&)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h:285:10: error: ‘MatchOperand_Success’ was not declared in this scope; did you mean ‘Match_Success’?
+  285 |   return MatchOperand_Success;
+      |          ^~~~~~~~~~~~~~~~~~~~
+      |          Match_Success
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h: In member function ‘bool {anonymous}::AIEBaseAsmParser<Parser, BundleType, OperandType>::parseSingleIndirectOrIndexedModeOperand(llvm::OperandVector&)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h:295:14: error: ‘MatchOperand_ParseFail’ was not declared in this scope
+  295 |       return MatchOperand_ParseFail;
+      |              ^~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h:299:14: error: ‘MatchOperand_ParseFail’ was not declared in this scope
+  299 |       return MatchOperand_ParseFail;
+      |              ^~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h:304:10: error: ‘MatchOperand_Success’ was not declared in this scope; did you mean ‘Match_Success’?
+  304 |   return MatchOperand_Success;
+      |          ^~~~~~~~~~~~~~~~~~~~
+      |          Match_Success
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h: In member function ‘bool {anonymous}::AIEBaseAsmParser<Parser, BundleType, OperandType>::parseIndirectOrIndexedMode(llvm::OperandVector&)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h:334:10: error: ‘MatchOperand_Success’ was not declared in this scope; did you mean ‘Match_Success’?
+  334 |   return MatchOperand_Success;
+      |          ^~~~~~~~~~~~~~~~~~~~
+      |          Match_Success
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2PAsmParser.cpp: In member function ‘virtual bool {anonymous}::AIE2PAsmParser::parseIdentifier(llvm::OperandVector&)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2PAsmParser.cpp:180:43: error: ‘MatchOperand_Success’ was not declared in this scope; did you mean ‘Match_Success’?
+  180 |   if (parseRegister(RegNo, Begin, End) == MatchOperand_Success) {
+      |                                           ^~~~~~~~~~~~~~~~~~~~
+      |                                           Match_Success
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2PAsmParser.cpp:202:10: error: ‘MatchOperand_Success’ was not declared in this scope; did you mean ‘Match_Success’?
+  202 |   return MatchOperand_Success;
+      |          ^~~~~~~~~~~~~~~~~~~~
+      |          Match_Success
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h: In instantiation of ‘{anonymous}::AIEBaseAsmParser<Parser, BundleType, OperandType>::AIEBaseAsmParser(const llvm::MCSubtargetInfo&, const llvm::MCInstrInfo&, const llvm::MCTargetOptions&, llvm::AIEBaseMCFormats&) [with Parser = {anonymous}::AIE2PAsmParser; BundleType = llvm::AIE::Bundle<llvm::MCInst>; OperandType = {anonymous}::AIE2POperand]’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2PAsmParser.cpp:63:60:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h:96:24: error: no matching function for call to ‘llvm::MCTargetAsmParser::MCTargetAsmParser(const llvm::MCTargetOptions&, const llvm::MCSubtargetInfo&, const llvm::MCInstrInfo&)’
+   96 |         Formats(Formats) {}
+      |                        ^
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2PAsmParser.cpp:24:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCParser/MCTargetAsmParser.h:348:3: note: candidate: ‘llvm::MCTargetAsmParser::MCTargetAsmParser(const llvm::MCSubtargetInfo&, const llvm::MCInstrInfo&)’
+  348 |   MCTargetAsmParser(const MCSubtargetInfo &STI, const MCInstrInfo &MII);
+      |   ^~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCParser/MCTargetAsmParser.h:348:3: note:   candidate expects 2 arguments, 3 provided
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2PAsmParser.cpp:28:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/TargetRegistry.h: In instantiation of ‘static llvm::MCTargetAsmParser* llvm::RegisterMCAsmParser<MCAsmParserImpl>::Allocator(const llvm::MCSubtargetInfo&, llvm::MCAsmParser&, const llvm::MCInstrInfo&) [with MCAsmParserImpl = {anonymous}::AIE2PAsmParser]’:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/TargetRegistry.h:1343:44:   required from ‘llvm::RegisterMCAsmParser<MCAsmParserImpl>::RegisterMCAsmParser(llvm::Target&) [with MCAsmParserImpl = {anonymous}::AIE2PAsmParser]’
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2PAsmParser.cpp:216:60:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/TargetRegistry.h:1349:12: error: no matching function for call to ‘{anonymous}::AIE2PAsmParser::AIE2PAsmParser(const llvm::MCSubtargetInfo&, llvm::MCAsmParser&, const llvm::MCInstrInfo&)’
+ 1349 |     return new MCAsmParserImpl(STI, P, MII);
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2PAsmParser.cpp:61:3: note: candidate: ‘{anonymous}::AIE2PAsmParser::AIE2PAsmParser(const llvm::MCSubtargetInfo&, llvm::MCAsmParser&, const llvm::MCInstrInfo&, const llvm::MCTargetOptions&)’
+   61 |   AIE2PAsmParser(const MCSubtargetInfo &STI, MCAsmParser &Parser,
+      |   ^~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2PAsmParser.cpp:61:3: note:   candidate expects 4 arguments, 3 provided
+[4/6] Building CXX object lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2PSAsmParser.cpp.o
+FAILED: lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2PSAsmParser.cpp.o 
+CCACHE_CPP2=yes CCACHE_HASHDIR=yes CCACHE_SLOPPINESS=pch_defines,time_macros /usr/bin/ccache /usr/bin/g++ -D_DEBUG -D_GLIBCXX_ASSERTIONS -D_GLIBCXX_USE_CXX11_ABI=1 -D_GNU_SOURCE -D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_EXTENSIVE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AsmParser -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE -I/home/jtuyls/iree-ai/llvm-aie-port/build/include -I/home/jtuyls/iree-ai/llvm-aie-port/llvm/include -I/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/include -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-uninitialized -Wno-nonnull -Wno-class-memaccess -Wno-dangling-reference -Wno-redundant-move -Wno-pessimizing-move -Wno-array-bounds -Wno-stringop-overread -Wno-dangling-pointer -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported -fdiagnostics-color -ffunction-sections -fdata-sections -O3 -DNDEBUG -std=c++17 -fvisibility=hidden -UNDEBUG -fno-exceptions -funwind-tables -fno-rtti -MD -MT lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2PSAsmParser.cpp.o -MF lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2PSAsmParser.cpp.o.d -o lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2PSAsmParser.cpp.o -c /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2PSAsmParser.cpp
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2PSAsmParser.cpp:33:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h: In member function ‘virtual bool {anonymous}::AIEBaseAsmParser<Parser, BundleType, OperandType>::parseImmediate(llvm::OperandVector&)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h:285:10: error: ‘MatchOperand_Success’ was not declared in this scope; did you mean ‘Match_Success’?
+  285 |   return MatchOperand_Success;
+      |          ^~~~~~~~~~~~~~~~~~~~
+      |          Match_Success
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h: In member function ‘bool {anonymous}::AIEBaseAsmParser<Parser, BundleType, OperandType>::parseSingleIndirectOrIndexedModeOperand(llvm::OperandVector&)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h:295:14: error: ‘MatchOperand_ParseFail’ was not declared in this scope
+  295 |       return MatchOperand_ParseFail;
+      |              ^~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h:299:14: error: ‘MatchOperand_ParseFail’ was not declared in this scope
+  299 |       return MatchOperand_ParseFail;
+      |              ^~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h:304:10: error: ‘MatchOperand_Success’ was not declared in this scope; did you mean ‘Match_Success’?
+  304 |   return MatchOperand_Success;
+      |          ^~~~~~~~~~~~~~~~~~~~
+      |          Match_Success
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h: In member function ‘bool {anonymous}::AIEBaseAsmParser<Parser, BundleType, OperandType>::parseIndirectOrIndexedMode(llvm::OperandVector&)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h:334:10: error: ‘MatchOperand_Success’ was not declared in this scope; did you mean ‘Match_Success’?
+  334 |   return MatchOperand_Success;
+      |          ^~~~~~~~~~~~~~~~~~~~
+      |          Match_Success
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2PSAsmParser.cpp: In member function ‘virtual bool {anonymous}::AIE2PSAsmParser::parseIdentifier(llvm::OperandVector&)’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2PSAsmParser.cpp:208:43: error: ‘MatchOperand_Success’ was not declared in this scope; did you mean ‘Match_Success’?
+  208 |   if (parseRegister(RegNo, Begin, End) == MatchOperand_Success) {
+      |                                           ^~~~~~~~~~~~~~~~~~~~
+      |                                           Match_Success
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2PSAsmParser.cpp:230:10: error: ‘MatchOperand_Success’ was not declared in this scope; did you mean ‘Match_Success’?
+  230 |   return MatchOperand_Success;
+      |          ^~~~~~~~~~~~~~~~~~~~
+      |          Match_Success
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h: In instantiation of ‘{anonymous}::AIEBaseAsmParser<Parser, BundleType, OperandType>::AIEBaseAsmParser(const llvm::MCSubtargetInfo&, const llvm::MCInstrInfo&, const llvm::MCTargetOptions&, llvm::AIEBaseMCFormats&) [with Parser = {anonymous}::AIE2PSAsmParser; BundleType = llvm::AIE::Bundle<llvm::MCInst>; OperandType = {anonymous}::AIE2PSOperand]’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2PSAsmParser.cpp:62:60:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIEBaseAsmParser.h:96:24: error: no matching function for call to ‘llvm::MCTargetAsmParser::MCTargetAsmParser(const llvm::MCTargetOptions&, const llvm::MCSubtargetInfo&, const llvm::MCInstrInfo&)’
+   96 |         Formats(Formats) {}
+      |                        ^
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2PSAsmParser.cpp:23:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCParser/MCTargetAsmParser.h:348:3: note: candidate: ‘llvm::MCTargetAsmParser::MCTargetAsmParser(const llvm::MCSubtargetInfo&, const llvm::MCInstrInfo&)’
+  348 |   MCTargetAsmParser(const MCSubtargetInfo &STI, const MCInstrInfo &MII);
+      |   ^~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/MCParser/MCTargetAsmParser.h:348:3: note:   candidate expects 2 arguments, 3 provided
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2PSAsmParser.cpp:27:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/TargetRegistry.h: In instantiation of ‘static llvm::MCTargetAsmParser* llvm::RegisterMCAsmParser<MCAsmParserImpl>::Allocator(const llvm::MCSubtargetInfo&, llvm::MCAsmParser&, const llvm::MCInstrInfo&) [with MCAsmParserImpl = {anonymous}::AIE2PSAsmParser]’:
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/TargetRegistry.h:1343:44:   required from ‘llvm::RegisterMCAsmParser<MCAsmParserImpl>::RegisterMCAsmParser(llvm::Target&) [with MCAsmParserImpl = {anonymous}::AIE2PSAsmParser]’
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2PSAsmParser.cpp:244:62:   required from here
+/home/jtuyls/iree-ai/llvm-aie-port/llvm/include/llvm/MC/TargetRegistry.h:1349:12: error: no matching function for call to ‘{anonymous}::AIE2PSAsmParser::AIE2PSAsmParser(const llvm::MCSubtargetInfo&, llvm::MCAsmParser&, const llvm::MCInstrInfo&)’
+ 1349 |     return new MCAsmParserImpl(STI, P, MII);
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2PSAsmParser.cpp:60:3: note: candidate: ‘{anonymous}::AIE2PSAsmParser::AIE2PSAsmParser(const llvm::MCSubtargetInfo&, llvm::MCAsmParser&, const llvm::MCInstrInfo&, const llvm::MCTargetOptions&)’
+   60 |   AIE2PSAsmParser(const MCSubtargetInfo &STI, MCAsmParser &Parser,
+      |   ^~~~~~~~~~~~~~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE2PSAsmParser.cpp:60:3: note:   candidate expects 4 arguments, 3 provided
+ninja: build stopped: cannot make progress due to previous errors.
+DONE_RC=1

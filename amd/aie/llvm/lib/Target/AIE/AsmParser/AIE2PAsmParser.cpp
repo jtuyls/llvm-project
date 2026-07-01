@@ -59,8 +59,8 @@ private:
 
 public:
   AIE2PAsmParser(const MCSubtargetInfo &STI, MCAsmParser &Parser,
-                 const MCInstrInfo &MII, const MCTargetOptions &Options)
-      : AIEBaseAsmParser(STI, MII, Options, FormatInterface) {
+                 const MCInstrInfo &MII)
+      : AIEBaseAsmParser(STI, MII, FormatInterface) {
     // TODO: There might be some stuff we want to initialize
     setAvailableFeatures(ComputeAvailableFeatures(getSTI().getFeatureBits()));
   }
@@ -177,7 +177,7 @@ bool AIE2PAsmParser::parseIdentifier(OperandVector &Operands) {
   MCRegister RegNo;
   SMLoc Begin;
   SMLoc End;
-  if (parseRegister(RegNo, Begin, End) == MatchOperand_Success) {
+  if (!parseRegister(RegNo, Begin, End)) {
     // FIXME: Some of the registers in eD and eDS have the same names.
     // Here, we backpatch the string-matched eD registers into their eDS
     // super-register when parsing a .3d instruction.
@@ -199,7 +199,7 @@ bool AIE2PAsmParser::parseIdentifier(OperandVector &Operands) {
     Lex();
   } else
     return Error(Begin, "operand is not a register, nor a known identifier");
-  return MatchOperand_Success;
+  return false; /* amd/aie/ port: bool success */
 }
 
 /// parseImmediate:
