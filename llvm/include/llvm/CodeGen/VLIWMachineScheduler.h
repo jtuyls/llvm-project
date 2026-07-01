@@ -22,6 +22,7 @@
 namespace llvm {
 
 class DFAPacketizer;
+class ResourceCycle; // amd/aie/ port
 class RegisterClassInfo;
 class ScheduleHazardRecognizer;
 class SUnit;
@@ -35,7 +36,7 @@ protected:
   /// ResourcesModel - Represents VLIW state.
   /// Not limited to VLIW targets per se, but assumes definition of resource
   /// model by a target.
-  DFAPacketizer *ResourcesModel;
+  ResourceCycle *ResourcesModel; // amd/aie/ port
 
   const TargetSchedModel *SchedModel;
 
@@ -62,7 +63,7 @@ public:
   bool isInPacket(SUnit *SU) const { return is_contained(Packet, SU); }
 
 protected:
-  virtual DFAPacketizer *createPacketizer(const TargetSubtargetInfo &STI) const;
+  virtual ResourceCycle *createPacketizer(const TargetSubtargetInfo &STI) const; // amd/aie/ port
 };
 
 /// Extend the standard ScheduleDAGMILive to provide more context and override

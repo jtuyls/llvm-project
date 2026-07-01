@@ -117,7 +117,10 @@ void DefaultVLIWScheduler::schedule() {
 VLIWPacketizerList::VLIWPacketizerList(MachineFunction &mf,
                                        MachineLoopInfo &mli, AAResults *aa)
     : MF(mf), TII(mf.getSubtarget().getInstrInfo()), AA(aa) {
-  ResourceTracker = TII->CreateTargetScheduleState(MF.getSubtarget());
+  // amd/aie/ port: CreateTargetScheduleState now returns the ResourceCycle base.
+  ResourceCycle *TSS = TII->CreateTargetScheduleState(MF.getSubtarget());
+  assert(TSS->CanTrackResources && "Expected a DFAPacketizer");
+  ResourceTracker = static_cast<DFAPacketizer *>(TSS);
   ResourceTracker->setTrackResources(true);
   VLIWScheduler = new DefaultVLIWScheduler(MF, mli, AA);
 }

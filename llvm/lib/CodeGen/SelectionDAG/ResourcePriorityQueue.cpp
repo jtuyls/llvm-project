@@ -20,6 +20,7 @@
 
 #include "llvm/CodeGen/ResourcePriorityQueue.h"
 #include "llvm/CodeGen/DFAPacketizer.h"
+#include "llvm/CodeGen/ResourceCycle.h" // amd/aie/ port
 #include "llvm/CodeGen/SelectionDAGISel.h"
 #include "llvm/CodeGen/SelectionDAGNodes.h"
 #include "llvm/CodeGen/TargetInstrInfo.h"

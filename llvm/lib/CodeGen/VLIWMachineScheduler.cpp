@@ -14,6 +14,7 @@
 #include "llvm/CodeGen/VLIWMachineScheduler.h"
 #include "llvm/ADT/SmallVector.h"
 #include "llvm/CodeGen/DFAPacketizer.h"
+#include "llvm/CodeGen/ResourceCycle.h" // amd/aie/ port
 #include "llvm/CodeGen/MachineBasicBlock.h"
 #include "llvm/CodeGen/MachineFunction.h"
 #include "llvm/CodeGen/MachineInstr.h"
@@ -189,7 +190,7 @@ bool VLIWResourceModel::reserveResources(SUnit *SU, bool IsTop) {
   return startNewCycle;
 }
 
-DFAPacketizer *
+ResourceCycle *
 VLIWResourceModel::createPacketizer(const TargetSubtargetInfo &STI) const {
   return STI.getInstrInfo()->CreateTargetScheduleState(STI);
 }

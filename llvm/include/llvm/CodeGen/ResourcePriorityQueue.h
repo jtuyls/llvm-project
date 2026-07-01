@@ -20,6 +20,7 @@
 
 namespace llvm {
   class DFAPacketizer;
+  class ResourceCycle; // amd/aie/ port
   class InstrItineraryData;
   class ResourcePriorityQueue;
   class SelectionDAGISel;
@@ -63,7 +64,7 @@ namespace llvm {
     /// ResourcesModel - Represents VLIW state.
     /// Not limited to VLIW targets per say, but assumes
     /// definition of DFA by a target.
-    std::unique_ptr<DFAPacketizer> ResourcesModel;
+    std::unique_ptr<ResourceCycle> ResourcesModel; // amd/aie/ port
 
     /// Resource model - packet/bundle model. Purely
     /// internal at the time.
