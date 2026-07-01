@@ -45,7 +45,9 @@ class DeadMachineInstructionElim : public MachineFunctionPass {
 public:
   static char ID; // Pass identification, replacement for typeid
 
-  DeadMachineInstructionElim() : MachineFunctionPass(ID) {}
+  bool KeepLifetimeInstructions = false; // amd/aie/ port
+  DeadMachineInstructionElim(bool Keep = false)
+      : MachineFunctionPass(ID), KeepLifetimeInstructions(Keep) {}
 
   bool runOnMachineFunction(MachineFunction &MF) override {
     if (skipFunction(MF.getFunction()))
@@ -127,3 +129,12 @@ bool DeadMachineInstructionElimImpl::eliminateDeadMI(
   NeedAnotherIteration = !NeedsProcessing.empty();
   return AnyChanges;
 }
+
+// amd/aie/ port: legacy factory with KeepLifetimeInstructions (AIE keeps
+// lifetime markers during dead-MI elimination).
+namespace llvm {
+MachineFunctionPass *
+createDeadMachineInstructionElim(bool KeepLifetimeInstructions) {
+  return new DeadMachineInstructionElim(KeepLifetimeInstructions);
+}
+} // namespace llvm

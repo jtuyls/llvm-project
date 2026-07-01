@@ -69,6 +69,9 @@ using namespace llvm;
 /// Enable analysis of recursive PHI nodes.
 static cl::opt<bool> EnableRecPhiAnalysis("basic-aa-recphi", cl::Hidden,
                                           cl::init(true));
+// amd/aie/ port: AIE reads this to gate full PHI analysis.
+cl::opt<bool> EnableFullPHIAnalysis("basic-aa-full-phi-analysis", cl::Hidden,
+                                    cl::init(false));
 
 static cl::opt<bool> EnableSeparateStorageAnalysis("basic-aa-separate-storage",
                                                    cl::Hidden, cl::init(true));

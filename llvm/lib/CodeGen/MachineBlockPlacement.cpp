@@ -137,22 +137,26 @@ static cl::opt<bool>
                                  "precisely by using profile data."),
                         cl::init(false), cl::Hidden);
 
-static cl::opt<bool>
+cl::opt<bool> /* amd/aie/ port: external */
     ForcePreciseRotationCost("force-precise-rotation-cost",
                              cl::desc("Force the use of precise cost "
                                       "loop rotation strategy."),
                              cl::init(false), cl::Hidden);
 
-static cl::opt<unsigned> MisfetchCost(
+cl::opt<unsigned> MisfetchCost( /* amd/aie/ port */
     "misfetch-cost",
     cl::desc("Cost that models the probabilistic risk of an instruction "
              "misfetch due to a jump comparing to falling through, whose cost "
              "is zero."),
     cl::init(1), cl::Hidden);
 
-static cl::opt<unsigned> JumpInstCost("jump-inst-cost",
+cl::opt<unsigned> JumpInstCost( /* amd/aie/ port */"jump-inst-cost",
                                       cl::desc("Cost of jump instructions."),
                                       cl::init(1), cl::Hidden);
+// amd/aie/ port: AIE reads this to tune alias-analysis lookup depth (23 made
+// llvm::MaxLookupSearchDepth a constexpr; provide a runtime opt for AIE).
+cl::opt<unsigned> MaxLookupSearchDepth("aie-basic-aa-max-lookup-search-depth",
+    cl::desc("Max lookup search depth override (AIE)"), cl::init(6), cl::Hidden);
 static cl::opt<bool>
     TailDupPlacement("tail-dup-placement",
                      cl::desc("Perform tail duplication during placement. "

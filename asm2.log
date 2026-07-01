@@ -1,0 +1,63 @@
+ninja: Entering directory `build'
+[1/12] Generating VCSRevision.h
+[2/12] Building CXX object lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIEBaseOperand.cpp.o
+[3/12] Building CXX object lib/Object/CMakeFiles/LLVMObject.dir/IRSymtab.cpp.o
+[4/12] Linking CXX static library lib/libLLVMObject.a
+[5/12] Building CXX object lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE1AsmParser.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE1AsmParser.cpp:73:
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIEGenAsmMatcher.inc:2289:13: warning: ‘llvm::ParseStatus {anonymous}::AIEAsmParser::MatchOperandParserImpl(llvm::OperandVector&, llvm::StringRef, bool)’ defined but not used [-Wunused-function]
+ 2289 | ParseStatus AIEAsmParser::
+      |             ^~~~~~~~~~~~
+[6/12] Building CXX object lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2AsmParser.cpp.o
+[7/12] Building CXX object lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2PAsmParser.cpp.o
+[8/12] Building CXX object lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2PSAsmParser.cpp.o
+[9/12] Linking CXX static library lib/libLLVMAIEAsmParser.a
+[10/12] Building CXX object lib/CodeGen/AsmPrinter/CMakeFiles/LLVMAsmPrinter.dir/AsmPrinter.cpp.o
+[11/12] Linking CXX static library lib/libLLVMAsmPrinter.a
+[12/12] Linking CXX executable bin/llc
+FAILED: bin/llc 
+: && /usr/bin/g++ -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wno-uninitialized -Wno-nonnull -Wno-class-memaccess -Wno-dangling-reference -Wno-redundant-move -Wno-pessimizing-move -Wno-array-bounds -Wno-stringop-overread -Wno-dangling-pointer -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported -fdiagnostics-color -ffunction-sections -fdata-sections -O3 -DNDEBUG -fuse-ld=lld -Wl,--color-diagnostics   -Wl,--export-dynamic tools/llc/CMakeFiles/llc.dir/llc.cpp.o tools/llc/CMakeFiles/llc.dir/NewPMDriver.cpp.o -o bin/llc  -Wl,-rpath,"\$ORIGIN/../lib:"  lib/libLLVMAIEAsmParser.a  lib/libLLVMX86AsmParser.a  lib/libLLVMAIECodeGen.a  lib/libLLVMX86CodeGen.a  lib/libLLVMAIEDesc.a  lib/libLLVMX86Desc.a  lib/libLLVMAIEInfo.a  lib/libLLVMX86Info.a  lib/libLLVMAnalysis.a  lib/libLLVMAsmPrinter.a  lib/libLLVMCodeGen.a  lib/libLLVMCodeGenTypes.a  lib/libLLVMCore.a  lib/libLLVMipo.a  lib/libLLVMIRPrinter.a  lib/libLLVMIRReader.a  lib/libLLVMMC.a  lib/libLLVMMIRParser.a  lib/libLLVMPasses.a  lib/libLLVMPlugins.a  lib/libLLVMRemarks.a  lib/libLLVMScalarOpts.a  lib/libLLVMSelectionDAG.a  lib/libLLVMSupport.a  lib/libLLVMTarget.a  lib/libLLVMTargetParser.a  lib/libLLVMTransformUtils.a  lib/libLLVMVectorize.a  lib/libLLVMAIEAsmPrinter.a  lib/libLLVMAIEUtils.a  lib/libLLVMMCDisassembler.a  lib/libLLVMIRPrinter.a  lib/libLLVMGlobalISel.a  lib/libLLVMSelectionDAG.a  lib/libLLVMCodeGen.a  lib/libLLVMCGData.a  lib/libLLVMCodeGenTypes.a  lib/libLLVMTarget.a  lib/libLLVMCFGuard.a  lib/libLLVMObjCARCOpts.a  lib/libLLVMCoroutines.a  lib/libLLVMipo.a  lib/libLLVMVectorize.a  lib/libLLVMSandboxIR.a  lib/libLLVMInstrumentation.a  lib/libLLVMBitWriter.a  lib/libLLVMFrontendOpenMP.a  lib/libLLVMFrontendOffloading.a  lib/libLLVMObjectYAML.a  lib/libLLVMFrontendAtomic.a  lib/libLLVMFrontendDirective.a  lib/libLLVMLinker.a  lib/libLLVMScalarOpts.a  lib/libLLVMAggressiveInstCombine.a  lib/libLLVMInstCombine.a  lib/libLLVMHipStdPar.a  lib/libLLVMTransformUtils.a  lib/libLLVMAnalysis.a  lib/libLLVMFrontendHLSL.a  lib/libLLVMProfileData.a  lib/libLLVMSymbolize.a  lib/libLLVMDebugInfoGSYM.a  lib/libLLVMDebugInfoDWARF.a  lib/libLLVMDebugInfoPDB.a  lib/libLLVMObject.a  lib/libLLVMIRReader.a  lib/libLLVMAsmParser.a  lib/libLLVMMCParser.a  lib/libLLVMMC.a  lib/libLLVMDebugInfoDWARFLowLevel.a  lib/libLLVMBitReader.a  lib/libLLVMCore.a  lib/libLLVMRemarks.a  lib/libLLVMBitstreamReader.a  lib/libLLVMTextAPI.a  lib/libLLVMBinaryFormat.a  lib/libLLVMTargetParser.a  lib/libLLVMDebugInfoCodeView.a  lib/libLLVMDebugInfoMSF.a  lib/libLLVMDebugInfoBTF.a  lib/libLLVMSupport.a  lib/libLLVMDemangle.a  -lrt  -ldl  -lm  /usr/lib/x86_64-linux-gnu/libz.so  /usr/lib/x86_64-linux-gnu/libzstd.so && :
+ld.lld: error: undefined symbol: JumpInstCost
+>>> referenced by AIEBaseTargetMachine.cpp
+>>>               AIEBaseTargetMachine.cpp.o:(llvm::AIEBaseTargetMachine::setMBBPlacementOpts()) in archive lib/libLLVMAIECodeGen.a
+>>> referenced by AIEBaseTargetMachine.cpp
+>>>               AIEBaseTargetMachine.cpp.o:(llvm::AIEBaseTargetMachine::AIEBaseTargetMachine(llvm::Target const&, llvm::Triple const&, llvm::StringRef, llvm::StringRef, llvm::TargetOptions const&, std::optional<llvm::Reloc::Model>, std::optional<llvm::CodeModel::Model>, llvm::CodeGenOptLevel, bool)) in archive lib/libLLVMAIECodeGen.a
+
+ld.lld: error: undefined symbol: MisfetchCost
+>>> referenced by AIEBaseTargetMachine.cpp
+>>>               AIEBaseTargetMachine.cpp.o:(llvm::AIEBaseTargetMachine::setMBBPlacementOpts()) in archive lib/libLLVMAIECodeGen.a
+>>> referenced by AIEBaseTargetMachine.cpp
+>>>               AIEBaseTargetMachine.cpp.o:(llvm::AIEBaseTargetMachine::AIEBaseTargetMachine(llvm::Target const&, llvm::Triple const&, llvm::StringRef, llvm::StringRef, llvm::TargetOptions const&, std::optional<llvm::Reloc::Model>, std::optional<llvm::CodeModel::Model>, llvm::CodeGenOptLevel, bool)) in archive lib/libLLVMAIECodeGen.a
+
+ld.lld: error: undefined symbol: ForcePreciseRotationCost
+>>> referenced by AIEBaseTargetMachine.cpp
+>>>               AIEBaseTargetMachine.cpp.o:(llvm::AIEBaseTargetMachine::setMBBPlacementOpts()) in archive lib/libLLVMAIECodeGen.a
+>>> referenced by AIEBaseTargetMachine.cpp
+>>>               AIEBaseTargetMachine.cpp.o:(llvm::AIEBaseTargetMachine::AIEBaseTargetMachine(llvm::Target const&, llvm::Triple const&, llvm::StringRef, llvm::StringRef, llvm::TargetOptions const&, std::optional<llvm::Reloc::Model>, std::optional<llvm::CodeModel::Model>, llvm::CodeGenOptLevel, bool)) in archive lib/libLLVMAIECodeGen.a
+
+ld.lld: error: undefined symbol: EnableFullPHIAnalysis
+>>> referenced by AIEBaseTargetMachine.cpp
+>>>               AIEBaseTargetMachine.cpp.o:(llvm::AIEBaseTargetMachine::setAliasAnalysisOpts()) in archive lib/libLLVMAIECodeGen.a
+>>> referenced by AIEBaseTargetMachine.cpp
+>>>               AIEBaseTargetMachine.cpp.o:(llvm::AIEBaseTargetMachine::AIEBaseTargetMachine(llvm::Target const&, llvm::Triple const&, llvm::StringRef, llvm::StringRef, llvm::TargetOptions const&, std::optional<llvm::Reloc::Model>, std::optional<llvm::CodeModel::Model>, llvm::CodeGenOptLevel, bool)) in archive lib/libLLVMAIECodeGen.a
+
+ld.lld: error: undefined symbol: MaxLookupSearchDepth
+>>> referenced by AIEBaseTargetMachine.cpp
+>>>               AIEBaseTargetMachine.cpp.o:(llvm::AIEBaseTargetMachine::setAliasAnalysisOpts()) in archive lib/libLLVMAIECodeGen.a
+>>> referenced by AIEBaseTargetMachine.cpp
+>>>               AIEBaseTargetMachine.cpp.o:(llvm::AIEBaseTargetMachine::AIEBaseTargetMachine(llvm::Target const&, llvm::Triple const&, llvm::StringRef, llvm::StringRef, llvm::TargetOptions const&, std::optional<llvm::Reloc::Model>, std::optional<llvm::CodeModel::Model>, llvm::CodeGenOptLevel, bool)) in archive lib/libLLVMAIECodeGen.a
+
+ld.lld: error: undefined symbol: SwpPragmaAsMaxII
+>>> referenced by AIEBaseTargetMachine.cpp
+>>>               AIEBaseTargetMachine.cpp.o:(llvm::AIEBaseTargetMachine::setPipelinerOpts()) in archive lib/libLLVMAIECodeGen.a
+>>> referenced by AIEBaseTargetMachine.cpp
+>>>               AIEBaseTargetMachine.cpp.o:(llvm::AIEBaseTargetMachine::AIEBaseTargetMachine(llvm::Target const&, llvm::Triple const&, llvm::StringRef, llvm::StringRef, llvm::TargetOptions const&, std::optional<llvm::Reloc::Model>, std::optional<llvm::CodeModel::Model>, llvm::CodeGenOptLevel, bool)) in archive lib/libLLVMAIECodeGen.a
+
+ld.lld: error: undefined symbol: llvm::createDeadMachineInstructionElim(bool)
+>>> referenced by AIE2TargetMachine.cpp
+>>>               AIE2TargetMachine.cpp.o:(llvm::AIE2PassConfig::addGlobalInstructionSelect()) in archive lib/libLLVMAIECodeGen.a
+>>> referenced by AIE2TargetMachine.cpp
+>>>               AIE2TargetMachine.cpp.o:(llvm::AIE2PassConfig::addGlobalInstructionSelect()) in archive lib/libLLVMAIECodeGen.a
+collect2: error: ld returned 1 exit status
+ninja: build stopped: cannot make progress due to previous errors.
+DONE_RC=1

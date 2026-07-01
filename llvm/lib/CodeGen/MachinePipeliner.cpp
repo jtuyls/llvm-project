@@ -117,6 +117,9 @@ STATISTIC(NumFailTooManyStores, "Pipeliner abort due to too many stores");
 /// A command line option to turn software pipelining on or off.
 static cl::opt<bool> EnableSWP("enable-pipeliner", cl::Hidden, cl::init(true),
                                cl::desc("Enable Software Pipelining"));
+// amd/aie/ port: AIE reads this (treat pragma II as max bound).
+cl::opt<bool> SwpPragmaAsMaxII("pipeliner-pragma-as-max-ii", cl::Hidden,
+    cl::init(false), cl::desc("Treat pragma II as maximum bound"));
 
 /// A command line option to enable SWP at -Os.
 static cl::opt<bool> EnableSWPOptSize("enable-pipeliner-opt-size",
