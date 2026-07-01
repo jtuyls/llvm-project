@@ -1,0 +1,51 @@
+ninja: Entering directory `build'
+[1/25] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEFinalizeBundle.cpp.o
+[2/25] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIERegMemEventTracker.cpp.o
+[3/25] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEMachineAlignment.cpp.o
+[4/25] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEBaseAsmPrinter.cpp.o
+[5/25] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie1/AIE1InstrInfo.cpp.o
+[6/25] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEHazardRecognizer.cpp.o
+[7/25] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie1/AIEHazardRecognizerPRAS.cpp.o
+[8/25] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEMaxLatencyFinder.cpp.o
+[9/25] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEMachineScheduler.cpp.o
+[10/25] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEMultiSlotInstrMaterializer.cpp.o
+[11/25] Building CXX object lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE1AsmParser.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AsmParser/AIE1AsmParser.cpp:73:
+/home/jtuyls/iree-ai/llvm-aie-port/build/lib/Target/AIE/AIEGenAsmMatcher.inc:2289:13: warning: ‘llvm::ParseStatus {anonymous}::AIEAsmParser::MatchOperandParserImpl(llvm::OperandVector&, llvm::StringRef, bool)’ defined but not used [-Wunused-function]
+ 2289 | ParseStatus AIEAsmParser::
+      |             ^~~~~~~~~~~~
+[12/25] Building CXX object lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2PAsmParser.cpp.o
+[13/25] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEInterBlockScheduling.cpp.o
+[14/25] Building CXX object lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2AsmParser.cpp.o
+[15/25] Building CXX object lib/Target/AIE/AsmParser/CMakeFiles/LLVMAIEAsmParser.dir/AIE2PSAsmParser.cpp.o
+[16/25] Linking CXX static library lib/libLLVMAIEAsmParser.a
+[17/25] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEBaseInstrInfo.cpp.o
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseInstrInfo.cpp: In member function ‘virtual bool llvm::AIEBaseInstrInfo::foldImmediate(llvm::MachineInstr&, llvm::MachineInstr&, llvm::Register, llvm::MachineRegisterInfo*) const’:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseInstrInfo.cpp:614:29: warning: unused variable ‘TRI’ [-Wunused-variable]
+  614 |   const TargetRegisterInfo *TRI = MRI->getTargetRegisterInfo();
+      |                             ^~~
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseInstrInfo.cpp:615:26: warning: unused variable ‘MF’ [-Wunused-variable]
+  615 |   const MachineFunction &MF = *UseMI.getParent()->getParent();
+      |                          ^~
+[18/25] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEBaseSubtarget.cpp.o
+[19/25] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEPostPipeliner.cpp.o
+[20/25] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2p/AIE2PInstrInfo.cpp.o
+[21/25] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIE2InstrInfo.cpp.o
+[22/25] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/aie2ps/AIE2PSInstrInfo.cpp.o
+[23/25] Building CXX object lib/Target/AIE/CMakeFiles/LLVMAIECodeGen.dir/AIEBaseTargetMachine.cpp.o
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2FrameLowering.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2Subtarget.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIE2TargetMachine.h:18,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetMachine.cpp:18:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseFrameLowering.h:90:16: warning: ‘virtual void llvm::AIEBaseFrameLowering::adjustReg(llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag) const’ was hidden [-Woverloaded-virtual=]
+   90 |   virtual void adjustReg(MachineBasicBlock &MBB,
+      |                ^~~~~~~~~
+In file included from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1Subtarget.h:19,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1TargetMachine.h:20,
+                 from /home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/AIEBaseTargetMachine.cpp:25:
+/home/jtuyls/iree-ai/llvm-aie-port/amd/aie/llvm/lib/Target/AIE/aie1/AIE1FrameLowering.h:29:15: note:   by ‘static void llvm::AIEFrameLowering::adjustReg(const llvm::TargetInstrInfo*, llvm::MachineBasicBlock&, llvm::MachineBasicBlock::iterator, const llvm::DebugLoc&, unsigned int, int64_t, llvm::MachineInstr::MIFlag)’
+   29 |   static void adjustReg(const TargetInstrInfo *TII, MachineBasicBlock &MBB,
+      |               ^~~~~~~~~
+[24/25] Linking CXX static library lib/libLLVMAIECodeGen.a
+[25/25] Linking CXX executable bin/llc
+DONE_RC=0

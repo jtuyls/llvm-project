@@ -190,6 +190,17 @@ void ScheduleDAGInstrs::startBlock(MachineBasicBlock *bb) {
   BB = bb;
 }
 
+// amd/aie/ port: compute ExitSU from the region end (null-guarded so callers
+// without a region/BB, e.g. AIE's DataDependenceHelper, leave ExitSU empty).
+void ScheduleDAGInstrs::setExitSU() {
+  MachineInstr *ExitMI =
+      BB ? (RegionEnd != BB->end()
+                ? &*skipDebugInstructionsBackward(RegionEnd, RegionBegin)
+                : nullptr)
+         : nullptr;
+  ExitSU.setInstr(ExitMI);
+}
+
 // amd/aie/ port: rebuild the MachineInstr->SUnit reverse-lookup map.
 void ScheduleDAGInstrs::makeMaps() {
   // At this point all SUnits are allocated and their addresses are stable.
@@ -251,11 +262,10 @@ void ScheduleDAGInstrs::exitRegion() {
 }
 
 void ScheduleDAGInstrs::addSchedBarrierDeps() {
-  MachineInstr *ExitMI =
-      RegionEnd != BB->end()
-          ? &*skipDebugInstructionsBackward(RegionEnd, RegionBegin)
-          : nullptr;
-  ExitSU.setInstr(ExitMI);
+  // amd/aie/ port: use the pre-computed ExitSU (set by setExitSU()) rather than
+  // recomputing from BB->end() here, so AIE's DataDependenceHelper (which builds
+  // edges without a region/BB) doesn't dereference a null BB.
+  MachineInstr *ExitMI = ExitSU.getInstr();
   // Add dependencies on the defs and uses of the instruction.
   if (ExitMI) {
     const MCInstrDesc &MIDesc = ExitMI->getDesc();
@@ -804,8 +814,10 @@ void ScheduleDAGInstrs::buildSchedGraph(AAResults *AA,
   // Create an SUnit for each real instruction.
   initSUnits();
 
-  // amd/aie/ port: edge construction is factored into buildEdges() so AIE can
+  // amd/aie/ port: set up ExitSU before building edges (addSchedBarrierDeps
+  // reads it); edge construction is factored into buildEdges() so AIE can
   // create SUnits incrementally (initSUnit) and then build the dependencies.
+  setExitSU();
   buildEdges(AA, RPTracker, PDiffs, LIS, TrackLaneMasks);
 }
 
