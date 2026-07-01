@@ -50,7 +50,7 @@ struct AIE2PSRegisterInfo : public AIE2PSGenRegisterInfo {
   const TargetRegisterClass *
   getLargestLegalSuperClass(const TargetRegisterClass *RC,
                             const MachineFunction &MF) const override;
-  bool isTypeLegalForClass(const TargetRegisterClass &RC, LLT T) const override;
+  bool isTypeLegalForClass(const TargetRegisterClass &RC, LLT T) const;
   const TargetRegisterClass *
   getGPRRegClass(const MachineFunction &MF) const override;
   Register getControlRegister(unsigned Idx) const override;

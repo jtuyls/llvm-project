@@ -56,7 +56,7 @@ struct AIERegisterInfo : public AIEGenRegisterInfo {
     return true;
   }
 
-  bool isTypeLegalForClass(const TargetRegisterClass &RC, LLT T) const override;
+  bool isTypeLegalForClass(const TargetRegisterClass &RC, LLT T) const;
 
   Register getStackPointerRegister() const override;
 

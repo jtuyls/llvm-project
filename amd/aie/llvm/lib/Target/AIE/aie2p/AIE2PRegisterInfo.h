@@ -59,7 +59,7 @@ struct AIE2PRegisterInfo : public AIE2PGenRegisterInfo {
     return true;
   }
 
-  bool isTypeLegalForClass(const TargetRegisterClass &RC, LLT T) const override;
+  bool isTypeLegalForClass(const TargetRegisterClass &RC, LLT T) const;
 
   /// Given a register bank and operand type, return the smallest register class
   /// that can hold a value on that bank.
