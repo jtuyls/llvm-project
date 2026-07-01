@@ -239,7 +239,8 @@ bool AIE2PInstructionSelector::select(MachineInstr &I) {
     return selectG_BRCOND(I, MRI);
   case G_BRINDIRECT:
     I.setDesc(TII.get(AIE2P::PseudoJ_jump_ind));
-    return constrainSelectedInstRegOperands(I, TII, TRI, RBI);
+    constrainSelectedInstRegOperands(I, TII, TRI, RBI);
+    return true;
   case G_INTRINSIC:
     switch (cast<GIntrinsic>(I).getIntrinsicID()) {
     case Intrinsic::aie2p_get_coreid:
@@ -474,7 +475,8 @@ bool AIE2PInstructionSelector::selectG_GLOBAL_VALUE(MachineInstr &I,
                                                     MachineRegisterInfo &) {
   I.setDesc(TII.get(AIE2P::MOVXM));
   I.getOperand(1).setTargetFlags(AIEII::MO_GLOBAL);
-  return constrainSelectedInstRegOperands(I, TII, TRI, RBI);
+  constrainSelectedInstRegOperands(I, TII, TRI, RBI);
+    return true;
 }
 
 bool AIE2PInstructionSelector::selectVSRS(MachineInstr &I,
@@ -502,7 +504,8 @@ bool AIE2PInstructionSelector::selectVSRS(MachineInstr &I,
 
   setUnsetCtrlRegister(MIB, *MI, MRI, AIE2P::srsSign0, SignReg);
   I.eraseFromParent();
-  return constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+  constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+    return true;
 }
 
 bool AIE2PInstructionSelector::selectG_AIE_LOAD_UPS(
@@ -589,7 +592,8 @@ bool AIE2PInstructionSelector::selectG_AIE_LOAD_UPS(
 
   UPSI.eraseFromParent();
   makeDeadMI(*LoadOp, MRI);
-  return constrainSelectedInstRegOperands(*NewInstr.getInstr(), TII, TRI, RBI);
+  constrainSelectedInstRegOperands(*NewInstr.getInstr(), TII, TRI, RBI);
+    return true;
 }
 
 bool AIE2PInstructionSelector::selectVCONVbfp16(MachineInstr &I,
@@ -616,7 +620,8 @@ bool AIE2PInstructionSelector::selectVCONVbfp16(MachineInstr &I,
                              AIE2P::EXPVEC64RegClass, ExpCopyMI->getOperand(0));
 
     I.eraseFromParent();
-    return constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+    constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+    return true;
   } else {
     Register Src1Reg = I.getOperand(3).getReg();
     Register Src2Reg = I.getOperand(4).getReg();
@@ -645,7 +650,8 @@ bool AIE2PInstructionSelector::selectVCONVbfp16(MachineInstr &I,
                              AIE2P::EXPVEC64RegClass, ExpCopyMI->getOperand(0));
 
     I.eraseFromParent();
-    return constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+    constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+    return true;
   }
   return false;
 }
@@ -719,7 +725,8 @@ bool AIE2PInstructionSelector::selectCascadeStreamInsn(MachineInstr &I,
                        1);
 
   I.eraseFromParent();
-  return constrainSelectedInstRegOperands(*CascadeMV, TII, TRI, RBI);
+  constrainSelectedInstRegOperands(*CascadeMV, TII, TRI, RBI);
+    return true;
 }
 
 Register AIE2PInstructionSelector::createDRegSequence(
@@ -1632,7 +1639,8 @@ bool AIE2PInstructionSelector::selectWideG_AIE_LOAD_STORE(
 
   auto constrainInstRegOps = [&](auto &Instrs) {
     return std::all_of(Instrs.begin(), Instrs.end(), [&](const auto &Instr) {
-      return constrainSelectedInstRegOperands(*Instr, TII, TRI, RBI);
+      constrainSelectedInstRegOperands(*Instr, TII, TRI, RBI);
+    return true;
     });
   };
 
@@ -1818,7 +1826,8 @@ bool AIE2PInstructionSelector::selectG_LOAD(MachineInstr &I,
     // We map to a *(ptr + imm) addrmode with imm = 0
     I.setDesc(TII.get(AIE2P::LDA_dms_lda_idx_imm));
     I.addOperand(*MF, MachineOperand::CreateImm(0));
-    return constrainSelectedInstRegOperands(I, TII, TRI, RBI);
+    constrainSelectedInstRegOperands(I, TII, TRI, RBI);
+    return true;
   }
 
   // Handle vector loads
@@ -1898,7 +1907,8 @@ bool AIE2PInstructionSelector::selectVLD_FIFO_FILL(MachineInstr &I,
                      {PtrIn, FifoIn, AvailIn});
   MI.cloneMemRefs(I);
   I.eraseFromParent();
-  return constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+  constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+    return true;
 }
 
 bool AIE2PInstructionSelector::selectVLD_FIFO_FILLX(MachineInstr &I,
@@ -1924,10 +1934,11 @@ bool AIE2PInstructionSelector::selectVLD_FIFO_FILLX(MachineInstr &I,
 
   MI.cloneMemRefs(I);
   I.eraseFromParent();
-  return constrainSelectedInstRegOperands(*MI, TII, TRI, RBI) &&
+  constrainSelectedInstRegOperands(*MI, TII, TRI, RBI) &&
          constrainOperandRegClass(*MF, TRI, MRI, TII, RBI, *CopyBackLfeMI,
                                   AIE2P::mFifoExtraRegClass,
                                   CopyBackLfeMI->getOperand(0));
+    return true;
 }
 
 bool AIE2PInstructionSelector::selectVLD_FIFO_POP_512(
@@ -1946,7 +1957,8 @@ bool AIE2PInstructionSelector::selectVLD_FIFO_POP_512(
                      {PtrIn, FifoIn, AvailIn});
   MI.cloneMemRefs(I);
   I.eraseFromParent();
-  return constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+  constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+    return true;
 }
 
 bool AIE2PInstructionSelector::selectVLD_FIFO_POPX(MachineInstr &I,
@@ -1973,10 +1985,11 @@ bool AIE2PInstructionSelector::selectVLD_FIFO_POPX(MachineInstr &I,
 
   MI.cloneMemRefs(I);
   I.eraseFromParent();
-  return constrainSelectedInstRegOperands(*MI, TII, TRI, RBI) &&
+  constrainSelectedInstRegOperands(*MI, TII, TRI, RBI) &&
          constrainOperandRegClass(*MF, TRI, MRI, TII, RBI, *CopyBackLfeMI,
                                   AIE2P::mFifoExtraRegClass,
                                   CopyBackLfeMI->getOperand(0));
+    return true;
 }
 
 bool AIE2PInstructionSelector::selectVLD_FIFO_POP_512_1D(
@@ -1996,7 +2009,8 @@ bool AIE2PInstructionSelector::selectVLD_FIFO_POP_512_1D(
                      {PtrIn, FifoIn, AvailIn, OffsetReg});
   MI.cloneMemRefs(I);
   I.eraseFromParent();
-  return constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+  constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+    return true;
 }
 
 bool AIE2PInstructionSelector::selectVLD_FIFO_POP_512_2D(
@@ -2022,7 +2036,8 @@ bool AIE2PInstructionSelector::selectVLD_FIFO_POP_512_2D(
       {PtrIn, FifoIn, AvailIn, DReg});
   MI.cloneMemRefs(I);
   I.eraseFromParent();
-  return constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+  constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+    return true;
 }
 
 bool AIE2PInstructionSelector::selectVLD_FIFO_POP_512_3D(
@@ -2053,7 +2068,8 @@ bool AIE2PInstructionSelector::selectVLD_FIFO_POP_512_3D(
       {PtrIn, FifoIn, AvailIn, DSReg});
   MI.cloneMemRefs(I);
   I.eraseFromParent();
-  return constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+  constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+    return true;
 }
 
 bool AIE2PInstructionSelector::selectVLD_FIFO_POP_BFP16(
@@ -2077,8 +2093,8 @@ bool AIE2PInstructionSelector::selectVLD_FIFO_POP_BFP16(
       buildAndConstrainFifoLoadCopies(Vec576Out, MantVecOut, ExpVecOut, MRI);
   MI.cloneMemRefs(I);
   I.eraseFromParent();
-  return constrainSelectedInstRegOperands(*MI, TII, TRI, RBI) &&
-         CopiesConstrained;
+  constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+  return CopiesConstrained;
 }
 
 bool AIE2PInstructionSelector::selectVLD_FIFO_POP_BFP16_1D(
@@ -2103,8 +2119,8 @@ bool AIE2PInstructionSelector::selectVLD_FIFO_POP_BFP16_1D(
       buildAndConstrainFifoLoadCopies(Vec576Out, MantVecOut, ExpVecOut, MRI);
   MI.cloneMemRefs(I);
   I.eraseFromParent();
-  return constrainSelectedInstRegOperands(*MI, TII, TRI, RBI) &&
-         CopiesConstrained;
+  constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+  return CopiesConstrained;
 }
 
 bool AIE2PInstructionSelector::selectVLD_FIFO_POP_BFP16_2D(
@@ -2136,8 +2152,8 @@ bool AIE2PInstructionSelector::selectVLD_FIFO_POP_BFP16_2D(
       buildAndConstrainFifoLoadCopies(Vec576Out, MantVecOut, ExpVecOut, MRI);
   MI.cloneMemRefs(I);
   I.eraseFromParent();
-  return constrainSelectedInstRegOperands(*MI, TII, TRI, RBI) &&
-         CopiesConstrained;
+  constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+  return CopiesConstrained;
 }
 
 bool AIE2PInstructionSelector::selectVLD_FIFO_POP_BFP16_3D(
@@ -2173,8 +2189,8 @@ bool AIE2PInstructionSelector::selectVLD_FIFO_POP_BFP16_3D(
       buildAndConstrainFifoLoadCopies(Vec576Out, MantVecOut, ExpVecOut, MRI);
   MI.cloneMemRefs(I);
   I.eraseFromParent();
-  return constrainSelectedInstRegOperands(*MI, TII, TRI, RBI) &&
-         CopiesConstrained;
+  constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+  return CopiesConstrained;
 }
 
 bool AIE2PInstructionSelector::selectG_AIE_LOAD_STORE(
@@ -2208,7 +2224,8 @@ bool AIE2PInstructionSelector::selectG_AIE_LOAD_STORE(
   NewInstr.cloneMemRefs(AMI->MemI);
   AMI->MemI.eraseFromParent();
 
-  return constrainSelectedInstRegOperands(*NewInstr, TII, TRI, RBI);
+  constrainSelectedInstRegOperands(*NewInstr, TII, TRI, RBI);
+    return true;
 }
 
 static bool getVLDA_CONVOpcode(const MachineInstr &MemOp,
@@ -2571,7 +2588,8 @@ bool AIE2PInstructionSelector::selectVUNPACK(MachineInstr &I,
   // 1 – Source is 8 bits
   setCtrlRegister(MIB, AIE2P::crUnpackSize, (unsigned)Is8Bit);
   I.eraseFromParent();
-  return constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+  constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+    return true;
 }
 
 bool AIE2PInstructionSelector::selectVPACK(MachineInstr &I,
@@ -2588,7 +2606,8 @@ bool AIE2PInstructionSelector::selectVPACK(MachineInstr &I,
   // 1 – Destination is 8 bits
   setCtrlRegister(MIB, AIE2P::crPackSize, (unsigned)Is8Bit);
   I.eraseFromParent();
-  return constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+  constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+    return true;
 }
 
 std::optional<LoadStoreOpcodes>
@@ -2731,7 +2750,8 @@ bool AIE2PInstructionSelector::selectG_AIE_STORE_CONV(
 
   makeDeadMI(*ConvOp, MRI);
   StoreI.eraseFromParent();
-  return constrainSelectedInstRegOperands(*NewInstr.getInstr(), TII, TRI, RBI);
+  constrainSelectedInstRegOperands(*NewInstr.getInstr(), TII, TRI, RBI);
+    return true;
 }
 
 std::optional<LoadStoreOpcodes>
@@ -2972,7 +2992,8 @@ bool AIE2PInstructionSelector::selectG_AIE_BROADCAST_VECTOR(
          "Expected the Dest in Accumulator Bank");
   MachineInstrBuilder MI = MIB.buildInstr(AIE2P::VCLR, {DstVecReg}, {});
   I.eraseFromParent();
-  return constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+  constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+    return true;
 }
 
 std::optional<LoadStoreOpcodes> AIE2PInstructionSelector::getCombinedOpcodeUPS(
@@ -3802,7 +3823,8 @@ bool AIE2PInstructionSelector ::selectVSHUFFLE_BFP(MachineInstr &I,
                            AIE2P::EXPVEC64RegClass, ExpCopyMI->getOperand(0));
 
   I.eraseFromParent();
-  return constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+  constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+    return true;
 }
 
 bool AIE2PInstructionSelector::selectVST_FIFO_CONV(MachineInstr &StoreI,
@@ -3853,7 +3875,8 @@ bool AIE2PInstructionSelector::selectVST_FIFO_CONV(MachineInstr &StoreI,
   makeDeadMI(*ConvOp, MRI);
   StoreI.eraseFromParent();
 
-  return constrainSelectedInstRegOperands(*NewInstr.getInstr(), TII, TRI, RBI);
+  constrainSelectedInstRegOperands(*NewInstr.getInstr(), TII, TRI, RBI);
+    return true;
 }
 
 bool AIE2PInstructionSelector::selectVST_FIFO_BFP16(MachineInstr &I,
@@ -3888,7 +3911,8 @@ bool AIE2PInstructionSelector::selectVST_FIFO_BFP16(MachineInstr &I,
                            {FifoIn, SrcReg, PtrIn, AvailIn});
   MI.cloneMemRefs(I);
   I.eraseFromParent();
-  return constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+  constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+    return true;
 }
 namespace llvm {
 InstructionSelector *

@@ -173,7 +173,8 @@ bool AIEInstructionSelector::selectG_ZEXT(MachineInstr &I,
   if (DstRB->getID() == SrcRB->getID()) {
     auto Zext = MIB.buildInstr(AIE::MOVT_S12, {DstReg}, {SrcReg}).addImm(0);
     I.eraseFromParent();
-    return constrainSelectedInstRegOperands(*Zext, TII, TRI, RBI);
+    constrainSelectedInstRegOperands(*Zext, TII, TRI, RBI);
+    return true;
   }
 
   I.setDesc(TII.get(AIE::COPY));
@@ -213,7 +214,8 @@ bool AIEInstructionSelector::selectG_SEXT_INREG(MachineInstr &I,
   }
 
   I.eraseFromParent();
-  return constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+  constrainSelectedInstRegOperands(*MI, TII, TRI, RBI);
+    return true;
 }
 
 bool AIEInstructionSelector::selectG_PTR_ADD(MachineInstr &I,
@@ -235,7 +237,8 @@ bool AIEInstructionSelector::selectG_PTR_ADD(MachineInstr &I,
     // FIXME: Constants on the RHS could be folded into the ADD instruction by
     // relying on the TableGen patterns for G_ADD on GPRRegbank
     I.setDesc(TII.get(AIE::ADD));
-    return constrainSelectedInstRegOperands(I, TII, TRI, RBI);
+    constrainSelectedInstRegOperands(I, TII, TRI, RBI);
+    return true;
   }
 
   if (DstRB->getID() != AIE::PTRRegBankID ||
@@ -244,7 +247,8 @@ bool AIEInstructionSelector::selectG_PTR_ADD(MachineInstr &I,
     return false;
 
   I.setDesc(TII.get(AIE::PADDA_nrm));
-  return constrainSelectedInstRegOperands(I, TII, TRI, RBI);
+  constrainSelectedInstRegOperands(I, TII, TRI, RBI);
+    return true;
 }
 
 bool AIEInstructionSelector::selectG_LOAD(MachineInstr &I,
@@ -392,13 +396,15 @@ bool AIEInstructionSelector::selectG_BRCOND(MachineInstr &I,
 bool AIEInstructionSelector::selectG_BRINDIRECT(MachineInstr &I,
                                                 MachineRegisterInfo &MRI) {
   I.setDesc(TII.get(AIE::JA));
-  return constrainSelectedInstRegOperands(I, TII, TRI, RBI);
+  constrainSelectedInstRegOperands(I, TII, TRI, RBI);
+    return true;
 }
 
 bool AIEInstructionSelector::selectG_JUMP_TABLE(MachineInstr &I,
                                                 MachineRegisterInfo &MRI) {
   I.setDesc(TII.get(AIE::MOV_U20));
-  return constrainSelectedInstRegOperands(I, TII, TRI, RBI);
+  constrainSelectedInstRegOperands(I, TII, TRI, RBI);
+    return true;
 }
 
 bool AIEInstructionSelector::selectPHI(MachineInstr &I,
