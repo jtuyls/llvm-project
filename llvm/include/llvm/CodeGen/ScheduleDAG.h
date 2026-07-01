@@ -143,6 +143,9 @@ class TargetRegisterInfo;
       return Latency;
     }
 
+    /// amd/aie/ port: AIE reads latency as signed (it models negative latencies).
+    int getSignedLatency() const { return (int)Latency; }
+
     /// Sets the latency for this edge.
     void setLatency(unsigned Lat) {
       Latency = Lat;

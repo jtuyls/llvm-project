@@ -314,6 +314,9 @@ public:
     return !hasFP(MF);
   }
 
+  // amd/aie/ port: AIE's frame-object ordering includes callee-saves.
+  virtual bool orderFrameObjectsIncludesCalleeSaves() const { return false; }
+
   /// canSimplifyCallFramePseudos - When possible, it's best to simplify the
   /// call frame pseudo ops before doing frame index elimination. This is
   /// possible only when frame index references between the pseudos won't

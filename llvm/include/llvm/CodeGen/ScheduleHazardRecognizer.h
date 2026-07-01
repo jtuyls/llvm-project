@@ -70,6 +70,9 @@ public:
   /// emitted, to advance the hazard state.
   virtual void EmitInstruction(SUnit *) {}
 
+  // amd/aie/ port: AIE emits with a (possibly negative) delta-cycle offset.
+  virtual void EmitInstruction(SUnit *SU, int DeltaCycles) { EmitInstruction(SU); }
+
   /// This overload will be used when the hazard recognizer is being used
   /// by a non-scheduling pass, which does not use SUnits.
   virtual void EmitInstruction(MachineInstr *) {}
