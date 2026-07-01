@@ -3719,6 +3719,12 @@ public:
     return Libcalls.getLibcallCallingConv(Call);
   }
 
+  /// amd/aie/ port: override the CallingConv for a specific libcall (AIE uses a
+  /// vector-register-preserving CC for integer div/rem/int-to-fp helpers).
+  void setLibcallCallingConv(RTLIB::Libcall Call, CallingConv::ID CC) {
+    Libcalls.setLibcallCallingConv(Call, CC);
+  }
+
   /// Execute target specific actions to finalize target lowering.
   /// This is used to set extra flags in MachineFrameInformation and freezing
   /// the set of reserved registers.

@@ -17,6 +17,7 @@
 namespace llvm {
 
 class MachineInstr;
+class MachineBasicBlock; // amd/aie/ port: StartBlock/EndBlock hooks
 class SUnit;
 
 /// HazardRecognizer - This determines whether or not an instruction can be
@@ -123,6 +124,11 @@ public:
     for (unsigned i = 0; i < Quantity; ++i)
       EmitNoop();
   }
+
+  // amd/aie/ port: AIE hazard recognizers hook block start/end for
+  // exposed-pipeline bookkeeping (StartBlock before scheduling, EndBlock after).
+  virtual void StartBlock(MachineBasicBlock *MBB) {}
+  virtual void EndBlock(MachineBasicBlock *MBB) {}
 };
 
 } // end namespace llvm

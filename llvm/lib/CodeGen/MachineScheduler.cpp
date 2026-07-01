@@ -188,7 +188,8 @@ cl::opt<MISched::Direction> llvm::PreRADirection(
         clEnumValN(MISched::Bidirectional, "bidirectional",
                    "Force bidirectional pre reg-alloc list scheduling")));
 
-static cl::opt<MISched::Direction> PostRADirection(
+// amd/aie/ port: exported (was static) so AIE's post-RA scheduler can read it.
+cl::opt<MISched::Direction> llvm::PostRADirection(
     "misched-postra-direction", cl::Hidden,
     cl::desc("Post reg-alloc list scheduling direction"),
     cl::init(MISched::Unspecified),

@@ -26,6 +26,8 @@ private:
   /// Stores the implementation choice for each each libcall.
   RTLIB::LibcallImpl LibcallImpls[RTLIB::UNKNOWN_LIBCALL + 1] = {
       RTLIB::Unsupported};
+  /// amd/aie/ port: per-Libcall calling-convention override (MaxID = unset).
+  CallingConv::ID CCOverrides[RTLIB::UNKNOWN_LIBCALL + 1];
 
 public:
   LLVM_ABI LibcallLoweringInfo(const RTLIB::RuntimeLibcallsInfo &RTLCI,
@@ -56,7 +58,17 @@ public:
   // FIXME: Remove this wrapper in favor of directly using
   // getLibcallImplCallingConv
   LLVM_ABI CallingConv::ID getLibcallCallingConv(RTLIB::Libcall Call) const {
+    // amd/aie/ port: honor a target CC override if one was set.
+    if (CCOverrides[Call] != CallingConv::MaxID)
+      return CCOverrides[Call];
     return RTLCI.LibcallImplCallingConvs[LibcallImpls[Call]];
+  }
+
+  // amd/aie/ port: 23 makes libcall CCs immutable (owned by the const
+  // RuntimeLibcallsInfo). AIE overrides the CC for specific libcalls, so keep a
+  // per-Libcall override table consulted by getLibcallCallingConv().
+  LLVM_ABI void setLibcallCallingConv(RTLIB::Libcall Call, CallingConv::ID CC) {
+    CCOverrides[Call] = CC;
   }
 
   /// Get the CallingConv that should be used for the specified libcall.

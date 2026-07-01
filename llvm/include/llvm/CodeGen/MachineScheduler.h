@@ -117,6 +117,8 @@ enum Direction {
 } // namespace MISched
 
 LLVM_ABI extern cl::opt<MISched::Direction> PreRADirection;
+// amd/aie/ port: AIE's post-RA scheduler reads a post-RA direction override.
+LLVM_ABI extern cl::opt<MISched::Direction> PostRADirection;
 LLVM_ABI extern cl::opt<bool> VerifyScheduling;
 
 #ifndef NDEBUG

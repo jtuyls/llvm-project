@@ -18,6 +18,8 @@ LibcallLoweringInfo::LibcallLoweringInfo(
     const RTLIB::RuntimeLibcallsInfo &RTLCI,
     const TargetSubtargetInfo &Subtarget)
     : RTLCI(RTLCI) {
+  // amd/aie/ port: no CC overrides by default (MaxID sentinel = unset).
+  std::fill(std::begin(CCOverrides), std::end(CCOverrides), CallingConv::MaxID);
   // TODO: This should be generated with lowering predicates, and assert the
   // call is available.
   for (RTLIB::LibcallImpl Impl : RTLIB::libcall_impls()) {

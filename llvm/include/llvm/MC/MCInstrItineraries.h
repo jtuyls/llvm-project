@@ -144,6 +144,13 @@ public:
     return Stages + StageIdx;
   }
 
+  // amd/aie/ port: AIE reads an itinerary's stages as an ArrayRef.
+  virtual ArrayRef<const InstrStage> getStages(unsigned ItinClassIndx) const {
+    auto &Itinerary = Itineraries[ItinClassIndx];
+    size_t Length = Itinerary.LastStage - Itinerary.FirstStage;
+    return ArrayRef<const InstrStage>(Stages + Itinerary.FirstStage, Length);
+  }
+
   /// Return the total stage latency of the given class.  The latency is
   /// the maximum completion time for any stage in the itinerary.  If no stages
   /// exist, it defaults to one cycle.
