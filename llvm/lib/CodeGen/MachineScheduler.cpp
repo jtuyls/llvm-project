@@ -2958,7 +2958,8 @@ unsigned SchedBoundary::countResource(const MCSchedClassDesc *SC, unsigned PIdx,
 }
 
 /// Move the boundary of scheduled code by one SUnit.
-void SchedBoundary::bumpNode(SUnit *SU) {
+void SchedBoundary::bumpNode(SUnit *SU, int DeltaCycles) {
+  (void)DeltaCycles; // amd/aie/ port: honored by AIE's scheduler overrides.
   // checkHazard should prevent scheduling multiple instructions per cycle that
   // exceed the issue width.
   const MCSchedClassDesc *SC = DAG->getSchedClass(SU);

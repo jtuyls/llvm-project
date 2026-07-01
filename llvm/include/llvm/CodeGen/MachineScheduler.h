@@ -1118,7 +1118,8 @@ public:
                                   unsigned Cycles, unsigned ReadyCycle,
                                   unsigned StartAtCycle);
 
-  LLVM_ABI void bumpNode(SUnit *SU);
+  // amd/aie/ port: AIE passes a delta-cycle offset (exposed pipeline).
+  LLVM_ABI void bumpNode(SUnit *SU, int DeltaCycles = 0);
 
   LLVM_ABI void releasePending();
 
