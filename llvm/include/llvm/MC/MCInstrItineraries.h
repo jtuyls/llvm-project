@@ -145,7 +145,9 @@ public:
   }
 
   // amd/aie/ port: AIE reads an itinerary's stages as an ArrayRef.
-  virtual ArrayRef<const InstrStage> getStages(unsigned ItinClassIndx) const {
+  // amd/aie/ port: non-virtual (InstrItineraryData must stay non-polymorphic —
+  // it is embedded by value in MCSchedModel and aggregate-initialized).
+  ArrayRef<const InstrStage> getStages(unsigned ItinClassIndx) const {
     auto &Itinerary = Itineraries[ItinClassIndx];
     size_t Length = Itinerary.LastStage - Itinerary.FirstStage;
     return ArrayRef<const InstrStage>(Stages + Itinerary.FirstStage, Length);

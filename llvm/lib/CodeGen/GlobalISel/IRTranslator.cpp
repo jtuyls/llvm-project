@@ -4316,6 +4316,32 @@ bool IRTranslator::runOnMachineFunction(MachineFunction &CurMF) {
   // Make our arguments/constants entry block fallthrough to the IR entry block.
   EntryBB->addSuccessor(&getMBB(F.front()));
 
+  // amd/aie/ port: targets that must pre-lower the return (AIE) get a chance to
+  // pre-determine return assignments before formal args are lowered.
+  if (CLI->mustPreLowerReturn()) {
+    const ReturnInst *RI = nullptr;
+    for (const BasicBlock &BB : F)
+      if (auto *R = dyn_cast<ReturnInst>(BB.getTerminator())) {
+        RI = R;
+        break;
+      }
+    if (RI) {
+      const Value *RetVal = RI->getReturnValue();
+      if (RetVal && DL->getTypeStoreSize(RetVal->getType()).isZero())
+        RetVal = nullptr;
+      ArrayRef<Register> RetVRegs;
+      if (RetVal)
+        RetVRegs = getOrCreateVRegs(*RetVal);
+      if (!CLI->preLowerReturn(RetVal, RetVRegs, FuncInfo)) {
+        OptimizationRemarkMissed R("gisel-irtranslator", "GISelFailure",
+                                   F.getSubprogram(), &F.getEntryBlock());
+        R << "unable to pre-lower return type";
+        reportTranslationError(*MF, *ORE, R);
+        return false;
+      }
+    }
+  }
+
   // Lower the actual args into this basic block.
   SmallVector<ArrayRef<Register>, 8> VRegArgs;
   for (const Argument &Arg: F.args()) {
