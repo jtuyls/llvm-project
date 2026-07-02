@@ -2518,7 +2518,13 @@ void GlobalISelEmitter::run(raw_ostream &OS) {
     // Skip any patterns containing BF16 types, as GISel cannot currently tell
     // the difference between fp16 and bf16. FIXME: This can be removed once
     // UseExtended are universally supported.
-    bool UseExtended = LLT::getUseExtended();
+    // amd/aie/ port: LLVM 23 gates this on the global UseExtended flag, but AIE
+    // cannot enable extended LLTs (it breaks its non-extended selector tables,
+    // see the reverted setUseExtended). AIE uses bf16 but no fp16, so the
+    // ambiguity is moot; import its bf16 patterns as llvm-aie did (which gated
+    // on Target.getName().starts_with("AIE") rather than UseExtended).
+    bool UseExtended =
+        LLT::getUseExtended() || Target.getName().starts_with("AIE");
     if (hasBFloatType(Pat.getSrcPattern()) && !UseExtended)
       continue;
 

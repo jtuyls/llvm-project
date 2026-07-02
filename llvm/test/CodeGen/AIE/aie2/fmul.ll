@@ -14,19 +14,27 @@ define bfloat @test_fmul_bfloat(bfloat %a, bfloat %b) {
 ; CHECK-NEXT:    nopa ; jl #__mulsf3
 ; CHECK-NEXT:    nop // Delay Slot 5
 ; CHECK-NEXT:    paddb [sp], #32 // Delay Slot 4
-; CHECK-NEXT:    mova r0, #16; st lr, [sp, #-32] // 4-byte Folded Spill Delay Slot 3
-; CHECK-NEXT:    st r16, [sp, #-28]; lshl r1, r1, r0 // 4-byte Folded Spill Delay Slot 2
+; CHECK-NEXT:    mova r0, #16; st lr, [sp, #-28] // 4-byte Folded Spill
+; CHECK-NEXT:    // 4-byte Folded Spill Delay Slot 3
+; CHECK-NEXT:    st r16, [sp, #-32]; lshl r1, r1, r0 // 4-byte Folded Spill
+; CHECK-NEXT:    // 4-byte Folded Spill Delay Slot 2
 ; CHECK-NEXT:    lshl r2, r2, r0 // Delay Slot 1
-; CHECK-NEXT:    lda lr, [sp, #-32] // 4-byte Folded Reload
-; CHECK-NEXT:    nop
-; CHECK-NEXT:    nop
-; CHECK-NEXT:    nop
-; CHECK-NEXT:    mova r16, #0
+; CHECK-NEXT:    mova r16, #0; nopb ; nopxm
 ; CHECK-NEXT:    mov r29, r16
-; CHECK-NEXT:    lda r16, [sp, #-28]; vinsert.32 x0, x0, r29, r0 // 4-byte Folded Reload
-; CHECK-NEXT:    ret lr ; vmov bmh0, x0
+; CHECK-NEXT:    vinsert.32 x0, x0, r29, r0
+; CHECK-NEXT:    vmov bmh0, x0
+; CHECK-NEXT:    nop
+; CHECK-NEXT:    lda lr, [sp, #-28]; vconv.bf16.fp32 wl0, bmh0 // 4-byte Folded Reload
+; CHECK-NEXT:    nop
+; CHECK-NEXT:    nop
+; CHECK-NEXT:    nop
+; CHECK-NEXT:    nop
+; CHECK-NEXT:    nop
+; CHECK-NEXT:    lda r16, [sp, #-32] // 4-byte Folded Reload
+; CHECK-NEXT:    // 4-byte Folded Reload
+; CHECK-NEXT:    ret lr
 ; CHECK-NEXT:    nop // Delay Slot 5
-; CHECK-NEXT:    vconv.bf16.fp32 wl0, bmh0 // Delay Slot 4
+; CHECK-NEXT:    nop // Delay Slot 4
 ; CHECK-NEXT:    nop // Delay Slot 3
 ; CHECK-NEXT:    vextract.s16 r0, x0, r16 // Delay Slot 2
 ; CHECK-NEXT:    paddb [sp], #-32 // Delay Slot 1
@@ -41,10 +49,12 @@ define float @test_fmul_float(float %a, float %b) {
 ; CHECK-NEXT:    nopb ; nopa ; nops ; jl #__mulsf3; nopv
 ; CHECK-NEXT:    nopx // Delay Slot 5
 ; CHECK-NEXT:    paddb [sp], #32 // Delay Slot 4
-; CHECK-NEXT:    st lr, [sp, #-32] // 4-byte Folded Spill Delay Slot 3
+; CHECK-NEXT:    st lr, [sp, #-32] // 4-byte Folded Spill
+; CHECK-NEXT:    // 4-byte Folded Spill Delay Slot 3
 ; CHECK-NEXT:    nop // Delay Slot 2
 ; CHECK-NEXT:    nop // Delay Slot 1
 ; CHECK-NEXT:    lda lr, [sp, #-32] // 4-byte Folded Reload
+; CHECK-NEXT:    // 4-byte Folded Reload
 ; CHECK-NEXT:    nop
 ; CHECK-NEXT:    nop
 ; CHECK-NEXT:    nop
@@ -68,10 +78,12 @@ define double @test_fmul_double(double %a, double %b) {
 ; CHECK-NEXT:    nopb ; nopa ; nops ; jl #__muldf3; nopv
 ; CHECK-NEXT:    nopx // Delay Slot 5
 ; CHECK-NEXT:    paddb [sp], #32 // Delay Slot 4
-; CHECK-NEXT:    st lr, [sp, #-32] // 4-byte Folded Spill Delay Slot 3
+; CHECK-NEXT:    st lr, [sp, #-32] // 4-byte Folded Spill
+; CHECK-NEXT:    // 4-byte Folded Spill Delay Slot 3
 ; CHECK-NEXT:    nop // Delay Slot 2
 ; CHECK-NEXT:    nop // Delay Slot 1
 ; CHECK-NEXT:    lda lr, [sp, #-32] // 4-byte Folded Reload
+; CHECK-NEXT:    // 4-byte Folded Reload
 ; CHECK-NEXT:    nop
 ; CHECK-NEXT:    nop
 ; CHECK-NEXT:    nop

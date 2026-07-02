@@ -94,9 +94,13 @@ void AIE2Subtarget::initLibcallLoweringInfo(LibcallLoweringInfo &Info) const {
     RTLIB::Libcall Op;
     RTLIB::LibcallImpl Impl;
   } LibraryCalls[] = {
+      {RTLIB::ADD_F32, RTLIB::impl___addsf3},
+      {RTLIB::SUB_F32, RTLIB::impl___subsf3},
       {RTLIB::MUL_F32, RTLIB::impl___mulsf3},
       {RTLIB::DIV_F32, RTLIB::impl___divsf3},
       {RTLIB::REM_F32, RTLIB::impl_fmodf},
+      {RTLIB::ADD_F64, RTLIB::impl___adddf3},
+      {RTLIB::SUB_F64, RTLIB::impl___subdf3},
       {RTLIB::MUL_F64, RTLIB::impl___muldf3},
       {RTLIB::DIV_F64, RTLIB::impl___divdf3},
       {RTLIB::REM_F64, RTLIB::impl_fmod},
