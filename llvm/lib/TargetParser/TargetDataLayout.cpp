@@ -564,6 +564,17 @@ std::string Triple::computeDataLayout(StringRef ABIName) const {
   case Triple::aarch64_be:
   case Triple::aarch64_32:
     return computeAArch64DataLayout(*this);
+  // amd/aie/ port: LLVM 23 centralized the default data-layout strings here
+  // (out of the per-target TargetMachine). AIE was not added, so anything that
+  // infers the layout from the triple without a TargetMachine (e.g. `opt
+  // -mtriple=aie2`) hit llvm_unreachable("Invalid arch"). Mirror
+  // AIEBaseTargetMachine::computeDataLayout (shared by all AIE variants).
+  case Triple::aie:
+  case Triple::aie2:
+  case Triple::aie2p:
+  case Triple::aie2ps:
+    return "e-m:e-p:20:32-i1:8:32-i8:8:32-i16:16:32-i32:32:32-f32:32:32-i64:32-"
+           "f64:32-a:0:32-n32";
   case Triple::arc:
     return "e-m:e-p:32:32-i1:8:32-i8:8:32-i16:16:32-i32:32:32-"
            "f32:32:32-i64:32-f64:32-a:0:32-n32";
