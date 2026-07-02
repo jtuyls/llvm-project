@@ -16,11 +16,13 @@ define void @test(i32 %x) {
 ; CHECK-NEXT:    nopa ; paddb [sp], #32; nopx
 ; CHECK-NEXT:    jl #f
 ; CHECK-NEXT:    mov p0, sp // Delay Slot 5
-; CHECK-NEXT:    st lr, [sp, #-28] // 4-byte Folded Spill Delay Slot 4
-; CHECK-NEXT:    paddb [p0], #-32 // Delay Slot 3
+; CHECK-NEXT:    st lr, [sp, #-32] // 4-byte Folded Spill
+; CHECK-NEXT:    // 4-byte Folded Spill Delay Slot 4
+; CHECK-NEXT:    paddb [p0], #-28 // Delay Slot 3
 ; CHECK-NEXT:    st r0, [p0, #0] // Delay Slot 2
 ; CHECK-NEXT:    nop // Delay Slot 1
-; CHECK-NEXT:    lda lr, [sp, #-28] // 4-byte Folded Reload
+; CHECK-NEXT:    lda lr, [sp, #-32] // 4-byte Folded Reload
+; CHECK-NEXT:    // 4-byte Folded Reload
 ; CHECK-NEXT:    nop
 ; CHECK-NEXT:    nop
 ; CHECK-NEXT:    nop

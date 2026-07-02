@@ -2446,7 +2446,21 @@ void MachineVerifier::visitMachineInstrBefore(const MachineInstr *MI) {
         !DstSize.isScalable())
       break;
 
-    if (SrcSize.isNonZero() && DstSize.isNonZero() && SrcSize != DstSize) {
+    // amd/aie/ port: a pointer may legitimately be copied to/from a register
+    // wider than the pointer itself. AIE has 20-bit pointers (p:20 in the
+    // datalayout) that live in 32-bit registers, so a pre-RegBankSelect
+    // `%v(p0) = COPY $preg` transiently mismatches (pointer=20 vs physreg=32).
+    // Byte-aligned targets have pointer size == register size, so their COPYs
+    // never reach here with a mismatch; this only relaxes sub-register-width
+    // pointers.
+    bool PtrFitsInReg =
+        (DstTy.isValid() && DstTy.isPointerOrPointerVector() &&
+         DstSize.getKnownMinValue() <= SrcSize.getKnownMinValue()) ||
+        (SrcTy.isValid() && SrcTy.isPointerOrPointerVector() &&
+         SrcSize.getKnownMinValue() <= DstSize.getKnownMinValue());
+
+    if (!PtrFitsInReg && SrcSize.isNonZero() && DstSize.isNonZero() &&
+        SrcSize != DstSize) {
       if (!DstOp.getSubReg() && !SrcOp.getSubReg()) {
         report("Copy Instruction is illegal with mismatching sizes", MI);
         OS << "Def Size = " << DstSize << ", Src Size = " << SrcSize << '\n';
