@@ -16,6 +16,7 @@
 #include "MCTargetDesc/AIEMCTargetDesc.h"
 #include "aie1/AIE1RegisterInfo.h"
 #include "llvm/MC/MCContext.h"
+#include "llvm/MC/MCDecoder.h"
 #include "llvm/MC/MCDecoderOps.h"
 #include "llvm/MC/MCDisassembler/MCDisassembler.h"
 #include "llvm/MC/MCInst.h"
@@ -387,12 +388,16 @@ TABLEBASEDDECODER(ACC768)
 TABLEBASEDDECODER(AML)
 TABLEBASEDDECODER(AMH)
 
+// amd/aie/ port: LLVM 23 dropped MCDisassembler::decodeSingletonRegClass and
+// emits 2-argument singleton register decoders (MCInst&, const MCDisassembler*).
+// Inline the old behavior: a singleton class contributes its one register.
 #define FIXEDREGDECODER(ClassName)                                             \
-  template <typename InsnType>                                                 \
   static DecodeStatus Decode##ClassName##RegisterClass(                        \
-      MCInst &Inst, InsnType Insn, uint64_t Address,                           \
-      const MCDisassembler *Decoder) {                                         \
-    return Decoder->decodeSingletonRegClass(Inst, ClassName##RegClass);        \
+      MCInst &Inst, const MCDisassembler *Decoder) {                          \
+    if (ClassName##RegClass.getNumRegs() != 1)                                 \
+      return MCDisassembler::Fail;                                             \
+    Inst.addOperand(MCOperand::createReg(ClassName##RegClass.getRegister(0))); \
+    return MCDisassembler::Success;                                            \
   }
 
 FIXEDREGDECODER(GPR0)
@@ -435,6 +440,12 @@ SLOTDECODERDecl(VecAll);
 SLOTDECODERDecl(VecShft);
 SLOTDECODERDecl(VecStrm);
 SLOTDECODERDecl(VecShrt);
+
+// amd/aie/ port: LLVM 23 moved the decoder opcodes (OPC_Decode/OPC_CheckField/
+// OPC_SwitchField/OPC_Scope/...) into the llvm::MCD namespace. AIE's generated
+// table still emits a standalone decodeInstruction() referencing them
+// unqualified, so pull the namespace in before including the table.
+using namespace llvm::MCD;
 
 #include "AIEGenDisassemblerTables.inc"
 

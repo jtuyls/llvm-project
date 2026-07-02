@@ -16,6 +16,7 @@
 #include "AIEDisassemblerPP.h"
 #include "MCTargetDesc/aie2p/AIE2PMCTargetDesc.h"
 #include "aie2p/AIE2PRegisterInfo.h"
+#include "llvm/MC/MCDecoder.h"
 #include "llvm/MC/MCDecoderOps.h"
 #include "llvm/MC/MCDisassembler/MCDisassembler.h"
 #include "llvm/MC/MCInst.h"
@@ -65,6 +66,9 @@ SLOTDECODERDecl(Nop);
 } // namespace
 
 #include "AIE2PGenDecoderMethods.h"
+
+// amd/aie/ port: LLVM 23 put decoder opcodes/helpers in llvm::MCD.
+using namespace llvm::MCD;
 
 #include "AIE2PGenDisassemblerTables.inc"
 

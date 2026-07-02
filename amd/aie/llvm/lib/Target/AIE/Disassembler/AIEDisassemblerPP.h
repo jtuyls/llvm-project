@@ -31,12 +31,15 @@
 
 #define TABLEBASEDDECODER(ClassName) TABLEBASEDDECODER2(ClassName, ClassName)
 
+// amd/aie/ port: LLVM 23 dropped MCDisassembler::decodeSingletonRegClass and
+// emits 2-argument singleton register decoders (MCInst&, const MCDisassembler*).
 #define FIXEDREGDECODER(ClassName)                                             \
-  template <typename InsnType>                                                 \
   static DecodeStatus Decode##ClassName##RegisterClass(                        \
-      MCInst &Inst, InsnType Insn, uint64_t Address,                           \
-      const MCDisassembler *Decoder) {                                         \
-    return Decoder->decodeSingletonRegClass(Inst, ClassName##RegClass);        \
+      MCInst &Inst, const MCDisassembler *Decoder) {                           \
+    if (ClassName##RegClass.getNumRegs() != 1)                                 \
+      return MCDisassembler::Fail;                                             \
+    Inst.addOperand(MCOperand::createReg(ClassName##RegClass.getRegister(0))); \
+    return MCDisassembler::Success;                                            \
   }
 
 #define SLOTDECODERDecl(ClassName)                                             \

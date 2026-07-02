@@ -16,6 +16,7 @@
 #include "AIEBaseDisassembler.h"
 #include "AIEDisassemblerPP.h"
 #include "MCTargetDesc/AIE2MCTargetDesc.h"
+#include "llvm/MC/MCDecoder.h"
 #include "llvm/MC/MCDecoderOps.h"
 #include "llvm/MC/MCDisassembler/MCDisassembler.h"
 #include "llvm/MC/MCInst.h"
@@ -483,6 +484,9 @@ template <typename InsnType>
 static DecodeStatus DecodeLDA_Q_3DInstruction(MCInst &MI, InsnType &Insn,
                                               uint64_t Address,
                                               const MCDisassembler *Decoder);
+
+// amd/aie/ port: LLVM 23 put decoder opcodes/helpers in llvm::MCD.
+using namespace llvm::MCD;
 
 #include "AIE2GenDisassemblerTables.inc"
 
