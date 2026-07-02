@@ -774,48 +774,84 @@ static bool combineSubRegCopyToSuperregCopy(MachineBasicBlock &MBB,
   return Changed;
 }
 
-/// amd/aie/ port: LLVM 23's LiveRangeCalc rejects a use that precedes its
-/// single def within the same block ("Use not jointly dominated by defs");
-/// LLVM 21 tolerated it. AIE's post-increment store selection (ptr-mod) leaves
-/// the increment-modifier constant (e.g. MOV_PD_imm10_pseudo) defined AFTER the
-/// ST_..._pstm that folds it in — the constant belongs to the *next* address
-/// computation, but the post-increment fold pulls its use back to the store's
-/// position. Such a def is a pure rematerializable immediate (no register
-/// inputs, no memory, no side effects), so hoisting it to just before its
-/// earliest in-block use is always safe and restores well-formed def-before-use
-/// order without changing semantics.
-static bool hoistBackwardImmDefs(MachineBasicBlock &MBB,
-                                 MachineRegisterInfo &MRI) {
+/// amd/aie/ port: returns true if \p Def (which is currently positioned AFTER
+/// its use at index \p UsePos) can be safely hoisted to just before that use.
+/// \p Pos maps every instruction in the block to its program-order index.
+static bool canHoistDefBeforeUse(const MachineInstr &Def, unsigned UsePos,
+                                 const DenseMap<const MachineInstr *, unsigned>
+                                     &Pos,
+                                 const MachineRegisterInfo &MRI) {
+  // Never move something that could change observable memory/control order or
+  // that defines/uses physical registers (whose liveness we can't verify here).
+  if (Def.mayStore() || Def.hasUnmodeledSideEffects() || Def.isInlineAsm() ||
+      Def.isBundled())
+    return false;
+  unsigned DefPos = Pos.lookup(&Def);
+  for (const MachineOperand &MO : Def.operands()) {
+    if (!MO.isReg() || !MO.getReg())
+      continue;
+    if (MO.getReg().isPhysical())
+      return false; // Can't reason about physreg liveness across the move.
+    if (MO.isUse()) {
+      // Every register input must already be available at the use site.
+      const MachineInstr *InDef = MRI.getUniqueVRegDef(MO.getReg());
+      if (!InDef || InDef->getParent() != Def.getParent() ||
+          Pos.lookup(InDef) >= UsePos)
+        return false;
+    }
+  }
+  // A load may be hoisted only if it is unordered (not volatile/atomic) and it
+  // crosses nothing that stores, orders memory, or has side effects — so no
+  // aliasing or ordered access sits between the new and old positions.
+  if (Def.mayLoad()) {
+    if (Def.hasOrderedMemoryRef())
+      return false;
+    for (const auto &[MI, P] : Pos)
+      if (P >= UsePos && P < DefPos &&
+          (MI->mayStore() || MI->hasUnmodeledSideEffects() ||
+           MI->hasOrderedMemoryRef()))
+        return false;
+  }
+  return true;
+}
+
+/// amd/aie/ port: LLVM 23's LiveRangeCalc rejects a use that precedes its single
+/// def within the same block ("Use not jointly dominated by defs"); LLVM 21
+/// tolerated it. AIE's post-increment selection (ptr-mod) leaves a value defined
+/// AFTER a use that folds it in: the increment-modifier constant
+/// (MOV_PD_imm10_pseudo) or a post-increment load-defined pointer belongs to the
+/// *next* address computation, but the post-increment fold pulls its use back to
+/// the current access. Hoist any such backward def to just before its earliest
+/// in-block use when provably safe (see canHoistDefBeforeUse), restoring
+/// well-formed def-before-use order without changing semantics. Iterate to a
+/// fixpoint so chains resolve; blocks here are small and straight-line.
+static bool hoistBackwardDefs(MachineBasicBlock &MBB,
+                              MachineRegisterInfo &MRI) {
   bool Changed = false;
-  SmallPtrSet<const MachineInstr *, 32> Seen;
-  for (MachineInstr &MI : make_early_inc_range(MBB)) {
-    Seen.insert(&MI);
-    for (const MachineOperand &MO : MI.explicit_uses()) {
-      if (!MO.isReg() || !MO.getReg().isVirtual())
-        continue;
-      MachineInstr *Def = MRI.getUniqueVRegDef(MO.getReg());
-      // Skip if no unique def, def is in another block, or def already precedes
-      // this use (well-formed).
-      if (!Def || Def->getParent() != &MBB || Seen.count(Def))
-        continue;
-      // Only hoist pure immediate materializations: exactly one def, no memory,
-      // no side effects, and no register operand uses (explicit or implicit) —
-      // so moving the def earlier can never violate one of its own inputs.
-      if (Def->mayLoadOrStore() || Def->hasUnmodeledSideEffects() ||
-          Def->isInlineAsm() || Def->getNumExplicitDefs() != 1)
-        continue;
-      bool HasRegUse = false;
-      for (const MachineOperand &U : Def->operands())
-        if (U.isReg() && U.isUse() && U.getReg()) {
-          HasRegUse = true;
-          break;
-        }
-      if (HasRegUse)
-        continue;
-      // Move the def to just before its earliest use (this instruction).
-      MBB.splice(MI.getIterator(), &MBB, Def->getIterator());
-      Seen.insert(Def);
-      Changed = true;
+  bool Again = true;
+  while (Again) {
+    Again = false;
+    DenseMap<const MachineInstr *, unsigned> Pos;
+    unsigned Idx = 0;
+    for (const MachineInstr &MI : MBB)
+      Pos[&MI] = Idx++;
+
+    for (MachineInstr &U : MBB) {
+      unsigned UPos = Pos.lookup(&U);
+      for (const MachineOperand &MO : U.explicit_uses()) {
+        if (!MO.isReg() || !MO.getReg().isVirtual())
+          continue;
+        MachineInstr *Def = MRI.getUniqueVRegDef(MO.getReg());
+        if (!Def || Def->getParent() != &MBB || Pos.lookup(Def) <= UPos)
+          continue; // No unique in-block def, or already well-formed.
+        if (!canHoistDefBeforeUse(*Def, UPos, Pos, MRI))
+          continue;
+        MBB.splice(U.getIterator(), &MBB, Def->getIterator());
+        Changed = Again = true;
+        break;
+      }
+      if (Again)
+        break;
     }
   }
   return Changed;
@@ -841,7 +877,7 @@ bool AIEPostSelectOptimize::runOnMachineFunction(MachineFunction &MF) {
   // is strict about this; LLVM 21 was not). Do this first so later steps and
   // all downstream analyses see well-formed MIR.
   for (MachineBasicBlock &MBB : MF)
-    Changed |= hoistBackwardImmDefs(MBB, MF.getRegInfo());
+    Changed |= hoistBackwardDefs(MBB, MF.getRegInfo());
 
   // 0. Fold REG_SEQUENCE (COPY %0.sub_bfp16_x), %subreg.sub_bfp16_x,
   // (%0.sub_bfp16_e), %subreg.sub_bfp16_e) into COPY %0
