@@ -903,8 +903,14 @@ void AIEBaseTargetLowering::alignFirstVASlot(CCState &CCInfo) {
   CCInfo.AllocateStack(NextVAOffset - NextOffset, Align(4));
 }
 
-MVT AIEBaseTargetLowering::getVectorIdxTy(const DataLayout &DL) const {
-  return MVT::i32;
+// amd/aie/ port: LLVM 23 made getVectorIdxTy non-virtual and moved the target
+// hook to getVectorIdxWidth (getVectorIdxTy/LLT now derive from it). AIE wants
+// an i32 vector index; the default getVectorIdxWidth returns
+// getPointerSizeInBits(0) = 20 (AIE's 20-bit datalayout index), which truncates
+// the extract/insert index to s20 and breaks the (i32 eR) selection patterns.
+// Override the new hook to keep the width at 32.
+unsigned AIEBaseTargetLowering::getVectorIdxWidth(const DataLayout &DL) const {
+  return 32;
 }
 
 unsigned AIEBaseTargetLowering::getNumRegistersForCallingConv(

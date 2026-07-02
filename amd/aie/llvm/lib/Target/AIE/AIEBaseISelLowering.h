@@ -37,7 +37,9 @@ public:
   LLT getOptimalMemOpLLT(const MemOp &Op,
                          const AttributeList &FuncAttributes) const override;
 
-  MVT getVectorIdxTy(const DataLayout &DL) const;
+  // amd/aie/ port: LLVM 23's target hook for the vector index width (replaces
+  // the now-non-virtual getVectorIdxTy). Keep AIE's index i32 (width 32).
+  unsigned getVectorIdxWidth(const DataLayout &DL) const override;
 
   /// Returns if it's reasonable to merge stores to MemVT size.
   bool canMergeStoresTo(unsigned AS, EVT MemVT,
