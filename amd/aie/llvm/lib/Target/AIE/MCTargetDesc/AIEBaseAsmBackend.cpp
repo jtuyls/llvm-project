@@ -34,6 +34,12 @@ static uint64_t adjustFixupValue(const MCFixup &Fixup, uint64_t Value,
 void AIEBaseAsmBackend::applyFixup(const MCFragment &F, const MCFixup &Fixup,
                                    const MCValue &Target, uint8_t *Data,
                                    uint64_t Value, bool IsResolved) {
+  // amd/aie/ port: LLVM 23 moved relocation recording into the backend's
+  // applyFixup path via maybeAddReloc (was the assembler's job in LLVM 21).
+  // An applyFixup override that doesn't call it silently drops every
+  // relocation (undefined-symbol fixups resolve to 0, no .rela section emitted).
+  maybeAddReloc(F, Fixup, Target, Value, IsResolved);
+
   if (!Value)
     return; // Doesn't change encoding.
 

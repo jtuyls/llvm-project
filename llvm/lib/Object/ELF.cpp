@@ -61,6 +61,16 @@ StringRef llvm::object::getELFRelocationTypeName(uint32_t Machine,
       break;
     }
     break;
+  case ELF::EM_AIE:
+    switch (Type) {
+    // amd/aie/ port: one shared .def for all AIE archs — ELF reloc numbers are
+    // opaque (R_AIE_<n> just names relocation type n); the linker switches on
+    // the machine flags to pick the actual relocation routine.
+#include "llvm/BinaryFormat/ELFRelocs/AIE.def"
+    default:
+      break;
+    }
+    break;
   case ELF::EM_ARM:
     switch (Type) {
 #include "llvm/BinaryFormat/ELFRelocs/ARM.def"

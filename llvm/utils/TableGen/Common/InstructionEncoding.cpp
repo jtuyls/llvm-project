@@ -108,10 +108,15 @@ void InstructionEncoding::parseFixedLenEncoding(
                                      " bits beyond that are    not zero/unset");
   };
 
-  if (InstNumBits < BitWidth)
-    // amd/aie/ port (PoC): AIE uses variable-length VLIW encodings where the
-    // declared Size can exceed the Inst{} field width; skip 23's strict check.
-    return;
+  // amd/aie/ port: AIE uses variable-length VLIW slot encodings where the
+  // `Inst` field is narrower than the declared Size*8 (only the low opcode
+  // bits are fixed; the upper operand bits live in the composite bundle).
+  // LLVM 23 upstream fatal-errors here, assuming Inst >= Size*8. Instead of
+  // erroring (or early-returning, which left InstBits at a degenerate width
+  // and made the DecoderEmitter mis-name/drop the per-slot tables), fall
+  // through: the width stays Size*8, take_front() safely constrains the low
+  // InstNumBits from `Inst`, and the remaining upper bits stay unknown
+  // (don't-care), matching LLVM 21's per-slot table generation.
 
   if (InstNumBits > BitWidth) {
     // Ensure that all the bits beyond 'Size' are 0 or unset (i.e., carry no

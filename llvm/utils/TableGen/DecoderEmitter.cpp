@@ -1311,6 +1311,23 @@ DecoderTreeBuilder::convertFilterChooser(const FilterChooser *FC) {
   do {
     if (FC->SingletonEncodingID)
       N->addChild(convertSingleton(*FC->SingletonEncodingID, FC->FilterBits));
+    else if (FC->HasConflict && FC->FilterChooserMap.empty())
+      // amd/aie/ port: unresolved decoding conflict (this chooser itself failed
+      // to filter — HasConflict set locally and no filter applied, so its map is
+      // empty — as opposed to a parent whose HasConflict merely propagated up
+      // from a child, or a variable-length continuation with an empty map).
+      // AIE's variable-length VLIW
+      // slot encodings can overlap in the bits the filter algorithm inspects, so
+      // no single filter separates them (e.g. VABS_GTZ_D16/S16, MOV_CNTR/D1).
+      // LLVM 23 upstream drops the ENTIRE table when this happens; LLVM 21
+      // (llvm-aie) emitted the table best-effort. Match that here without losing
+      // the conflicting encodings: emit each as a singleton under this CheckAny
+      // scope so the decoder linearly tries each and matches on its full
+      // mandatory-bit pattern — distinct encodings still decode correctly; only
+      // encodings with byte-identical fixed bits remain genuinely ambiguous
+      // (first match wins, as in every decoder).
+      for (unsigned EncID : FC->EncodingIDs)
+        N->addChild(convertSingleton(EncID, FC->FilterBits));
     else
       N->addChild(convertFilterChooserMap(FC->StartBit, FC->NumBits,
                                           FC->FilterChooserMap));
@@ -1323,8 +1340,10 @@ DecoderTreeBuilder::convertFilterChooser(const FilterChooser *FC) {
 std::unique_ptr<DecoderTreeNode>
 DecoderTreeBuilder::buildTree(ArrayRef<unsigned> EncodingIDs) {
   FilterChooser FC(Encodings, EncodingIDs);
-  if (FC.hasConflict())
-    return nullptr;
+  // amd/aie/ port: do NOT bail the whole table on conflict (LLVM 23 default).
+  // convertFilterChooser emits any conflicting leaf as a CheckAny of singletons
+  // (best-effort, matching LLVM 21 / llvm-aie), so the table still emits and
+  // AIE's per-slot VLIW decoder tables (DecoderTableVec32/Mv32/...) exist.
   return convertFilterChooser(&FC);
 }
 
