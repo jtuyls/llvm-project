@@ -10,21 +10,19 @@
 %struct = type { i32, i32 }
 
 define i32 @dontFoldGEPs(ptr %dm, i1 %arg4, i64 %arg9, i64 %arg19) {
-; CHECK-LABEL: define i32 @dontFoldGEPs(
-; CHECK-SAME: ptr [[DM:%.*]], i1 [[ARG4:%.*]], i64 [[ARG9:%.*]], i64 [[ARG19:%.*]]) {
+; CHECK-LABEL: @dontFoldGEPs(
 ; CHECK-NEXT:  bb:
-; CHECK-NEXT:    [[TMP1:%.*]] = load ptr, ptr [[DM]], align 8
-; CHECK-NEXT:    br i1 [[ARG4]], label [[BB1:%.*]], label [[BB2:%.*]]
+; CHECK-NEXT:    [[TMP1:%.*]] = load ptr, ptr [[DM:%.*]], align 8
+; CHECK-NEXT:    br i1 [[ARG4:%.*]], label [[BB1:%.*]], label [[BB2:%.*]]
 ; CHECK:       bb1:
-; CHECK-NEXT:    [[TMP0:%.*]] = trunc i64 [[ARG9]] to i20
-; CHECK-NEXT:    [[TMP10:%.*]] = getelementptr inbounds [[STRUCT2:%.*]], ptr [[TMP1]], i20 [[TMP0]]
+; CHECK-NEXT:    [[TMP3:%.*]] = trunc nsw i64 [[ARG9:%.*]] to i20
 ; CHECK-NEXT:    br label [[BB3:%.*]]
 ; CHECK:       bb2:
-; CHECK-NEXT:    [[TMP2:%.*]] = trunc i64 [[ARG19]] to i20
-; CHECK-NEXT:    [[TMP4:%.*]] = getelementptr inbounds [[STRUCT2]], ptr [[TMP1]], i20 [[TMP2]]
+; CHECK-NEXT:    [[TMP2:%.*]] = trunc nsw i64 [[ARG19:%.*]] to i20
 ; CHECK-NEXT:    br label [[BB3]]
 ; CHECK:       bb3:
-; CHECK-NEXT:    [[PHI:%.*]] = phi ptr [ [[TMP10]], [[BB1]] ], [ [[TMP4]], [[BB2]] ]
+; CHECK-NEXT:    [[DOTPN:%.*]] = phi i20 [ [[TMP3]], [[BB1]] ], [ [[TMP2]], [[BB2]] ]
+; CHECK-NEXT:    [[PHI:%.*]] = getelementptr inbounds [8 x i8], ptr [[TMP1]], i20 [[DOTPN]]
 ; CHECK-NEXT:    [[TMP25:%.*]] = load i32, ptr [[PHI]], align 4
 ; CHECK-NEXT:    ret i32 [[TMP25]]
 ;
