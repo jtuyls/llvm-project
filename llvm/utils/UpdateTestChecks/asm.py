@@ -31,6 +31,14 @@ ASM_FUNCTION_X86_RE = re.compile(
     flags=(re.M | re.S),
 )
 
+# amd/aie/ port: AIE function-body matcher for update_llc_test_checks.py.
+ASM_FUNCTION_AIE_RE = re.compile(
+    r"^(?P<func>[\ .0-9a-zA-Z_]+)\w*:.*?\n"  # f: (name of function)
+    r"(?P<body>.*?)\n"  # (body of the function)
+    r".Lfunc_end[0-9]+:",  # .Lfunc_end0: or # -- End function
+    flags=(re.M | re.S),
+)
+
 ASM_FUNCTION_ARM_RE = re.compile(
     r'^(?P<func>[0-9a-zA-Z_$]+):[ \t]*(@+[ \t]*@"?(?P=func)"?)?\n'  # f: (name of function)
     r"(?:\.L(?P=func)\$local:\n)?"  # drop .L<func>$local:
@@ -339,6 +347,23 @@ def scrub_asm_amdgpu(asm, args):
     return asm
 
 
+# amd/aie/ port: AIE asm scrubber for update_llc_test_checks.py.
+SCRUB_AIE_COMMENTS_RE = re.compile(r"\/\/.*$")
+
+
+def scrub_asm_aie(asm, args):
+    # Scrub runs of whitespace out of the assembly, but leave the leading
+    # whitespace in place.
+    asm = common.SCRUB_WHITESPACE_RE.sub(r" ", asm)
+    # Expand the tabs used for indentation.
+    asm = string.expandtabs(asm, 2)
+    # Strip kill operands inserted into the asm.
+    asm = common.SCRUB_KILL_COMMENT_RE.sub("", asm)
+    # Strip trailing whitespace.
+    asm = common.SCRUB_TRAILING_WHITESPACE_RE.sub(r"", asm)
+    return asm
+
+
 def scrub_asm_arm_eabi(asm, args):
     # Scrub runs of whitespace out of the assembly, but leave the leading
     # whitespace in place.
@@ -567,6 +592,8 @@ def get_run_handler(triple):
         "arm64_32": (scrub_asm_arm_eabi, ASM_FUNCTION_AARCH64_DARWIN_RE),
         "aarch64": (scrub_asm_arm_eabi, ASM_FUNCTION_AARCH64_RE),
         "aarch64-apple-darwin": (scrub_asm_arm_eabi, ASM_FUNCTION_AARCH64_DARWIN_RE),
+        # amd/aie/ port: matches aie/aie2/aie2p/aie2ps via longest-prefix lookup.
+        "aie": (scrub_asm_aie, ASM_FUNCTION_AIE_RE),
         "aarch64-apple-ios": (scrub_asm_arm_eabi, ASM_FUNCTION_AARCH64_DARWIN_RE),
         "aarch64-apple-macosx": (scrub_asm_arm_eabi, ASM_FUNCTION_AARCH64_DARWIN_RE),
         "bpf": (scrub_asm_bpf, ASM_FUNCTION_BPF_RE),
