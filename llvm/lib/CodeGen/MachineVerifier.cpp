@@ -1405,7 +1405,12 @@ void MachineVerifier::verifyPreISelGenericInstruction(const MachineInstr *MI) {
     if (PtrTy.isPointerOrPointerVector()) {
       const DataLayout &DL = MF->getDataLayout();
       unsigned AS = PtrTy.getAddressSpace();
-      unsigned IndexSizeInBits = DL.getIndexSize(AS) * 8;
+      // amd/aie/ port: use getIndexSizeInBits (exact IndexBitWidth) rather than
+      // getIndexSize(AS)*8 (byte-rounded). Byte-rounding breaks non-byte-aligned
+      // pointers: AIE's addrspace-0 index is 20 bits, which getIndexSize rounds
+      // to 3 bytes -> 24, spuriously rejecting the legal s20 G_PTR_ADD offset.
+      // For all byte-aligned targets the two are identical.
+      unsigned IndexSizeInBits = DL.getIndexSizeInBits(AS);
       if (OffsetTy.getScalarSizeInBits() != IndexSizeInBits) {
         report("gep offset operand must match index size for address space",
                MI);
