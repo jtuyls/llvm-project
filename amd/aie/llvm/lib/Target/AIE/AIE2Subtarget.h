@@ -61,6 +61,12 @@ public:
   bool useAA() const override { return true; }
   bool enableEarlyIfConversion() const override { return true; }
 
+  // amd/aie/ port: LLVM 23's RuntimeLibcalls.td opt-in model leaves AIE's
+  // unrecognized triple with an empty libcall set, so scalar fmul/fdiv/frem and
+  // G_MEMCPY/MEMSET/MEMMOVE legalization ("Convert to libcall") fail. Restore
+  // the standard compiler-rt / libc implementations on every LibcallLoweringInfo.
+  void initLibcallLoweringInfo(LibcallLoweringInfo &Info) const override;
+
   void ParseSubtargetFeatures(StringRef CPU, StringRef TuneCPU, StringRef FS);
 
   const AIE2FrameLowering *getFrameLowering() const override {
