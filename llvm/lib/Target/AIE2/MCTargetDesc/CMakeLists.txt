@@ -1,0 +1,12 @@
+add_llvm_component_library(LLVMAIE2Desc
+  AIE2MCTargetDesc.cpp
+  AIE2MCAsmInfo.cpp
+  AIE2InstPrinter.cpp
+  LINK_COMPONENTS
+  MC
+  AIE2Info
+  Support
+  TargetParser
+  ADD_TO_COMPONENT
+  AIE2
+  )

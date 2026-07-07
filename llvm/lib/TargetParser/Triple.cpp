@@ -62,6 +62,7 @@ StringRef Triple::getArchTypeName(ArchType Kind) {
     return "bpfeb";
   case bpfel:
     return "bpfel";
+  case aie2:         return "aie2";
   case csky:
     return "csky";
   case dxil:
@@ -733,6 +734,7 @@ Triple::ArchType Triple::getArchTypeForLLVMName(StringRef Name) {
       .Case("renderscript32", renderscript32)
       .Case("renderscript64", renderscript64)
       .Case("ve", ve)
+      .Case("aie2", aie2)
       .Case("csky", csky)
       .Case("loongarch32", loongarch32)
       .Case("loongarch64", loongarch64)
@@ -883,6 +885,7 @@ Triple::ArchType Triple::parseArch(StringRef ArchName) {
           .Case("ve", Triple::ve)
           .Case("wasm32", Triple::wasm32)
           .Case("wasm64", Triple::wasm64)
+          .Case("aie2", Triple::aie2)
           .Case("csky", Triple::csky)
           .Case("loongarch32", Triple::loongarch32)
           .Case("loongarch64", Triple::loongarch64)
@@ -1217,6 +1220,7 @@ static Triple::ObjectFormatType getDefaultFormat(const Triple &T) {
   case Triple::avr:
   case Triple::bpfeb:
   case Triple::bpfel:
+  case Triple::aie2:
   case Triple::csky:
   case Triple::hexagon:
   case Triple::hsail64:
@@ -1990,6 +1994,7 @@ unsigned Triple::getArchPointerBitWidth(llvm::Triple::ArchType Arch) {
   case llvm::Triple::arc:
   case llvm::Triple::arm:
   case llvm::Triple::armeb:
+  case llvm::Triple::aie2:
   case llvm::Triple::csky:
   case llvm::Triple::dxil:
   case llvm::Triple::hexagon:
@@ -2464,6 +2469,7 @@ bool Triple::isLittleEndian() const {
   case Triple::arm:
   case Triple::avr:
   case Triple::bpfel:
+  case Triple::aie2:
   case Triple::csky:
   case Triple::dxil:
   case Triple::hexagon:
