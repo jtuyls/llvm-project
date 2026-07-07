@@ -5,6 +5,15 @@
 ; SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 ;
 ; (c) Copyright 2023-2025 Advanced Micro Devices, Inc. or its affiliates
+;
+; REGRESSION PIN: this test also pins the post-increment stale-combine guard in
+; matchGlobalPtrModOptimizer (AIECombinerHelper.cpp). Removing that guard makes
+; AIEGlobalCombinerPtrMods emit a POSTINC_LOAD off the wrong (re-based) base for
+; the second load of field 51, reading X+92 instead of X+100 -- a silent
+; miscompile. A minimal repro is not feasible: the bad combine is an emergent
+; property of the NodeNum-ordered gain-based selection over this whole load
+; chain (a hand-minimized snippet selects the correct offset-load). Do not
+; delete/simplify this function without re-verifying the guard another way.
 ; RUN: llc -O2 -mtriple=aie2  --issue-limit=1 %s -o - | FileCheck %s
 ; ModuleID = 'conv2d_offset_test.cc'
 source_filename = "conv2d_offset_test.cc"
