@@ -1047,6 +1047,36 @@ bool llvm::matchGlobalPtrModOptimizer(MachineInstr &MemI,
     return false;
   }
   assert(CombineRule->CombineInstrs.size() >= 2);
+
+  // amd/aie/ port: re-validate the pre-computed combine against the CURRENT MIR.
+  // The combine list is built by an earlier analysis; between then and applying
+  // it, another GICombine in this pass (e.g. ptr_add_immed_chain) can re-base
+  // the pointer modifier — folding `%p = %base + k` into `%base` — so its input
+  // pointer no longer equals the memory op's address. Under LLVM 23's combiner
+  // ordering this actually happens, and applyLdStInc builds the memop from the
+  // modifier's operands, so applying a re-based combine reads the WRONG address
+  // (conv2d_offset_test miscompile: a load of X+100 became POSTINC_LOAD X+92).
+  // A valid combine keeps the memop pointer equal to the modifier's INPUT
+  // pointer (post-increment: reads [base], base += off) or its OUTPUT/def
+  // (offset: reads [base + off]). If it matches neither, the combine went stale;
+  // drop it (return false → not applied; matcher stays consistent, no loop) and
+  // leave the memop for a correct offset/plain form.
+  {
+    const auto &AIETII = (const AIEBaseInstrInfo &)TII;
+    MachineInstr *PtrMod = CombineRule->CombineInstrs[0];
+    const Register MemPtr = MemI.getOperand(1).getReg();
+    const Register PtrModOut = PtrMod->getOperand(0).getReg();
+    Register PtrModIn;
+    if (auto Idx = AIETII.getInputPtrIdx(*PtrMod, MRI))
+      PtrModIn = PtrMod->getOperand(*Idx).getReg();
+    if (MemPtr != PtrModIn && MemPtr != PtrModOut) {
+      LLVM_DEBUG(dbgs() << "[Global Ptr Inc] Dropping stale combine (modifier "
+                           "re-based; would read wrong address) for "
+                        << MemI);
+      return false;
+    }
+  }
+
   LLVM_DEBUG(dbgs() << "[Global Ptr Inc] Found\n" << *CombineRule);
 
   return true;

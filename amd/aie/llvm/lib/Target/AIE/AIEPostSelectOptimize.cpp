@@ -843,6 +843,30 @@ bool AIEPostSelectOptimize::runOnMachineFunction(MachineFunction &MF) {
   for (MachineBasicBlock &MBB : MF)
     Changed |= hoistBackwardImmDefs(MBB, MF.getRegInfo());
 
+  // 0b. Materialize multi-slot pseudos for optnone functions. The machine
+  // scheduler selects a per-slot alternative opcode for each multi-slot pseudo
+  // (e.g. a post-increment MOV_PD_imm10_pseudo modifier) and materializes it,
+  // but the scheduler is SKIPPED for optnone functions. An un-materialized
+  // multi-slot pseudo survives to AIEMachineAlignment where getSlot() asserts
+  // hasSingleSlot(). For optnone there is no scheduling, so every instruction
+  // occupies its own bundle and any valid slot alternative is correct: pick the
+  // first. (Non-optnone functions are left to the scheduler's slot-aware choice.)
+  if (MF.getFunction().hasOptNone()) {
+    const auto *ATII =
+        static_cast<const AIEBaseInstrInfo *>(MF.getSubtarget().getInstrInfo());
+    for (MachineBasicBlock &MBB : MF)
+      for (MachineInstr &MI : MBB) {
+        if (!ATII->isMultiSlotPseudo(MI))
+          continue;
+        const std::vector<unsigned> *Alts =
+            ATII->getFormatInterface()->getAlternateInstsOpcode(MI.getOpcode());
+        if (Alts && !Alts->empty()) {
+          MI.setDesc(ATII->get(Alts->front()));
+          Changed = true;
+        }
+      }
+  }
+
   // 0. Fold REG_SEQUENCE (COPY %0.sub_bfp16_x), %subreg.sub_bfp16_x,
   // (%0.sub_bfp16_e), %subreg.sub_bfp16_e) into COPY %0
   for (MachineBasicBlock &MBB : MF) {
