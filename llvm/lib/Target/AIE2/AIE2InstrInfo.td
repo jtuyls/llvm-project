@@ -19,23 +19,25 @@ def AIE2ret_glue : SDNode<"AIE2ISD::RET_GLUE", SDT_AIE2Ret,
 def i32imm_op : Operand<i32>;
 
 //===----------------------------------------------------------------------===//
-// Register-register ALU
+// Register-register ALU -- real I32_ALU encodings (op codes from the fork).
 //===----------------------------------------------------------------------===//
-class ALU_rr<string mn, SDPatternOperator op>
-    : AIE2Inst<(outs GPR:$dst), (ins GPR:$s1, GPR:$s2),
-               !strconcat(mn, " $dst, $s1, $s2"),
-               [(set i32:$dst, (op i32:$s1, i32:$s2))]>;
+class ALU_rr<bits<4> op, string mn, SDPatternOperator node>
+    : AIE2AluRR<op, (outs GPR:$mRx), (ins GPR:$mRx0, GPR:$mRy),
+                mn # " $mRx, $mRx0, $mRy",
+                [(set i32:$mRx, (node i32:$mRx0, i32:$mRy))]>;
 
-def ADD : ALU_rr<"add", add>;
-def SUB : ALU_rr<"sub", sub>;
-def AND : ALU_rr<"and", and>;
-def OR  : ALU_rr<"or",  or>;
-def XOR : ALU_rr<"xor", xor>;
+def ADD : ALU_rr<0b0000, "add", add>;
+def SUB : ALU_rr<0b0001, "sub", sub>;
+def AND : ALU_rr<0b0100, "and", and>;
+def OR  : ALU_rr<0b0101, "or",  or>;
+def XOR : ALU_rr<0b0110, "xor", xor>;
 
-// Register-immediate add (also used for constant materialization / frame).
-def ADDI : AIE2Inst<(outs GPR:$dst), (ins GPR:$s, i32imm_op:$imm),
-                    "addi $dst, $s, #$imm",
-                    [(set i32:$dst, (add i32:$s, imm:$imm))]>;
+// Register-immediate add -- real I32_ALU encoding.
+// Verified: add r1,r1,#1 -> 0x10420719 (matches the fork).
+def simm7 : Operand<i32>, ImmLeaf<i32, [{ return isInt<7>(Imm); }]>;
+def ADD_ri : AIE2AluRI<(outs GPR:$mRx), (ins GPR:$mRx0, simm7:$c7s),
+                       "add $mRx, $mRx0, #$c7s",
+                       [(set i32:$mRx, (add i32:$mRx0, simm7:$c7s))]>;
 
 // Move immediate into a register.
 def MOVi : AIE2Inst<(outs GPR:$dst), (ins i32imm_op:$imm),
