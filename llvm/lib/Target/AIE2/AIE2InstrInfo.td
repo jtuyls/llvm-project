@@ -49,13 +49,21 @@ let hasSideEffects = 0 in
 def MOVr : AIE2Inst<(outs GPR:$dst), (ins GPR:$src), "mov $dst, $src", []>;
 
 //===----------------------------------------------------------------------===//
-// Memory: a single word load through a register-held pointer. This exists only
-// to demonstrate that pointers are plain i32 (p:32) -- the load address is a
-// GPR, no i20/p:20 machinery involved.
+// Memory: real AIE2 word load/store, immediate-indexed `[$ptr, #imm]`. The
+// address lives in an eP (PTR) pointer register -- required for a
+// hardware-valid `lda`/`st`. Data flows through eR/GPR. Encodings verified
+// bit-exact vs the fork (see AIE2InstrFormats.td).
 //===----------------------------------------------------------------------===//
-let mayLoad = 1 in
-def LW : AIE2Inst<(outs GPR:$dst), (ins GPR:$addr), "lw $dst, [$addr]",
-                  [(set i32:$dst, (load GPR:$addr))]>;
+def simm6 : Operand<i32>, ImmLeaf<i32, [{ return isInt<6>(Imm); }]>;
+
+def LDA_idx_imm : AIE2LdaScl<(outs GPR:$mR), (ins PTR:$ptr, simm6:$imm),
+                             "lda $mR, [$ptr, #$imm]", []>;
+def ST_idx_imm  : AIE2StScl<(outs), (ins GPR:$mR, PTR:$ptr, simm6:$imm),
+                            "st $mR, [$ptr, #$imm]", []>;
+
+// Offset-0 addressing: the pointer register is the address directly.
+def : Pat<(i32 (load PTR:$ptr)),        (LDA_idx_imm PTR:$ptr, 0)>;
+def : Pat<(store i32:$mR, PTR:$ptr),    (ST_idx_imm GPR:$mR, PTR:$ptr, 0)>;
 
 //===----------------------------------------------------------------------===//
 // NOP -- real 2-byte encoding, bit-exact to base llvm-aie (`nop` = 0x0001).

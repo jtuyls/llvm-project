@@ -55,9 +55,16 @@ SDValue AIE2TargetLowering::LowerFormalArguments(
   CCState CCInfo(CallConv, IsVarArg, MF, ArgLocs, *DAG.getContext());
   CCInfo.AnalyzeFormalArguments(Ins, CC_AIE2);
 
-  for (const CCValAssign &VA : ArgLocs) {
+  for (unsigned i = 0, e = ArgLocs.size(); i != e; ++i) {
+    const CCValAssign &VA = ArgLocs[i];
     if (VA.isRegLoc()) {
-      Register VReg = RegInfo.createVirtualRegister(&AIE2::GPRRegClass);
+      // Pointer arguments live in eP (PTR); plain integers in eR (GPR). Match
+      // the vreg class to the assigned physical register so the load/store
+      // address is already in an eP register (no cross-class copy needed).
+      const TargetRegisterClass *RC =
+          AIE2::PTRRegClass.contains(VA.getLocReg()) ? &AIE2::PTRRegClass
+                                                     : &AIE2::GPRRegClass;
+      Register VReg = RegInfo.createVirtualRegister(RC);
       RegInfo.addLiveIn(VA.getLocReg(), VReg);
       InVals.push_back(DAG.getCopyFromReg(Chain, DL, VReg, VA.getLocVT()));
     } else {

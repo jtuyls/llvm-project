@@ -74,3 +74,50 @@ class AIE2AluRR<bits<4> op, dag outs, dag ins, string asmstr, list<dag> pattern>
   let Inst{6-4}   = 0b001;
   let Inst{3-0}   = 0b1001;
 }
+
+//===----------------------------------------------------------------------===//
+// Load/store, immediate-indexed addressing `[$ptr, #imm]` (the AIE2
+// address-generation `ag_idx_imm` mode). Composites (AIE2CompositeFormats.td):
+//   I32_LDA = {0b00000, lda[20:0], 0b01, 0b1001},  lda = {ag_all[13], mLdaScl[7], 0b1}
+//   I32_ST  = {0b00001, st[20:0],  0b01, 0b1001},  st  = {ag_all[13], mSclSt[7],  0b0}
+// with (AIE2GenInstrInfo.td / AIE2GenInstrFormats.td):
+//   ag_all   = {ptr[3], imm[6], 0b1010}          (ag_all__ag_idx_imm mixin)
+//   mLdaScl  = {mR[5], 0b00}  == (Enc << 2)       (eR data-reg field; see the
+//              fork's AIE2MCCodeEmitter getmLdaScl/getmSclSt: eR -> (Enc<<2)|00)
+// Both fields are plain here -- the two zero bits below the 5-bit register make
+// the (Enc<<2) shift expressible without a custom encoder. Verified bit-exact:
+//   lda r1,[p0,#0] -> 0x00028259 ([0x59,0x82,0x02,0x00])
+//   st  r1,[p1,#0] -> 0x09028219 ([0x19,0x82,0x02,0x09])
+//===----------------------------------------------------------------------===//
+class AIE2LdaScl<dag outs, dag ins, string asmstr, list<dag> pattern>
+    : AIE2Inst<outs, ins, asmstr, pattern> {
+  bits<5> mR;     // data (dst) register, eR
+  bits<3> ptr;    // base pointer register, eP
+  bits<6> imm;    // signed byte offset
+  let mayLoad = 1;
+  let Inst{31-27} = 0b00000;      // I32_LDA opcode
+  let Inst{26-24} = ptr;          // ag_all[12:10]
+  let Inst{23-18} = imm;          // ag_all[9:4]
+  let Inst{17-14} = 0b1010;       // ag_all[3:0] (ag_idx_imm mode)
+  let Inst{13-9}  = mR;           // mLdaScl[6:2]
+  let Inst{8-7}   = 0b00;         // mLdaScl[1:0]
+  let Inst{6}     = 0b1;          // lda[0]
+  let Inst{5-4}   = 0b01;         // I32_LDA format tail
+  let Inst{3-0}   = 0b1001;
+}
+class AIE2StScl<dag outs, dag ins, string asmstr, list<dag> pattern>
+    : AIE2Inst<outs, ins, asmstr, pattern> {
+  bits<5> mR;     // data (src) register, eR
+  bits<3> ptr;    // base pointer register, eP
+  bits<6> imm;    // signed byte offset
+  let mayStore = 1;
+  let Inst{31-27} = 0b00001;      // I32_ST opcode
+  let Inst{26-24} = ptr;          // ag_all[12:10]
+  let Inst{23-18} = imm;          // ag_all[9:4]
+  let Inst{17-14} = 0b1010;       // ag_all[3:0] (ag_idx_imm mode)
+  let Inst{13-9}  = mR;           // mSclSt[6:2]
+  let Inst{8-7}   = 0b00;         // mSclSt[1:0]
+  let Inst{6}     = 0b0;          // st[0]
+  let Inst{5-4}   = 0b01;         // I32_ST format tail
+  let Inst{3-0}   = 0b1001;
+}
