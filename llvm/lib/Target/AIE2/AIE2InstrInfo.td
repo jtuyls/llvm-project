@@ -27,6 +27,7 @@ def simm7  : Operand<i32>, ImmLeaf<i32, [{ return isInt<7>(Imm); }]>;
 def simm11 : Operand<i32>, ImmLeaf<i32, [{ return isInt<11>(Imm); }]>;
 def simm6  : Operand<i32>, ImmLeaf<i32, [{ return isInt<6>(Imm); }]>;
 def imm6   : Operand<i32>, ImmLeaf<i32, [{ return isUInt<6>(Imm); }]>;
+def imm20  : Operand<i32>, ImmLeaf<i32, [{ return isUInt<20>(Imm); }]>;
 
 // Register-register move (used by copyPhysReg; not selected from a pattern).
 let hasSideEffects = 0 in
@@ -116,6 +117,12 @@ let Predicates = [IsAIE2P] in {
   def ST_P  : AIE2PStScl<(outs), (ins GPR:$mR, PTR:$ptr),
                          "st $mR, [$ptr, #0]", []>;
 
+  // Materialize a fixed (numeric) address into an eP pointer register, so a
+  // self-contained kernel can load/store to a known data-memory location with
+  // no relocation. imm20 fits AIE's 20-bit pointer/address width.
+  def MOVXM_P : AIE2PMovXM<(outs PTR:$p), (ins imm20:$imm),
+                           "movxm $p, #$imm", []>;
+
   // NOP -- real 2-byte encoding (aie2p `nop` = 0x0000).
   let hasSideEffects = 0 in
   def NOP_P : AIE2Inst16<(outs), (ins), "nop", []> { let Inst{31-0} = 0x00000000; }
@@ -137,4 +144,7 @@ let Predicates = [IsAIE2P] in {
   def : Pat<(int_aie2_release imm6:$id, i32:$mRy), (REL_imm_P imm6:$id, GPR:$mRy)>;
   def : Pat<(i32 (load PTR:$ptr)),     (LDA_P PTR:$ptr)>;
   def : Pat<(store i32:$mR, PTR:$ptr), (ST_P GPR:$mR, PTR:$ptr)>;
+  // Load/store to a fixed numeric address: materialize it into eP first.
+  def : Pat<(i32 (load (i32 imm20:$a))),      (LDA_P (MOVXM_P imm20:$a))>;
+  def : Pat<(store i32:$mR, (i32 imm20:$a)),  (ST_P GPR:$mR, (MOVXM_P imm20:$a))>;
 }

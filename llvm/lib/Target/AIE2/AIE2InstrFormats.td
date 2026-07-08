@@ -33,6 +33,19 @@ class AIE2Pseudo<dag outs, dag ins, string asmstr, list<dag> pattern>
   let Inst{31-0} = 0;
 }
 
+// 48-bit (6-byte) instruction form -- e.g. movxm (long immediate). The MC
+// emitter returns the encoding in a uint64_t and writes Size bytes LE.
+class AIE2Inst48<dag outs, dag ins, string asmstr, list<dag> pattern>
+    : Instruction {
+  field bits<48> Inst;
+  let Namespace = "AIE2";
+  let Size = 6;
+  dag OutOperandList = outs;
+  dag InOperandList = ins;
+  let AsmString = asmstr;
+  let Pattern = pattern;
+}
+
 //===----------------------------------------------------------------------===//
 // Real AIE2 encodings, lifted from the fork's slot + composite-format layouts
 // (llvm-aie), with the composite-format constant bits inlined so plain
@@ -244,4 +257,19 @@ class AIE2PLock<bit isAcq, dag outs, dag ins, string asmstr, list<dag> pattern>
   let Inst{17}    = isAcq;
   let Inst{16-12} = mRy;
   let Inst{11-0}  = 0x818;
+}
+// movxm p, #imm20 (aie2p): 6-byte long-immediate into an eP pointer register.
+// Decoded/verified vs the fork: base bits {2,6,22,23}, p at {27-25}, and the
+// 20-bit immediate scattered imm[11:0]->Inst[20:9], imm[19:12]->Inst[35:28].
+//   movxm p0,#0x70400 -> [0x44,0x00,0xc8,0x00,0x07,0x00]
+class AIE2PMovXM<dag outs, dag ins, string asmstr, list<dag> pattern>
+    : AIE2Inst48<outs, ins, asmstr, pattern> {
+  bits<3> p; bits<20> imm;
+  let isReMaterializable = 1;
+  let Inst{2}     = 0b1;
+  let Inst{6}     = 0b1;
+  let Inst{23-22} = 0b11;
+  let Inst{27-25} = p;
+  let Inst{20-9}  = imm{11-0};
+  let Inst{35-28} = imm{19-12};
 }
