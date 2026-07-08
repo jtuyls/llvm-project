@@ -23,7 +23,15 @@ public:
   explicit AIE2DAGToDAGISel(AIE2TargetMachine &TM, CodeGenOptLevel OL)
       : SelectionDAGISel(TM, OL) {}
 
+  bool runOnMachineFunction(MachineFunction &MF) override {
+    // Needed by the generated predicate checks (Subtarget->isAIE2P()).
+    Subtarget = &MF.getSubtarget<AIE2Subtarget>();
+    return SelectionDAGISel::runOnMachineFunction(MF);
+  }
+
   void Select(SDNode *Node) override;
+
+  const AIE2Subtarget *Subtarget = nullptr;
 
 #include "AIE2GenDAGISel.inc"
 };

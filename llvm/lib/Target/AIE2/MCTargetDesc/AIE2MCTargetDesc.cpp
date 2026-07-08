@@ -43,7 +43,7 @@ static MCRegisterInfo *createAIE2MCRegisterInfo(const Triple &TT) {
 static MCSubtargetInfo *createAIE2MCSubtargetInfo(const Triple &TT,
                                                   StringRef CPU, StringRef FS) {
   if (CPU.empty())
-    CPU = "aie2";
+    CPU = TT.isAIE2P() ? "aie2p" : "aie2";
   return createAIE2MCSubtargetInfoImpl(TT, CPU, /*TuneCPU=*/CPU, FS);
 }
 

@@ -168,3 +168,80 @@ class AIE2Lock<bits<2> op, dag outs, dag ins, string asmstr, list<dag> pattern>
   let Inst{6-4}   = 0b001;        // I32_ALU format tail
   let Inst{3-0}   = 0b1001;
 }
+
+//===----------------------------------------------------------------------===//
+// aie2p (npu2 / Strix) encodings. Field POSITIONS match aie2 for the ALU forms
+// (only the instr32 tail differs: 0b1000 vs aie2's 0b1001), but load/store,
+// const-gen and locks use different slot layouts. All decoded + verified
+// bit-exact against the fork's aie2p llvm-mc (see AIE2InstrInfo.td defs).
+//===----------------------------------------------------------------------===//
+class AIE2PAluRR<bits<4> op, dag outs, dag ins, string asmstr, list<dag> pattern>
+    : AIE2Inst<outs, ins, asmstr, pattern> {
+  bits<5> mRx; bits<5> mRx0; bits<5> mRy;
+  let Inst{31-27} = 0b00010;
+  let Inst{26-22} = mRx0;
+  let Inst{21-17} = mRx;
+  let Inst{16-12} = mRy;
+  let Inst{11-8}  = op;
+  let Inst{7}     = 0b1;
+  let Inst{6-4}   = 0b001;
+  let Inst{3-0}   = 0b1000;       // aie2p tail (aie2: 0b1001)
+}
+class AIE2PAluRI<dag outs, dag ins, string asmstr, list<dag> pattern>
+    : AIE2Inst<outs, ins, asmstr, pattern> {
+  bits<5> mRx; bits<5> mRx0; bits<7> c7s;
+  let Inst{31-27} = 0b00010;
+  let Inst{26-22} = mRx0;
+  let Inst{21-17} = mRx;
+  let Inst{16-10} = c7s;
+  let Inst{9-8}   = 0b11;
+  let Inst{7}     = 0b0;
+  let Inst{6-4}   = 0b001;
+  let Inst{3-0}   = 0b1000;
+}
+// mova: {0b00000, c11s[11], mR[5], 0x018[11]}. Verified mova r0,#1=0x00010018.
+class AIE2PMovImm<dag outs, dag ins, string asmstr, list<dag> pattern>
+    : AIE2Inst<outs, ins, asmstr, pattern> {
+  bits<5> mR; bits<11> c11s;
+  let isMoveImm = 1;
+  let isReMaterializable = 1;
+  let Inst{31-27} = 0b00000;
+  let Inst{26-16} = c11s;
+  let Inst{15-11} = mR;
+  let Inst{10-0}  = 0b00000011000;
+}
+// lda [p,#0]: {0b00000, ptr[3], 0b000001, mR[5], 0x1698[13]}. mR=dst, ptr=eP.
+class AIE2PLdaScl<dag outs, dag ins, string asmstr, list<dag> pattern>
+    : AIE2Inst<outs, ins, asmstr, pattern> {
+  bits<5> mR; bits<3> ptr;
+  let mayLoad = 1;
+  let Inst{31-27} = 0b00000;
+  let Inst{26-24} = ptr;
+  let Inst{23-18} = 0b000001;
+  let Inst{17-13} = mR;
+  let Inst{12-0}  = 0x1698;
+}
+// st [p,#0]: {0b00001, ptr[3], 0b000001, mR[5], 0x1198[13]}. mR=src.
+class AIE2PStScl<dag outs, dag ins, string asmstr, list<dag> pattern>
+    : AIE2Inst<outs, ins, asmstr, pattern> {
+  bits<5> mR; bits<3> ptr;
+  let mayStore = 1;
+  let Inst{31-27} = 0b00001;
+  let Inst{26-24} = ptr;
+  let Inst{23-18} = 0b000001;
+  let Inst{17-13} = mR;
+  let Inst{12-0}  = 0x1198;
+}
+// acq/rel: {0b00010, id[6], 0b000, isAcq, mRy[5], 0x818[12]}.
+// Verified: rel #0,r0=0x10000818, acq #0,r0=0x10020818.
+class AIE2PLock<bit isAcq, dag outs, dag ins, string asmstr, list<dag> pattern>
+    : AIE2Inst<outs, ins, asmstr, pattern> {
+  bits<6> id; bits<5> mRy;
+  let hasSideEffects = 1;
+  let Inst{31-27} = 0b00010;
+  let Inst{26-21} = id;
+  let Inst{20-18} = 0b000;
+  let Inst{17}    = isAcq;
+  let Inst{16-12} = mRy;
+  let Inst{11-0}  = 0x818;
+}

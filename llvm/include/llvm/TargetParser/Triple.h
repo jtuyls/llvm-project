@@ -55,6 +55,7 @@ public:
     aarch64_be,  // AArch64 (big endian): aarch64_be
     aarch64_32,  // AArch64 (little endian) ILP32: aarch64_32
     aie2,        // AMD AI Engine 2 (minimal experimental target)
+    aie2p,       // AMD AI Engine 2P (npu2 / Strix; minimal experimental target)
     arc,         // ARC: Synopsys ARC
     avr,         // AVR: Atmel AVR microcontroller
     bpfel,       // eBPF or extended BPF or 64-bit BPF (little endian)
@@ -1127,6 +1128,9 @@ public:
 
   // Tests whether the target is AMD AI Engine 2.
   bool isAIE2() const { return getArch() == Triple::aie2; }
+
+  // Tests whether the target is AMD AI Engine 2P (npu2 / Strix).
+  bool isAIE2P() const { return getArch() == Triple::aie2p; }
 
   /// Tests whether the target is the Apple "arm64e" AArch64 subarch.
   bool isArm64e() const {

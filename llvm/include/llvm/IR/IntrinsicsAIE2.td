@@ -14,4 +14,6 @@
 let TargetPrefix = "aie2" in {
   def int_aie2_acquire : Intrinsic<[], [llvm_i32_ty, llvm_i32_ty], []>;
   def int_aie2_release : Intrinsic<[], [llvm_i32_ty, llvm_i32_ty], []>;
+  // Signals Core.Done. Used to terminate a self-contained core-entry kernel.
+  def int_aie2_done    : Intrinsic<[], [], []>;
 }

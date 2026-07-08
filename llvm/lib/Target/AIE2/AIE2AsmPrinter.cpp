@@ -61,9 +61,11 @@ void AIE2AsmPrinter::emitInstruction(const MachineInstr *MI) {
   // AIE branches/returns have 5 delay slots. This minimal (non-bundled) target
   // does not schedule useful work into them, so pad with 5 NOPs. The preceding
   // instructions already executed, so the shadow NOPs are semantically inert.
-  if (MI->getOpcode() == AIE2::RET) {
+  // Encodings differ between aie2 and aie2p (RET/NOP), so pick per subtarget.
+  unsigned Op = MI->getOpcode();
+  if (Op == AIE2::RET || Op == AIE2::RET_P) {
     MCInst Nop;
-    Nop.setOpcode(AIE2::NOP);
+    Nop.setOpcode(Op == AIE2::RET_P ? AIE2::NOP_P : AIE2::NOP);
     for (unsigned i = 0; i < 5; ++i)
       EmitToStreamer(*OutStreamer, Nop);
   }

@@ -23,6 +23,10 @@ class StringRef;
 class TargetMachine;
 
 class AIE2Subtarget : public AIE2GenSubtargetInfo {
+  // Set by ParseSubtargetFeatures from FeatureAIE2P (enabled for the aie2p
+  // processor / triple). Selects the aie2p instruction encodings.
+  bool IsAIE2P = false;
+
   AIE2InstrInfo InstrInfo;
   AIE2FrameLowering FrameLowering;
   AIE2TargetLowering TLInfo;
@@ -49,6 +53,8 @@ public:
   const SelectionDAGTargetInfo *getSelectionDAGInfo() const override {
     return &TSInfo;
   }
+
+  bool isAIE2P() const { return IsAIE2P; }
 };
 } // namespace llvm
 

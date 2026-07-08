@@ -8,6 +8,15 @@
 
 include "llvm/Target/Target.td"
 
+// Selects the aie2p (npu2 / Strix) instruction encodings. The scalar+DMA
+// instructions share field positions with aie2 for the ALU forms but differ
+// for load/store/const/lock and for nop; each encoding form is gated on this
+// feature so one backend serves both aie2 and aie2p.
+def FeatureAIE2P : SubtargetFeature<"aie2p", "IsAIE2P", "true",
+                                    "AMD AI Engine 2P (npu2 / Strix)">;
+def IsAIE2P : Predicate<"Subtarget->isAIE2P()">;
+def IsAIE2  : Predicate<"!Subtarget->isAIE2P()">;
+
 include "AIE2RegisterInfo.td"
 include "AIE2CallingConv.td"
 include "AIE2InstrInfo.td"
@@ -20,6 +29,7 @@ def AIE2InstrInfo : InstrInfo;
 defm : RemapAllTargetPseudoPointerOperands<GPR>;
 
 def : ProcessorModel<"aie2", NoSchedModel, []>;
+def : ProcessorModel<"aie2p", NoSchedModel, [FeatureAIE2P]>;
 
 def AIE2AsmWriter : AsmWriter {
   let AsmWriterClassName = "InstPrinter";
