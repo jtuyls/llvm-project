@@ -56,7 +56,21 @@ def LW : AIE2Inst<(outs GPR:$dst), (ins GPR:$addr), "lw $dst, [$addr]",
                   [(set i32:$dst, (load GPR:$addr))]>;
 
 //===----------------------------------------------------------------------===//
+// NOP -- real 2-byte encoding, bit-exact to base llvm-aie (`nop` = 0x0001).
+// Delay-slot / packet padding uses this.
+//===----------------------------------------------------------------------===//
+let hasSideEffects = 0 in
+def NOP : AIE2Inst16<(outs), (ins), "nop", []> {
+  let Inst{31-0} = 0x00000001; // only low 16 bits emitted (Size = 2)
+}
+
+//===----------------------------------------------------------------------===//
 // Control flow
 //===----------------------------------------------------------------------===//
+// Real standalone `ret lr` encoding, bit-exact to base llvm-aie (0x10001819,
+// little-endian bytes 19 18 00 10). This is a constant encoding (no register
+// operands vary), so no format-wrapper machinery is needed for it.
 let isReturn = 1, isTerminator = 1, isBarrier = 1 in
-def RET : AIE2Inst<(outs), (ins), "ret", [(AIE2ret_glue)]>;
+def RET : AIE2Inst<(outs), (ins), "ret lr", [(AIE2ret_glue)]> {
+  let Inst{31-0} = 0x10001819;
+}

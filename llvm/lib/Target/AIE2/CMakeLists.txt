@@ -4,6 +4,7 @@ set(LLVM_TARGET_DEFINITIONS AIE2.td)
 
 tablegen(LLVM AIE2GenAsmWriter.inc -gen-asm-writer)
 tablegen(LLVM AIE2GenCallingConv.inc -gen-callingconv)
+tablegen(LLVM AIE2GenMCCodeEmitter.inc -gen-emitter)
 tablegen(LLVM AIE2GenDAGISel.inc -gen-dag-isel)
 tablegen(LLVM AIE2GenInstrInfo.inc -gen-instr-info)
 tablegen(LLVM AIE2GenRegisterInfo.inc -gen-register-info)

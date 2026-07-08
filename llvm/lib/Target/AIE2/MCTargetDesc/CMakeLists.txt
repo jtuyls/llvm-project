@@ -2,6 +2,9 @@ add_llvm_component_library(LLVMAIE2Desc
   AIE2MCTargetDesc.cpp
   AIE2MCAsmInfo.cpp
   AIE2InstPrinter.cpp
+  AIE2MCCodeEmitter.cpp
+  AIE2AsmBackend.cpp
+  AIE2ELFObjectWriter.cpp
   LINK_COMPONENTS
   MC
   AIE2Info

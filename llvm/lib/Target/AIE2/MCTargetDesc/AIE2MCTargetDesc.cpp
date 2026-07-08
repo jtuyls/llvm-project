@@ -63,4 +63,6 @@ LLVMInitializeAIE2TargetMC() {
   TargetRegistry::RegisterMCRegInfo(T, createAIE2MCRegisterInfo);
   TargetRegistry::RegisterMCSubtargetInfo(T, createAIE2MCSubtargetInfo);
   TargetRegistry::RegisterMCInstPrinter(T, createAIE2MCInstPrinter);
+  TargetRegistry::RegisterMCCodeEmitter(T, createAIE2MCCodeEmitter);
+  TargetRegistry::RegisterMCAsmBackend(T, createAIE2AsmBackend);
 }
