@@ -57,6 +57,16 @@ void AIE2AsmPrinter::emitInstruction(const MachineInstr *MI) {
       TmpInst.addOperand(MCOp);
   }
   EmitToStreamer(*OutStreamer, TmpInst);
+
+  // AIE branches/returns have 5 delay slots. This minimal (non-bundled) target
+  // does not schedule useful work into them, so pad with 5 NOPs. The preceding
+  // instructions already executed, so the shadow NOPs are semantically inert.
+  if (MI->getOpcode() == AIE2::RET) {
+    MCInst Nop;
+    Nop.setOpcode(AIE2::NOP);
+    for (unsigned i = 0; i < 5; ++i)
+      EmitToStreamer(*OutStreamer, Nop);
+  }
 }
 
 extern "C" LLVM_ABI LLVM_EXTERNAL_VISIBILITY void

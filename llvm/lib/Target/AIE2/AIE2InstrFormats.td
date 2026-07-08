@@ -121,3 +121,50 @@ class AIE2StScl<dag outs, dag ins, string asmstr, list<dag> pattern>
   let Inst{5-4}   = 0b01;         // I32_ST format tail
   let Inst{3-0}   = 0b1001;
 }
+
+//===----------------------------------------------------------------------===//
+// Constant materialization: `mova $mR, #imm` with an 11-bit signed immediate
+// (AIE2 lda-slot constant-generation, MOVA_lda_cg). Composite I32_LDA with
+//   lda = {c11s[11], 0b00, mLdaCg[7], 0b1},  mLdaCg(eR) = {mR[5], 0b00}
+// Verified bit-exact vs the fork's llvm-mc:
+//   mova r1,#-1 -> [0x59,0x02,0xff,0x07]   mova r0,#1 -> [0x59,0x00,0x01,0x00]
+//===----------------------------------------------------------------------===//
+class AIE2MovImm<dag outs, dag ins, string asmstr, list<dag> pattern>
+    : AIE2Inst<outs, ins, asmstr, pattern> {
+  bits<5> mR;      // dst, eR
+  bits<11> c11s;   // signed immediate
+  let isMoveImm = 1;
+  let isReMaterializable = 1;
+  let Inst{31-27} = 0b00000;      // I32_LDA opcode
+  let Inst{26-16} = c11s;         // lda[20:10]
+  let Inst{15-14} = 0b00;         // lda[9:8]
+  let Inst{13-9}  = mR;           // mLdaCg[6:2]
+  let Inst{8-7}   = 0b00;         // mLdaCg[1:0]
+  let Inst{6}     = 0b1;          // lda[0]
+  let Inst{5-4}   = 0b01;         // I32_LDA format tail
+  let Inst{3-0}   = 0b1001;
+}
+
+//===----------------------------------------------------------------------===//
+// DMA locks: `acq #id, $val` / `rel #id, $val` (alu slot). Composite I32_ALU
+// with alu = {mLockId[7], dc[1], op[2], mRy[5], 0b0010, 0b0} and the immediate
+// lock-id form mLockId = {id[6], 0b0}; op = 0b01 (acq) / 0b00 (rel).
+// Verified bit-exact vs the fork:
+//   acq #0,r1 -> [0x19,0x12,0x02,0x10]   rel #0,r0 -> [0x19,0x02,0x00,0x10]
+//===----------------------------------------------------------------------===//
+class AIE2Lock<bits<2> op, dag outs, dag ins, string asmstr, list<dag> pattern>
+    : AIE2Inst<outs, ins, asmstr, pattern> {
+  bits<6> id;      // lock id (immediate)
+  bits<5> mRy;     // value register, eR
+  let hasSideEffects = 1;
+  let Inst{31-27} = 0b00010;      // I32_ALU opcode
+  let Inst{26-21} = id;           // mLockId[6:1]
+  let Inst{20}    = 0b0;          // mLockId[0]
+  let Inst{19}    = 0b0;          // dontcare
+  let Inst{18-17} = op;           // 0b01 acq / 0b00 rel
+  let Inst{16-12} = mRy;          // value register
+  let Inst{11-8}  = 0b0010;       // lock sub-opcode
+  let Inst{7}     = 0b0;
+  let Inst{6-4}   = 0b001;        // I32_ALU format tail
+  let Inst{3-0}   = 0b1001;
+}

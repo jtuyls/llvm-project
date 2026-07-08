@@ -39,10 +39,24 @@ def ADD_ri : AIE2AluRI<(outs GPR:$mRx), (ins GPR:$mRx0, simm7:$c7s),
                        "add $mRx, $mRx0, #$c7s",
                        [(set i32:$mRx, (add i32:$mRx0, simm7:$c7s))]>;
 
-// Move immediate into a register.
-def MOVi : AIE2Inst<(outs GPR:$dst), (ins i32imm_op:$imm),
-                    "mov $dst, #$imm",
-                    [(set i32:$dst, imm:$imm)]>;
+// Constant materialization into a register (real `mova`, 11-bit signed imm).
+def simm11 : Operand<i32>, ImmLeaf<i32, [{ return isInt<11>(Imm); }]>;
+def MOVA : AIE2MovImm<(outs GPR:$mR), (ins simm11:$c11s),
+                      "mova $mR, #$c11s",
+                      [(set i32:$mR, (i32 simm11:$c11s))]>;
+
+//===----------------------------------------------------------------------===//
+// DMA locks: acquire/release. Lowered from the aie2 lock intrinsics; the value
+// operand is a plain i32 (materialized via MOVA when constant).
+//===----------------------------------------------------------------------===//
+def imm6 : Operand<i32>, ImmLeaf<i32, [{ return isUInt<6>(Imm); }]>;
+def ACQ_imm : AIE2Lock<0b01, (outs), (ins imm6:$id, GPR:$mRy),
+                       "acq #$id, $mRy", []>;
+def REL_imm : AIE2Lock<0b00, (outs), (ins imm6:$id, GPR:$mRy),
+                       "rel #$id, $mRy", []>;
+
+def : Pat<(int_aie2_acquire imm6:$id, i32:$mRy), (ACQ_imm imm6:$id, GPR:$mRy)>;
+def : Pat<(int_aie2_release imm6:$id, i32:$mRy), (REL_imm imm6:$id, GPR:$mRy)>;
 
 // Register-register move (used by copyPhysReg; not selected from a pattern).
 let hasSideEffects = 0 in
