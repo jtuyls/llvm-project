@@ -2849,11 +2849,25 @@ MachineVerifier::visitMachineOperand(const MachineOperand *MO, unsigned MONum) {
       // If SubIdx is used, verify that RC with SubIdx can be used for an
       // operand of class DRC. This is valid if for every register in RC, the
       // register obtained by applying SubIdx to it is in DRC.
-      if (SubIdx && TRI->getMatchingSuperRegClass(RC, DRC, SubIdx) != RC) {
-        report("Illegal virtual register for instruction", MO, MONum);
-        OS << TRI->getRegClassName(RC) << "." << TRI->getSubRegIndexName(SubIdx)
-           << " cannot be used for " << TRI->getRegClassName(DRC)
-           << " operands.";
+      //
+      // amd/aie/ port: getMatchingSuperRegClass() may legitimately return a
+      // proper SUPERCLASS of RC rather than RC itself (AIE: RC=mXa, DRC=mWa,
+      // SubIdx=sub_256_lo yields VEC512, of which mXa is a subclass). That is
+      // still sound: if every register of the returned class has its SubIdx
+      // sub-register in DRC, then so does every register of any subclass of it,
+      // RC included. Comparing exactly against RC (upstream) rejects such
+      // targets. LLVM 21 used RC->hasSuperClassEq(Matching), which is the
+      // correct predicate -- it still reports when Matching is null or a proper
+      // subclass of RC (i.e. some registers of RC would not satisfy DRC).
+      if (SubIdx) {
+        const TargetRegisterClass *Matching =
+            TRI->getMatchingSuperRegClass(RC, DRC, SubIdx);
+        if (!Matching || !RC->hasSuperClassEq(Matching)) {
+          report("Illegal virtual register for instruction", MO, MONum);
+          OS << TRI->getRegClassName(RC) << "."
+             << TRI->getSubRegIndexName(SubIdx) << " cannot be used for "
+             << TRI->getRegClassName(DRC) << " operands.";
+        }
       }
 
       // If no SubIdx is used, verify that RC is a sub-class of DRC.
