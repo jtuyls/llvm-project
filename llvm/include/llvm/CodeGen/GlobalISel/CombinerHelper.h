@@ -371,6 +371,11 @@ public:
   /// Fold (shl (and x, imm1), imm2) -> (shl x, imm2), when the bits imm1
   /// clears are exactly the bits imm2 shifts out, i.e. (~imm1 << imm2) == 0.
   bool matchCombineShlOfAnd(MachineInstr &MI, Register &Reg) const;
+
+  /// Fold G_INTTOPTR of a constant whose width matches the pointer's into a
+  /// G_CONSTANT of pointer type.
+  bool matchIntToPtrContant(MachineInstr &MI, MachineRegisterInfo &MRI,
+                            BuildFnTy &MatchInfo) const;
   void applyCombineShlOfAnd(MachineInstr &MI, Register &Reg) const;
 
   /// Fold away a merge of an unmerge of the corresponding values.

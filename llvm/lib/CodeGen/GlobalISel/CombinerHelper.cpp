@@ -2497,6 +2497,39 @@ bool CombinerHelper::matchCombineShlOfAnd(MachineInstr &MI,
   return !((~AndVal << ShAmount) & Mask);
 }
 
+bool CombinerHelper::matchIntToPtrContant(MachineInstr &MI,
+                                          MachineRegisterInfo &MRI,
+                                          BuildFnTy &MatchInfo) const {
+
+  assert(MI.getOpcode() == TargetOpcode::G_INTTOPTR);
+
+  Register DstReg = MI.getOperand(0).getReg();
+  LLT CastType = MRI.getType(DstReg);
+  const DataLayout &DL = Builder.getMF().getDataLayout();
+
+  if (DL.isNonIntegralAddressSpace(CastType.getScalarType().getAddressSpace()))
+    return false;
+
+  Register SrcReg = MI.getOperand(1).getReg();
+  auto CstVal = getIConstantVRegValWithLookThrough(SrcReg, MRI);
+
+  if (!CstVal)
+    return false;
+
+  LLT ConstantType = MRI.getType(CstVal->VReg);
+
+  if (DL.getPointerSizeInBits(CastType.getScalarType().getAddressSpace()) !=
+      ConstantType.getScalarSizeInBits())
+    return false;
+
+  if (!isConstantLegalOrBeforeLegalizer(CastType))
+    return false;
+
+  MatchInfo = [=](MachineIRBuilder &B) { B.buildConstant(DstReg, CstVal->Value); };
+
+  return true;
+}
+
 void CombinerHelper::applyCombineShlOfAnd(MachineInstr &MI,
                                           Register &Reg) const {
   assert(MI.getOpcode() == TargetOpcode::G_SHL && "Expected a G_SHL");

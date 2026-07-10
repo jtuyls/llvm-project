@@ -35,7 +35,8 @@ def aie_generic_combines : GICombineGroup<[trivial_combines, vector_ops_combines
     // Fold (shl (and x, imm1), imm2) -> (shl x, imm2). llvm-aie put this rule
     // in upstream's identity_combines; keeping it AIE-local avoids perturbing
     // every other target's codegen for a fold only AIE needs.
-    shl_and_fold]>;
+    shl_and_fold,
+    combine_inttoptr_constant]>;
 
 // AIE-specific offset folding for G_GLOBAL_VALUE.
 def combine_globalval_offset_matchdata : GIDefMatchData<"uint64_t">;

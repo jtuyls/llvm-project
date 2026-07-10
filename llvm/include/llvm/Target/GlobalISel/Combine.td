@@ -2326,6 +2326,13 @@ def undef_combines : GICombineGroup<[undef_to_fp_zero, undef_to_int_zero,
 
 // Under certain conditions, transform:
 //   Fold (shl (and x, imm1), imm2) -> (shl x, imm2)
+// Fold (inttoptr C) -> pointer-typed C, when C is as wide as the pointer.
+def combine_inttoptr_constant : GICombineRule<
+  (defs root:$root, build_fn_matchinfo:$info),
+  (match (wip_match_opcode G_INTTOPTR):$root,
+          [{ return Helper.matchIntToPtrContant(*${root}, MRI, ${info}); }]),
+  (apply [{ Helper.applyBuildFn(*${root}, ${info}); }])>;
+
 def shl_and_fold: GICombineRule <
   (defs root:$root, register_matchinfo:$matchinfo),
   (match (wip_match_opcode G_SHL):$root,
