@@ -843,14 +843,32 @@ void Combiner::dumpFull(unsigned *GlobalID, CombinerGain *Gain) const {
 
 void GlobalCombiner::initDAG(AIE::DataDependenceHelper &DAG,
                              MachineBasicBlock &MBB) {
+  // amd/aie/ port: llvm-aie's ScheduleDAGInstrs::buildEdges() walked `SUnits`
+  // directly, so this helper never had to describe a scheduling region nor
+  // populate the MachineInstr->SUnit map before calling it. LLVM 23's
+  // buildEdges() is MI-driven: it iterates [RegionBegin, RegionEnd) and looks
+  // each instruction up in MISUnitMap. With neither set it walked an empty
+  // region, found no SUnits, and built NO dependency edges at all -- silently.
+  // The ptr-mod combiners then saw SUnits with no predecessors, computed an
+  // empty MoveUpInstrsToInsertionPoint, and emitted G_AIE_POSTINC/OFFSET ops
+  // before the G_CONSTANT they use ("Virtual register defs don't dominate all
+  // uses"). So: declare the block and region, and build the map (initSUnit only
+  // appends to SUnits; addresses aren't stable until it stops growing, which is
+  // why makeMaps() is separate) before building edges.
   DAG.clearDAG();
+  DAG.startBlock(&MBB);
+  unsigned NumRegionInstrs = 0;
   for (auto &MI : MBB) {
     if (!MI.isTerminator()) {
       DAG.initSUnit(MI);
+      ++NumRegionInstrs;
     }
   }
-  DAG.buildEdges();
+  DAG.enterRegion(&MBB, MBB.begin(), MBB.getFirstTerminator(), NumRegionInstrs);
   DAG.makeMaps();
+  DAG.buildEdges();
+  DAG.exitRegion();
+  DAG.finishBlock();
 }
 
 raw_ostream &operator<<(raw_ostream &OS, const CombinerGain &Val) {
