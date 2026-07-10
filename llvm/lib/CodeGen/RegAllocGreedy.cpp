@@ -2362,6 +2362,25 @@ MCRegister RAGreedy::selectOrSplit(const LiveInterval &VirtReg,
                     "depth for recoloring reached. Use "
                     "-fexhaustive-register-search to skip cutoffs");
   }
+
+  // amd/aie/ port: a pinned vreg (VirtRegMap::setRequiredPhys) may have been
+  // split or recolored above. Its products inherit the pin (see
+  // LRE_DidCloneVirtReg), but a product that carries no extra allocation
+  // requirement of its own does not need to stay pinned -- keeping it pinned
+  // would make the allocator fail where it could legally pick another register.
+  // Relax the hard requirement into a preference, as llvm-aie does.
+  for (Register VReg : NewVRegs) {
+    if (!VRM->hasRequiredPhys(VReg))
+      continue;
+    if (none_of(MRI->reg_instructions(VReg), [](const MachineInstr &MI) {
+          return MI.hasExtraDefRegAllocReq() || MI.hasExtraSrcRegAllocReq();
+        })) {
+      if (PreferPreviousRAAssignment)
+        MRI->setSimpleHint(VReg, VRM->getRequiredPhys(VReg));
+      VRM->unsetRequiredPhys(VReg);
+    }
+  }
+
   return Reg;
 }
 

@@ -95,6 +95,10 @@ private:
   /// MachineRegisterInfo callback to notify when new virtual
   /// registers are created.
   void MRI_NoteNewVirtualRegister(Register VReg) override;
+  /// amd/aie/ port: carry VirtRegMap's required-physreg pin across clones, so a
+  /// clone of a vreg that must live in a specific physical register (AIE's
+  /// composite addressing-tuple sub-registers) inherits the constraint.
+  void MRI_NoteCloneVirtualRegister(Register NewReg, Register SrcReg) override;
 
   /// Check if MachineOperand \p MO is a last use/kill either in the
   /// main live range of \p LI or in one of the matching subregister ranges.

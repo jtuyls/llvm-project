@@ -413,6 +413,18 @@ LiveRangeEdit::MRI_NoteNewVirtualRegister(Register VReg) {
   NewRegs.push_back(VReg);
 }
 
+// amd/aie/ port: see the header. Upstream's default forwards to
+// MRI_NoteNewVirtualRegister and loses the pin.
+void LiveRangeEdit::MRI_NoteCloneVirtualRegister(Register NewReg,
+                                                 Register SrcReg) {
+  if (VRM) {
+    VRM->grow();
+    if (VRM->hasRequiredPhys(SrcReg))
+      VRM->setRequiredPhys(NewReg, VRM->getRequiredPhys(SrcReg));
+  }
+  NewRegs.push_back(NewReg);
+}
+
 void LiveRangeEdit::calculateRegClassAndHint(MachineFunction &MF,
                                              VirtRegAuxInfo &VRAI) {
   for (unsigned I = 0, Size = size(); I < Size; ++I) {
