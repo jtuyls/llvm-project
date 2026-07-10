@@ -47,6 +47,10 @@ void llvm::initializeCodeGen(PassRegistry &Registry) {
   initializeExpandPostRALegacyPass(Registry);
   initializeExpandReductionsPass(Registry);
   initializeFEntryInserterLegacyPass(Registry);
+  // amd/aie/ port: FinalizeMachineBundles is added by ID (AIE1's addPreSched2),
+  // so its PassInfo must be in the registry before Pass::createPass() runs --
+  // self-registration in the ctor is too late (chicken-and-egg).
+  initializeFinalizeMachineBundlesPass(Registry);
   initializeFinalizeISelPass(Registry);
   initializeFixupStatepointCallerSavedLegacyPass(Registry);
   initializeFuncletLayoutPass(Registry);
