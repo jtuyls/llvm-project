@@ -3862,8 +3862,18 @@ static bool InferFromPattern(CodeGenInstruction &InstInfo,
 
   // Transfer inferred flags.
   InstInfo.hasSideEffects |= PatInfo.hasSideEffects;
-  InstInfo.mayStore |= PatInfo.mayStore;
-  InstInfo.mayLoad |= PatInfo.mayLoad;
+  // amd/aie/ port: patterns that model inaccessible memory through registers
+  // (PatInaccessibleMem) must NOT propagate mayLoad/mayStore onto the
+  // instruction -- AIE's UPS/SRS ops touch control registers, not memory. The
+  // verification guards above were ported but this transfer guard was missed,
+  // so 43 mv-slot instructions (e.g. VUPS_S32_S8_mv_ups_w2c) wrongly gained
+  // MayLoad. AIE's memory-dependence code then demanded per-scheduling-class
+  // memory-cycle info for them and hit
+  // report_fatal_error("Missing memory latency info.").
+  if (!modelsInaccessibleMemThroughRegs) {
+    InstInfo.mayStore |= PatInfo.mayStore;
+    InstInfo.mayLoad |= PatInfo.mayLoad;
+  }
 
   // These flags are silently added without any verification.
   // FIXME: To match historical behavior of TableGen, for now add those flags
