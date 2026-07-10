@@ -169,10 +169,17 @@ namespace llvm {
     RegUnit2SUnitsMap Defs;
     RegUnit2SUnitsMap Uses;
 
+    /// This controls registering single defs in CurrentVRegDefs.
+    /// This allows analysing non-SSA virtual regs, where the
+    /// assumption that a full def can not generate WAR and WAW
+    /// dependences does not hold.
+    bool AbandonSingleDefs = true;
+
     /// Tracks the last instruction(s) in this region defining each virtual
     /// register. There may be multiple current definitions for a register with
-    /// disjunct lanemasks.
-    VReg2SUnitMultiMap CurrentVRegDefs;
+    /// disjunct lanemasks. The operand index is needed to let the subtarget
+    /// adjust the latency of output and anti dependences.
+    VReg2SUnitOperIdxMultiMap CurrentVRegDefs;
     /// Tracks the last instructions in this region using each virtual register.
     VReg2SUnitOperIdxMultiMap CurrentVRegUses;
 
@@ -373,7 +380,12 @@ namespace llvm {
     // (factored out of buildSchedGraph for AIE's iterative scheduling).
     void buildEdges(AAResults *AA, RegPressureTracker *RPTracker = nullptr,
                     PressureDiffs *PDiffs = nullptr, LiveIntervals *LIS = nullptr,
-                    bool TrackLaneMasks = false, bool AbandonSingleDefs = false);
+                    bool TrackLaneMasks = false, bool AbandonSingleDefs = true);
+
+    /// Let the subtarget adjust \p Dep, then add it as a predecessor of
+    /// \p DstSU. Virtual so schedulers can intercept every edge.
+    virtual void adjustAndAddPred(SUnit *DstSU, SDep &Dep, int SrcIdx,
+                                  int DstIdx, const TargetSchedModel *SchedModel);
 
     /// Adds dependencies from instructions in the current list of
     /// instructions being scheduled to scheduling barrier. We want to make sure

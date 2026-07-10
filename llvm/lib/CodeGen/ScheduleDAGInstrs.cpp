@@ -296,6 +296,15 @@ void ScheduleDAGInstrs::exitRegion() {
   // Nothing to do.
 }
 
+void ScheduleDAGInstrs::adjustAndAddPred(SUnit *DstSU, SDep &Dep, int SrcIdx,
+                                         int DstIdx,
+                                         const TargetSchedModel *SchedModel) {
+  const TargetSubtargetInfo &ST = MF.getSubtarget();
+  ST.adjustSchedDependency(Dep.getSUnit(), SrcIdx, DstSU, DstIdx, Dep,
+                           SchedModel);
+  DstSU->addPred(Dep);
+}
+
 void ScheduleDAGInstrs::addSchedBarrierDeps() {
   // amd/aie/ port: use the pre-computed ExitSU (set by setExitSU()) rather than
   // recomputing from BB->end() here, so AIE's DataDependenceHelper (which builds
@@ -360,7 +369,6 @@ void ScheduleDAGInstrs::addPhysRegDataDeps(SUnit *SU, unsigned OperIdx) {
   Register Reg = MO.getReg();
 
   // Ask the target if address-backscheduling is desirable, and if so how much.
-  const TargetSubtargetInfo &ST = MF.getSubtarget();
 
   // Only use any non-zero latency for real defs/uses, in contrast to
   // "fake" operands added by regalloc.
@@ -401,8 +409,7 @@ void ScheduleDAGInstrs::addPhysRegDataDeps(SUnit *SU, unsigned OperIdx) {
       } else {
         Dep.setLatency(0);
       }
-      ST.adjustSchedDependency(SU, OperIdx, UseSU, UseOpIdx, Dep, &SchedModel);
-      UseSU->addPred(Dep);
+      adjustAndAddPred(UseSU, Dep, OperIdx, UseOpIdx, &SchedModel);
     }
   }
 }
@@ -418,7 +425,6 @@ void ScheduleDAGInstrs::addPhysRegDeps(SUnit *SU, unsigned OperIdx) {
   if (MRI.isConstantPhysReg(Reg))
     return;
 
-  const TargetSubtargetInfo &ST = MF.getSubtarget();
 
   // Optionally add output and anti dependencies. For anti
   // dependencies we use a latency of 0 because for a multi-issue
@@ -442,9 +448,7 @@ void ScheduleDAGInstrs::addPhysRegDeps(SUnit *SU, unsigned OperIdx) {
           Dep.setLatency(
               SchedModel.computeOutputLatency(MI, OperIdx, DefInstr));
         }
-        ST.adjustSchedDependency(SU, OperIdx, DefSU, I->OpIdx, Dep,
-                                 &SchedModel);
-        DefSU->addPred(Dep);
+        adjustAndAddPred(DefSU, Dep, OperIdx, I->OpIdx, &SchedModel);
       }
     }
   }
@@ -557,7 +561,6 @@ void ScheduleDAGInstrs::addVRegDefDeps(SUnit *SU, unsigned OperIdx) {
     assert(deadDefHasNoUse(MO) && "Dead defs should have no uses");
   } else {
     // Add data dependence to all uses we found so far.
-    const TargetSubtargetInfo &ST = MF.getSubtarget();
     for (VReg2SUnitOperIdxMultiMap::iterator I = CurrentVRegUses.find(Reg),
          E = CurrentVRegUses.end(); I != E; /*empty*/) {
       LaneBitmask LaneMask = I->LaneMask;
@@ -573,9 +576,7 @@ void ScheduleDAGInstrs::addVRegDefDeps(SUnit *SU, unsigned OperIdx) {
         SDep Dep(SU, SDep::Data, Reg);
         Dep.setLatency(SchedModel.computeOperandLatency(MI, OperIdx, Use,
                                                         I->OperandIndex));
-        ST.adjustSchedDependency(SU, OperIdx, UseSU, I->OperandIndex, Dep,
-                                 &SchedModel);
-        UseSU->addPred(Dep);
+        adjustAndAddPred(UseSU, Dep, OperIdx, I->OperandIndex, &SchedModel);
       }
 
       LaneMask &= ~KillLaneMask;
@@ -589,7 +590,7 @@ void ScheduleDAGInstrs::addVRegDefDeps(SUnit *SU, unsigned OperIdx) {
   }
 
   // Shortcut: Singly defined vregs do not have output/anti dependencies.
-  if (MRI.hasOneDef(Reg))
+  if (AbandonSingleDefs && MRI.hasOneDef(Reg))
     return;
 
   // Add output dependence to the next nearest defs of this vreg.
@@ -600,8 +601,8 @@ void ScheduleDAGInstrs::addVRegDefDeps(SUnit *SU, unsigned OperIdx) {
   // are not eliminated sometime during scheduling. The output dependence edge
   // is also useful if output latency exceeds def-use latency.
   LaneBitmask LaneMask = DefLaneMask;
-  for (VReg2SUnit &V2SU : make_range(CurrentVRegDefs.find(Reg),
-                                     CurrentVRegDefs.end())) {
+  for (VReg2SUnitOperIdx &V2SU :
+       make_range(CurrentVRegDefs.find(Reg), CurrentVRegDefs.end())) {
     // Ignore defs for other lanes.
     if ((V2SU.LaneMask & LaneMask).none())
       continue;
@@ -621,17 +622,19 @@ void ScheduleDAGInstrs::addVRegDefDeps(SUnit *SU, unsigned OperIdx) {
 
     // Update current definition. This can get tricky if the def was about a
     // bigger lanemask before. We then have to shrink it and create a new
-    // VReg2SUnit for the non-overlapping part.
+    // VReg2SUnitOperIdx for the non-overlapping part.
     LaneBitmask OverlapMask = V2SU.LaneMask & LaneMask;
     LaneBitmask NonOverlapMask = V2SU.LaneMask & ~LaneMask;
     V2SU.SU = SU;
     V2SU.LaneMask = OverlapMask;
+    V2SU.OperandIndex = OperIdx;
     if (NonOverlapMask.any())
-      CurrentVRegDefs.insert(VReg2SUnit(Reg, NonOverlapMask, DefSU));
+      CurrentVRegDefs.insert(
+          VReg2SUnitOperIdx(Reg, NonOverlapMask, V2SU.OperandIndex, DefSU));
   }
   // If there was no CurrentVRegDefs entry for some lanes yet, create one.
   if (LaneMask.any())
-    CurrentVRegDefs.insert(VReg2SUnit(Reg, LaneMask, SU));
+    CurrentVRegDefs.insert(VReg2SUnitOperIdx(Reg, LaneMask, OperIdx, SU));
 }
 
 /// Adds a register data dependency if the instruction that defines the
@@ -653,8 +656,8 @@ void ScheduleDAGInstrs::addVRegUseDeps(SUnit *SU, unsigned OperIdx) {
   CurrentVRegUses.insert(VReg2SUnitOperIdx(Reg, LaneMask, OperIdx, SU));
 
   // Add antidependences to the following defs of the vreg.
-  for (VReg2SUnit &V2SU : make_range(CurrentVRegDefs.find(Reg),
-                                     CurrentVRegDefs.end())) {
+  for (VReg2SUnitOperIdx &V2SU :
+       make_range(CurrentVRegDefs.find(Reg), CurrentVRegDefs.end())) {
     // Ignore defs for unrelated lanes.
     LaneBitmask PrevDefLaneMask = V2SU.LaneMask;
     if ((PrevDefLaneMask & LaneMask).none())
@@ -662,7 +665,8 @@ void ScheduleDAGInstrs::addVRegUseDeps(SUnit *SU, unsigned OperIdx) {
     if (V2SU.SU == SU)
       continue;
 
-    V2SU.SU->addPred(SDep(SU, SDep::Anti, Reg));
+    SDep Dep(SU, SDep::Anti, Reg);
+    adjustAndAddPred(V2SU.SU, Dep, OperIdx, V2SU.OperandIndex, &SchedModel);
   }
 }
 
@@ -875,7 +879,7 @@ void ScheduleDAGInstrs::buildEdges(AAResults *AA,
                                    RegPressureTracker *RPTracker,
                                    PressureDiffs *PDiffs, LiveIntervals *LIS,
                                    bool TrackLaneMasks, bool AbandonSingleDefs) {
-  (void)AbandonSingleDefs; // amd/aie/ port: honored by AIE scheduling paths.
+  this->AbandonSingleDefs = AbandonSingleDefs;
   const TargetSubtargetInfo &ST = MF.getSubtarget();
   bool UseAA = EnableAASchedMI.getNumOccurrences() > 0 ? EnableAASchedMI
                                                        : ST.useAA();
