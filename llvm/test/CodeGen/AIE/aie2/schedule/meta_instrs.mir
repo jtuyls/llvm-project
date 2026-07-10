@@ -1,0 +1,31 @@
+# This file is licensed under the Apache License v2.0 with LLVM Exceptions.
+# See https://llvm.org/LICENSE.txt for license information.
+# SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+#
+# (c) Copyright 2023-2026 Advanced Micro Devices, Inc. or its affiliates
+# RUN: llc -march=aie2 -run-pass=postmisched %s %topdown-single -o - | FileCheck %s
+
+# Verify that KILL and IMPLICIT_DEF pseudo-instructions are removed before
+# post-RA scheduling.
+
+---
+name:            implicit_def_removed
+alignment:       16
+body:             |
+  bb.0.entry:
+    ; CHECK-LABEL: name: implicit_def_removed
+    ; CHECK-NOT: IMPLICIT_DEF
+    $wl0 = IMPLICIT_DEF
+    VST_dmw_sts_w_ag_idx_imm $wl0, $p0, 0
+...
+
+---
+name:            kill_removed
+alignment:       16
+body:             |
+  bb.0.entry:
+    ; CHECK-LABEL: name: kill_removed
+    ; CHECK-NOT: KILL
+    $wl0 = VMOV_mv_w $wh0
+    KILL $wl0
+...
