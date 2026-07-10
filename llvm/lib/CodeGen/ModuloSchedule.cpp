@@ -108,6 +108,10 @@ void ModuloScheduleExpander::generatePipelinedLoop() {
   LoopInfo = TII->analyzeLoopForPipelining(BB);
   assert(LoopInfo && "Must be able to analyze loop!");
 
+  // Tell the target the expansion is starting. A no-op everywhere but AIE,
+  // whose DownCountLoop needs it to fix up the trip-count register.
+  LoopInfo->startExpand();
+
   // Create a new basic block for the kernel and add it to the CFG.
   MachineBasicBlock *KernelBB = MF.CreateMachineBasicBlock(BB->getBasicBlock());
 

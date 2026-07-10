@@ -1099,10 +1099,14 @@ bool EarlyIfConverter::shouldConvertIf() {
   if (EnableDataDependentBranchAnalysis)
     DataDependent = isConditionDataDependent();
 
-  unsigned CritLimit = DataDependent ? SchedModel.MispredictPenalty
-                                     : SchedModel.MispredictPenalty / 2;
-
+  // The non-data-dependent limit is a target hook. Its default is
+  // MispredictPenalty / 2, i.e. exactly what upstream used unconditionally;
+  // only AIE overrides it.
   MachineBasicBlock &MBB = *IfConv.Head;
+  const TargetSubtargetInfo &STI = MBB.getParent()->getSubtarget();
+  unsigned CritLimit = DataDependent ? SchedModel.MispredictPenalty
+                                     : STI.getCriticalPathLimit();
+
   MachineOptimizationRemarkEmitter MORE(*MBB.getParent(), nullptr);
 
   // Emit analysis remark about data-dependent condition.
