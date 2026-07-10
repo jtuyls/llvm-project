@@ -908,11 +908,13 @@ void PEIImpl::calculateFrameObjectOffsets(MachineFunction &MF) {
 
   Align MaxAlign = MFI.getMaxAlign();
   // First assign frame offsets to stack objects that are used to spill
-  // callee saved registers.
+  // callee saved registers, unless the target wants to include them in
+  // orderFrameObjects() for custom placement.
+  const bool IncludeCSInOrdering = TFI.orderFrameObjectsIncludesCalleeSaves();
   auto AllFIs = seq(MFI.getObjectIndexBegin(), MFI.getObjectIndexEnd());
   for (int FI : reverse_conditionally(AllFIs, /*Reverse=*/!StackGrowsDown)) {
     // Only allocate objects on the default stack.
-    if (!MFI.isCalleeSavedObjectIndex(FI) ||
+    if (IncludeCSInOrdering || !MFI.isCalleeSavedObjectIndex(FI) ||
         MFI.getStackID(FI) != TargetStackID::Default)
       continue;
 
@@ -1056,11 +1058,12 @@ void PEIImpl::calculateFrameObjectOffsets(MachineFunction &MF) {
   SmallVector<int, 8> ObjectsToAllocate;
 
   // Then prepare to assign frame offsets to stack objects that are not used to
-  // spill callee saved registers.
+  // spill callee saved registers (unless IncludeCSInOrdering is set, in which
+  // case the target places them via orderFrameObjects()).
   for (unsigned i = 0, e = MFI.getObjectIndexEnd(); i != e; ++i) {
     if (MFI.isObjectPreAllocated(i) && MFI.getUseLocalStackAllocationBlock())
       continue;
-    if (MFI.isCalleeSavedObjectIndex(i))
+    if (MFI.isCalleeSavedObjectIndex(i) && !IncludeCSInOrdering)
       continue;
     if (RS && RS->isScavengingFrameIndex((int)i))
       continue;
