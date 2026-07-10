@@ -71,6 +71,13 @@ public:
     CCOverrides[Call] = CC;
   }
 
+  /// amd/aie/ port: the overrides a target installed on its TargetLowering.
+  /// LLVM 23 builds a second, analysis-owned LibcallLoweringInfo for the
+  /// legalizer, which must inherit them.
+  ArrayRef<CallingConv::ID> getLibcallCallingConvOverrides() const {
+    return CCOverrides;
+  }
+
   /// Get the CallingConv that should be used for the specified libcall.
   LLVM_ABI CallingConv::ID
   getLibcallImplCallingConv(RTLIB::LibcallImpl Call) const {

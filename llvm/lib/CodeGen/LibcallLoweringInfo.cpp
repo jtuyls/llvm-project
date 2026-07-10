@@ -8,6 +8,7 @@
 
 #include "llvm/CodeGen/LibcallLoweringInfo.h"
 #include "llvm/Analysis/RuntimeLibcallInfo.h"
+#include "llvm/CodeGen/TargetLowering.h"
 #include "llvm/CodeGen/TargetSubtargetInfo.h"
 #include "llvm/InitializePasses.h"
 #include "llvm/Target/TargetMachine.h"
@@ -32,6 +33,24 @@ LibcallLoweringInfo::LibcallLoweringInfo(
   }
 
   Subtarget.initLibcallLoweringInfo(*this);
+
+  // amd/aie/ port: LLVM 23 gives the legalizer its own LibcallLoweringInfo,
+  // built by the LibcallLoweringInfoWrapper analysis, while a target's
+  // TargetLowering constructor installs its calling-convention overrides on the
+  // *TargetLowering's* instance. Inherit them, or AIE's div/rem and int-to-fp
+  // helpers silently lose their vector-preserving CC (wrong register mask on
+  // the call). Guard against the TargetLowering's own instance, which is built
+  // before the subtarget knows its TargetLowering.
+  if (const TargetLowering *TL = Subtarget.getTargetLowering()) {
+    const LibcallLoweringInfo &TLILibcalls = TL->getLibcallLoweringInfo();
+    if (&TLILibcalls != this) {
+      ArrayRef<CallingConv::ID> Overrides =
+          TLILibcalls.getLibcallCallingConvOverrides();
+      for (unsigned I = 0, E = Overrides.size(); I != E; ++I)
+        if (Overrides[I] != CallingConv::MaxID)
+          CCOverrides[I] = Overrides[I];
+    }
+  }
 }
 
 AnalysisKey LibcallLoweringModuleAnalysis::Key;

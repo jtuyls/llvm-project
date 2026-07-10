@@ -640,7 +640,10 @@ LegalizerHelper::LegalizeResult LegalizerHelper::createLibcall(
     return LegalizerHelper::UnableToLegalize;
 
   StringRef Name = RTLIB::RuntimeLibcallsInfo::getLibcallImplName(LibcallImpl);
-  const CallingConv::ID CC = Libcalls->getLibcallImplCallingConv(LibcallImpl);
+  // Use the per-Libcall accessor, not the per-LibcallImpl one: it consults the
+  // target's CC overrides (AIE gives integer div/rem and int-to-fp helpers a
+  // vector-register-preserving CC) before falling back to the impl's CC.
+  const CallingConv::ID CC = Libcalls->getLibcallCallingConv(Libcall);
   return createLibcall(Name.data(), Result, Args, CC, LocObserver, MI);
 }
 
