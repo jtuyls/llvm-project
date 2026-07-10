@@ -54,7 +54,7 @@ public:
   bool isProfitableFoldGEPIntoPHI() const { return false; }
   void getUnrollingPreferences(Loop *L, ScalarEvolution &SE,
                                TTI::UnrollingPreferences &UP,
-                               OptimizationRemarkEmitter *ORE);
+                               OptimizationRemarkEmitter *ORE) const;
   bool isHardwareLoopProfitable(Loop *L, ScalarEvolution &SE,
                                 AssumptionCache &AC, TargetLibraryInfo *LibInfo,
                                 HardwareLoopInfo &HWLoopInfo) const;

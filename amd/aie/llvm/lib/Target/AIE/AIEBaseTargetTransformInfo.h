@@ -53,7 +53,7 @@ public:
 
   void adjustUnrollingPreferences(Loop *L, ScalarEvolution &SE,
                                   TTI::UnrollingPreferences &UP,
-                                  OptimizationRemarkEmitter *ORE);
+                                  OptimizationRemarkEmitter *ORE) const;
   void applyLoopIdiomUnrolling(Loop *L, TTI::UnrollingPreferences &UP) const;
   bool isHardwareLoopProfitable(Loop *L, ScalarEvolution &SE,
                                 AssumptionCache &AC, TargetLibraryInfo *LibInfo,
@@ -99,7 +99,7 @@ public:
   }
   void adjustUnrollingPreferences(Loop *L, ScalarEvolution &SE,
                                   TTI::UnrollingPreferences &UP,
-                                  OptimizationRemarkEmitter *ORE);
+                                  OptimizationRemarkEmitter *ORE) const;
   bool isHardwareLoopProfitable(Loop *L, ScalarEvolution &SE,
                                 AssumptionCache &AC, TargetLibraryInfo *LibInfo,
                                 HardwareLoopInfo &HWLoopInfo) const;

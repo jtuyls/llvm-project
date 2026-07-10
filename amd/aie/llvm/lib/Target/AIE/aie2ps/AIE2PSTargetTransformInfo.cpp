@@ -29,7 +29,7 @@ bool AIE2PSTTICommon::isGetSSIntrinsicID(Intrinsic::ID ID) const {
 
 void AIE2PSTTIImpl::getUnrollingPreferences(Loop *L, ScalarEvolution &SE,
                                             TTI::UnrollingPreferences &UP,
-                                            OptimizationRemarkEmitter *ORE) {
+                                            OptimizationRemarkEmitter *ORE) const {
   BaseT::getUnrollingPreferences(L, SE, UP, ORE);
   Common.adjustUnrollingPreferences(L, SE, UP, ORE);
   Common.applyLoopIdiomUnrolling(L, UP);

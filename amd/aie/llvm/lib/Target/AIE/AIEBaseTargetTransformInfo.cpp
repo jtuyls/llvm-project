@@ -183,7 +183,7 @@ bool AIETTICommon::isAllowedInZOL(Instruction &I) const {
 
 void AIETTICommon::adjustUnrollingPreferences(Loop *L, ScalarEvolution &SE,
                                               TTI::UnrollingPreferences &UP,
-                                              OptimizationRemarkEmitter *ORE) {
+                                              OptimizationRemarkEmitter *ORE) const {
   UP.Partial = EnablePartialUnroll;
   UP.Runtime = EnableRuntimeUnroll;
   UP.MaxCount = MaxUnrollCount;

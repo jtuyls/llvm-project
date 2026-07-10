@@ -45,7 +45,7 @@ AIE2TTIImpl::instCombineIntrinsic(InstCombiner &IC, IntrinsicInst &II) const {
 
 void AIE2TTIImpl::getUnrollingPreferences(Loop *L, ScalarEvolution &SE,
                                           TTI::UnrollingPreferences &UP,
-                                          OptimizationRemarkEmitter *ORE) {
+                                          OptimizationRemarkEmitter *ORE) const {
   UP.Partial = UP.Runtime = true;
   BaseT::getUnrollingPreferences(L, SE, UP, ORE);
   Common.adjustUnrollingPreferences(L, SE, UP, ORE);
