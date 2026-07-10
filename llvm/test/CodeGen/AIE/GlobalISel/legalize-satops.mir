@@ -225,9 +225,9 @@ body:             |
   ; AIE2-NEXT:   [[COPY1:%[0-9]+]]:_(s32) = COPY $r1
   ; AIE2-NEXT:   [[SUB:%[0-9]+]]:_(s32) = G_SUB [[COPY]], [[COPY1]]
   ; AIE2-NEXT:   [[C:%[0-9]+]]:_(s32) = G_CONSTANT i32 0
-  ; AIE2-NEXT:   [[ICMP:%[0-9]+]]:_(s32) = G_ICMP intpred(slt), [[SUB]](s32), [[COPY]]
-  ; AIE2-NEXT:   [[ICMP1:%[0-9]+]]:_(s32) = G_ICMP intpred(sgt), [[COPY1]](s32), [[C]]
-  ; AIE2-NEXT:   [[XOR:%[0-9]+]]:_(s32) = G_XOR [[ICMP1]], [[ICMP]]
+  ; AIE2-NEXT:   [[ICMP:%[0-9]+]]:_(s32) = G_ICMP intpred(slt), [[COPY]](s32), [[COPY1]]
+  ; AIE2-NEXT:   [[ICMP1:%[0-9]+]]:_(s32) = G_ICMP intpred(slt), [[SUB]](s32), [[C]]
+  ; AIE2-NEXT:   [[XOR:%[0-9]+]]:_(s32) = G_XOR [[ICMP]], [[ICMP1]]
   ; AIE2-NEXT:   [[COPY2:%[0-9]+]]:_(s32) = COPY [[SUB]](s32)
   ; AIE2-NEXT:   [[C1:%[0-9]+]]:_(s32) = G_CONSTANT i32 31
   ; AIE2-NEXT:   [[ASHR:%[0-9]+]]:_(s32) = G_ASHR [[COPY2]], [[C1]](s32)
@@ -248,9 +248,9 @@ body:             |
   ; AIE2P-NEXT:   [[COPY1:%[0-9]+]]:_(s32) = COPY $r1
   ; AIE2P-NEXT:   [[SUB:%[0-9]+]]:_(s32) = G_SUB [[COPY]], [[COPY1]]
   ; AIE2P-NEXT:   [[C:%[0-9]+]]:_(s32) = G_CONSTANT i32 0
-  ; AIE2P-NEXT:   [[ICMP:%[0-9]+]]:_(s32) = G_ICMP intpred(slt), [[SUB]](s32), [[COPY]]
-  ; AIE2P-NEXT:   [[ICMP1:%[0-9]+]]:_(s32) = G_ICMP intpred(sgt), [[COPY1]](s32), [[C]]
-  ; AIE2P-NEXT:   [[XOR:%[0-9]+]]:_(s32) = G_XOR [[ICMP1]], [[ICMP]]
+  ; AIE2P-NEXT:   [[ICMP:%[0-9]+]]:_(s32) = G_ICMP intpred(slt), [[COPY]](s32), [[COPY1]]
+  ; AIE2P-NEXT:   [[ICMP1:%[0-9]+]]:_(s32) = G_ICMP intpred(slt), [[SUB]](s32), [[C]]
+  ; AIE2P-NEXT:   [[XOR:%[0-9]+]]:_(s32) = G_XOR [[ICMP]], [[ICMP1]]
   ; AIE2P-NEXT:   [[COPY2:%[0-9]+]]:_(s32) = COPY [[SUB]](s32)
   ; AIE2P-NEXT:   [[C1:%[0-9]+]]:_(s32) = G_CONSTANT i32 31
   ; AIE2P-NEXT:   [[ASHR:%[0-9]+]]:_(s32) = G_ASHR [[COPY2]], [[C1]](s32)
