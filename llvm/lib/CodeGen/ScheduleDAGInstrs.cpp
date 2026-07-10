@@ -910,8 +910,20 @@ void ScheduleDAGInstrs::buildEdges(AAResults *AA,
     if (MI.isDebugLabel() || MI.isDebugRef() || MI.isPseudoProbe())
       continue;
 
-    SUnit *SU = MISUnitMap[&MI];
-    assert(SU && "No SUnit mapped to this MI");
+    SUnit *SU = MISUnitMap.lookup(&MI);
+    // amd/aie/ port: AIE's post-RA / post-pipeliner schedulers create SUnits only
+    // for the region's "free" instructions (AIEMachineScheduler), adding SUnits
+    // for the fixed instructions afterwards via a DAG mutator. So an MI inside
+    // [RegionBegin, RegionEnd) can legitimately have no SUnit yet. llvm-aie's
+    // buildEdges iterated `SUnits` directly and skipped such MIs implicitly;
+    // LLVM 23's MI-driven loop asserts instead. Skip them here. Every upstream
+    // target builds an SUnit for each non-debug MI, so this never triggers there
+    // (and RPTracker/PDiffs/LIS are null on AIE's path, so no tracker desync).
+    if (!SU) {
+      assert(!RPTracker && !PDiffs && !LIS &&
+             "MI without SUnit while tracking pressure/liveness");
+      continue;
+    }
 
     if (RPTracker) {
       RegisterOperands RegOpers;
