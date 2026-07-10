@@ -2875,7 +2875,10 @@ bool SwingSchedulerDAG::schedulePipeline(SMSchedule &Schedule) {
 
     // If a schedule is found, check if it is a valid schedule too.
     if (scheduleFound)
-      scheduleFound = Schedule.isValidSchedule(this);
+      // The target gets the last word: AIE's ZeroOverheadLoop rejects an II it
+      // cannot encode. canAcceptII() defaults to true for every other target.
+      scheduleFound = Schedule.isValidSchedule(this) &&
+                      LoopPipelinerInfo->canAcceptII(Schedule);
 
     // If a schedule was found and the option is enabled, check if the schedule
     // might generate additional register spills/fills.
