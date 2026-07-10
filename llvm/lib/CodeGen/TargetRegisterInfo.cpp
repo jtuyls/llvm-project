@@ -52,7 +52,8 @@ static cl::opt<unsigned>
 TargetRegisterInfo::TargetRegisterInfo(
     const TargetRegisterInfoDesc *ID,
     ArrayRef<const TargetRegisterClass *> RegisterClasses,
-    const char *SubRegIndexStrings, ArrayRef<uint32_t> SubRegIndexNameOffsets,
+    ArrayRef<uint16_t> IgnoreRegPressureSets, const char *SubRegIndexStrings,
+    ArrayRef<uint32_t> SubRegIndexNameOffsets,
     const SubRegCoveredBits *SubRegIdxRanges,
     const LaneBitmask *SubRegIndexLaneMasks, LaneBitmask CoveringLanes,
     const RegClassInfo *const RCInfos,
@@ -62,7 +63,9 @@ TargetRegisterInfo::TargetRegisterInfo(
       SubRegIdxRanges(SubRegIdxRanges),
       SubRegIndexLaneMasks(SubRegIndexLaneMasks),
       RegClassBegin(RegisterClasses.begin()),
-      RegClassEnd(RegisterClasses.end()), CoveringLanes(CoveringLanes),
+      RegClassEnd(RegisterClasses.end()),
+      IgnoreRegPressureSets(IgnoreRegPressureSets),
+      CoveringLanes(CoveringLanes),
       RCInfos(RCInfos), RCVTLists(RCVTLists), HwMode(Mode) {}
 
 TargetRegisterInfo::~TargetRegisterInfo() = default;

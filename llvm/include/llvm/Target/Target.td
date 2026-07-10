@@ -401,6 +401,9 @@ class RegisterClass<string namespace, list<ValueType> regTypes, int alignment,
   // classes will be resolved in the order defined by this value, with lower values
   // taking precedence over higher ones. Ties are resolved by enumeration order.
   int BaseClassOrder = ?;
+
+  // Consider Register Pressure in Pre RA Scheduling
+  bit ConsiderInPreRAScheduling = true;
 }
 
 // The memberList in a RegisterClass is a dag of set operations. TableGen

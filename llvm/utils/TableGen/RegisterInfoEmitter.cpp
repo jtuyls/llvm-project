@@ -1139,6 +1139,21 @@ void RegisterInfoEmitter::runMCDesc(raw_ostream &OS, raw_ostream &MainOS,
 
   OS << "};\n\n";
 
+  const std::string IgnoreRegPressureSetsName =
+      std::string(Target.getName()) + "IgnoreRegPressureSets";
+  OS << "extern const uint16_t " << IgnoreRegPressureSetsName << "[] = {\n";
+  for (unsigned PSetID : RegBank.getIgnoreRegPressureSets()) {
+    const RegUnitSet &Set = RegBank.getRegPressureSet(PSetID);
+    // Emit the ordered pressure set ID to match the IDs used by
+    // getRegClassPressureSets().
+    OS << Set.Order << ", // " << Set.Name << "\n";
+  }
+  // If no elements are in IgnoreRegPressureSets we need to
+  // add a no entry, since C standard requires array to have at least one
+  // element.
+  OS << 65535 << ", // no reg pressure entry \n";
+  OS << "};\n\n";
+
   EmitRegMappingTables(OS, Regs, false);
 
   // Emit Reg encoding table
@@ -1305,6 +1320,10 @@ void RegisterInfoEmitter::runTargetDesc(raw_ostream &OS, raw_ostream &MainOS,
   // Start out by emitting each of the register classes.
   const auto &RegisterClasses = RegBank.getRegClasses();
   const auto &SubRegIndices = RegBank.getSubRegIndices();
+  const auto IgnoreRegPressureSetsSize =
+      RegBank.getIgnoreRegPressureSets().size();
+  const std::string IgnoreRegPressureSetsName =
+      std::string(Target.getName()) + "IgnoreRegPressureSets";
 
   // Collect all registers belonging to any allocatable class.
   std::set<const Record *> AllocatableRegs;
@@ -1735,6 +1754,7 @@ void RegisterInfoEmitter::runTargetDesc(raw_ostream &OS, raw_ostream &MainOS,
   OS << "extern const MCPhysReg " << TargetName << "RegUnitRoots[][2];\n";
   OS << "extern const uint16_t " << TargetName << "SubRegIdxLists[];\n";
   OS << "extern const uint16_t " << TargetName << "RegEncodingTable[];\n";
+  OS << "extern const uint16_t " << IgnoreRegPressureSetsName << "[];\n";
   if (Target.getRegistersAreIntervals())
     OS << "extern const unsigned " << TargetName << "RegUnitIntervals[][2];\n";
 
@@ -1745,11 +1765,13 @@ void RegisterInfoEmitter::runTargetDesc(raw_ostream &OS, raw_ostream &MainOS,
 {0}(unsigned RA, unsigned DwarfFlavour, unsigned EHFlavour,
     unsigned PC, unsigned HwMode)
   : {2}(&{1}RegInfoDesc, {1}RegisterClasses,
+      ArrayRef<uint16_t>({3}, size_t{{{4}}),
       {1}SubRegIndexStrings, {1}SubRegIndexNameOffsets,
       {1}SubRegIdxRangeTable, {1}SubRegIndexLaneMaskTable,
 
   )",
-                ClassName, TargetName, RIBaseClass);
+                ClassName, TargetName, RIBaseClass, IgnoreRegPressureSetsName,
+                IgnoreRegPressureSetsSize);
   printMask(OS, RegBank.CoveringLanes);
   OS << formatv(R"(, {0}RegClassInfos, {0}VTLists, HwMode) {{
   InitMCRegisterInfo({0}RegDesc, {1}, RA, PC,

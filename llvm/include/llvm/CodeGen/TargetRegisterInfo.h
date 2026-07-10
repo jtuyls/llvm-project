@@ -266,6 +266,8 @@ private:
   const LaneBitmask *SubRegIndexLaneMasks;
 
   regclass_iterator RegClassBegin, RegClassEnd;   // List of regclasses
+  // List of Register Pressure IDs to ignore
+  ArrayRef<uint16_t> IgnoreRegPressureSets;
   LaneBitmask CoveringLanes;
   const RegClassInfo *const RCInfos;
   const MVT::SimpleValueType *const RCVTLists;
@@ -274,6 +276,7 @@ private:
 protected:
   TargetRegisterInfo(const TargetRegisterInfoDesc *ID,
                      ArrayRef<const TargetRegisterClass *> RegisterClasses,
+                     ArrayRef<uint16_t> IgnoreRegPressureSets,
                      const char *SubRegIndexStrings,
                      ArrayRef<uint32_t> SubRegIndexNameOffsets,
                      const SubRegCoveredBits *SubRegIdxRanges,
@@ -935,6 +938,12 @@ public:
   virtual const TargetRegisterClass *
   getPointerRegClass(unsigned Kind = 0) const {
     llvm_unreachable("Target didn't implement getPointerRegClass!");
+  }
+
+  /// Pressure set IDs that pre-RA scheduling must not account for. Populated
+  /// from register classes marked ConsiderInPreRAScheduling = false.
+  ArrayRef<uint16_t> getIgnoreRegPressureSets() const {
+    return IgnoreRegPressureSets;
   }
 
   /// Returns a legal register class to copy a register in the specified class

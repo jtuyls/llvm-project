@@ -36,6 +36,7 @@
 #include <cstdint>
 #include <iterator>
 #include <map>
+#include <set>
 #include <queue>
 #include <string>
 #include <tuple>
@@ -675,6 +676,8 @@ CodeGenRegisterClass::CodeGenRegisterClass(CodeGenRegBank &RegBank,
       RegsWithSuperRegsTopoSigs(RegBank.getNumTopoSigs()), EnumValue(-1),
       TSFlags(0) {
   GeneratePressureSet = R->getValueAsBit("GeneratePressureSet");
+  UseRegPressureInPreRAScheduling =
+      R->getValueAsBit("ConsiderInPreRAScheduling");
   for (const Record *Type : R->getValueAsListOfDefs("RegTypes"))
     VTs.push_back(getValueTypeByHwMode(Type, RegBank.getHwModes()));
 
@@ -757,7 +760,7 @@ CodeGenRegisterClass::CodeGenRegisterClass(CodeGenRegBank &RegBank,
     : Members(*Props.Members), TheDef(nullptr), Name(Name.str()),
       RegsWithSuperRegsTopoSigs(RegBank.getNumTopoSigs()), EnumValue(-1),
       RSI(Props.RSI), CopyCost(0), Allocatable(true), AllocationPriority(0),
-      GlobalPriority(false), TSFlags(0) {
+      GlobalPriority(false), TSFlags(0), UseRegPressureInPreRAScheduling(true) {
   MemberBV.resize(RegBank.getRegisters().size());
   Artificial = true;
   GeneratePressureSet = false;
@@ -795,6 +798,7 @@ void CodeGenRegisterClass::inheritProperties(CodeGenRegBank &RegBank) {
   GlobalPriority = Super.GlobalPriority;
   TSFlags = Super.TSFlags;
   GeneratePressureSet |= Super.GeneratePressureSet;
+  UseRegPressureInPreRAScheduling = Super.UseRegPressureInPreRAScheduling;
 
   // Copy all allocation orders, filter out foreign registers from the larger
   // super-class.
@@ -2307,6 +2311,20 @@ void CodeGenRegBank::computeRegUnitLaneMasks() {
   }
 }
 
+void CodeGenRegBank::computeIgnoreRegPressureSetsInPreRAScheduling() {
+  std::set<unsigned> RegPressureIDs;
+  for (auto &RC : RegClasses) {
+    if (RC.UseRegPressureInPreRAScheduling)
+      continue;
+
+    // Collect pressure set IDs for this class.
+    for (unsigned PSetID : getRCPressureSetIDs(RC.EnumValue))
+      RegPressureIDs.emplace(PSetID);
+  }
+
+  IgnoreRegPressureSets.assign(RegPressureIDs.begin(), RegPressureIDs.end());
+}
+
 void CodeGenRegBank::computeDerivedInfo() {
   computeComposites();
   computeSubRegLaneMasks();
@@ -2353,6 +2371,10 @@ void CodeGenRegBank::computeDerivedInfo() {
   });
   for (unsigned Idx = 0, EndIdx = RegUnitSets.size(); Idx != EndIdx; ++Idx)
     RegUnitSets[RegUnitSetOrder[Idx]].Order = Idx;
+
+  // Now that pressure sets are computed, build the ignore list for
+  // MachineScheduler.
+  computeIgnoreRegPressureSetsInPreRAScheduling();
 }
 
 //

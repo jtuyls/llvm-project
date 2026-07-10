@@ -88,6 +88,9 @@ class RegisterClassInfo {
 public:
   LLVM_ABI RegisterClassInfo();
 
+  /// Get TargetRegisterInfo
+  const TargetRegisterInfo *getTargetRegisterInfo() const { return TRI; }
+
   /// runOnFunction - Prepare to answer questions about MF. Rev indicates to
   /// use reversed raw order when compute register order. This must be called
   /// before any other methods are used.

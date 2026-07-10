@@ -235,7 +235,8 @@ namespace {
 
     bool IsCheapInstruction(MachineInstr &MI) const;
 
-    bool CanCauseHighRegPressure(const SmallDenseMap<unsigned, int> &Cost,
+    bool CanCauseHighRegPressure(MachineInstr &MI,
+                                 const SmallDenseMap<unsigned, int> &Cost,
                                  bool Cheap);
 
     void UpdateBackTraceRegPressure(const MachineInstr *MI);
@@ -1213,7 +1214,8 @@ bool MachineLICMImpl::IsCheapInstruction(MachineInstr &MI) const {
 /// Visit BBs from header to current BB, check if hoisting an instruction of the
 /// given cost matrix can cause high register pressure.
 bool MachineLICMImpl::CanCauseHighRegPressure(
-    const SmallDenseMap<unsigned, int> &Cost, bool CheapInstr) {
+    MachineInstr &MI, const SmallDenseMap<unsigned, int> &Cost,
+    bool CheapInstr) {
   for (const auto &[Class, Weight] : Cost) {
     if (Weight <= 0)
       continue;
@@ -1221,8 +1223,9 @@ bool MachineLICMImpl::CanCauseHighRegPressure(
     int Limit = RegLimit[Class];
 
     // Don't hoist cheap instructions if they would increase register pressure,
-    // even if we're under the limit.
-    if (CheapInstr && !HoistCheapInsts)
+    // even if we're under the limit -- unless the target says this particular
+    // instruction is still worth hoisting.
+    if (CheapInstr && !HoistCheapInsts && !TII->canHoistCheapInst(MI))
       return true;
 
     for (const auto &RP : BackTrace)
@@ -1311,7 +1314,7 @@ bool MachineLICMImpl::IsProfitableToHoist(MachineInstr &MI,
 
   // Visit BBs from header to current BB, if hoisting this doesn't cause
   // high register pressure, then it's safe to proceed.
-  if (!CanCauseHighRegPressure(Cost, CheapInstr)) {
+  if (!CanCauseHighRegPressure(MI, Cost, CheapInstr)) {
     LLVM_DEBUG(dbgs() << "Hoist non-reg-pressure: " << MI);
     ++NumLowRP;
     return true;
@@ -1354,7 +1357,7 @@ bool MachineLICMImpl::IsProfitableToHoist(MachineInstr &MI,
                  // high RP we're fine to hoist it even if the user can't be
                  // hoisted later Otherwise we want to check the user if it's
                  // hoistable
-                 if (CanCauseHighRegPressure(Cost, false) &&
+                 if (CanCauseHighRegPressure(UseMI, Cost, false) &&
                      !CurLoop->isLoopInvariant(UseMI, DefReg))
                    return false;
 

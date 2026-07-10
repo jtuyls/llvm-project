@@ -384,6 +384,8 @@ public:
   /// Generate register pressure set for this register class and any class
   /// synthesized from it.
   bool GeneratePressureSet;
+  ///  Consider register pressure during Pre RA Scheduling
+  bool UseRegPressureInPreRAScheduling;
 
   // Return the Record that defined this class, or NULL if the class was
   // created by TableGen.
@@ -684,6 +686,10 @@ class CodeGenRegBank {
   // Give each register unit set an order based on sorting criteria.
   std::vector<unsigned> RegUnitSetOrder;
 
+  // Indices of Pressure Sets to ignore during Register Pressure Calculation in
+  // the Machine Scheduler.
+  std::vector<unsigned> IgnoreRegPressureSets;
+
   // Keep track of synthesized definitions generated in TupleExpander.
   std::vector<std::unique_ptr<Record>> SynthDefs;
 
@@ -731,6 +737,7 @@ class CodeGenRegBank {
 
   /// Computes a lane mask for each register unit enumerated by a physical
   /// register.
+  void computeIgnoreRegPressureSetsInPreRAScheduling();
   void computeRegUnitLaneMasks();
 
   // Helper function for printing debug information. Handles artificial
@@ -871,6 +878,10 @@ public:
   getSuperRegForSubReg(const ValueTypeByHwMode &Ty,
                        const CodeGenSubRegIndex *SubIdx,
                        bool MustBeAllocatable = false) const;
+
+  const std::vector<unsigned> &getIgnoreRegPressureSets() const {
+    return IgnoreRegPressureSets;
+  }
 
   // Get the sum of unit weights.
   unsigned getRegUnitSetWeight(const std::vector<unsigned> &Units) const {

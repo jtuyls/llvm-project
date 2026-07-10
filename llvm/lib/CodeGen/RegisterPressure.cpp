@@ -55,9 +55,16 @@ static void increaseSetPressure(std::vector<unsigned> &CurrSetPressure,
     return;
 
   PSetIterator PSetI = MRI.getPressureSets(VRegOrUnit);
+  ArrayRef<uint16_t> IgnoreRegPressureSets =
+      MRI.getTargetRegisterInfo()->getIgnoreRegPressureSets();
+
   unsigned Weight = PSetI.getWeight();
-  for (; PSetI.isValid(); ++PSetI)
+  for (; PSetI.isValid(); ++PSetI) {
+    // Ignore Reg Pressure Set ID
+    if (is_contained(IgnoreRegPressureSets, *PSetI))
+      continue;
     CurrSetPressure[*PSetI] += Weight;
+  }
 }
 
 /// Decrease pressure for each pressure set provided by TargetRegisterInfo.
@@ -69,9 +76,15 @@ static void decreaseSetPressure(std::vector<unsigned> &CurrSetPressure,
   if (NewMask.any() || PrevMask.none())
     return;
 
+  ArrayRef<uint16_t> IgnoreRegPressureSets =
+      MRI.getTargetRegisterInfo()->getIgnoreRegPressureSets();
+
   PSetIterator PSetI = MRI.getPressureSets(VRegOrUnit);
   unsigned Weight = PSetI.getWeight();
   for (; PSetI.isValid(); ++PSetI) {
+    // Ignore Reg Pressure Set ID
+    if (is_contained(IgnoreRegPressureSets, *PSetI))
+      continue;
     assert(CurrSetPressure[*PSetI] >= Weight && "register pressure underflow");
     CurrSetPressure[*PSetI] -= Weight;
   }
@@ -662,9 +675,16 @@ void PressureDiffs::addInstruction(unsigned Idx,
 /// Add a change in pressure to the pressure diff of a given instruction.
 void PressureDiff::addPressureChange(VirtRegOrUnit VRegOrUnit, bool IsDec,
                                      const MachineRegisterInfo *MRI) {
+  ArrayRef<uint16_t> IgnoreRegPressureSets =
+      MRI->getTargetRegisterInfo()->getIgnoreRegPressureSets();
+
   PSetIterator PSetI = MRI->getPressureSets(VRegOrUnit);
   int Weight = IsDec ? -PSetI.getWeight() : PSetI.getWeight();
   for (; PSetI.isValid(); ++PSetI) {
+    // Ignore Reg Pressure Set ID
+    if (is_contained(IgnoreRegPressureSets, *PSetI))
+      continue;
+
     // Find an existing entry in the pressure diff for this PSet.
     PressureDiff::iterator I = nonconst_begin(), E = nonconst_end();
     for (; I != E && I->isValid(); ++I) {
@@ -951,9 +971,18 @@ static void computeExcessPressureDelta(ArrayRef<unsigned> OldPressureVec,
                                        const RegisterClassInfo *RCI,
                                        ArrayRef<unsigned> LiveThruPressureVec) {
   Delta.Excess = PressureChange();
+  ArrayRef<uint16_t> IgnorePressureSetIDs =
+      RCI->getTargetRegisterInfo()->getIgnoreRegPressureSets();
+
   for (unsigned i = 0, e = OldPressureVec.size(); i < e; ++i) {
     unsigned POld = OldPressureVec[i];
     unsigned PNew = NewPressureVec[i];
+
+    // Ignore Reg Pressure Set ID
+    const unsigned PSID = i;
+    if (is_contained(IgnorePressureSetIDs, PSID))
+      continue;
+
     int PDiff = (int)PNew - (int)POld;
     if (!PDiff) // No change in this set in the common case.
       continue;
@@ -988,7 +1017,8 @@ static void computeMaxPressureDelta(ArrayRef<unsigned> OldMaxPressureVec,
                                     ArrayRef<unsigned> NewMaxPressureVec,
                                     ArrayRef<PressureChange> CriticalPSets,
                                     ArrayRef<unsigned> MaxPressureLimit,
-                                    RegPressureDelta &Delta) {
+                                    RegPressureDelta &Delta,
+                                    ArrayRef<uint16_t> IgnoreRegPressureSets) {
   Delta.CriticalMax = PressureChange();
   Delta.CurrentMax = PressureChange();
 
@@ -996,6 +1026,12 @@ static void computeMaxPressureDelta(ArrayRef<unsigned> OldMaxPressureVec,
   for (unsigned i = 0, e = OldMaxPressureVec.size(); i < e; ++i) {
     unsigned POld = OldMaxPressureVec[i];
     unsigned PNew = NewMaxPressureVec[i];
+
+    // Ignore Reg Pressure Set ID
+    const unsigned PSID = i;
+    if (is_contained(IgnoreRegPressureSets, PSID))
+      continue;
+
     if (PNew == POld) // No change in this set in the common case.
       continue;
 
@@ -1095,8 +1131,9 @@ getMaxUpwardPressureDelta(const MachineInstr *MI, PressureDiff *PDiff,
 
   computeExcessPressureDelta(SavedPressure, CurrSetPressure, Delta, RCI,
                              LiveThruPressure);
-  computeMaxPressureDelta(SavedMaxPressure, P.MaxSetPressure, CriticalPSets,
-                          MaxPressureLimit, Delta);
+  computeMaxPressureDelta(
+      SavedMaxPressure, P.MaxSetPressure, CriticalPSets, MaxPressureLimit,
+      Delta, MRI->getTargetRegisterInfo()->getIgnoreRegPressureSets());
   assert(Delta.CriticalMax.getUnitInc() >= 0 &&
          Delta.CurrentMax.getUnitInc() >= 0 && "cannot decrease max pressure");
 
@@ -1154,11 +1191,19 @@ getUpwardPressureDelta(const MachineInstr *MI, /*const*/ PressureDiff &PDiff,
                        ArrayRef<PressureChange> CriticalPSets,
                        ArrayRef<unsigned> MaxPressureLimit) const {
   unsigned CritIdx = 0, CritEnd = CriticalPSets.size();
+  ArrayRef<uint16_t> IgnoreRegPressureSets =
+      MRI->getTargetRegisterInfo()->getIgnoreRegPressureSets();
+
   for (PressureDiff::const_iterator
          PDiffI = PDiff.begin(), PDiffE = PDiff.end();
        PDiffI != PDiffE && PDiffI->isValid(); ++PDiffI) {
 
     unsigned PSetID = PDiffI->getPSet();
+
+    // Ignore Reg Pressure Set ID
+    if (is_contained(IgnoreRegPressureSets, PSetID))
+      continue;
+
     unsigned Limit = RCI->getRegPressureSetLimit(PSetID);
     if (!LiveThruPressure.empty())
       Limit += LiveThruPressure[PSetID];
@@ -1344,8 +1389,9 @@ getMaxDownwardPressureDelta(const MachineInstr *MI, RegPressureDelta &Delta,
 
   computeExcessPressureDelta(SavedPressure, CurrSetPressure, Delta, RCI,
                              LiveThruPressure);
-  computeMaxPressureDelta(SavedMaxPressure, P.MaxSetPressure, CriticalPSets,
-                          MaxPressureLimit, Delta);
+  computeMaxPressureDelta(
+      SavedMaxPressure, P.MaxSetPressure, CriticalPSets, MaxPressureLimit,
+      Delta, MRI->getTargetRegisterInfo()->getIgnoreRegPressureSets());
   assert(Delta.CriticalMax.getUnitInc() >= 0 &&
          Delta.CurrentMax.getUnitInc() >= 0 && "cannot decrease max pressure");
 
