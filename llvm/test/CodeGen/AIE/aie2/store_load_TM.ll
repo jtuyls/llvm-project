@@ -10,7 +10,7 @@
 define dso_local noundef i32 @_Z12test_read_tmj(i32 noundef %regAddr) local_unnamed_addr #0 {
 ; CHECK-LABEL: _Z12test_read_tmj:
 ; CHECK:       // %bb.0: // %entry
-; CHECK-NEXT:    movxm r0, #-524288
+; CHECK-NEXT:    movxm r0, #524288
 ; CHECK-NEXT:    add r0, r1, r0
 ; CHECK-NEXT:    mov p0, r0
 ; CHECK-NEXT:    lda.tm r0, [p0]
@@ -32,7 +32,7 @@ define dso_local void @_Z13test_write_tmjj(i32 noundef %regVal, i32 noundef %reg
 ; CHECK-LABEL: _Z13test_write_tmjj:
 ; CHECK:       // %bb.0: // %entry
 ; CHECK-NEXT:    nopa ; nopb ; ret lr ; nopm
-; CHECK-NEXT:    movxm r2, #-524288 // Delay Slot 5
+; CHECK-NEXT:    movxm r2, #524288 // Delay Slot 5
 ; CHECK-NEXT:    add r1, r1, r2 // Delay Slot 4
 ; CHECK-NEXT:    mov p0, r1 // Delay Slot 3
 ; CHECK-NEXT:    st.tm r0, [p0] // Delay Slot 2
