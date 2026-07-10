@@ -1781,7 +1781,8 @@ public:
   /// either have dead flags or have no uses, then the instruction is said to be
   /// dead.
   LLVM_ABI bool isDead(const MachineRegisterInfo &MRI,
-                       LiveRegUnits *LivePhysRegs = nullptr) const;
+                       LiveRegUnits *LivePhysRegs = nullptr,
+                       bool KeepLifetimeInstructions = false) const;
 
   /// Returns true if this instruction's memory access aliases the memory
   /// access of Other.

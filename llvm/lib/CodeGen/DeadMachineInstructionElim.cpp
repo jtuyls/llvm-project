@@ -33,9 +33,10 @@ class DeadMachineInstructionElimImpl {
   const MachineRegisterInfo *MRI = nullptr;
   const TargetInstrInfo *TII = nullptr;
   LiveRegUnits LivePhysRegs;
+  bool KeepLifetimeInstructions = false;
 
 public:
-  bool runImpl(MachineFunction &MF);
+  bool runImpl(MachineFunction &MF, bool KeepLifetimeInstructions = false);
 
 private:
   bool eliminateDeadMI(MachineFunction &MF, bool &NeedAnotherIteration);
@@ -52,7 +53,8 @@ public:
   bool runOnMachineFunction(MachineFunction &MF) override {
     if (skipFunction(MF.getFunction()))
       return false;
-    return DeadMachineInstructionElimImpl().runImpl(MF);
+    return DeadMachineInstructionElimImpl().runImpl(MF,
+                                                    KeepLifetimeInstructions);
   }
 
   void getAnalysisUsage(AnalysisUsage &AU) const override {
@@ -78,8 +80,10 @@ char &llvm::DeadMachineInstructionElimID = DeadMachineInstructionElim::ID;
 INITIALIZE_PASS(DeadMachineInstructionElim, DEBUG_TYPE,
                 "Remove dead machine instructions", false, false)
 
-bool DeadMachineInstructionElimImpl::runImpl(MachineFunction &MF) {
+bool DeadMachineInstructionElimImpl::runImpl(MachineFunction &MF,
+                                             bool LifetimeInstructions) {
   MRI = &MF.getRegInfo();
+  KeepLifetimeInstructions = LifetimeInstructions;
 
   const TargetSubtargetInfo &ST = MF.getSubtarget();
   TII = ST.getInstrInfo();
@@ -92,23 +96,44 @@ bool DeadMachineInstructionElimImpl::runImpl(MachineFunction &MF) {
   return AnyChanges;
 }
 
+/// Reserved registers the target has opted in to dead-code elimination via
+/// isSimplifiableReservedReg(). Empty for every target but AIE.
+static SmallVector<MCPhysReg, 16>
+getSimplifiableReservedRegs(const MachineRegisterInfo *MRI) {
+  BitVector ReservedRegs = MRI->getReservedRegs();
+  SmallVector<MCPhysReg, 16> SimplifiableReservedRegs;
+  for (MCPhysReg PhysReg : ReservedRegs.set_bits()) {
+    if (MRI->canSimplifyPhysReg(PhysReg))
+      SimplifiableReservedRegs.push_back(PhysReg);
+  }
+  return SimplifiableReservedRegs;
+}
+
 bool DeadMachineInstructionElimImpl::eliminateDeadMI(
     MachineFunction &MF, bool &NeedAnotherIteration) {
   bool AnyChanges = false;
   SmallPtrSet<MachineBasicBlock *, 4> NeedsProcessing;
+  SmallVector<MCPhysReg, 16> SimplifiableReservedRegs =
+      getSimplifiableReservedRegs(MRI);
 
   // Loop over all instructions in all blocks, from bottom to top, so that it's
   // more likely that chains of dependent but ultimately dead instructions will
   // be cleaned up.
   for (MachineBasicBlock *MBB : post_order(&MF)) {
     LivePhysRegs.addLiveOuts(*MBB);
+
+    // Reserved registers are considered always live, so consider them as
+    // live-outs for MBB. Inside MBB, dead assignments can still be detected.
+    for (MCPhysReg PhysReg : SimplifiableReservedRegs)
+      LivePhysRegs.addReg(PhysReg);
+
     NeedsProcessing.erase(MBB);
 
     // Now scan the instructions and delete dead ones, tracking physreg
     // liveness as we go.
     for (MachineInstr &MI : make_early_inc_range(reverse(*MBB))) {
       // If the instruction is dead, delete it!
-      if (MI.isDead(*MRI, &LivePhysRegs)) {
+      if (MI.isDead(*MRI, &LivePhysRegs, KeepLifetimeInstructions)) {
         if (MI.isPHI()) {
           for (MachineBasicBlock *P : MBB->predecessors())
             NeedsProcessing.insert(P);
@@ -123,6 +148,12 @@ bool DeadMachineInstructionElimImpl::eliminateDeadMI(
         continue;
       }
       LivePhysRegs.stepBackward(MI);
+
+      // If the instruction is a call, conservatively assume that it reads
+      // reserved registers.
+      if (MI.isCall())
+        for (MCPhysReg PhysReg : SimplifiableReservedRegs)
+          LivePhysRegs.addReg(PhysReg);
     }
   }
   LivePhysRegs.clear();
