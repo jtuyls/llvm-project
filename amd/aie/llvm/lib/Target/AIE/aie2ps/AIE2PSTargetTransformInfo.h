@@ -47,7 +47,7 @@ public:
                                OptimizationRemarkEmitter *ORE);
   bool isHardwareLoopProfitable(Loop *L, ScalarEvolution &SE,
                                 AssumptionCache &AC, TargetLibraryInfo *LibInfo,
-                                HardwareLoopInfo &HWLoopInfo);
+                                HardwareLoopInfo &HWLoopInfo) const;
   bool isProfitableOuterLSR(const Loop &L) const;
 
   InstructionCost getMemoryOpCost(

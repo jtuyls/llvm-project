@@ -38,8 +38,8 @@ bool shouldMergeCongruentIVsImpl(const PHINode *IV1, const PHINode *IV2);
 class AIETTICommon {
 public:
   virtual ~AIETTICommon() = default;
-  virtual bool isLoweredToCall(const Function *F);
-  virtual bool isAllowedInZOL(llvm::Instruction &Instr);
+  virtual bool isLoweredToCall(const Function *F) const;
+  virtual bool isAllowedInZOL(llvm::Instruction &Instr) const;
 
   virtual bool isVectorExtractIntrinsicID(Intrinsic::ID ID) const {
     return false;
@@ -57,7 +57,7 @@ public:
   void applyLoopIdiomUnrolling(Loop *L, TTI::UnrollingPreferences &UP) const;
   bool isHardwareLoopProfitable(Loop *L, ScalarEvolution &SE,
                                 AssumptionCache &AC, TargetLibraryInfo *LibInfo,
-                                HardwareLoopInfo &HWLoopInfo);
+                                HardwareLoopInfo &HWLoopInfo) const;
   bool isProfitableOuterLSR(const Loop &L) const;
 
   InstructionCost getMemoryOpCost(unsigned Opcode, Type *Src, Align Alignment,
@@ -102,7 +102,7 @@ public:
                                   OptimizationRemarkEmitter *ORE);
   bool isHardwareLoopProfitable(Loop *L, ScalarEvolution &SE,
                                 AssumptionCache &AC, TargetLibraryInfo *LibInfo,
-                                HardwareLoopInfo &HWLoopInfo);
+                                HardwareLoopInfo &HWLoopInfo) const;
 
   // AIE vector arithmetic operates on 512-bit registers. The default
   // getRegisterBitWidth returns 32 (scalar width), which causes the loop

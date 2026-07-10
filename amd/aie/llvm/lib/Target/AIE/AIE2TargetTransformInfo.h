@@ -27,7 +27,7 @@ namespace llvm {
 
 class AIE2TTICommon : public AIETTICommon {
 private:
-  bool isAllowedInZOL(llvm::Instruction &Instr) override;
+  bool isAllowedInZOL(llvm::Instruction &Instr) const override;
 };
 
 class AIE2TTIImpl : public AIEBaseTTIImpl<AIE2TTIImpl> {
@@ -57,7 +57,7 @@ public:
                                OptimizationRemarkEmitter *ORE);
   bool isHardwareLoopProfitable(Loop *L, ScalarEvolution &SE,
                                 AssumptionCache &AC, TargetLibraryInfo *LibInfo,
-                                HardwareLoopInfo &HWLoopInfo);
+                                HardwareLoopInfo &HWLoopInfo) const;
   bool isProfitableOuterLSR(const Loop &L) const;
 
   InstructionCost getMemoryOpCost(

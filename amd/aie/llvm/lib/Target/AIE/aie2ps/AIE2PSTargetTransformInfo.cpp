@@ -38,7 +38,7 @@ void AIE2PSTTIImpl::getUnrollingPreferences(Loop *L, ScalarEvolution &SE,
 bool AIE2PSTTIImpl::isHardwareLoopProfitable(Loop *L, ScalarEvolution &SE,
                                              AssumptionCache &AC,
                                              TargetLibraryInfo *LibInfo,
-                                             HardwareLoopInfo &HWLoopInfo) {
+                                             HardwareLoopInfo &HWLoopInfo) const {
   return Common.isHardwareLoopProfitable(L, SE, AC, LibInfo, HWLoopInfo);
 }
 

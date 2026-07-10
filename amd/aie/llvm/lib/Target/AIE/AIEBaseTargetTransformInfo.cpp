@@ -88,7 +88,7 @@ static cl::opt<bool> MergeCongruentIVs(
              "When set, allows merging even when IVs have separate load/store "
              "uses."));
 
-bool AIETTICommon::isLoweredToCall(const Function *F) {
+bool AIETTICommon::isLoweredToCall(const Function *F) const {
 
   // Memory operations.
   if (F->getIntrinsicID() == Intrinsic::memcpy ||
@@ -120,7 +120,7 @@ bool AIETTICommon::isLoweredToCall(const Function *F) {
   return !F->isIntrinsic();
 }
 
-bool AIETTICommon::isAllowedInZOL(Instruction &I) {
+bool AIETTICommon::isAllowedInZOL(Instruction &I) const {
   Type *Ty = I.getType();
   if (Ty->getScalarType()->isDoubleTy()) {
     return false;
@@ -292,7 +292,7 @@ bool AIETTICommon::isScalarLoop(const Loop *L) {
 bool AIETTICommon::isHardwareLoopProfitable(Loop *L, ScalarEvolution &SE,
                                             AssumptionCache &AC,
                                             TargetLibraryInfo *LibInfo,
-                                            HardwareLoopInfo &HWLoopInfo) {
+                                            HardwareLoopInfo &HWLoopInfo) const {
 
   if (!EnableAIEHardwareLoops) {
     LLVM_DEBUG(dbgs() << "AIE Loops: Disabled\n");

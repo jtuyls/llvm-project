@@ -21,7 +21,7 @@ using namespace llvm;
 
 #define DEBUG_TYPE "aie2tti"
 
-bool AIE2TTICommon::isAllowedInZOL(Instruction &I) {
+bool AIE2TTICommon::isAllowedInZOL(Instruction &I) const {
   // FMul is legalized to a VMUL for bfloat16 in other targets
   if (I.getOpcode() == Instruction::FMul) {
     return false;
@@ -54,7 +54,7 @@ void AIE2TTIImpl::getUnrollingPreferences(Loop *L, ScalarEvolution &SE,
 bool AIE2TTIImpl::isHardwareLoopProfitable(Loop *L, ScalarEvolution &SE,
                                            AssumptionCache &AC,
                                            TargetLibraryInfo *LibInfo,
-                                           HardwareLoopInfo &HWLoopInfo) {
+                                           HardwareLoopInfo &HWLoopInfo) const {
   return Common.isHardwareLoopProfitable(L, SE, AC, LibInfo, HWLoopInfo);
 }
 
