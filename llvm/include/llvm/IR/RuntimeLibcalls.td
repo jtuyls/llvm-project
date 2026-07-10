@@ -4529,3 +4529,19 @@ defset list<RuntimeLibcallImpl> AMDLIBM_VECFUNCS = {
   def amd_vrd4_round : RuntimeLibcallImpl<ROUND_V4F64>;
   def amd_vrd8_round : RuntimeLibcallImpl<ROUND_V8F64>;
 }
+
+//===----------------------------------------------------------------------===//
+// AIE Runtime Libcalls
+//===----------------------------------------------------------------------===//
+
+// amd/aie/ port: LLVM 23 replaced LLVM 21's unconditional setLibcallName
+// defaults with this per-triple opt-in. Without a SystemRuntimeLibrary the AIE
+// triples start with an EMPTY libcall set, so every .libcall() legalization
+// (integer div/rem, f32/f64 arith, FP<->int conversions, FP compares, and the
+// G_MEMCPY/MEMSET/MEMMOVE memory intrinsics) fails with
+// "unable to legalize instruction". AIE links the standard compiler-rt
+// builtins, so opt in to the default set.
+def isAIE : RuntimeLibcallPredicate<"TT.isAIE()">;
+
+def AIESystemLibrary
+    : SystemRuntimeLibrary<isAIE, (add DefaultRuntimeLibcallImpls)>;

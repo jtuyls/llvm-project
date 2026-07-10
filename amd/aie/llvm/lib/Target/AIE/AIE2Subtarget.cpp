@@ -23,7 +23,6 @@
 #include "llvm/CodeGen/LibcallLoweringInfo.h"
 #include "llvm/CodeGen/MachineScheduler.h"
 #include "llvm/CodeGen/ScheduleDAG.h"
-#include "llvm/IR/RuntimeLibcalls.h"
 #include "llvm/MC/TargetRegistry.h"
 
 using namespace llvm;
@@ -83,31 +82,3 @@ const AIEBaseAddrSpaceInfo &AIE2Subtarget::getAddrSpaceInfo() const {
   return AddrSpaceInfo;
 }
 
-void AIE2Subtarget::initLibcallLoweringInfo(LibcallLoweringInfo &Info) const {
-  // amd/aie/ port: LLVM 23 replaced LLVM 21's unconditional setLibcallName
-  // defaults with RuntimeLibcalls.td's per-triple opt-in; AIE's triple is not
-  // recognized by setTargetRuntimeLibcallSets(), so it starts with an empty
-  // libcall set. Provide the standard compiler-rt / libc implementations so
-  // .libcall() legalization (scalar fmul/fdiv/frem) and the memory-intrinsic
-  // libcalls (G_MEMCPY/MEMSET/MEMMOVE) can be lowered.
-  static const struct {
-    RTLIB::Libcall Op;
-    RTLIB::LibcallImpl Impl;
-  } LibraryCalls[] = {
-      {RTLIB::ADD_F32, RTLIB::impl___addsf3},
-      {RTLIB::SUB_F32, RTLIB::impl___subsf3},
-      {RTLIB::MUL_F32, RTLIB::impl___mulsf3},
-      {RTLIB::DIV_F32, RTLIB::impl___divsf3},
-      {RTLIB::REM_F32, RTLIB::impl_fmodf},
-      {RTLIB::ADD_F64, RTLIB::impl___adddf3},
-      {RTLIB::SUB_F64, RTLIB::impl___subdf3},
-      {RTLIB::MUL_F64, RTLIB::impl___muldf3},
-      {RTLIB::DIV_F64, RTLIB::impl___divdf3},
-      {RTLIB::REM_F64, RTLIB::impl_fmod},
-      {RTLIB::MEMCPY, RTLIB::impl_memcpy},
-      {RTLIB::MEMSET, RTLIB::impl_memset},
-      {RTLIB::MEMMOVE, RTLIB::impl_memmove},
-  };
-  for (const auto &LC : LibraryCalls)
-    Info.setLibcallImpl(LC.Op, LC.Impl);
-}

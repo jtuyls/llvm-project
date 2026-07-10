@@ -65,7 +65,6 @@ public:
   // unrecognized triple with an empty libcall set, so scalar fmul/fdiv/frem and
   // G_MEMCPY/MEMSET/MEMMOVE legalization ("Convert to libcall") fail. Restore
   // the standard compiler-rt / libc implementations on every LibcallLoweringInfo.
-  void initLibcallLoweringInfo(LibcallLoweringInfo &Info) const override;
 
   void ParseSubtargetFeatures(StringRef CPU, StringRef TuneCPU, StringRef FS);
 
