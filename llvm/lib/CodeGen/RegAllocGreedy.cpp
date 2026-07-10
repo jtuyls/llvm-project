@@ -2593,6 +2593,12 @@ void RAGreedy::tryHintRecoloring(const LiveInterval &VirtReg) {
       continue;
     }
 
+    // Cannot recolor registers that have a required assignment. AIE's staged
+    // RA pre-assigns the pieces of a register tuple; recoloring one of them
+    // scatters the tuple across several tuples.
+    if (VRM->hasRequiredPhys(Reg))
+      continue;
+
     // Get the live interval mapped with this virtual register to be able
     // to check for the interference with the new color.
     LiveInterval &LI = LIS->getInterval(Reg);
