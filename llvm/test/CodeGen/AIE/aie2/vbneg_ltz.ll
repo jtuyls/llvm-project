@@ -28,8 +28,8 @@ define dso_local noundef <32 x i16> @_Z23test_bneg_ltz_v32uint16Dv32_tRj(<32 x i
 ; CHECK:       // %bb.0: // %entry
 ; CHECK-NEXT:    nopa ; nopb ; ret lr ; nopm
 ; CHECK-NEXT:    mov r1, r16 // Delay Slot 5
-; CHECK-NEXT:    vbneg_ltz.s16 x0, r16, x2 // Delay Slot 4
-; CHECK-NEXT:    mova r0, #-1 // Delay Slot 3
+; CHECK-NEXT:    mova r0, #-1 // Delay Slot 4
+; CHECK-NEXT:    vbneg_ltz.s16 x0, r16, x2 // Delay Slot 3
 ; CHECK-NEXT:    st r0, [p0, #0] // Delay Slot 2
 ; CHECK-NEXT:    mov r16, r1 // Delay Slot 1
 entry:
@@ -44,8 +44,8 @@ define dso_local noundef <16 x i32> @_Z23test_bneg_ltz_v16uint32Dv16_jRj(<16 x i
 ; CHECK:       // %bb.0: // %entry
 ; CHECK-NEXT:    nopa ; nopb ; ret lr ; nopm
 ; CHECK-NEXT:    mov r1, r16 // Delay Slot 5
-; CHECK-NEXT:    vbneg_ltz.s32 x0, r16, x2 // Delay Slot 4
-; CHECK-NEXT:    mova r0, #-1 // Delay Slot 3
+; CHECK-NEXT:    mova r0, #-1 // Delay Slot 4
+; CHECK-NEXT:    vbneg_ltz.s32 x0, r16, x2 // Delay Slot 3
 ; CHECK-NEXT:    st r0, [p0, #0] // Delay Slot 2
 ; CHECK-NEXT:    mov r16, r1 // Delay Slot 1
 entry:

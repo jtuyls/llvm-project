@@ -42,8 +42,8 @@ define <8 x i32> @test_conditional_extract_vector(<16 x i32> noundef %a, i32 nou
 ; CHECK-NEXT:    nop // Delay Slot 5
 ; CHECK-NEXT:    nop // Delay Slot 4
 ; CHECK-NEXT:    nop // Delay Slot 3
-; CHECK-NEXT:    nop // Delay Slot 2
-; CHECK-NEXT:    vmov x0, x2 // Delay Slot 1
+; CHECK-NEXT:    vmov x0, x2 // Delay Slot 2
+; CHECK-NEXT:    nop // Delay Slot 1
 ; CHECK-NEXT:  // %bb.1: // %if.end
 ; CHECK-NEXT:    vmov wl0, wh0
 ; CHECK-NEXT:  .LBB2_2: // %return
