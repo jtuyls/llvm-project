@@ -1,4 +1,5 @@
-; REQUIRES: aie1   ; AIE1 is out of scope for the LLVM-23 port
+; AIE1 is out of scope for the LLVM-23 port (see ../lit.local.cfg).
+; REQUIRES: aie1
 ;
 ; This file is licensed under the Apache License v2.0 with LLVM Exceptions.
 ; See https://llvm.org/LICENSE.txt for license information.

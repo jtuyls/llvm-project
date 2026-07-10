@@ -5,8 +5,8 @@
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 #
 # (c) Copyright 2023-2026 Advanced Micro Devices, Inc. or its affiliates
-# RUN: llc -mtriple aie -run-pass=regbankselect -regbankselect-fast %s -verify-machineinstrs -o - | FileCheck %s
-# RUN: llc -mtriple aie -run-pass=regbankselect -regbankselect-greedy %s -verify-machineinstrs -o - | FileCheck --check-prefix=GREEDY %s
+# RUN: %if aie1 %{ llc -mtriple aie -run-pass=regbankselect -regbankselect-fast %s -verify-machineinstrs -o - | FileCheck %s %}
+# RUN: %if aie1 %{ llc -mtriple aie -run-pass=regbankselect -regbankselect-greedy %s -verify-machineinstrs -o - | FileCheck --check-prefix=GREEDY %s %}
 # RUN: llc -mtriple aie2 -run-pass=regbankselect -regbankselect-fast %s -verify-machineinstrs -o - | FileCheck %s
 # RUN: llc -mtriple aie2 -run-pass=regbankselect -regbankselect-greedy %s -verify-machineinstrs -o - | FileCheck --check-prefix=GREEDY %s
 # RUN: llc -mtriple aie2ps -run-pass=regbankselect -regbankselect-fast %s -verify-machineinstrs -o - | FileCheck %s
