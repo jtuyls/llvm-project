@@ -4,8 +4,8 @@
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 #
 # (c) Copyright 2023-2024 Advanced Micro Devices, Inc. or its affiliates
-# RUN: llc %s -mtriple=aie --start-after=postmisched --filetype=obj -o %t.aie1.o
-# RUN: llvm-objdump -r --triple=aie %t.aie1.o | FileCheck --check-prefix=AIE1 %s
+# RUN: %if aie1 %{ llc %s -mtriple=aie --start-after=postmisched --filetype=obj -o %t.aie1.o %}
+# RUN: %if aie1 %{ llvm-objdump -r --triple=aie %t.aie1.o | FileCheck --check-prefix=AIE1 %s %}
 # RUN: llc %s -mtriple=aie2 --start-after=postmisched --filetype=obj -o %t.aie2.o
 # RUN: llvm-objdump -r --triple=aie2 %t.aie2.o | FileCheck --check-prefix=AIE2 %s
 # RUN: llc %s -mtriple=aie2p --start-after=postmisched --filetype=obj -o %t.aie2p.o
