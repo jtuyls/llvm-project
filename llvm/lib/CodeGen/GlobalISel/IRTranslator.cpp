@@ -2916,11 +2916,25 @@ bool IRTranslator::translateIntrinsic(
 
   // Add MachineMemOperands for each memory access described by the target.
   for (const auto &Info : TgtMemIntrinsicInfos) {
-    Align Alignment = Info.align.value_or(
-        DL->getABITypeAlign(Info.memVT.getTypeForEVT(CB.getContext())));
-    LLT MemTy = Info.memVT.isSimple()
-                    ? getLLTForMVT(Info.memVT.getSimpleVT())
-                    : LLT::scalar(Info.memVT.getStoreSizeInBits());
+    // amd/aie/ port: a target may describe an access of unknown size by setting
+    // Info.memVT = MVT::Other (AIE does this for the fifo_ld_*/fifo_st_*
+    // intrinsics, whose HW access range depends on FIFO state) while supplying
+    // an explicit Info.align. Two problems with the upstream expression:
+    //   1. std::optional::value_or EAGERLY evaluates its argument, so
+    //      getTypeForEVT() ran even when Info.align was set, and MVT::Other has
+    //      no LLVM type -> assert "Type is not extended!".
+    //   2. MVT::Other is `isSimple()`, so getLLTForMVT() would build a bogus LLT.
+    // Evaluate the alignment lazily and map MVT::Other to an unsized LLT, as
+    // llvm-aie does. Upstream targets never set memVT = MVT::Other here, so
+    // behaviour is unchanged for them.
+    Align Alignment =
+        Info.align ? *Info.align
+                   : DL->getABITypeAlign(Info.memVT.getTypeForEVT(CB.getContext()));
+    LLT MemTy = Info.memVT == MVT::Other
+                    ? LLT()
+                    : Info.memVT.isSimple()
+                          ? getLLTForMVT(Info.memVT.getSimpleVT())
+                          : LLT::scalar(Info.memVT.getStoreSizeInBits());
 
     // TODO: We currently just fallback to address space 0 if
     // getTgtMemIntrinsic didn't yield anything useful.
