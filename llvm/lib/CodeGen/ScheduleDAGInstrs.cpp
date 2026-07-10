@@ -201,6 +201,32 @@ void ScheduleDAGInstrs::setExitSU() {
   ExitSU.setInstr(ExitMI);
 }
 
+// amd/aie/ port: record debug instructions by walking the MI range. Split out of
+// buildEdges(), which is SUnit-driven (debug instructions have no SUnit).
+void ScheduleDAGInstrs::recordDbgInstrs() {
+  // Remove any stale debug info; sometimes buildSchedGraph is called again
+  // without emitting the info from the previous call.
+  DbgValues.clear();
+  FirstDbgValue = nullptr;
+
+  // Connect any debug machine instruction to the instruction before it. If
+  // there is no instruction before it, record it in FirstDbgValue.
+  MachineInstr *DbgMI = nullptr;
+  for (MachineBasicBlock::iterator MII = RegionEnd, MIE = RegionBegin;
+       MII != MIE; --MII) {
+    MachineInstr &MI = *std::prev(MII);
+    if (DbgMI) {
+      DbgValues.emplace_back(DbgMI, &MI);
+      DbgMI = nullptr;
+    }
+
+    if (MI.isDebugValue() || MI.isDebugPHI())
+      DbgMI = &MI;
+  }
+  if (DbgMI)
+    FirstDbgValue = DbgMI;
+}
+
 // amd/aie/ port: rebuild the MachineInstr->SUnit reverse-lookup map.
 void ScheduleDAGInstrs::makeMaps() {
   // At this point all SUnits are allocated and their addresses are stable.
@@ -839,6 +865,9 @@ void ScheduleDAGInstrs::buildSchedGraph(AAResults *AA,
   // reads it); edge construction is factored into buildEdges() so AIE can
   // create SUnits incrementally (initSUnit) and then build the dependencies.
   setExitSU();
+  // buildEdges() is SUnit-driven, so the region's debug instructions are
+  // collected separately here.
+  recordDbgInstrs();
   buildEdges(AA, RPTracker, PDiffs, LIS, TrackLaneMasks);
 }
 
@@ -890,9 +919,6 @@ void ScheduleDAGInstrs::buildEdges(AAResults *AA,
 
   // Remove any stale debug info; sometimes BuildSchedGraph is called again
   // without emitting the info from the previous call.
-  DbgValues.clear();
-  FirstDbgValue = nullptr;
-
   assert(Defs.empty() && Uses.empty() &&
          "Only BuildGraph should update Defs/Uses");
   Defs.setUniverse(TRI->getNumRegs());
@@ -908,38 +934,19 @@ void ScheduleDAGInstrs::buildEdges(AAResults *AA,
   // ExitSU.
   addSchedBarrierDeps();
 
-  // Walk the list of instructions, from bottom moving up.
-  MachineInstr *DbgMI = nullptr;
-  for (MachineBasicBlock::iterator MII = RegionEnd, MIE = RegionBegin;
-       MII != MIE; --MII) {
-    MachineInstr &MI = *std::prev(MII);
-    if (DbgMI) {
-      DbgValues.emplace_back(DbgMI, &MI);
-      DbgMI = nullptr;
-    }
-
-    if (MI.isDebugValue() || MI.isDebugPHI()) {
-      DbgMI = &MI;
-      continue;
-    }
-
-    if (MI.isDebugLabel() || MI.isDebugRef() || MI.isPseudoProbe())
-      continue;
-
-    SUnit *SU = MISUnitMap.lookup(&MI);
-    // amd/aie/ port: AIE's post-RA / post-pipeliner schedulers create SUnits only
-    // for the region's "free" instructions (AIEMachineScheduler), adding SUnits
-    // for the fixed instructions afterwards via a DAG mutator. So an MI inside
-    // [RegionBegin, RegionEnd) can legitimately have no SUnit yet. llvm-aie's
-    // buildEdges iterated `SUnits` directly and skipped such MIs implicitly;
-    // LLVM 23's MI-driven loop asserts instead. Skip them here. Every upstream
-    // target builds an SUnit for each non-debug MI, so this never triggers there
-    // (and RPTracker/PDiffs/LIS are null on AIE's path, so no tracker desync).
-    if (!SU) {
-      assert(!RPTracker && !PDiffs && !LIS &&
-             "MI without SUnit while tracking pressure/liveness");
-      continue;
-    }
+  // amd/aie/ port: walk the SUnits, from bottom moving up, rather than the MI
+  // range. Two AIE requirements make the MI-driven loop wrong:
+  //   1. AIE's post-RA/post-pipeliner scheduler creates SUnits only for the
+  //      region's "free" instructions and adds the fixed ones later via a DAG
+  //      mutator, so an MI in [RegionBegin, RegionEnd) may have no SUnit.
+  //   2. The post-pipeliner builds NCopies (=2) SUnits per MI to expose
+  //      loop-carried dependences. An MI-driven walk visits each MI once and
+  //      MISUnitMap holds only the last SUnit, so a whole iteration's copy would
+  //      get no edges at all.
+  // Debug instructions have no SUnit; they are recorded by recordDbgInstrs().
+  for (auto &SUR : reverse(SUnits)) {
+    SUnit *SU = &SUR;
+    MachineInstr &MI = *SU->getInstr();
 
     if (RPTracker) {
       RegisterOperands RegOpers;
@@ -1134,9 +1141,6 @@ void ScheduleDAGInstrs::buildEdges(AAResults *AA,
       reduceHugeMemNodeMaps(NonAliasStores, NonAliasLoads, getReductionSize());
     }
   }
-
-  if (DbgMI)
-    FirstDbgValue = DbgMI;
 
   Defs.clear();
   Uses.clear();

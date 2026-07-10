@@ -360,6 +360,11 @@ namespace llvm {
     // amd/aie/ port: compute ExitSU from the region end (null-guarded).
     void setExitSU();
 
+    /// amd/aie/ port: record the debug instructions of the current region.
+    /// Factored out of buildEdges() because buildEdges() iterates SUnits (which
+    /// debug instructions never have), not the MI range.
+    void recordDbgInstrs();
+
     // amd/aie/ port: create a single SUnit for MI incrementally, returning its
     // node number (nullopt for debug/pseudo instructions).
     std::optional<unsigned> initSUnit(MachineInstr &MI);
