@@ -2965,6 +2965,9 @@ bool RAGreedy::run(MachineFunction &mf) {
                                : TRI->reverseLocalAssignment();
 
   ExtraInfo.emplace();
+  // amd/aie/ port: cover every vreg, not just those enqueued this run (see
+  // ExtraRegInfo::grow).
+  ExtraInfo->grow(MRI->getNumVirtRegs());
 
   EvictAdvisor = EvictProvider->getAdvisor(*MF, *this, MBFI, Loops);
   PriorityAdvisor = PriorityProvider->getAdvisor(*MF, *this, *Indexes);

@@ -82,6 +82,20 @@ public:
     ExtraRegInfo() {}
     ExtraRegInfo(const ExtraRegInfo &) = delete;
 
+    /// amd/aie/ port: size Info for every virtual register up front. getStage()
+    /// / getCascade() are const and index Info directly, and they are called on
+    /// *interfering* live ranges (canEvictInterferenceBasedOnCost), which need
+    /// not have been enqueued in this allocation run. Info only ever grew as a
+    /// side effect of setStage()/setCascade() on enqueued vregs, so whether an
+    /// interfering vreg was in range depended on it having a lower index than
+    /// the highest enqueued one -- true by luck for a normal single-pass
+    /// greedy, false for AIE's staged RA, which enqueues a filtered subset of
+    /// register classes per stage. Result: IndexedMap out-of-bounds assert.
+    void grow(unsigned NumVirtRegs) {
+      if (NumVirtRegs)
+        Info.grow(Register::index2VirtReg(NumVirtRegs - 1).id());
+    }
+
     LiveRangeStage getStage(Register Reg) const { return Info[Reg].Stage; }
 
     LiveRangeStage getStage(const LiveInterval &VirtReg) const {
