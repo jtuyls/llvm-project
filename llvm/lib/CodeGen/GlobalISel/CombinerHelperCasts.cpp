@@ -343,10 +343,22 @@ bool CombinerHelper::matchNarrowBinop(const MachineInstr &TruncMI,
     return false;
 
   Register Dst = Trunc->getReg(0);
+  Register Src = Trunc->getReg(1);
   LLT DstTy = MRI.getType(Dst);
+  LLT SrcTy = MRI.getType(Src);
 
   // Is narrow binop legal?
   if (!isLegalOrBeforeLegalizer({BinOp->getOpcode(), {DstTy}}))
+    return false;
+
+  const MachineFunction *MF = TruncMI.getMF();
+  LLVMContext &Ctx = MF->getFunction().getContext();
+  const auto &TLI = getTargetLowering();
+  // Be sure that replacing one truncation by two is cost-free. Without this,
+  // narrow_binop_* is the exact inverse of
+  // hoist_logic_op_with_same_opcode_hands and the two rules oscillate forever
+  // on a target where the truncate is not free -- AIE's s32 -> s20.
+  if (!TLI.isTruncateFree(SrcTy, DstTy, Ctx))
     return false;
 
   MatchInfo = [=](MachineIRBuilder &B) {
