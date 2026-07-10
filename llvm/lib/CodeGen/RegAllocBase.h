@@ -117,6 +117,9 @@ protected:
   /// enqueue - Add VirtReg to the priority queue of unassigned registers.
   virtual void enqueueImpl(const LiveInterval *LI) = 0;
 
+  /// Hook for allocators to initialize state for already-allocated registers.
+  virtual void noteAllocatedReg(const LiveInterval *LI) {}
+
   /// enqueue - Add VirtReg to the priority queue of unassigned registers.
   void enqueue(const LiveInterval *LI);
 

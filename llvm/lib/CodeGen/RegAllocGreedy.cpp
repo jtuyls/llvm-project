@@ -432,6 +432,13 @@ void RAGreedy::releaseMemory() {
   GlobalCand.clear();
 }
 
+// An interval that already has a physreg -- a pre-assignment from staged RA --
+// never goes through selectOrSplit, so its stage must be set here or the
+// eviction/split heuristics see a default-staged interval.
+void RAGreedy::noteAllocatedReg(const LiveInterval *LI) {
+  ExtraInfo->setStage(*LI, RS_Split);
+}
+
 void RAGreedy::enqueueImpl(const LiveInterval *LI) { enqueue(Queue, LI); }
 
 void RAGreedy::enqueue(PQueue &CurQueue, const LiveInterval *LI) {

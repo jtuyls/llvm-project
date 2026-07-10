@@ -304,6 +304,7 @@ public:
 
   Spiller &spiller() override { return *SpillerInstance; }
   void enqueueImpl(const LiveInterval *LI) override;
+  void noteAllocatedReg(const LiveInterval *LI) override;
   const LiveInterval *dequeue() override;
   MCRegister selectOrSplit(const LiveInterval &,
                            SmallVectorImpl<Register> &) override;

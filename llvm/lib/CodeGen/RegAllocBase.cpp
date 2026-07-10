@@ -201,8 +201,10 @@ void RegAllocBase::enqueue(const LiveInterval *LI) {
 
   assert(Reg.isVirtual() && "Can only enqueue virtual registers");
 
-  if (VRM->hasPhys(Reg))
+  if (VRM->hasPhys(Reg)) {
+    noteAllocatedReg(LI);
     return;
+  }
 
   if (shouldAllocateRegister(Reg)) {
     LLVM_DEBUG(dbgs() << "Enqueuing " << printReg(Reg, TRI) << '\n');

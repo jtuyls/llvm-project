@@ -1371,6 +1371,16 @@ void InlineSpiller::spill(LiveRangeEdit &edit, AllocationOrder *order) {
   assert(!edit.getReg().isStack() && "Trying to spill a stack slot.");
   // Share a stack slot among all descendants of Original.
   Original = VRM.getOriginal(edit.getReg());
+  // Allow the target to redirect this lookup. Some target passes deliberately
+  // sever the VirtRegMap split-from chain (clearSplitFromReg) for correctness
+  // (e.g. to stop SplitKit from rematerializing through a stale ancestor LI),
+  // but still want spills of the descendants to share a stack slot with the
+  // logical group's original. The hook returns that "logical group original"
+  // when it should be used here. Only AIE implements it.
+  if (auto SyntheticOrig =
+          MF.getSubtarget().getSpillGroupOriginal(MF, Original))
+    if (LIS.hasInterval(*SyntheticOrig))
+      Original = *SyntheticOrig;
   StackSlot = VRM.getStackSlot(Original);
   StackInt = nullptr;
 
