@@ -304,6 +304,13 @@ void ScheduleDAGInstrs::addSchedBarrierDeps() {
   // consult, so stop here rather than dereferencing a null BB.
   if (!BB)
     return;
+  // amd/aie/ port: Succ->liveins() asserts that the function tracks register
+  // liveness. AIE builds this DAG from a pre-RA pass (the global combiner's
+  // DataDependenceHelper) on MIR with tracksRegLiveness = false, where there is
+  // no live-in information from which to model an exit use. Upstream's
+  // schedulers only run where liveness is tracked, so this is inert for them.
+  if (!MF.getProperties().hasTracksLiveness())
+    return;
   if (!ExitMI || (!ExitMI->isCall() && !ExitMI->isBarrier())) {
     // For others, e.g. fallthrough, conditional branch, assume the exit
     // uses all the registers that are livein to the successor blocks.
