@@ -256,7 +256,16 @@ static void addOneOperandFields(const Record *EncodingDef,
 
     // If still no luck, we're done with this operand.
     if (!OpEncodingField) {
-      OpInfo.HasNoEncoding = true;
+      // amd/aie/ port: an operand may legitimately carry no encoding bits and be
+      // materialized entirely by a custom DecoderMethod -- AIE's fixed-register
+      // operands (e.g. mR16m in vmax_lt.16, emitted via FIXEDREGDECODER). Marking
+      // those HasNoEncoding drops them from the decoder; combined with
+      // -ignore-non-decodable-operands the drop is silent, so the decoded MCInst
+      // is short an operand and the InstPrinter reads past the end. Leave the
+      // flag clear when a Decoder exists, so emitBinaryParser's `bits<0>` path
+      // emits "Decoder(MI, Decoder)" (LLVM 21 behaviour).
+      if (OpInfo.Decoder.empty())
+        OpInfo.HasNoEncoding = true;
       return;
     }
   }
