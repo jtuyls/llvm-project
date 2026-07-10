@@ -133,6 +133,13 @@ static cl::opt<bool> GreedyRegClassPriorityTrumpsGlobalness(
              "more important then whether the range is global"),
     cl::Hidden);
 
+// amd/aie/ port: after a required-physreg vreg is split/recolored, relax the
+// hard requirement on the products into a preference.
+static cl::opt<bool> PreferPreviousRAAssignment(
+    "greedy-prefer-previous-assignments",
+    cl::desc("Maintain preference for phys regs assigned in previous RA runs"),
+    cl::init(true), cl::Hidden);
+
 static cl::opt<bool> GreedyReverseLocalAssignment(
     "greedy-reverse-local-assignment",
     cl::desc("Reverse allocation order of local live ranges, such that "
@@ -397,6 +404,12 @@ void RAGreedy::LRE_WillShrinkVirtReg(Register VirtReg) {
 }
 
 void RAGreedy::LRE_DidCloneVirtReg(Register New, Register Old) {
+  // amd/aie/ port: carry a pinned physical register across splits/clones,
+  // otherwise the product of a split escapes the tuple constraint.
+  if (VRM->hasRequiredPhys(Old)) {
+    VRM->grow();
+    VRM->setRequiredPhys(New, VRM->getRequiredPhys(Old));
+  }
   ExtraInfo->LRE_DidCloneVirtReg(New, Old);
 }
 
@@ -1510,8 +1523,12 @@ MCRegister RAGreedy::tryBlockSplit(const LiveInterval &VirtReg,
 static unsigned getNumAllocatableRegsForConstraints(
     const MachineInstr *MI, Register Reg, const TargetRegisterClass *SuperRC,
     const TargetInstrInfo *TII, const TargetRegisterInfo *TRI,
-    const RegisterClassInfo &RCI) {
+    const RegisterClassInfo &RCI, const VirtRegMap &VRM) {
   assert(SuperRC && "Invalid register class");
+
+  // amd/aie/ port: a pinned vreg has exactly one legal physreg.
+  if (VRM.hasRequiredPhys(Reg))
+    return 1;
 
   const TargetRegisterClass *ConstrainedRC =
       MI->getRegClassConstraintEffectForVReg(Reg, SuperRC, TII, TRI,
@@ -1624,7 +1641,7 @@ MCRegister RAGreedy::tryInstructionSplit(const LiveInterval &VirtReg,
           (SplitSubClass &&
            SuperRCNumAllocatableRegs ==
                getNumAllocatableRegsForConstraints(MI, VirtReg.reg(), SuperRC,
-                                                   TII, TRI, RegClassInfo)) ||
+                                                   TII, TRI, RegClassInfo, *VRM)) ||
           // TODO: Handle split for subranges with subclass constraints?
           (!SplitSubClass && VirtReg.hasSubRanges() &&
            !readsLaneSubset(*MRI, MI, VirtReg, TRI, Use, TII))) {

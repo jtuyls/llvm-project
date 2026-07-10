@@ -26,9 +26,37 @@ using namespace llvm;
 #define DEBUG_TYPE "regalloc"
 
 // Compare VirtRegMap::getRegAllocPref().
+// amd/aie/ port: singleton / copy ctors for the required-physreg order.
+AllocationOrder::AllocationOrder(MCPhysReg RequiredReg) : IterationLimit(1) {
+  OrderScratch = {RequiredReg};
+  Order = OrderScratch;
+}
+
+AllocationOrder::AllocationOrder(const AllocationOrder &A)
+    : Hints(A.Hints), IterationLimit(A.IterationLimit) {
+  if (A.OrderScratch.empty()) {
+    Order = A.Order;
+  } else {
+    OrderScratch = A.OrderScratch;
+    Order = OrderScratch;
+  }
+}
+
 AllocationOrder AllocationOrder::create(Register VirtReg, const VirtRegMap &VRM,
                                         const RegisterClassInfo &RegClassInfo,
                                         const LiveRegMatrix *Matrix) {
+  // amd/aie/ port: a target may pin a virtual register to one physical register
+  // (VirtRegMap::setRequiredPhys). AIE does this for the sub-registers of its
+  // composite addressing tuples, which are jointly encoded and have no
+  // composite load/store, so the pieces must land in a matching super-register.
+  // The VirtRegMap API survived the port but every consumer of it was dropped,
+  // so the requirement was silently ignored and greedy assigned unrelated
+  // registers (e.g. $dn1/$dj1/$dc2 instead of $dn4/$dj4/$dc4), which then
+  // asserted in AIESplitInstructionRewriter's getMatchingSuperReg().
+  // No upstream target calls setRequiredPhys, so this is inert for them.
+  if (VRM.hasRequiredPhys(VirtReg))
+    return AllocationOrder(MCPhysReg(VRM.getRequiredPhys(VirtReg)));
+
   const MachineFunction &MF = VRM.getMachineFunction();
   const TargetRegisterInfo *TRI = &VRM.getTargetRegInfo();
   auto Order = RegClassInfo.getOrder(MF.getRegInfo().getRegClass(VirtReg));
