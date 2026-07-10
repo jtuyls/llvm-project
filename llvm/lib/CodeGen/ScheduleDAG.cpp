@@ -113,18 +113,18 @@ bool SUnit::addPred(const SDep &D, bool Required) {
     if (PredDep.overlaps(D)) {
       // Extend the latency if needed. Equivalent to
       // removePred(PredDep) + addPred(D).
-      if (PredDep.getLatency() < D.getLatency()) {
+      if (PredDep.getSignedLatency() < D.getSignedLatency()) {
         SUnit *PredSU = PredDep.getSUnit();
         // Find the corresponding successor in N.
         SDep ForwardD = PredDep;
         ForwardD.setSUnit(this);
         for (SDep &SuccDep : PredSU->Succs) {
           if (SuccDep == ForwardD) {
-            SuccDep.setLatency(D.getLatency());
+            SuccDep.setSignedLatency(D.getSignedLatency());
             break;
           }
         }
-        PredDep.setLatency(D.getLatency());
+        PredDep.setSignedLatency(D.getSignedLatency());
         // Changing latency, dirty the involved SUnits.
         this->setDepthDirty();
         D.getSUnit()->setHeightDirty();

@@ -268,6 +268,8 @@ private:
   uint32_t InstrGen;
   SmallVector<unsigned, 0> UsedInInstr;
 
+  // Keep track of the VRegs that were assigned for def operands.
+  SmallSet<Register, 8> DefVRegsAssignedInInstr;
   SmallVector<unsigned, 8> DefOperandIndexes;
   // Register masks attached to the current instruction.
   SmallVector<const uint32_t *> RegMasks;
@@ -1056,6 +1058,13 @@ bool RegAllocFastImpl::defineLiveThroughVirtReg(MachineInstr &MI,
                                                 Register VirtReg) {
   if (!shouldAllocateRegister(VirtReg))
     return false;
+
+  // If the current instruction has a previous def of the same VirtReg,
+  // re-use its PhysReg instead of finding a new assignment.
+  // E.g. %0.sub_0, %0.sub_1 = FOO %1
+  if (DefVRegsAssignedInInstr.count(VirtReg))
+    return defineVirtReg(MI, OpNum, VirtReg, true);
+
   LiveRegMap::iterator LRI = findLiveVirtReg(VirtReg);
   if (LRI != LiveVirtRegs.end()) {
     MCPhysReg PrevReg = LRI->PhysReg;
@@ -1110,7 +1119,8 @@ bool RegAllocFastImpl::defineVirtReg(MachineInstr &MI, unsigned OpNum,
   if (LRI->PhysReg == 0) {
     allocVirtReg(MI, *LRI, 0, LookAtPhysRegUses);
   } else {
-    assert((!isRegUsedInInstr(LRI->PhysReg, LookAtPhysRegUses) || LRI->Error) &&
+    assert((!isRegUsedInInstr(LRI->PhysReg, LookAtPhysRegUses) || LRI->Error ||
+            DefVRegsAssignedInInstr.count(VirtReg)) &&
            "TODO: preassign mismatch");
     LLVM_DEBUG(dbgs() << "In def of " << printReg(VirtReg, TRI)
                       << " use existing assignment to "
@@ -1152,6 +1162,7 @@ bool RegAllocFastImpl::defineVirtReg(MachineInstr &MI, unsigned OpNum,
     BundleVirtRegsMap[VirtReg] = *LRI;
   }
   markRegUsedInInstr(PhysReg);
+  DefVRegsAssignedInInstr.insert(VirtReg);
   return setPhysReg(MI, MO, *LRI);
 }
 
@@ -1476,6 +1487,7 @@ void RegAllocFastImpl::allocateInstruction(MachineInstr &MI) {
   // - The "free def operands" step has to come last instead of first for tied
   //   operands and early-clobbers.
 
+  DefVRegsAssignedInInstr.clear();
   InstrGen += 2;
   // In the event we ever get more than 2**31 instructions...
   if (LLVM_UNLIKELY(InstrGen == 0)) {

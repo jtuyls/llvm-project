@@ -95,7 +95,10 @@ class TargetRegisterInfo;
     /// The time associated with this edge. Often this is just the value of the
     /// Latency field of the predecessor, however advanced models may provide
     /// additional information about specific edges.
-    unsigned Latency = 0u;
+    /// Signed so that AIE can express negative latencies, which let the
+    /// destination of an edge be scheduled before its source. getLatency()
+    /// clamps to 0 for the generic schedulers, which assume non-negative.
+    int Latency = 0;
 
   public:
     /// Constructs a null SDep. This is only for use by container classes which
@@ -139,18 +142,19 @@ class TargetRegisterInfo;
     /// Returns the latency value for this edge, which roughly means the
     /// minimum number of cycles that must elapse between the predecessor and
     /// the successor, given that they have this edge between them.
-    unsigned getLatency() const {
-      return Latency;
-    }
-
-    /// amd/aie/ port: AIE reads/writes latency as signed (models negative latencies).
-    int getSignedLatency() const { return (int)Latency; }
-    void setSignedLatency(int Lat) { Latency = (unsigned)Lat; }
+    /// A negative latency is reported as 0: generic code cannot act on it.
+    unsigned getLatency() const { return std::max(Latency, 0); }
 
     /// Sets the latency for this edge.
-    void setLatency(unsigned Lat) {
-      Latency = Lat;
-    }
+    void setLatency(unsigned Lat) { Latency = int(Lat); }
+
+    /// Returns the uncapped latency for this edge, which might be negative.
+    /// This can effectively allow scheduling the destination of this edge
+    /// before its source.
+    int getSignedLatency() const { return Latency; }
+
+    /// Sets a (possibly negative) latency for this edge.
+    void setSignedLatency(int Lat) { Latency = Lat; }
 
     //// Returns the SUnit to which this edge points.
     SUnit *getSUnit() const;
