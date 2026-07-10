@@ -839,7 +839,9 @@ Align DataLayout::getPointerPrefAlignment(unsigned AS) const {
 }
 
 unsigned DataLayout::getPointerSize(unsigned AS) const {
-  return divideCeil(getPointerSpec(AS).BitWidth, 8);
+  // Round up to a power of two: a 20-bit AIE pointer occupies 4 bytes of
+  // storage, not 3. Identity for every power-of-two pointer width.
+  return PowerOf2Ceil(divideCeil(getPointerSpec(AS).BitWidth, 8));
 }
 
 unsigned DataLayout::getPointerTypeSizeInBits(Type *Ty) const {

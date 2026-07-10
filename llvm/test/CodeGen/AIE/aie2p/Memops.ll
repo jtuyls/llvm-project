@@ -227,12 +227,10 @@ define dso_local void @lowerMemcpyUsingAlignedWordCall() local_unnamed_addr #0 {
 ; CHECK-NEXT:    nopa ; nopb ; nops ; jl #memcpy; nopv
 ; CHECK-NEXT:    nopa ; nopx // Delay Slot 5
 ; CHECK-NEXT:    paddxm [sp], #64 // Delay Slot 4
-; CHECK-NEXT:    st lr, [sp, #-64] // 4-byte Folded Spill
-; CHECK-NEXT:    // 4-byte Folded Spill Delay Slot 3
+; CHECK-NEXT:    st lr, [sp, #-64] // 4-byte Folded Spill Delay Slot 3
 ; CHECK-NEXT:    movxm p1, ##buffer1 // Delay Slot 2
 ; CHECK-NEXT:    mova r0, #256; movxm p2, ##buffer2 // Delay Slot 1
 ; CHECK-NEXT:    lda lr, [sp, #-64]; nopb ; nops ; nopxm ; nopv // 4-byte Folded Reload
-; CHECK-NEXT:    // 4-byte Folded Reload
 ; CHECK-NEXT:    nopx
 ; CHECK-NEXT:    nop
 ; CHECK-NEXT:    nop

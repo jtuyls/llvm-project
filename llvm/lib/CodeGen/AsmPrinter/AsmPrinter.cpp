@@ -2183,7 +2183,10 @@ void AsmPrinter::emitFunctionBody() {
       for (auto &Handler : Handlers)
         Handler->beginInstruction(&MI);
 
-      if (isVerbose())
+      // Skip BUNDLE headers: since LLVM 23 finalizeBundle() propagates the
+      // members' memoperands onto the header, so emitting its comments here
+      // duplicates every "N-byte Folded Spill" already printed for the member.
+      if (isVerbose() && !MI.isBundle())
         emitComments(MI, STI, OutStreamer->getCommentOS());
 
 #ifndef NDEBUG
