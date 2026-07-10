@@ -255,6 +255,15 @@ void ScheduleDAGInstrs::enterRegion(MachineBasicBlock *bb,
   RegionBegin = begin;
   RegionEnd = end;
   NumRegionInstrs = regioninstrs;
+
+  // amd/aie/ port: AIE adds SUnits incrementally (initSUnit) and keeps raw SUnit
+  // pointers across those additions -- AIEPostRASchedStrategy::addFixedSUnit
+  // asserts `SUnits.size() < SUnits.capacity()` precisely so a push_back can
+  // never re-allocate and invalidate them. Reserve the whole region up front,
+  // as llvm-aie does. (Upstream only reserves inside initSUnits(), which the
+  // incremental path never calls.)
+  clearDAG();
+  SUnits.reserve(NumRegionInstrs);
 }
 
 void ScheduleDAGInstrs::exitRegion() {

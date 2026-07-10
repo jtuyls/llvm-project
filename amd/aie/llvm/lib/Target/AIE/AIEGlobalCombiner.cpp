@@ -855,16 +855,20 @@ void GlobalCombiner::initDAG(AIE::DataDependenceHelper &DAG,
   // uses"). So: declare the block and region, and build the map (initSUnit only
   // appends to SUnits; addresses aren't stable until it stops growing, which is
   // why makeMaps() is separate) before building edges.
-  DAG.clearDAG();
-  DAG.startBlock(&MBB);
+  // NB: enterRegion() clears the DAG and reserves SUnits, so it must run before
+  // any initSUnit() call.
   unsigned NumRegionInstrs = 0;
+  for (auto &MI : MBB)
+    if (!MI.isTerminator())
+      ++NumRegionInstrs;
+
+  DAG.startBlock(&MBB);
+  DAG.enterRegion(&MBB, MBB.begin(), MBB.getFirstTerminator(), NumRegionInstrs);
   for (auto &MI : MBB) {
     if (!MI.isTerminator()) {
       DAG.initSUnit(MI);
-      ++NumRegionInstrs;
     }
   }
-  DAG.enterRegion(&MBB, MBB.begin(), MBB.getFirstTerminator(), NumRegionInstrs);
   DAG.makeMaps();
   DAG.buildEdges();
   DAG.exitRegion();
