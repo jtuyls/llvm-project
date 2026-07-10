@@ -106,6 +106,9 @@ public:
 
   bool shouldUseSchedule(SwingSchedulerDAG &SSD, SMSchedule &SMS) override;
 
+  /// AIE has no fixed stage cap; canAcceptII() rejects schedules whose stage
+  /// count exceeds what the loop hardware can encode.
+  int getMaxStages(int Default) const override { return -1; }
   bool canAcceptII(SMSchedule &SMS) override;
 };
 

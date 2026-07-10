@@ -105,7 +105,14 @@ void ModuloScheduleExpander::expand() {
 }
 
 void ModuloScheduleExpander::generatePipelinedLoop() {
-  LoopInfo = TII->analyzeLoopForPipelining(BB);
+  // Prefer the PipelinerLoopInfo the pipeliner scheduled with: re-analyzing
+  // would discard the state the target recorded during scheduling (AIE's
+  // DownCountLoop, for one). Callers that supply none -- WindowScheduler --
+  // get upstream's behaviour of analyzing here.
+  if (!LoopInfo) {
+    OwnedLoopInfo = TII->analyzeLoopForPipelining(BB);
+    LoopInfo = OwnedLoopInfo.get();
+  }
   assert(LoopInfo && "Must be able to analyze loop!");
 
   // Tell the target the expansion is starting. A no-op everywhere but AIE,
@@ -2020,7 +2027,7 @@ void PeelingModuloScheduleExpander::expand() {
   BB = Schedule.getLoop()->getTopBlock();
   Preheader = Schedule.getLoop()->getLoopPreheader();
   LLVM_DEBUG(Schedule.dump());
-  LoopInfo = TII->analyzeLoopForPipelining(BB);
+  // LoopInfo comes from the pipeliner; do not re-analyze.
   assert(LoopInfo);
 
   rewriteKernel();
@@ -2041,7 +2048,7 @@ void PeelingModuloScheduleExpander::validateAgainstModuloScheduleExpander() {
   // First, run the normal ModuleScheduleExpander. We don't support any
   // InstrChanges.
   assert(LIS && "Requires LiveIntervals!");
-  ModuloScheduleExpander MSE(MF, Schedule, *LIS,
+  ModuloScheduleExpander MSE(MF, Schedule, *LIS, LoopInfo,
                              ModuloScheduleExpander::InstrChangesTy());
   MSE.expand();
   MachineBasicBlock *ExpandedKernel = MSE.getRewrittenKernel();
@@ -2854,8 +2861,12 @@ void ModuloScheduleTest::runOnLoop(MachineFunction &MF, MachineLoop &L) {
 
   ModuloSchedule MS(MF, &L, std::move(Instrs), std::move(Cycle),
                     std::move(Stage));
+  auto &ST = MF.getSubtarget();
+  auto *TII = ST.getInstrInfo();
+  auto LoopInfo = TII->analyzeLoopForPipelining(BB);
   ModuloScheduleExpander MSE(
-      MF, MS, LIS, /*InstrChanges=*/ModuloScheduleExpander::InstrChangesTy());
+      MF, MS, LIS, LoopInfo.get(),
+      /*InstrChanges=*/ModuloScheduleExpander::InstrChangesTy());
   MSE.expand();
   MSE.cleanup();
 }

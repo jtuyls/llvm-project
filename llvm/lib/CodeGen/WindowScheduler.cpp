@@ -638,7 +638,9 @@ void WindowScheduler::expand() {
   }
   ModuloSchedule MS(*MF, &Loop, std::move(OrderedInsts), std::move(Cycles),
                     std::move(Stages));
-  ModuloScheduleExpander MSE(*MF, MS, *Context->LIS,
+  // Let the expander analyze the loop itself: WindowScheduler's block is not
+  // the one generatePipelinedLoop() operates on.
+  ModuloScheduleExpander MSE(*MF, MS, *Context->LIS, /*LoopInfo=*/nullptr,
                              ModuloScheduleExpander::InstrChangesTy());
   MSE.expand();
   MSE.cleanup();

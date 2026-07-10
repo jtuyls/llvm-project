@@ -842,6 +842,12 @@ public:
     }
     /// Return true if \p SMS can be scheduled and register-allocated by the
     /// target or false if the II should be increased.
+    /// Maximum number of pipeline stages the target will accept, or -1 for no
+    /// fixed cap. \p Default is the value of -pipeliner-max-stages. AIE returns
+    /// -1 and bounds the stage count through canAcceptII() instead, which knows
+    /// what its zero-overhead loop hardware can encode.
+    virtual int getMaxStages(int Default) const { return Default; }
+
     virtual bool canAcceptII(SMSchedule &SMS) { return true; }
     /// Called from the modulo schedule expander before any other modification.
     virtual void startExpand() {}

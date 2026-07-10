@@ -177,7 +177,11 @@ private:
   MachineBasicBlock *BB = nullptr;
   MachineBasicBlock *Preheader = nullptr;
   MachineBasicBlock *NewKernel = nullptr;
-  std::unique_ptr<TargetInstrInfo::PipelinerLoopInfo> LoopInfo;
+  /// Non-owning; supplied by the pipeliner so the target sees the same
+  /// PipelinerLoopInfo it scheduled with. If null, generatePipelinedLoop()
+  /// analyzes the loop itself and owns the result in OwnedLoopInfo.
+  TargetInstrInfo::PipelinerLoopInfo *LoopInfo;
+  std::unique_ptr<TargetInstrInfo::PipelinerLoopInfo> OwnedLoopInfo;
 
   /// Map for each register and the max difference between its uses and def.
   /// The first element in the pair is the max difference in stages. The
@@ -263,9 +267,11 @@ public:
   /// FIXME: InstrChanges is opaque and is an implementation detail of an
   ///   optimization in MachinePipeliner that crosses abstraction boundaries.
   ModuloScheduleExpander(MachineFunction &MF, ModuloSchedule &S,
-                         LiveIntervals &LIS, InstrChangesTy InstrChanges)
+                         LiveIntervals &LIS,
+                         TargetInstrInfo::PipelinerLoopInfo *LoopInfo,
+                         InstrChangesTy InstrChanges)
       : Schedule(S), MF(MF), ST(MF.getSubtarget()), MRI(MF.getRegInfo()),
-        TII(ST.getInstrInfo()), LIS(LIS),
+        TII(ST.getInstrInfo()), LIS(LIS), LoopInfo(LoopInfo),
         InstrChanges(std::move(InstrChanges)) {}
 
   /// Performs the actual expansion.
@@ -283,9 +289,10 @@ public:
 class PeelingModuloScheduleExpander {
 public:
   PeelingModuloScheduleExpander(MachineFunction &MF, ModuloSchedule &S,
-                                LiveIntervals *LIS)
+                                LiveIntervals *LIS,
+                                TargetInstrInfo::PipelinerLoopInfo *LoopInfo)
       : Schedule(S), MF(MF), ST(MF.getSubtarget()), MRI(MF.getRegInfo()),
-        TII(ST.getInstrInfo()), LIS(LIS) {}
+        TII(ST.getInstrInfo()), LIS(LIS), LoopInfo(LoopInfo) {}
 
   void expand();
 
@@ -367,7 +374,7 @@ protected:
   /// coming from a peeled out prologue.
   Register getPhiCanonicalReg(MachineInstr* CanonicalPhi, MachineInstr* Phi);
   /// Target loop info before kernel peeling.
-  std::unique_ptr<TargetInstrInfo::PipelinerLoopInfo> LoopInfo;
+  TargetInstrInfo::PipelinerLoopInfo *LoopInfo;
 };
 
 /// Expand the kernel using modulo variable expansion algorithm (MVE).
