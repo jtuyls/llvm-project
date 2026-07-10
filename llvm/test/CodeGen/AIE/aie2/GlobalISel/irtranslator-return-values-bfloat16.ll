@@ -63,7 +63,7 @@ define dso_local noundef <8 x bfloat> @_Z14ret_v8bfloat16Dv8_u6__bf16(<8 x bfloa
   ; CHECK-NEXT:   [[UV:%[0-9]+]]:_(<8 x s16>), [[UV1:%[0-9]+]]:_(<8 x s16>) = G_UNMERGE_VALUES [[COPY]](<16 x s16>)
   ; CHECK-NEXT:   [[FRAME_INDEX:%[0-9]+]]:_(p0) = G_FRAME_INDEX %stack.0.ret
   ; CHECK-NEXT:   G_STORE [[UV]](<8 x s16>), [[FRAME_INDEX]](p0) :: (volatile store (<8 x s16>) into %ir.ret)
-  ; CHECK-NEXT:   [[LOAD:%[0-9]+]]:_(<8 x s16>) = G_LOAD [[FRAME_INDEX]](p0) :: (volatile dereferenceable load (<8 x s16>) from %ir.ret)
+  ; CHECK-NEXT:   [[LOAD:%[0-9]+]]:_(<8 x s16>) = G_LOAD [[FRAME_INDEX]](p0) :: (volatile load (<8 x s16>) from %ir.ret)
   ; CHECK-NEXT:   [[UV2:%[0-9]+]]:_(s16), [[UV3:%[0-9]+]]:_(s16), [[UV4:%[0-9]+]]:_(s16), [[UV5:%[0-9]+]]:_(s16), [[UV6:%[0-9]+]]:_(s16), [[UV7:%[0-9]+]]:_(s16), [[UV8:%[0-9]+]]:_(s16), [[UV9:%[0-9]+]]:_(s16) = G_UNMERGE_VALUES [[LOAD]](<8 x s16>)
   ; CHECK-NEXT:   [[DEF:%[0-9]+]]:_(s16) = G_IMPLICIT_DEF
   ; CHECK-NEXT:   [[BUILD_VECTOR:%[0-9]+]]:_(<16 x s16>) = G_BUILD_VECTOR [[UV2]](s16), [[UV3]](s16), [[UV4]](s16), [[UV5]](s16), [[UV6]](s16), [[UV7]](s16), [[UV8]](s16), [[UV9]](s16), [[DEF]](s16), [[DEF]](s16), [[DEF]](s16), [[DEF]](s16), [[DEF]](s16), [[DEF]](s16), [[DEF]](s16), [[DEF]](s16)
@@ -89,7 +89,7 @@ define dso_local noundef <16 x bfloat> @_Z15ret_v16bfloat16Dv16_u6__bf16(<16 x b
   ; CHECK-NEXT:   [[COPY:%[0-9]+]]:_(<16 x s16>) = COPY $wl2
   ; CHECK-NEXT:   [[FRAME_INDEX:%[0-9]+]]:_(p0) = G_FRAME_INDEX %stack.0.ret
   ; CHECK-NEXT:   G_STORE [[COPY]](<16 x s16>), [[FRAME_INDEX]](p0) :: (volatile store (<16 x s16>) into %ir.ret)
-  ; CHECK-NEXT:   [[LOAD:%[0-9]+]]:_(<16 x s16>) = G_LOAD [[FRAME_INDEX]](p0) :: (volatile dereferenceable load (<16 x s16>) from %ir.ret)
+  ; CHECK-NEXT:   [[LOAD:%[0-9]+]]:_(<16 x s16>) = G_LOAD [[FRAME_INDEX]](p0) :: (volatile load (<16 x s16>) from %ir.ret)
   ; CHECK-NEXT:   $wl0 = COPY [[LOAD]](<16 x s16>)
   ; CHECK-NEXT:   PseudoRET implicit $lr, implicit $wl0
 entry:
@@ -109,7 +109,7 @@ define dso_local noundef <32 x bfloat> @_Z15ret_v32bfloat16Dv32_u6__bf16(<32 x b
   ; CHECK-NEXT:   [[COPY:%[0-9]+]]:_(<32 x s16>) = COPY $x2
   ; CHECK-NEXT:   [[FRAME_INDEX:%[0-9]+]]:_(p0) = G_FRAME_INDEX %stack.0.ret
   ; CHECK-NEXT:   G_STORE [[COPY]](<32 x s16>), [[FRAME_INDEX]](p0) :: (volatile store (<32 x s16>) into %ir.ret)
-  ; CHECK-NEXT:   [[LOAD:%[0-9]+]]:_(<32 x s16>) = G_LOAD [[FRAME_INDEX]](p0) :: (volatile dereferenceable load (<32 x s16>) from %ir.ret)
+  ; CHECK-NEXT:   [[LOAD:%[0-9]+]]:_(<32 x s16>) = G_LOAD [[FRAME_INDEX]](p0) :: (volatile load (<32 x s16>) from %ir.ret)
   ; CHECK-NEXT:   $x0 = COPY [[LOAD]](<32 x s16>)
   ; CHECK-NEXT:   PseudoRET implicit $lr, implicit $x0
 entry:
@@ -129,7 +129,7 @@ define dso_local noundef <64 x bfloat> @_Z15ret_v64bfloat16Dv64_u6__bf16(<64 x b
   ; CHECK-NEXT:   [[COPY:%[0-9]+]]:_(<64 x s16>) = COPY $y3
   ; CHECK-NEXT:   [[FRAME_INDEX:%[0-9]+]]:_(p0) = G_FRAME_INDEX %stack.0.ret
   ; CHECK-NEXT:   G_STORE [[COPY]](<64 x s16>), [[FRAME_INDEX]](p0) :: (volatile store (<64 x s16>) into %ir.ret)
-  ; CHECK-NEXT:   [[LOAD:%[0-9]+]]:_(<64 x s16>) = G_LOAD [[FRAME_INDEX]](p0) :: (volatile dereferenceable load (<64 x s16>) from %ir.ret)
+  ; CHECK-NEXT:   [[LOAD:%[0-9]+]]:_(<64 x s16>) = G_LOAD [[FRAME_INDEX]](p0) :: (volatile load (<64 x s16>) from %ir.ret)
   ; CHECK-NEXT:   $y2 = COPY [[LOAD]](<64 x s16>)
   ; CHECK-NEXT:   PseudoRET implicit $lr, implicit $y2
 entry:

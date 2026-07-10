@@ -70,7 +70,7 @@ define void @test_call_v8half() {
   ; CHECK-LABEL: name: test_call_v8half
   ; CHECK: bb.1.entry:
   ; CHECK-NEXT:   [[FRAME_INDEX:%[0-9]+]]:_(p0) = G_FRAME_INDEX %stack.0.call
-  ; CHECK-NEXT:   [[LOAD:%[0-9]+]]:_(<8 x s16>) = G_LOAD [[FRAME_INDEX]](p0) :: (volatile dereferenceable load (<8 x s16>) from %ir.call)
+  ; CHECK-NEXT:   [[LOAD:%[0-9]+]]:_(<8 x s16>) = G_LOAD [[FRAME_INDEX]](p0) :: (volatile load (<8 x s16>) from %ir.call)
   ; CHECK-NEXT:   ADJCALLSTACKUP 0, 0, implicit-def $sp, implicit $sp
   ; CHECK-NEXT:   [[UV:%[0-9]+]]:_(s16), [[UV1:%[0-9]+]]:_(s16), [[UV2:%[0-9]+]]:_(s16), [[UV3:%[0-9]+]]:_(s16), [[UV4:%[0-9]+]]:_(s16), [[UV5:%[0-9]+]]:_(s16), [[UV6:%[0-9]+]]:_(s16), [[UV7:%[0-9]+]]:_(s16) = G_UNMERGE_VALUES [[LOAD]](<8 x s16>)
   ; CHECK-NEXT:   [[DEF:%[0-9]+]]:_(s16) = G_IMPLICIT_DEF
@@ -94,7 +94,7 @@ define void @_Z21test_call_v16halfv() {
   ; CHECK-LABEL: name: _Z21test_call_v16halfv
   ; CHECK: bb.1.entry:
   ; CHECK-NEXT:   [[FRAME_INDEX:%[0-9]+]]:_(p0) = G_FRAME_INDEX %stack.0.call
-  ; CHECK-NEXT:   [[LOAD:%[0-9]+]]:_(<16 x s16>) = G_LOAD [[FRAME_INDEX]](p0) :: (volatile dereferenceable load (<16 x s16>) from %ir.call)
+  ; CHECK-NEXT:   [[LOAD:%[0-9]+]]:_(<16 x s16>) = G_LOAD [[FRAME_INDEX]](p0) :: (volatile load (<16 x s16>) from %ir.call)
   ; CHECK-NEXT:   ADJCALLSTACKUP 0, 0, implicit-def $sp, implicit $sp
   ; CHECK-NEXT:   $wl2 = COPY [[LOAD]](<16 x s16>)
   ; CHECK-NEXT:   PseudoJL @callee_v16float16, csr_aie2ps, implicit-def $lr, implicit $wl2, implicit-def $wl0
@@ -114,7 +114,7 @@ define void @test_call_v32half() {
   ; CHECK-LABEL: name: test_call_v32half
   ; CHECK: bb.1.entry:
   ; CHECK-NEXT:   [[FRAME_INDEX:%[0-9]+]]:_(p0) = G_FRAME_INDEX %stack.0.call
-  ; CHECK-NEXT:   [[LOAD:%[0-9]+]]:_(<32 x s16>) = G_LOAD [[FRAME_INDEX]](p0) :: (volatile dereferenceable load (<32 x s16>) from %ir.call)
+  ; CHECK-NEXT:   [[LOAD:%[0-9]+]]:_(<32 x s16>) = G_LOAD [[FRAME_INDEX]](p0) :: (volatile load (<32 x s16>) from %ir.call)
   ; CHECK-NEXT:   ADJCALLSTACKUP 0, 0, implicit-def $sp, implicit $sp
   ; CHECK-NEXT:   $x2 = COPY [[LOAD]](<32 x s16>)
   ; CHECK-NEXT:   PseudoJL @callee_v32float16, csr_aie2ps, implicit-def $lr, implicit $x2, implicit-def $x0
@@ -134,7 +134,7 @@ define void @test_call_v64float16() {
   ; CHECK-LABEL: name: test_call_v64float16
   ; CHECK: bb.1.entry:
   ; CHECK-NEXT:   [[FRAME_INDEX:%[0-9]+]]:_(p0) = G_FRAME_INDEX %stack.0.call
-  ; CHECK-NEXT:   [[LOAD:%[0-9]+]]:_(<64 x s16>) = G_LOAD [[FRAME_INDEX]](p0) :: (volatile dereferenceable load (<64 x s16>) from %ir.call)
+  ; CHECK-NEXT:   [[LOAD:%[0-9]+]]:_(<64 x s16>) = G_LOAD [[FRAME_INDEX]](p0) :: (volatile load (<64 x s16>) from %ir.call)
   ; CHECK-NEXT:   ADJCALLSTACKUP 0, 0, implicit-def $sp, implicit $sp
   ; CHECK-NEXT:   $y3 = COPY [[LOAD]](<64 x s16>)
   ; CHECK-NEXT:   PseudoJL @callee_v64float16, csr_aie2ps, implicit-def $lr, implicit $y3, implicit-def $y2
@@ -155,7 +155,7 @@ define void @test_call_v128float16() {
   ; CHECK-LABEL: name: test_call_v128float16
   ; CHECK: bb.1.entry:
   ; CHECK-NEXT:   [[FRAME_INDEX:%[0-9]+]]:_(p0) = G_FRAME_INDEX %stack.0.call
-  ; CHECK-NEXT:   [[LOAD:%[0-9]+]]:_(<128 x s16>) = G_LOAD [[FRAME_INDEX]](p0) :: (volatile dereferenceable load (<128 x s16>) from %ir.call, align 128)
+  ; CHECK-NEXT:   [[LOAD:%[0-9]+]]:_(<128 x s16>) = G_LOAD [[FRAME_INDEX]](p0) :: (volatile load (<128 x s16>) from %ir.call, align 128)
   ; CHECK-NEXT:   ADJCALLSTACKUP 0, 0, implicit-def $sp, implicit $sp
   ; CHECK-NEXT:   $dm1 = COPY [[LOAD]](<128 x s16>)
   ; CHECK-NEXT:   PseudoJL @callee_v128float16, csr_aie2ps, implicit-def $lr, implicit $dm1, implicit-def $dm0
