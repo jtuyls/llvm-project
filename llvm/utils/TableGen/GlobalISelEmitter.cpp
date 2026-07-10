@@ -922,11 +922,19 @@ Expected<InstructionMatcher &> GlobalISelEmitter::createAndImportSelDAGMatcher(
     // Special case because the operand order is changed from setcc. The
     // predicate operand needs to be swapped from the last operand to the first
     // source.
-
+    //
+    // We allow targets to build custom FCMP/ICMP variants to support
+    // distinguished type restrictions (e.g. AIE's G_AIE_VECTOR_ICMP, whose
+    // result is a lane mask rather than a scalar i1). Any generic operator
+    // whose name ends in "_FCMP"/"_ICMP" is therefore treated as a comparison,
+    // which also covers plain G_FCMP/G_ICMP. Without this, the trailing
+    // CondCode leaf falls through to the generic operand path and the whole
+    // pattern is dropped with "unsupported type for Src operand (SETLT:...)".
     unsigned NumChildren = Src.getNumChildren();
-    bool IsFCmp = SrcGIOrNull->getName() == "G_FCMP";
+    StringRef SrcOpcName = SrcGIOrNull->getName();
+    bool IsFCmp = SrcOpcName.ends_with("_FCMP");
 
-    if (IsFCmp || SrcGIOrNull->getName() == "G_ICMP") {
+    if (IsFCmp || SrcOpcName.ends_with("_ICMP")) {
       const TreePatternNode &SrcChild = Src.getChild(NumChildren - 1);
       if (SrcChild.isLeaf()) {
         const DefInit *DI = dyn_cast<DefInit>(SrcChild.getLeafValue());

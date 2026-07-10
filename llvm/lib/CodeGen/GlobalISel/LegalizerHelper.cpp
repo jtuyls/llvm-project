@@ -4253,7 +4253,13 @@ LegalizerHelper::LegalizeResult LegalizerHelper::lowerLoad(GAnyLoad &LoadMI) {
 
     // Promote to a byte-sized load if not loading an integral number of
     // bytes.  For example, promote EXTLOAD:i20 -> EXTLOAD:i24.
-    LLT WideMemTy = EltTy.changeElementSize(MemStoreSizeInBits);
+    // MemTy can be a pointer here -- AIE's pointers are 20 bits wide, so an
+    // unaligned p0 load reaches this path -- and changeElementSize asserts on
+    // pointers. Widen those as plain integers instead. Non-pointer MemTy must
+    // still go through changeElementSize so the LLT keeps its integer/float
+    // kind (i8 vs the kindless s8).
+    LLT WideMemTy = EltTy.isPointer() ? LLT::integer(MemStoreSizeInBits)
+                                      : EltTy.changeElementSize(MemStoreSizeInBits);
     MachineMemOperand *NewMMO =
         MF.getMachineMemOperand(&MMO, MMO.getPointerInfo(), WideMemTy);
 
@@ -4279,8 +4285,18 @@ LegalizerHelper::LegalizeResult LegalizerHelper::lowerLoad(GAnyLoad &LoadMI) {
       MIRBuilder.buildLoad(LoadReg, PtrReg, *NewMMO);
     }
 
-    if (DstTy != LoadTy)
-      MIRBuilder.buildTrunc(DstReg, LoadReg);
+    if (DstTy != LoadTy) {
+      if (DstTy.isPointer()) {
+        // FIXME: We currently consider this to be illegal for non-integral
+        // address spaces, but we still need a way to reinterpret the bits.
+        Register Trunc =
+            MIRBuilder.buildTrunc(LLT::integer(DstTy.getSizeInBits()), LoadReg)
+                .getReg(0);
+        MIRBuilder.buildIntToPtr(DstReg, Trunc);
+      } else {
+        MIRBuilder.buildTrunc(DstReg, LoadReg);
+      }
+    }
 
     LoadMI.eraseFromParent();
     return Legalized;
@@ -4610,6 +4626,18 @@ LegalizerHelper::bitcast(MachineInstr &MI, unsigned TypeIdx, LLT CastTy) {
     return bitcastExtractSubvector(MI, TypeIdx, CastTy);
   case TargetOpcode::G_INSERT_SUBVECTOR:
     return bitcastInsertSubvector(MI, TypeIdx, CastTy);
+  case TargetOpcode::G_UNMERGE_VALUES: {
+    // Bitcasting the source lets a wide scalar be unmerged as a vector, e.g.
+    // 32 x s64 out of an s2048. Only the source operand (the last one) can be
+    // cast; the results are already the target's chosen element type.
+    if (TypeIdx != 1)
+      return UnableToLegalize;
+
+    Observer.changingInstr(MI);
+    bitcastSrc(MI, CastTy, MI.getNumOperands() - 1);
+    Observer.changedInstr(MI);
+    return Legalized;
+  }
   default:
     return UnableToLegalize;
   }
@@ -5098,7 +5126,11 @@ Register LegalizerHelper::getVectorElementPointer(Register VecPtr, LLT VecTy,
   // Convert index to the correct size for the address space.
   const DataLayout &DL = MIRBuilder.getDataLayout();
   unsigned AS = MRI.getType(VecPtr).getAddressSpace();
-  unsigned IndexSizeInBits = DL.getIndexSize(AS) * 8;
+  // Use getIndexSizeInBits, not getIndexSize()*8: byte-rounding breaks
+  // non-byte-aligned pointers. AIE's addrspace-0 index is 20 bits, which
+  // getIndexSize rounds up to 3 bytes -> 24, producing a G_PTR_ADD offset the
+  // MachineVerifier rejects. Identical for all byte-aligned targets.
+  unsigned IndexSizeInBits = DL.getIndexSizeInBits(AS);
   LLT IdxTy = MRI.getType(Index).changeElementSize(IndexSizeInBits);
   if (IdxTy != MRI.getType(Index))
     Index = MIRBuilder.buildSExtOrTrunc(IdxTy, Index).getReg(0);
