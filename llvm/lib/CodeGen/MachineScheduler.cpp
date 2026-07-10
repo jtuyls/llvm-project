@@ -725,7 +725,16 @@ MachineSchedulerPass::run(MachineFunction &MF,
 }
 
 bool PostMachineSchedulerLegacy::runOnMachineFunction(MachineFunction &MF) {
-  if (skipFunction(MF.getFunction()))
+  // amd/aie/ port: honour TargetSubtargetInfo::forcePostRAScheduling(). AIE
+  // requires post-RA scheduling for CORRECTNESS, not performance: it is what
+  // inserts the latency NOPs an exposed-pipeline machine needs, and what
+  // materializes multi-slot pseudos to a concrete slot. Skipping it for
+  // optnone functions silently produced code with missing NOPs and left
+  // multi-slot pseudos to assert in AIEMachineAlignment (getSlot() ->
+  // hasSingleSlot()). The hook exists in TargetSubtargetInfo and AIEBaseSubtarget
+  // overrides it; only this use of it was lost in the port.
+  bool SchedulingRequired = MF.getSubtarget().forcePostRAScheduling();
+  if (!SchedulingRequired && skipFunction(MF.getFunction()))
     return false;
 
   if (EnablePostRAMachineSched.getNumOccurrences()) {
