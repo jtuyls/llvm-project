@@ -2324,6 +2324,15 @@ def undef_combines : GICombineGroup<[undef_to_fp_zero, undef_to_int_zero,
                                      erase_undef_store,
                                      insert_extract_vec_elt_out_of_bounds]>;
 
+// Under certain conditions, transform:
+//   Fold (shl (and x, imm1), imm2) -> (shl x, imm2)
+def shl_and_fold: GICombineRule <
+  (defs root:$root, register_matchinfo:$matchinfo),
+  (match (wip_match_opcode G_SHL):$root,
+         [{ return Helper.matchCombineShlOfAnd(*${root}, ${matchinfo}); }]),
+  (apply [{ Helper.applyCombineShlOfAnd(*${root}, ${matchinfo}); }])
+>;
+
 def identity_combines : GICombineGroup<[select_same_val, right_identity_zero,
                                         binop_same_val, same_val_zero, binop_left_to_zero,
                                         binop_right_to_zero, p2i_to_i2p,

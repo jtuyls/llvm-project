@@ -368,6 +368,11 @@ public:
   void applyCombineShlOfExtend(MachineInstr &MI,
                                const RegisterImmPair &MatchData) const;
 
+  /// Fold (shl (and x, imm1), imm2) -> (shl x, imm2), when the bits imm1
+  /// clears are exactly the bits imm2 shifts out, i.e. (~imm1 << imm2) == 0.
+  bool matchCombineShlOfAnd(MachineInstr &MI, Register &Reg) const;
+  void applyCombineShlOfAnd(MachineInstr &MI, Register &Reg) const;
+
   /// Fold away a merge of an unmerge of the corresponding values.
   bool matchCombineMergeUnmerge(MachineInstr &MI, Register &MatchInfo) const;
 
