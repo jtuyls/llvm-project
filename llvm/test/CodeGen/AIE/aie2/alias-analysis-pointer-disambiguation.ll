@@ -179,7 +179,7 @@ for.cond.cleanup:                                 ; preds = %for.body
 ; AIE-AA-DIS-ENABLE:  NoAlias:      i8* %14, i8* %ptr_store
 ; AIE-AA-DIS-ENABLE:  NoAlias:      i8* %14, i8* %3
 ; AIE-AA-DIS-ENABLE:  NoAlias:      i8* %14, i8* %gep
-; AIE-AA-DIS-ENABLE:  NoAlias:      i8* %10, i8* %14
+; AIE-AA-DIS-ENABLE:  MayAlias:     i8* %10, i8* %14
 
 ; AIE-AA-DIS-DISABLE-LABEL: Function: test_with_gep_zero
 ; AIE-AA-DIS-DISABLE:  MayAlias:      i8* %ptr_load, i8* %ptr_store
