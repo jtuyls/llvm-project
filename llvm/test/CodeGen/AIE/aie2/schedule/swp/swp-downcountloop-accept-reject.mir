@@ -38,8 +38,15 @@ body:             |
   ; CHECK-TC-2: PLI: Accepting II=5
   ; CHECK-TC-2: PLI: Rejected schedule (dynamic TC, Loop condition not scheduled in stage 0)
 
-  ; CHECK-TC-1: PLI: Accepting II=6
-  ; CHECK-TC-1: PLI: Rejected schedule (dynamic TC, Loop condition not scheduled in stage 0)
+  ; With a minimum trip count of 1 the 3-stage schedule is rejected because it
+  ; needs more guards than the trip count allows; the pipeliner then finds a
+  ; 2-stage schedule at II=5 whose loop condition *is* in stage 0, so it is
+  ; accepted. (llvm-aie settled on II=6 here and rejected it for a stage-0
+  ; violation. The stage-0 reject path is still covered by
+  ; swp-zoloop-accept-reject.mir.)
+  ; CHECK-TC-1: PLI: Rejected schedule (Too many stages for TC, TotStages=3 MaxGuards=1 MinTC=1)
+  ; CHECK-TC-1: PLI: Accepting II=5
+  ; CHECK-TC-1: PLI: Accepting schedule for StageCount=2 (dynamic TC)
 
   bb.1:
     liveins: $p0, $p1, $r0
