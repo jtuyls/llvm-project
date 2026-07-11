@@ -772,6 +772,96 @@ static uint64_t resolveWasm64(uint64_t Type, uint64_t Offset, uint64_t S,
   }
 }
 
+// amd/aie/ port: AIE relocation resolution (llvm-objdump -dr, DWARF).
+static bool supportsAIE(uint64_t Type) {
+  switch (Type) {
+  case ELF::R_AIE_0:
+  case ELF::R_AIE_72:
+    return true;
+  default:
+    return false;
+  }
+}
+
+static uint64_t resolveAIE(uint64_t Type, uint64_t Offset, uint64_t S,
+                           uint64_t LocData, int64_t Addend) {
+  // llvm::dbgs() << "ResolveReloc:" << Type << " " << Offset << " " << S << " "
+  //              << LocData << " " << Addend << "\n";
+  switch (Type) {
+  case ELF::R_AIE_0:
+    return (S + Addend);
+  case ELF::R_AIE_72:
+    return (S + Addend);
+  default:
+    llvm_unreachable("Invalid relocation type");
+  }
+}
+
+static bool supportsAIE2(uint64_t Type) {
+  switch (Type) {
+  case ELF::R_AIE_50:
+    return true;
+  default:
+    return false;
+  }
+}
+
+static uint64_t resolveAIE2(uint64_t Type, uint64_t Offset, uint64_t S,
+                           uint64_t LocData, int64_t Addend) {
+  // llvm::dbgs() << "ResolveReloc:" << Type << " " << Offset << " " << S << " "
+  //              << LocData << " " << Addend << "\n";
+  switch (Type) {
+  case ELF::R_AIE_50:
+    return (S + Addend);
+  default:
+    llvm_unreachable("Invalid relocation type");
+  }
+}
+
+static bool supportsAIE2P(uint64_t Type) {
+  switch (Type) {
+  case ELF::R_AIE_0:
+  case ELF::R_AIE_62:
+    return true;
+  default:
+    return false;
+  }
+}
+
+static uint64_t resolveAIE2P(uint64_t Type, uint64_t Offset, uint64_t S,
+                             uint64_t LocData, int64_t Addend) {
+  switch (Type) {
+  case ELF::R_AIE_0:
+    return (S + Addend);
+  case ELF::R_AIE_62:
+    return (S + Addend);
+  default:
+    llvm_unreachable("Invalid relocation type");
+  }
+}
+
+static bool supportsAIE2PS(uint64_t Type) {
+  switch (Type) {
+  case ELF::R_AIE_0:
+  case ELF::R_AIE_134:
+    return true;
+  default:
+    return false;
+  }
+}
+
+static uint64_t resolveAIE2PS(uint64_t Type, uint64_t Offset, uint64_t S,
+                              uint64_t LocData, int64_t Addend) {
+  switch (Type) {
+  case ELF::R_AIE_0:
+    return (S + Addend);
+  case ELF::R_AIE_134:
+    return (S + Addend);
+  default:
+    llvm_unreachable("Invalid relocation type");
+  }
+}
+
 std::pair<SupportsRelocation, RelocationResolver>
 getRelocationResolver(const ObjectFile &Obj) {
   if (Obj.isCOFF()) {
@@ -833,6 +923,14 @@ getRelocationResolver(const ObjectFile &Obj) {
     case Triple::ppcle:
     case Triple::ppc:
       return {supportsPPC32, resolvePPC32};
+    case Triple::aie:
+      return {supportsAIE, resolveAIE};
+    case Triple::aie2:
+      return {supportsAIE2, resolveAIE2};
+    case Triple::aie2p:
+      return {supportsAIE2P, resolveAIE2P};
+    case Triple::aie2ps:
+      return {supportsAIE2PS, resolveAIE2PS};
     case Triple::arm:
     case Triple::armeb:
       return {supportsARM, resolveARM};

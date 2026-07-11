@@ -89,6 +89,12 @@
 using namespace llvm;
 using namespace llvm::object;
 using namespace llvm::objdump;
+
+// amd/aie/ port: AIE object files carry extra symbols marking basic-block ends.
+static bool isAIEElf(const ObjectFile &Obj) {
+  const auto *Elf = dyn_cast<ELFObjectFileBase>(&Obj);
+  return Elf && Elf->getEMachine() == ELF::EM_AIE;
+}
 using namespace llvm::opt;
 
 namespace {
@@ -1943,6 +1949,15 @@ disassembleObject(ObjectFile &Obj, const ObjectFile &DbgObj,
   // Multiple symbols can have the same address. Use a stable sort to stabilize
   // the output.
   StringSet<> FoundDisasmSymbolSet;
+
+  // AIE object files carry extra symbols marking the end of basic blocks. They
+  // are never 16-bit aligned, so filter them out by odd address; used as
+  // disassembly boundaries they would split instructions.
+  if (isAIEElf(Obj))
+    for (std::pair<const SectionRef, SectionSymbolsTy> &SecSyms : AllSymbols)
+      llvm::erase_if(SecSyms.second,
+                     [](const SymbolInfoTy &S) { return S.Addr % 2 == 1; });
+
   for (std::pair<const SectionRef, SectionSymbolsTy> &SecSyms : AllSymbols)
     llvm::stable_sort(SecSyms.second);
   llvm::stable_sort(AbsoluteSymbols);
@@ -2654,6 +2669,7 @@ disassembleObject(ObjectFile &Obj, const ObjectFile &DbgObj,
   for (StringRef Sym : MissingDisasmSymbolSet.keys())
     reportWarning("failed to disassemble missing symbol " + Sym, FileName);
 }
+
 
 static void disassembleObject(ObjectFile *Obj, bool InlineRelocs,
                               raw_ostream &OS) {
