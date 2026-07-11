@@ -331,9 +331,11 @@ namespace llvm {
     /// Cleans up after scheduling in the given block.
     virtual void finishBlock();
 
-    // amd/aie/ port: AIE-added memory-disambiguation hook overridden by the AIE
-    // scheduler / dependence helpers.
-    virtual bool mayAlias(SUnit *SUa, SUnit *SUb, bool TBAA) { return true; }
+    // amd/aie/ port: AIE-added memory-disambiguation hook. Targets override this
+    // to disambiguate memory accesses the generic MachineInstr::mayAlias cannot
+    // (e.g. across loop iterations, using target addressing-mode knowledge).
+    // The default forwards to MachineInstr::mayAlias.
+    virtual bool mayAlias(SUnit *SUa, SUnit *SUb, bool TBAA);
 
     // amd/aie/ port: AIE accesses the current block.
     MachineBasicBlock *getBB() const { return BB; }

@@ -605,13 +605,12 @@ void MachineLICMImpl::HoistRegionPostRA(MachineLoop *CurLoop) {
     const MachineLoop *ML = MLI->getLoopFor(BB);
     if (ML && ML->getHeader()->isEHPad()) continue;
 
-    // Conservatively treat live-in's as an external def.
-    // FIXME: That means a reload that're reused in successor block(s) will not
-    // be LICM'ed.
-    for (const auto &LI : BB->liveins()) {
-      for (MCRegUnit Unit : TRI->regunits(LI.PhysReg))
-        RUDefs.set(static_cast<unsigned>(Unit));
-    }
+    // amd/aie/ port: upstream conservatively marks every live-in physreg's
+    // register units as an external def here, which blocks hoisting any
+    // candidate whose def unit merely overlaps a live-in -- even when the
+    // live-in and the def touch disjoint lanes of the same super-register.
+    // We instead clobber live-in units lane-precisely, after the region walk
+    // has collected RUDefs; see below.
 
     // Funclet entry blocks will clobber all registers
     if (const uint32_t *Mask = BB->getBeginClobberMask(TRI))
@@ -633,6 +632,23 @@ void MachineLICMImpl::HoistRegionPostRA(MachineLoop *CurLoop) {
     SpeculationState = SpeculateUnknown;
     for (MachineInstr &MI : *BB)
       ProcessMI(&MI, RUDefs, RUClobbers, StoredFIs, Candidates, CurLoop);
+  }
+
+  // amd/aie/ port: mark a register unit as clobbered only if it is live-in to
+  // the loop header *and* the loop actually defines lanes that overlap the
+  // live-in lanes. This replaces upstream's blanket "live-ins are external
+  // defs", whose FIXME already notes it is too conservative. Lane precision
+  // matters on targets whose sub-registers are separately addressable: a copy
+  // defining one half of a super-register is hoistable even when the other half
+  // is live-in.
+  for (const auto &LoopLI : CurLoop->getHeader()->liveins()) {
+    const LaneBitmask LiveInMask = LoopLI.LaneMask;
+    for (MCRegUnitMaskIterator RUI(LoopLI.PhysReg, TRI); RUI.isValid(); ++RUI) {
+      const auto [LiveInUnit, UnitMask] = *RUI;
+      const auto Unit = static_cast<unsigned>(LiveInUnit);
+      if ((UnitMask & LiveInMask).any() && RUDefs.test(Unit))
+        RUClobbers.set(Unit);
+    }
   }
 
   // Gather the registers read / clobbered by the terminator.
