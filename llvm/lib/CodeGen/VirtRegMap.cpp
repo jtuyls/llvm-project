@@ -53,6 +53,13 @@ using namespace llvm;
 STATISTIC(NumSpillSlots, "Number of spill slots allocated");
 STATISTIC(NumIdCopies,   "Number of identity moves eliminated after rewriting");
 
+// amd/aie/ port: AIE's staged RA pins registers by turning the register
+// allocator's *preferred* hints into *required* assignments.
+static cl::opt<bool> RequirePreferredRegs(
+    "require-preferred-registers", cl::init(false), cl::Hidden,
+    cl::desc("Enforce preferred-register simple hints by making the hints "
+             "required in the VirtRegMap"));
+
 //===----------------------------------------------------------------------===//
 //  VirtRegMap implementation
 //===----------------------------------------------------------------------===//
@@ -75,6 +82,16 @@ void VirtRegMap::init(MachineFunction &mf) {
   Virt2RequiredPhysMap.clear(); // amd/aie/ port
 
   grow();
+
+  // amd/aie/ port: turn "preferred" registers into "required" registers if
+  // requested. AIE's staged RA uses this to pin an earlier stage's assignments.
+  if (RequirePreferredRegs) {
+    for (unsigned Idx = 0; Idx != MRI->getNumVirtRegs(); ++Idx) {
+      Register VReg = Register::index2VirtReg(Idx);
+      if (Register PreferredReg = MRI->getSimpleHint(VReg))
+        setRequiredPhys(VReg, PreferredReg);
+    }
+  }
 }
 
 void VirtRegMap::grow() {
