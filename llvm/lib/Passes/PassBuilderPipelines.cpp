@@ -137,6 +137,7 @@
 #include "llvm/Transforms/Scalar/SpeculativeExecution.h"
 #include "llvm/Transforms/Scalar/TailRecursionElimination.h"
 #include "llvm/Transforms/Scalar/WarnMissedTransforms.h"
+#include "llvm/Transforms/Utils/LoopIterCountAssumptions.h"
 #include "llvm/Transforms/Utils/AddDiscriminators.h"
 #include "llvm/Transforms/Utils/AssumeBundleBuilder.h"
 #include "llvm/Transforms/Utils/CanonicalizeAliases.h"
@@ -217,6 +218,11 @@ static cl::opt<bool>
 static cl::opt<bool> EnableUnrollAndJam("enable-unroll-and-jam",
                                         cl::init(false), cl::Hidden,
                                         cl::desc("Enable Unroll And Jam Pass"));
+
+static cl::opt<bool> EnableLoopIterCountToAssumptions(
+    "enable-loop-iter-count-assumptions", cl::Hidden, cl::init(false),
+    cl::desc(
+        "Enable Conversion of Loop Iteration Count Metadata to Assumptions."));
 
 static cl::opt<bool> EnableLoopFlatten("enable-loop-flatten", cl::init(false),
                                        cl::Hidden,
@@ -520,6 +526,9 @@ PassBuilder::buildO1FunctionSimplificationPipeline(OptimizationLevel Level,
   LPM1.addPass(LICMPass(PTO.LicmMssaOptCap, PTO.LicmMssaNoAccForPromotionCap,
                         /*AllowSpeculation=*/false));
 
+  if (EnableLoopIterCountToAssumptions)
+    LPM1.addPass(LoopIterCountAssumptions());
+
   LPM1.addPass(
       LoopRotatePass(/*EnableHeaderDuplication=*/true, isLTOPreLink(Phase)));
   // TODO: Investigate promotion cap for O1.
@@ -695,6 +704,9 @@ PassBuilder::buildFunctionSimplificationPipeline(OptimizationLevel Level,
   // TODO: Investigate promotion cap for O1.
   LPM1.addPass(LICMPass(PTO.LicmMssaOptCap, PTO.LicmMssaNoAccForPromotionCap,
                         /*AllowSpeculation=*/false));
+
+  if (EnableLoopIterCountToAssumptions)
+    LPM1.addPass(LoopIterCountAssumptions());
 
   LPM1.addPass(
       LoopRotatePass(/*EnableHeaderDuplication=*/true, isLTOPreLink(Phase)));
