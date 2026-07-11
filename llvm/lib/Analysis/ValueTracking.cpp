@@ -6945,6 +6945,92 @@ static bool isSameUnderlyingObjectInLoop(const PHINode *PN,
   return true;
 }
 
+// amd/aie/ port: see through AIE's 2D/3D address-generator and FIFO
+// intrinsics, which return {ptr, state} aggregates. Without this,
+// getUnderlyingObject stops at the extractvalue and BasicAA cannot
+// disambiguate two accesses through the same base pointer.
+static const Value *getUnderlyingObjectAIEIntrinsic(const Value *V) {
+  if (auto *Extract = dyn_cast<ExtractValueInst>(V)) {
+    if (auto *II = dyn_cast<IntrinsicInst>(Extract->getAggregateOperand())) {
+      switch (II->getIntrinsicID()) {
+      case Intrinsic::aie2_add_2d:
+      case Intrinsic::aie2_add_3d:
+      case Intrinsic::aie2p_add_2d:
+      case Intrinsic::aie2p_add_3d:
+      case Intrinsic::aie2p_fifo_ld_fill:
+      // fifo ld unaligned
+      case Intrinsic::aie2p_fifo_ld_pop_unaligned:
+      case Intrinsic::aie2p_fifo_ld_pop_1d_unaligned:
+      case Intrinsic::aie2p_fifo_ld_pop_2d_unaligned:
+      case Intrinsic::aie2p_fifo_ld_pop_3d_unaligned:
+      // fifo ld pop 544
+      case Intrinsic::aie2p_fifo_ld_pop_544_bfp16:
+      case Intrinsic::aie2p_fifo_ld_pop_544_1d_bfp16:
+      case Intrinsic::aie2p_fifo_ld_pop_544_2d_bfp16:
+      case Intrinsic::aie2p_fifo_ld_pop_544_3d_bfp16:
+      // fifo ld pop 576
+      case Intrinsic::aie2p_fifo_ld_pop_576_bfp16:
+      case Intrinsic::aie2p_fifo_ld_pop_576_1d_bfp16:
+      case Intrinsic::aie2p_fifo_ld_pop_576_2d_bfp16:
+      case Intrinsic::aie2p_fifo_ld_pop_576_3d_bfp16:
+      // fifo st flush
+      case Intrinsic::aie2p_fifo_st_flush:
+      case Intrinsic::aie2p_fifo_st_flush_1d:
+      case Intrinsic::aie2p_fifo_st_flush_2d:
+      case Intrinsic::aie2p_fifo_st_flush_3d:
+      // fifo st flush conv
+      case Intrinsic::aie2p_fifo_st_flush_conv:
+      case Intrinsic::aie2p_fifo_st_flush_1d_conv:
+      case Intrinsic::aie2p_fifo_st_flush_2d_conv:
+      case Intrinsic::aie2p_fifo_st_flush_3d_conv:
+      // fifo st push
+      case Intrinsic::aie2p_fifo_st_push_512_bfp16:
+      case Intrinsic::aie2p_fifo_st_push_544_bfp16:
+      case Intrinsic::aie2p_fifo_st_push_576_bfp16:
+      // AIE2PS 2D/3D addressing
+      case Intrinsic::aie2ps_add_2d:
+      case Intrinsic::aie2ps_add_3d:
+      // AIE2PS fifo ld fill
+      case Intrinsic::aie2ps_fifo_ld_fill:
+      case Intrinsic::aie2ps_fifo_ld_fillx:
+      // AIE2PS fifo ld pop unaligned
+      case Intrinsic::aie2ps_fifo_ld_pop_512_unaligned:
+      case Intrinsic::aie2ps_fifo_ld_pop_1d_unaligned:
+      case Intrinsic::aie2ps_fifo_ld_pop_2d_unaligned:
+      case Intrinsic::aie2ps_fifo_ld_pop_3d_unaligned:
+      // AIE2PS fifo ld pop BFP640
+      case Intrinsic::aie2ps_fifo_ld_pop_BFP640:
+      case Intrinsic::aie2ps_fifo_ld_pop_1d_BFP640:
+      case Intrinsic::aie2ps_fifo_ld_pop_2d_BFP640:
+      case Intrinsic::aie2ps_fifo_ld_pop_3d_BFP640:
+      // AIE2PS fifo ld pop BFP768
+      case Intrinsic::aie2ps_fifo_ld_pop_BFP768:
+      case Intrinsic::aie2ps_fifo_ld_pop_1d_BFP768:
+      case Intrinsic::aie2ps_fifo_ld_pop_2d_BFP768:
+      case Intrinsic::aie2ps_fifo_ld_pop_3d_BFP768:
+      case Intrinsic::aie2ps_fifo_ld_popx:
+      // AIE2PS fifo st flush
+      case Intrinsic::aie2ps_fifo_st_flush:
+      case Intrinsic::aie2ps_fifo_st_flush_1d:
+      case Intrinsic::aie2ps_fifo_st_flush_2d:
+      case Intrinsic::aie2ps_fifo_st_flush_3d:
+      // AIE2PS fifo st flush conv
+      case Intrinsic::aie2ps_fifo_st_flush_conv:
+      case Intrinsic::aie2ps_fifo_st_flush_1d_conv:
+      case Intrinsic::aie2ps_fifo_st_flush_2d_conv:
+      case Intrinsic::aie2ps_fifo_st_flush_3d_conv:
+      // AIE2PS fifo st push
+      case Intrinsic::aie2ps_fifo_st_push_512:
+      case Intrinsic::aie2ps_fifo_st_push_BFP384:
+      case Intrinsic::aie2ps_fifo_st_push_BFP640:
+      case Intrinsic::aie2ps_fifo_st_push_BFP768:
+        return II->getArgOperand(0);
+      }
+    }
+  }
+  return nullptr;
+}
+
 const Value *llvm::getUnderlyingObject(const Value *V, unsigned MaxLookup) {
   for (unsigned Count = 0; MaxLookup == 0 || Count < MaxLookup; ++Count) {
     if (auto *GEP = dyn_cast<GEPOperator>(V)) {
@@ -6983,6 +7069,9 @@ const Value *llvm::getUnderlyingObject(const Value *V, unsigned MaxLookup) {
           V = RP;
           continue;
         }
+      } else if (auto *AIEObject = getUnderlyingObjectAIEIntrinsic(V)) {
+        V = AIEObject;
+        continue;
       }
 
       return V;
