@@ -369,6 +369,19 @@ bool TargetTransformInfo::isLoweredToCall(const Function *F) const {
   return TTIImpl->isLoweredToCall(F);
 }
 
+bool TargetTransformInfo::isProfitableFoldGEPIntoPHI() const {
+  return TTIImpl->isProfitableFoldGEPIntoPHI();
+}
+
+bool TargetTransformInfo::isProfitableOuterLSR(const Loop &L) const {
+  return TTIImpl->isProfitableOuterLSR(L);
+}
+
+bool TargetTransformInfo::shouldMergeCongruentIVs(const PHINode *IV1,
+                                                  const PHINode *IV2) const {
+  return TTIImpl->shouldMergeCongruentIVs(IV1, IV2);
+}
+
 bool TargetTransformInfo::isHardwareLoopProfitable(
     Loop *L, ScalarEvolution &SE, AssumptionCache &AC,
     TargetLibraryInfo *LibInfo, HardwareLoopInfo &HWLoopInfo) const {

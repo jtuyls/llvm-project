@@ -265,6 +265,20 @@ public:
     return true;
   }
 
+  /// amd/aie/ port: AIE hooks. LLVM 23 requires these be const virtuals.
+  /// Fold a GEP into a PHI? AIE says no -- it creates pointer chains its
+  /// address generators cannot use.
+  virtual bool isProfitableFoldGEPIntoPHI() const { return true; }
+
+  /// Run LSR on non-innermost loops? Off by default; AIE opts in.
+  virtual bool isProfitableOuterLSR(const Loop &L) const { return false; }
+
+  /// Merge congruent induction variables? Default yes (upstream behaviour).
+  virtual bool shouldMergeCongruentIVs(const PHINode *IV1,
+                                       const PHINode *IV2) const {
+    return true;
+  }
+
   virtual bool isHardwareLoopProfitable(Loop *L, ScalarEvolution &SE,
                                         AssumptionCache &AC,
                                         TargetLibraryInfo *LibInfo,

@@ -58,6 +58,7 @@ class InterleavedAccessInfo;
 class IntrinsicInst;
 class LoadInst;
 class Loop;
+class PHINode;
 class LoopInfo;
 class LoopVectorizationLegality;
 class ProfileSummaryInfo;
@@ -745,6 +746,12 @@ public:
 
   /// Query the target whether it would be profitable to convert the given loop
   /// into a hardware loop.
+  /// amd/aie/ port: AIE TTI hooks.
+  LLVM_ABI bool isProfitableFoldGEPIntoPHI() const;
+  LLVM_ABI bool isProfitableOuterLSR(const Loop &L) const;
+  LLVM_ABI bool shouldMergeCongruentIVs(const PHINode *IV1,
+                                        const PHINode *IV2) const;
+
   LLVM_ABI bool isHardwareLoopProfitable(Loop *L, ScalarEvolution &SE,
                                          AssumptionCache &AC,
                                          TargetLibraryInfo *LibInfo,

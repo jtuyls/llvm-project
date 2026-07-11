@@ -1901,6 +1901,15 @@ SCEVExpander::replaceCongruentIVs(Loop *L, const DominatorTree *DT,
     if (OrigPhiRef->getType()->isPointerTy() != Phi->getType()->isPointerTy())
       continue;
 
+    // Check target-specific preference. AIE keeps some congruent IVs apart so
+    // its address generators can use them; every other target merges (default).
+    if (TTI && !TTI->shouldMergeCongruentIVs(Phi, OrigPhiRef)) {
+      SCEV_DEBUG_WITH_TYPE(
+          DebugType, dbgs() << "INDVARS: Skipping congruent iv merge due to "
+                            << "target preference: " << *Phi << '\n');
+      continue;
+    }
+
     replaceCongruentIVInc(Phi, OrigPhiRef, L, DT, DeadInsts);
     SCEV_DEBUG_WITH_TYPE(DebugType,
                          dbgs() << "INDVARS: Eliminated congruent iv: " << *Phi

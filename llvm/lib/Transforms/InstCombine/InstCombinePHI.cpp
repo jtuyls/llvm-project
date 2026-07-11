@@ -10,6 +10,7 @@
 //
 //===----------------------------------------------------------------------===//
 
+#include "llvm/Analysis/TargetTransformInfo.h"
 #include "InstCombineInternal.h"
 #include "llvm/ADT/STLExtras.h"
 #include "llvm/ADT/SmallPtrSet.h"
@@ -871,7 +872,10 @@ Instruction *InstCombinerImpl::foldPHIArgOpIntoPHI(PHINode &PN) {
 
   Instruction *FirstInst = cast<Instruction>(PN.getIncomingValue(0));
 
-  if (isa<GetElementPtrInst>(FirstInst))
+  // AIE declines this fold: it creates pointer chains its address generators
+  // cannot use. Default is true, so this is inert for every other target.
+  if (TTIForTargetIntrinsicsOnly.isProfitableFoldGEPIntoPHI() &&
+      isa<GetElementPtrInst>(FirstInst))
     return foldPHIArgGEPIntoPHI(PN);
   if (isa<LoadInst>(FirstInst))
     return foldPHIArgLoadIntoPHI(PN);

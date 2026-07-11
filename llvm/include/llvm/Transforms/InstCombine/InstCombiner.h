@@ -46,10 +46,16 @@ class TargetTransformInfo;
 /// This class provides both the logic to recursively visit instructions and
 /// combine them.
 class LLVM_LIBRARY_VISIBILITY InstCombiner {
+protected:
   /// Only used to call target specific intrinsic combining.
   /// It must **NOT** be used for any other purpose, as InstCombine is a
   /// target-independent canonicalization transform.
+  ///
+  /// amd/aie/ port: protected (was private) so InstCombinerImpl can ask
+  /// isProfitableFoldGEPIntoPHI(), as llvm-aie does.
   TargetTransformInfo &TTIForTargetIntrinsicsOnly;
+
+private:
 
 public:
   /// Maximum size of array considered when transforming.

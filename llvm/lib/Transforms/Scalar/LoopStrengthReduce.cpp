@@ -6221,8 +6221,9 @@ LSRInstance::LSRInstance(Loop *L, IVUsers &IU, ScalarEvolution &SE,
   // If loop preparation eliminates all interesting IV users, bail.
   if (IU.empty()) return;
 
-  // Skip nested loops until we can model them better with formulae.
-  if (!L->isInnermost()) {
+  // Skip nested loops until we can model them better with formulae, unless
+  // the target explicitly requests LSR for them (AIE does).
+  if (!L->isInnermost() && !TTI.isProfitableOuterLSR(*L)) {
     LLVM_DEBUG(dbgs() << "LSR skipping outer loop " << *L << "\n");
     return;
   }
