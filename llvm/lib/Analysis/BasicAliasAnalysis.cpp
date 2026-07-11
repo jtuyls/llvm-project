@@ -1530,7 +1530,11 @@ AliasResult BasicAAResult::aliasPHI(const PHINode *PN, LocationSize PNSize,
     if (PV1 == PN)
       continue;
 
-    if (isa<PHINode>(PV1)) {
+    // -basic-aa-full-phi-analysis (which AIE's TargetMachine turns on) lifts the
+    // conservative bail-out on a phi-of-phi, letting BasicAA see through the
+    // nested phis AIE's address computations build. Off by default for everyone
+    // else, so this is inert unless both this and EnableRecPhiAnalysis are set.
+    if (!(EnableRecPhiAnalysis && EnableFullPHIAnalysis) && isa<PHINode>(PV1)) {
       if (OnePhi && OnePhi != PV1) {
         // To control potential compile time explosion, we choose to be
         // conserviate when we have more than one Phi input.  It is important
