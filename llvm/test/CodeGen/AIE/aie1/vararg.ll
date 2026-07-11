@@ -247,7 +247,7 @@ define double @use_I_va_ID(i32 %a, ...) {
 ; CHECK-NEXT:    padda [p1], #-12
 ; CHECK-NEXT:    nop
 ; CHECK-NEXT:    st.spil p1, [sp, #-28]
-; CHECK-NEXT:    lda r6, [p0, cs0]
+; CHECK-NEXT:    lda r1, [p0, cs0]
 ; CHECK-NEXT:    mov.s12 cs0, #-12
 ; CHECK-NEXT:    padda [sp], #-32
 ; CHECK-NEXT:    lda r0, [p0, cs0]
@@ -290,7 +290,7 @@ define double @use_I_va_D(i32 %a, ...) {
 ; CHECK-NEXT:    padda [p1], #-8
 ; CHECK-NEXT:    nop
 ; CHECK-NEXT:    st.spil p1, [sp, #-28]
-; CHECK-NEXT:    lda r6, [p0, cs0]
+; CHECK-NEXT:    lda r1, [p0, cs0]
 ; CHECK-NEXT:    mov.s12 cs0, #-8
 ; CHECK-NEXT:    padda [sp], #-32
 ; CHECK-NEXT:    lda r0, [p0, cs0]

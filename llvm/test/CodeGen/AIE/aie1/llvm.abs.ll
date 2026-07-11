@@ -117,9 +117,9 @@ define i64 @abs_i64(i64 %arg) {
 ; SDAG-NEXT:    lt r0, r7, r13
 ; SDAG-NEXT:    sub r12, r13, r6
 ; SDAG-NEXT:    add r14, r7, r14
-; SDAG-NEXT:    ite_nez r12, r12, r6, r0
 ; SDAG-NEXT:    sub r13, r13, r14
-; SDAG-NEXT:    ite_nez r6, r13, r7, r0
+; SDAG-NEXT:    ite_nez r12, r12, r6, r0
+; SDAG-NEXT:    ite_nez r1, r13, r7, r0
 ; SDAG-NEXT:    mov r0, r12
 ; SDAG-NEXT:    ret lr
 ; SDAG-NEXT:    nop // Delay Slot 5

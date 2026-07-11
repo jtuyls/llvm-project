@@ -2315,7 +2315,22 @@ void SelectionDAGBuilder::visitRet(const ReturnInst &I) {
           Flags.setNoExt();
 
         for (unsigned i = 0; i < NumParts; ++i) {
-          Outs.push_back(ISD::OutputArg(Flags,
+          // amd/aie/ port: SelectionDAG does not set the IsSplit/IsSplitEnd
+          // flags for return values, only for arguments (LowerArguments does
+          // this). Targets whose return calling convention keys off them --
+          // AIE's RetCC dispatches multi-part returns to a custom handler via
+          // ArgFlags.isSplit() -- otherwise fall through to the plain register
+          // list and return the parts in the wrong registers. Mirror what
+          // LowerArguments does.
+          auto PartFlags = Flags;
+          if (NumParts > 1 && i == 0) {
+            PartFlags.setSplit();
+          } else if (i > 0) {
+            PartFlags.setOrigAlign(Align(1));
+            if (i == NumParts - 1)
+              PartFlags.setSplitEnd();
+          }
+          Outs.push_back(ISD::OutputArg(PartFlags,
                                         Parts[i].getValueType().getSimpleVT(),
                                         VT, Types[j], 0, 0));
           OutVals.push_back(Parts[i]);

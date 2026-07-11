@@ -117,7 +117,7 @@ define i64 @cmovcc64(i32 signext %a, i64 %b, i64 %c) nounwind {
 ; CHECK-NEXT:    nop
 ; CHECK-NEXT:    nop
 ; CHECK-NEXT:    ite_nez r12, r7, r12, r0
-; CHECK-NEXT:    ite_nez r6, r8, r13, r0
+; CHECK-NEXT:    ite_nez r1, r8, r13, r0
 ; CHECK-NEXT:    mov r0, r12
 ; CHECK-NEXT:    ret lr
 ; CHECK-NEXT:    nop // Delay Slot 5
@@ -204,7 +204,7 @@ define i64 @cmov64(i1 zeroext %a, i64 %b, i64 %c) nounwind {
 ; CHECK-NEXT:    nop
 ; CHECK-NEXT:    nop
 ; CHECK-NEXT:    ite_nez r12, r7, r12, r0
-; CHECK-NEXT:    ite_nez r6, r8, r13, r0
+; CHECK-NEXT:    ite_nez r1, r8, r13, r0
 ; CHECK-NEXT:    mov r0, r12
 ; CHECK-NEXT:    ret lr
 ; CHECK-NEXT:    nop // Delay Slot 5
@@ -276,7 +276,7 @@ define double @cmovdouble(i1 zeroext %a, double %b, double %c) nounwind {
 ; CHECK-NEXT:    nop
 ; CHECK-NEXT:    nop
 ; CHECK-NEXT:    ite_nez r12, r7, r12, r0
-; CHECK-NEXT:    ite_nez r6, r8, r13, r0
+; CHECK-NEXT:    ite_nez r1, r8, r13, r0
 ; CHECK-NEXT:    mov r0, r12
 ; CHECK-NEXT:    ret lr
 ; CHECK-NEXT:    nop // Delay Slot 5
