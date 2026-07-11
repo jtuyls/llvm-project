@@ -291,6 +291,9 @@ DecodeIITType(unsigned &NextElt, ArrayRef<unsigned char> Infos,
   case IIT_I20:
     OutputTable.push_back(IITDescriptor::get(IITDescriptor::Integer, 20));
     return;
+  case IIT_I48:
+    OutputTable.push_back(IITDescriptor::get(IITDescriptor::Integer, 48));
+    return;
   case IIT_I32:
     OutputTable.push_back(IITDescriptor::get(IITDescriptor::Integer, 32));
     return;
