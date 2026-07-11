@@ -31,7 +31,7 @@ define i64 @test_i64(i32 %a, i64 %d) nounwind {
 ; CHECK-NEXT:    nop // Delay Slot 2
 ; CHECK-NEXT:    nop // Delay Slot 1
 ; CHECK-NEXT:    nop ; ldb lr, [sp, #-32]; mov r0, r11 // 4-byte Folded Reload
-; CHECK-NEXT:    mov r1, r10
+; CHECK-NEXT:    mov r6, r10
 ; CHECK-NEXT:    lda.spil r11, [sp, #-24] // 4-byte Folded Reload
 ; CHECK-NEXT:    lda.spil r10, [sp, #-28] // 4-byte Folded Reload
 ; CHECK-NEXT:    padda [sp], #-32

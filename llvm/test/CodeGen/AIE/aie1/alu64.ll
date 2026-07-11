@@ -23,7 +23,7 @@ define i64 @addi(i64 %a) nounwind {
 ; CHECK-NEXT:    add r0, r6, #1
 ; CHECK-NEXT:    mov.u20 r12, #0
 ; CHECK-NEXT:    eq r12, r0, r12
-; CHECK-NEXT:    add r1, r7, r12
+; CHECK-NEXT:    add r6, r7, r12
 ; CHECK-NEXT:    ret lr
 ; CHECK-NEXT:    nop // Delay Slot 5
 ; CHECK-NEXT:    nop // Delay Slot 4
@@ -40,10 +40,10 @@ define i64 @slti(i64 %a) nounwind {
 ; CHECK:         .p2align 4
 ; CHECK-NEXT:  // %bb.0:
 ; CHECK-NEXT:    mov.u20 r12, #2
-; CHECK-NEXT:    mov.u20 r1, #0
 ; CHECK-NEXT:    ltu r12, r6, r12
-; CHECK-NEXT:    eq r0, r7, r1
-; CHECK-NEXT:    lt r13, r7, r1
+; CHECK-NEXT:    mov.u20 r6, #0
+; CHECK-NEXT:    eq r0, r7, r6
+; CHECK-NEXT:    lt r13, r7, r6
 ; CHECK-NEXT:    ite_nez r0, r12, r13, r0
 ; CHECK-NEXT:    ret lr
 ; CHECK-NEXT:    nop // Delay Slot 5
@@ -61,10 +61,10 @@ define i64 @sltiu(i64 %a) nounwind {
 ; CHECK:         .p2align 4
 ; CHECK-NEXT:  // %bb.0:
 ; CHECK-NEXT:    mov.u20 r12, #3
-; CHECK-NEXT:    mov.u20 r1, #0
 ; CHECK-NEXT:    ltu r12, r6, r12
-; CHECK-NEXT:    eq r0, r7, r1
-; CHECK-NEXT:    ite_nez r0, r12, r1, r0
+; CHECK-NEXT:    mov.u20 r6, #0
+; CHECK-NEXT:    eq r0, r7, r6
+; CHECK-NEXT:    ite_nez r0, r12, r6, r0
 ; CHECK-NEXT:    ret lr
 ; CHECK-NEXT:    nop // Delay Slot 5
 ; CHECK-NEXT:    nop // Delay Slot 4
@@ -81,8 +81,8 @@ define i64 @xori(i64 %a) nounwind {
 ; CHECK:         .p2align 4
 ; CHECK-NEXT:  // %bb.0:
 ; CHECK-NEXT:    mov.u20 r12, #4
-; CHECK-NEXT:    mov r1, r7
 ; CHECK-NEXT:    xor r0, r6, r12
+; CHECK-NEXT:    mov r6, r7
 ; CHECK-NEXT:    ret lr
 ; CHECK-NEXT:    nop // Delay Slot 5
 ; CHECK-NEXT:    nop // Delay Slot 4
@@ -98,8 +98,8 @@ define i64 @ori(i64 %a) nounwind {
 ; CHECK:         .p2align 4
 ; CHECK-NEXT:  // %bb.0:
 ; CHECK-NEXT:    mov.u20 r12, #5
-; CHECK-NEXT:    mov r1, r7
 ; CHECK-NEXT:    or r0, r6, r12
+; CHECK-NEXT:    mov r6, r7
 ; CHECK-NEXT:    ret lr
 ; CHECK-NEXT:    nop // Delay Slot 5
 ; CHECK-NEXT:    nop // Delay Slot 4
@@ -116,7 +116,7 @@ define i64 @andi(i64 %a) nounwind {
 ; CHECK-NEXT:  // %bb.0:
 ; CHECK-NEXT:    mov.u20 r12, #6
 ; CHECK-NEXT:    and r0, r6, r12
-; CHECK-NEXT:    mov.u20 r1, #0
+; CHECK-NEXT:    mov.u20 r6, #0
 ; CHECK-NEXT:    ret lr
 ; CHECK-NEXT:    nop // Delay Slot 5
 ; CHECK-NEXT:    nop // Delay Slot 4
@@ -138,8 +138,9 @@ define i64 @slli(i64 %a) nounwind {
 ; CHECK-NEXT:    mov.u20 r13, #7
 ; CHECK-NEXT:    lshl r14, r7, r13
 ; CHECK-NEXT:    lshl r12, r6, r12
-; CHECK-NEXT:    or r1, r14, r12
+; CHECK-NEXT:    or r12, r14, r12
 ; CHECK-NEXT:    lshl r0, r6, r13
+; CHECK-NEXT:    mov r6, r12
 ; CHECK-NEXT:    ret lr
 ; CHECK-NEXT:    nop // Delay Slot 5
 ; CHECK-NEXT:    nop // Delay Slot 4
@@ -159,10 +160,10 @@ define i64 @srli(i64 %a) nounwind {
 ; CHECK-NEXT:    mov.u20 r13, #0
 ; CHECK-NEXT:    sub r12, r13, r12
 ; CHECK-NEXT:    mov.u20 r13, #24
-; CHECK-NEXT:    lshl r13, r7, r13
 ; CHECK-NEXT:    lshl r14, r6, r12
+; CHECK-NEXT:    lshl r13, r7, r13
 ; CHECK-NEXT:    or r0, r14, r13
-; CHECK-NEXT:    lshl r1, r7, r12
+; CHECK-NEXT:    lshl r6, r7, r12
 ; CHECK-NEXT:    ret lr
 ; CHECK-NEXT:    nop // Delay Slot 5
 ; CHECK-NEXT:    nop // Delay Slot 4
@@ -182,10 +183,10 @@ define i64 @srai(i64 %a) nounwind {
 ; CHECK-NEXT:    mov.u20 r13, #0
 ; CHECK-NEXT:    sub r12, r13, r12
 ; CHECK-NEXT:    mov.u20 r13, #23
-; CHECK-NEXT:    lshl r13, r7, r13
 ; CHECK-NEXT:    lshl r14, r6, r12
+; CHECK-NEXT:    lshl r13, r7, r13
 ; CHECK-NEXT:    or r0, r14, r13
-; CHECK-NEXT:    ashl r1, r7, r12
+; CHECK-NEXT:    ashl r6, r7, r12
 ; CHECK-NEXT:    ret lr
 ; CHECK-NEXT:    nop // Delay Slot 5
 ; CHECK-NEXT:    nop // Delay Slot 4
@@ -206,7 +207,7 @@ define i64 @add(i64 %a, i64 %b) nounwind {
 ; CHECK-NEXT:    add r0, r6, r8
 ; CHECK-NEXT:    add r12, r7, r9
 ; CHECK-NEXT:    ltu r13, r0, r6
-; CHECK-NEXT:    add r1, r12, r13
+; CHECK-NEXT:    add r6, r12, r13
 ; CHECK-NEXT:    ret lr
 ; CHECK-NEXT:    nop // Delay Slot 5
 ; CHECK-NEXT:    nop // Delay Slot 4
@@ -224,8 +225,9 @@ define i64 @sub(i64 %a, i64 %b) nounwind {
 ; CHECK-NEXT:  // %bb.0:
 ; CHECK-NEXT:    sub r12, r7, r9
 ; CHECK-NEXT:    ltu r13, r6, r8
-; CHECK-NEXT:    sub r1, r12, r13
+; CHECK-NEXT:    sub r12, r12, r13
 ; CHECK-NEXT:    sub r0, r6, r8
+; CHECK-NEXT:    mov r6, r12
 ; CHECK-NEXT:    ret lr
 ; CHECK-NEXT:    nop // Delay Slot 5
 ; CHECK-NEXT:    nop // Delay Slot 4
@@ -240,7 +242,30 @@ define i64 @mul(i64 %a, i64 %b) nounwind {
 ;
 ; CHECK-LABEL: mul:
 ; CHECK:         .p2align 4
-; CHECK:         jal     __muldi3
+; CHECK-NEXT:  // %bb.0:
+; CHECK-NEXT:    padda [sp], #32
+; CHECK-NEXT:    nop
+; CHECK-NEXT:    st.spil lr, [sp, #-32] // 4-byte Folded Spill
+; CHECK-NEXT:    jal __muldi3
+; CHECK-NEXT:    nop // Delay Slot 5
+; CHECK-NEXT:    nop // Delay Slot 4
+; CHECK-NEXT:    nop // Delay Slot 3
+; CHECK-NEXT:    nop // Delay Slot 2
+; CHECK-NEXT:    nop // Delay Slot 1
+; CHECK-NEXT:    ldb lr, [sp, #-32] // 4-byte Folded Reload
+; CHECK-NEXT:    padda [sp], #-32
+; CHECK-NEXT:    nop
+; CHECK-NEXT:    nop
+; CHECK-NEXT:    nop
+; CHECK-NEXT:    nop
+; CHECK-NEXT:    nop
+; CHECK-NEXT:    nop
+; CHECK-NEXT:    ret lr
+; CHECK-NEXT:    nop // Delay Slot 5
+; CHECK-NEXT:    nop // Delay Slot 4
+; CHECK-NEXT:    nop // Delay Slot 3
+; CHECK-NEXT:    nop // Delay Slot 2
+; CHECK-NEXT:    nop // Delay Slot 1
   %1 = mul i64 %a, %b
   ret i64 %1
 }
@@ -255,11 +280,11 @@ define i64 @slt(i64 %a, i64 %b) nounwind {
 ; CHECK-LABEL: slt:
 ; CHECK:         .p2align 4
 ; CHECK-NEXT:  // %bb.0:
+; CHECK-NEXT:    ltu r13, r6, r8
 ; CHECK-NEXT:    eq r0, r7, r9
 ; CHECK-NEXT:    lt r12, r7, r9
-; CHECK-NEXT:    ltu r13, r6, r8
 ; CHECK-NEXT:    ite_nez r0, r13, r12, r0
-; CHECK-NEXT:    mov.u20 r1, #0
+; CHECK-NEXT:    mov.u20 r6, #0
 ; CHECK-NEXT:    ret lr
 ; CHECK-NEXT:    nop // Delay Slot 5
 ; CHECK-NEXT:    nop // Delay Slot 4
@@ -276,11 +301,11 @@ define i64 @sltu(i64 %a, i64 %b) nounwind {
 ; CHECK-LABEL: sltu:
 ; CHECK:         .p2align 4
 ; CHECK-NEXT:  // %bb.0:
+; CHECK-NEXT:    ltu r13, r6, r8
 ; CHECK-NEXT:    eq r0, r7, r9
 ; CHECK-NEXT:    ltu r12, r7, r9
-; CHECK-NEXT:    ltu r13, r6, r8
 ; CHECK-NEXT:    ite_nez r0, r13, r12, r0
-; CHECK-NEXT:    mov.u20 r1, #0
+; CHECK-NEXT:    mov.u20 r6, #0
 ; CHECK-NEXT:    ret lr
 ; CHECK-NEXT:    nop // Delay Slot 5
 ; CHECK-NEXT:    nop // Delay Slot 4
@@ -298,7 +323,7 @@ define i64 @xor(i64 %a, i64 %b) nounwind {
 ; CHECK:         .p2align 4
 ; CHECK-NEXT:  // %bb.0:
 ; CHECK-NEXT:    xor r0, r6, r8
-; CHECK-NEXT:    xor r1, r7, r9
+; CHECK-NEXT:    xor r6, r7, r9
 ; CHECK-NEXT:    ret lr
 ; CHECK-NEXT:    nop // Delay Slot 5
 ; CHECK-NEXT:    nop // Delay Slot 4
@@ -325,7 +350,7 @@ define i64 @or(i64 %a, i64 %b) nounwind {
 ; CHECK:         .p2align 4
 ; CHECK-NEXT:  // %bb.0:
 ; CHECK-NEXT:    or r0, r6, r8
-; CHECK-NEXT:    or r1, r7, r9
+; CHECK-NEXT:    or r6, r7, r9
 ; CHECK-NEXT:    ret lr
 ; CHECK-NEXT:    nop // Delay Slot 5
 ; CHECK-NEXT:    nop // Delay Slot 4
@@ -342,7 +367,7 @@ define i64 @and(i64 %a, i64 %b) nounwind {
 ; CHECK:         .p2align 4
 ; CHECK-NEXT:  // %bb.0:
 ; CHECK-NEXT:    and r0, r6, r8
-; CHECK-NEXT:    and r1, r7, r9
+; CHECK-NEXT:    and r6, r7, r9
 ; CHECK-NEXT:    ret lr
 ; CHECK-NEXT:    nop // Delay Slot 5
 ; CHECK-NEXT:    nop // Delay Slot 4
