@@ -1031,13 +1031,15 @@ AIE1TargetLowering::getRegForInlineAsmConstraint(const TargetRegisterInfo *TRI,
   return TargetLowering::getRegForInlineAsmConstraint(TRI, Constraint, VT);
 }
 
-EVT AIE1TargetLowering::getShiftAmountTy(EVT LHSTy, const DataLayout &DL) const {
+MVT AIE1TargetLowering::getScalarShiftAmountTy(const DataLayout &DL,
+                                               EVT LHSTy) const {
   assert(LHSTy.isInteger() && "Shift amount is not an integer type!");
-  if (LHSTy.isVector())
-    return LHSTy;
-  if (LHSTy.isInteger())
-    return LHSTy;
-  return getScalarShiftAmountTy(DL, LHSTy);
+  // AIE shifts take a shift amount as wide as the value being shifted. Do not
+  // fall back to the generic default, which derives the shift-amount type from
+  // the pointer width (20 bits on AIE) and yields unselectable i20 shifts.
+  if (LHSTy.isSimple())
+    return LHSTy.getSimpleVT();
+  return MVT::i32;
 }
 
 EVT AIE1TargetLowering::getSetCCResultType(const DataLayout &DL,

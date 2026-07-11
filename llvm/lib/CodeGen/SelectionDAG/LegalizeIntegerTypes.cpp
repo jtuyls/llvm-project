@@ -2306,7 +2306,8 @@ void DAGTypeLegalizer::PromoteSetCCOperands(SDValue &LHS, SDValue &RHS,
 
 SDValue DAGTypeLegalizer::PromoteIntOp_ANY_EXTEND(SDNode *N) {
   SDValue Op = GetPromotedInteger(N->getOperand(0));
-  return DAG.getNode(ISD::ANY_EXTEND, SDLoc(N), N->getValueType(0), Op);
+  // amd/aie/ port: AnyExtOrTrunc -- see PromoteIntOp_SIGN_EXTEND.
+  return DAG.getAnyExtOrTrunc(Op, SDLoc(N), N->getValueType(0));
 }
 
 SDValue DAGTypeLegalizer::PromoteIntOp_ANY_EXTEND_VECTOR_INREG(SDNode *N) {
@@ -2546,7 +2547,13 @@ SDValue DAGTypeLegalizer::PromoteIntOp_FunnelShift(SDNode *N) {
 SDValue DAGTypeLegalizer::PromoteIntOp_SIGN_EXTEND(SDNode *N) {
   SDValue Op = GetPromotedInteger(N->getOperand(0));
   SDLoc dl(N);
-  Op = DAG.getNode(ISD::ANY_EXTEND, dl, N->getValueType(0), Op);
+  // amd/aie/ port: use AnyExtOrTrunc. Promoting the operand can make it *wider*
+  // than the extend's result type on targets whose pointer type is narrower than
+  // the promoted integer type (AIE: i8 -> promoted i32, sign_extend to i20), in
+  // which case a truncate, not an any_extend, is what is needed. For every other
+  // target the promoted type is never wider than the result, so this is exactly
+  // the ANY_EXTEND it replaces.
+  Op = DAG.getAnyExtOrTrunc(Op, dl, N->getValueType(0));
   return DAG.getNode(ISD::SIGN_EXTEND_INREG, dl, Op.getValueType(),
                      Op, DAG.getValueType(N->getOperand(0).getValueType()));
 }
@@ -2757,7 +2764,8 @@ SDValue DAGTypeLegalizer::PromoteIntOp_ZERO_EXTEND(SDNode *N) {
       return Op;
   }
 
-  Op = DAG.getNode(ISD::ANY_EXTEND, dl, VT, Op);
+  // amd/aie/ port: AnyExtOrTrunc -- see PromoteIntOp_SIGN_EXTEND.
+  Op = DAG.getAnyExtOrTrunc(Op, dl, VT);
   return DAG.getZeroExtendInReg(Op, dl, Src.getValueType());
 }
 

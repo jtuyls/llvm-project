@@ -860,3 +860,7 @@ if lit_config.update_tests:
     from update_any_test_checks import utc_lit_plugin
 
     lit_config.test_updaters.append(utc_lit_plugin)
+
+# amd/aie/ port: some tests on non-AIEngine architectures fail with AIEngine
+# modifications. This feature is used to mark those tests (XFAIL).
+config.available_features.add("llvm-aie-regression")

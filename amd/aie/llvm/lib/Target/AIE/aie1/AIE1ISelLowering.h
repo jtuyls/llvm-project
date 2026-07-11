@@ -94,7 +94,11 @@ private:
   SDValue LowerSTORE(SDValue Op, SelectionDAG &DAG) const;
   SDValue LowerVASTART(SDValue Op, SelectionDAG &DAG) const;
   SDValue LowerVAARG(SDValue Op, SelectionDAG &DAG) const;
-  EVT getShiftAmountTy(EVT LHSTy, const DataLayout &DL) const;
+  // amd/aie/ port: LLVM 23 de-virtualized TargetLowering::getShiftAmountTy;
+  // getScalarShiftAmountTy is now the hook. Overriding the old one silently
+  // stopped overriding anything, and the base default returns the *pointer*
+  // width -- i20 on AIE -- producing i20 shift amounts that cannot be selected.
+  MVT getScalarShiftAmountTy(const DataLayout &DL, EVT LHSTy) const override;
   bool shouldConvertConstantLoadToIntImm(const APInt &Imm,
                                          Type *Ty) const override {
     return true;
