@@ -291,6 +291,14 @@ void AIEBaseAsmPrinter::emitXXStructorList(const DataLayout &DL,
   // don't pick up the ctors/dtors sections
   const char *const Name = IsCtor ? ".ctors" : ".dtors";
   auto *Symbol = static_cast<MCSymbolELF *>(Context.getOrCreateSymbol(Name));
+  // The section is also called .ctors/.dtors, so getOrCreateSymbol may hand
+  // back the section symbol, which MC considers already defined. Reset it to a
+  // plain undefined local object before emitting the label, or LLVM 23's
+  // MCStreamer::emitLabel rejects it ("symbol '.ctors' is already defined").
+  // LLVM 23 dropped MCSymbol::setUndefined()/setExternal(); clearing the
+  // fragment is what setUndefined() did, and STB_LOCAL already makes it
+  // non-external.
+  Symbol->setFragment(nullptr);
   Symbol->setType(ELF::STT_OBJECT);
   Symbol->setBinding(ELF::STB_LOCAL);
   Symbol->setSize(MCConstantExpr::create(Size, Context));
