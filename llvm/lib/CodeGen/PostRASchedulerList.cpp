@@ -145,6 +145,10 @@ class SchedulePostRATDList : public ScheduleDAGInstrs {
   /// the SlotIndex. It is only used by the AntiDepBreaker.
   unsigned EndIndex = 0;
 
+  /// amd/aie/ port: eagerly propagate node depth in ReleaseSucc. Required by
+  /// targets with a fully exposed pipeline; see ReleaseSucc.
+  bool EagerSuccDepth = false;
+
 public:
   SchedulePostRATDList(
       MachineFunction &MF, MachineLoopInfo &MLI, AliasAnalysis *AA,
@@ -217,6 +221,7 @@ SchedulePostRATDList::SchedulePostRATDList(
       MF.getSubtarget().getInstrInfo()->CreateTargetPostRAHazardRecognizer(
           InstrItins, this);
   MF.getSubtarget().getPostRAMutations(Mutations);
+  EagerSuccDepth = MF.getSubtarget().forcePostRAScheduling();
 
   assert((AntiDepMode == TargetSubtargetInfo::ANTIDEP_NONE ||
           MRI.tracksLiveness()) &&
@@ -270,8 +275,12 @@ static bool enablePostRAScheduler(const TargetSubtargetInfo &ST,
   if (EnablePostRAScheduler.getPosition() > 0)
     return EnablePostRAScheduler;
 
-  return ST.enablePostRAScheduler() &&
-         OptLevel >= ST.getOptLevelToEnablePostRAScheduler();
+  // amd/aie/ port: AIE has a fully exposed pipeline, so post-RA scheduling is a
+  // correctness requirement (it inserts the architecturally required NOPs), not
+  // an optimization. Honour forcePostRAScheduling() regardless of opt level.
+  return ST.forcePostRAScheduling() ||
+         (ST.enablePostRAScheduler() &&
+          OptLevel >= ST.getOptLevelToEnablePostRAScheduler());
 }
 
 bool PostRAScheduler::run(MachineFunction &MF) {
@@ -358,7 +367,10 @@ bool PostRAScheduler::run(MachineFunction &MF) {
 }
 
 bool PostRASchedulerLegacy::runOnMachineFunction(MachineFunction &MF) {
-  if (skipFunction(MF.getFunction()))
+  // amd/aie/ port: optnone must not disable the NOP-inserting post-RA scheduler
+  // on targets without pipeline interlocks.
+  if (!MF.getSubtarget().forcePostRAScheduling() &&
+      skipFunction(MF.getFunction()))
     return false;
 
   MachineLoopInfo *MLI = &getAnalysis<MachineLoopInfoWrapperPass>().getLI();
@@ -396,6 +408,7 @@ PostRASchedulerPass::run(MachineFunction &MF,
 void SchedulePostRATDList::startBlock(MachineBasicBlock *BB) {
   // Call the superclass.
   ScheduleDAGInstrs::startBlock(BB);
+  HazardRec->StartBlock(BB);
 
   // Reset the hazard recognizer and anti-dep breaker.
   HazardRec->Reset();
@@ -452,6 +465,8 @@ void SchedulePostRATDList::finishBlock() {
   if (AntiDepBreak)
     AntiDepBreak->FinishBlock();
 
+  HazardRec->EndBlock(BB);
+
   // Call the superclass.
   ScheduleDAGInstrs::finishBlock();
 }
@@ -484,6 +499,14 @@ void SchedulePostRATDList::ReleaseSucc(SUnit *SU, SDep *SuccEdge) {
   }
 #endif
   --SuccSU->NumPredsLeft;
+
+  // amd/aie/ port: targets with a fully exposed pipeline read node depths while
+  // the schedule is still being built (to size the trailing NOP padding against
+  // ExitSU's depth), so lazy dirty-marking is not enough for them -- they need
+  // the depth eagerly propagated here. Upstream targets keep the lazy path below
+  // and thus keep its non-quadratic behavior.
+  if (EagerSuccDepth)
+    SuccSU->setDepthToAtLeast(SU->getDepth() + SuccEdge->getLatency());
 
   // Standard scheduler algorithms will recompute the depth of the successor
   // here as such:
@@ -585,7 +608,9 @@ void SchedulePostRATDList::ListScheduleTopDown() {
                AvailableQueue.dump(this));
 
     SUnit *FoundSUnit = nullptr, *NotPreferredSUnit = nullptr;
-    bool HasNoopHazards = false;
+    // amd/aie/ port: on targets with no pipeline interlocks the recognizer
+    // requires NOPs to be emitted whenever no instruction can issue this cycle.
+    bool HasNoopHazards = HazardRec->emitNoopsIfNoInstructionsAvailable();
     while (!AvailableQueue.empty()) {
       SUnit *CurSUnit = AvailableQueue.pop();
 
@@ -672,6 +697,21 @@ void SchedulePostRATDList::ListScheduleTopDown() {
       ++CurCycle;
       CycleHasInsts = false;
     }
+  }
+
+  // amd/aie/ port: post-RA scheduling is what inserts the architecturally
+  // required NOPs on a fully exposed pipeline, but list scheduling never emits
+  // NOPs *after* the last instruction. Without this, the latency between a load
+  // of the link register and the RET that consumes it goes unpadded. Pad out to
+  // ExitSU's depth.
+  if (HazardRec->emitNoopsIfNoInstructionsAvailable()) {
+    if (CycleHasInsts) {
+      HazardRec->AdvanceCycle();
+      ++CurCycle;
+    }
+    const unsigned Depth = ExitSU.getDepth();
+    while (CurCycle < Depth)
+      emitNoop(CurCycle++);
   }
 
 #ifndef NDEBUG
