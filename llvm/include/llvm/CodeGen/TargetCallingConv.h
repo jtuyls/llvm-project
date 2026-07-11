@@ -262,10 +262,6 @@ namespace ISD {
     /// registers, we got 4 OutputArgs with PartOffsets 0, 4, 8 and 12.
     unsigned PartOffset;
 
-    /// amd/aie/ port: true if this is not a vararg output (23 dropped this from
-    /// ISD::OutputArg; AIE's calling-convention lowering still reads it).
-    bool IsFixed = true;
-
     OutputArg(ArgFlagsTy Flags, MVT VT, EVT ArgVT, Type *OrigTy,
               unsigned OrigArgIndex, unsigned PartOffset)
         : Flags(Flags), VT(VT), ArgVT(ArgVT), OrigTy(OrigTy),

@@ -611,11 +611,15 @@ void AIE1TargetLowering::analyzeCallOperands(
   unsigned NumOps = Outs.size();
   bool UsesVarargCC = false; // Whether the vararg CC was used
   for (unsigned i = 0; i != NumOps; ++i) {
-    if (!Outs[i].IsFixed && !UsesVarargCC) {
+    // amd/aie/ port: LLVM 23 removed ISD::OutputArg::IsFixed; vararg-ness now
+    // lives in the argument's ArgFlags (SelectionDAGBuilder sets setVarArg() for
+    // every argument past the last fixed one).
+    const bool IsVarArgSlot = Outs[i].Flags.isVarArg();
+    if (IsVarArgSlot && !UsesVarargCC) {
       alignFirstVASlot(CCInfo);
     }
-    UsesVarargCC |= !Outs[i].IsFixed;
-    assert((!UsesVarargCC || !Outs[i].IsFixed) &&
+    UsesVarargCC |= IsVarArgSlot;
+    assert((!UsesVarargCC || IsVarArgSlot) &&
            "Got a fixed argument after varargs");
     MVT ArgVT = Outs[i].VT;
     ISD::ArgFlagsTy ArgFlags = Outs[i].Flags;

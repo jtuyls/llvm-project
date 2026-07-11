@@ -4355,7 +4355,8 @@ bool IRTranslator::runOnMachineFunction(MachineFunction &CurMF) {
       if (!CLI->preLowerReturn(RetVal, RetVRegs, FuncInfo)) {
         OptimizationRemarkMissed R("gisel-irtranslator", "GISelFailure",
                                    F.getSubprogram(), &F.getEntryBlock());
-        R << "unable to pre-lower return type";
+        R << "unable to pre-lower return type: "
+          << ore::NV("Type", F.getType());
         reportTranslationError(*MF, *ORE, R);
         return false;
       }

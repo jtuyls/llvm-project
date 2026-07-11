@@ -62,11 +62,16 @@ struct AIEValueAssigner : public CallLowering::ValueAssigner {
                  CCValAssign::LocInfo LocInfo,
                  const CallLowering::ArgInfo &Info, ISD::ArgFlagsTy Flags,
                  CCState &State) override {
-    if (!Info.IsFixed && !UsesVarargCC) {
+    // amd/aie/ port: LLVM 23 removed ArgInfo::IsFixed; the vararg-ness of an
+    // argument now lives in its ArgFlags (CallLowering sets setVarArg() for every
+    // argument past the last fixed one).
+    const bool IsVarArgSlot = Info.Flags[0].isVarArg();
+    if (IsVarArgSlot && !UsesVarargCC) {
       AIEBaseTargetLowering::alignFirstVASlot(State);
       UsesVarargCC = true;
     }
-    if (getAssignFn(!Info.IsFixed)(ValNo, ValVT, LocVT, LocInfo, Flags, /*OrigTy=*/nullptr, State))
+    if (getAssignFn(IsVarArgSlot)(ValNo, ValVT, LocVT, LocInfo, Flags,
+                                  /*OrigTy=*/nullptr, State))
       return true;
     StackSize = State.getStackSize();
     return false;
