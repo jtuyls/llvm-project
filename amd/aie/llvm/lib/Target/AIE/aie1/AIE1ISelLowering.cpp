@@ -212,7 +212,13 @@ AIE1TargetLowering::AIE1TargetLowering(const TargetMachine &TM,
   setOperationAction(ISD::BUILD_VECTOR, MVT::v2i32, Legal);
   // Floating point division needs a library.
   setOperationAction(ISD::FDIV, MVT::f32, Expand);
-  setOperationAction(ISD::FREM, MVT::f32, Expand);
+  // amd/aie/ port: LLVM 23 changed what Expand means for FREM. The new
+  // ExpandIRInsts pass expands frem *in IR*, into a frexp/ldexp software
+  // sequence, for every target whose FREM action is Expand -- where in LLVM 21
+  // Expand simply fell through to the REM_F32 libcall in LegalizeDAG. AIE links
+  // libm, so ask for the libcall explicitly (as AArch64 and LoongArch now do);
+  // otherwise a single `jal fmodf` turns into a dozen calls plus spills.
+  setOperationAction(ISD::FREM, MVT::f32, LibCall);
   setOperationAction(ISD::FSQRT, MVT::f32, Legal);
   setOperationAction(ISD::FMA, MVT::f32, Expand);
 
