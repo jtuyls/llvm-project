@@ -38,9 +38,17 @@ void AIEMCExpr::printImpl(raw_ostream &OS, const MCAsmInfo *MAI) const {
   bool isSymRefExpr = Expr->getKind() == ExprKind::SymbolRef;
   if (!isSymRefExpr)
     OS << '(';
-  // amd/aie/ port: MCExpr::print is private in 23; MCAsmInfo is its friend.
+  // amd/aie/ port: MCExpr::print is private in LLVM 23 (MCAsmInfo and MCFragment
+  // are its only friends), so we cannot call Expr->print() the way llvm-aie did
+  // and must go through MCAsmInfo. Some callers legitimately have no MCAsmInfo
+  // -- MCFragment::dump() prints fixup values with a null MAI -- and dropping
+  // the sub-expression there makes the operand vanish from the dump entirely
+  // ("Value:#" instead of "Value:#myint"). Print the symbol directly in that
+  // case; a symbol reference is what the fixup value is in practice.
   if (MAI)
     MAI->printExpr(OS, *Expr);
+  else if (const auto *SRE = dyn_cast<MCSymbolRefExpr>(Expr))
+    OS << SRE->getSymbol().getName();
   if (!isSymRefExpr)
     OS << ')';
 }

@@ -82,6 +82,12 @@ LLVM_DUMP_METHOD void MCFragment::dump() const {
   case MCFragment::FT_LEB:
   case MCFragment::FT_Dwarf:
   case MCFragment::FT_DwarfFrame:
+  // amd/aie/ port: FT_PrefAlign is an AIE fragment kind, but in LLVM 23's
+  // fragment model every fragment owns a fixed+var content region, and the
+  // instructions emitted after a PrefAlign land in *its* content. It therefore
+  // has to be dumped like any other content-bearing fragment -- otherwise its
+  // contents and fixups are silently omitted from the mc-dump.
+  case MCFragment::FT_PrefAlign:
   case MCFragment::FT_SFrame: {
     if (isLinkerRelaxable())
       OS << " LinkerRelaxable";
@@ -136,6 +142,11 @@ LLVM_DUMP_METHOD void MCFragment::dump() const {
       OS << " AddrDelta:";
       getDwarfAddrDelta().print(OS, nullptr);
       break;
+    case MCFragment::FT_PrefAlign:
+      OS << " PrefAlign:" << getPrefAlignPreferred().value()
+         << " End:" << getPrefAlignEnd().getName()
+         << " ComputedAlign:" << getPrefAlignComputed().value();
+      break;
     default:
       llvm_unreachable("");
     }
@@ -171,11 +182,6 @@ LLVM_DUMP_METHOD void MCFragment::dump() const {
        << " Size:" << BF->getSize();
     break;
   }
-  case MCFragment::FT_PrefAlign:
-    OS << " PrefAlign:" << getPrefAlignPreferred().value()
-       << " End:" << getPrefAlignEnd().getName()
-       << " ComputedAlign:" << getPrefAlignComputed().value();
-    break;
   case MCFragment::FT_SymbolId: {
     const auto *F = cast<MCSymbolIdFragment>(this);
     OS << " Sym:" << F->getSymbol();

@@ -590,6 +590,13 @@ void MachineLICMImpl::HoistRegionPostRA(MachineLoop *CurLoop) {
   if (!Preheader)
     return;
 
+  // amd/aie/ port: opt-in to lane-precise live-in clobbering (see below). Only
+  // targets with a fully exposed pipeline and separately addressable
+  // sub-registers want this; upstream's conservative rule is load-bearing
+  // elsewhere.
+  const bool LanePreciseLiveIns =
+      Preheader->getParent()->getSubtarget().forcePostRAScheduling();
+
   unsigned NumRegUnits = TRI->getNumRegUnits();
   BitVector RUDefs(NumRegUnits);     // RUs defined once in the loop.
   BitVector RUClobbers(NumRegUnits); // RUs defined more than once.
@@ -609,8 +616,16 @@ void MachineLICMImpl::HoistRegionPostRA(MachineLoop *CurLoop) {
     // register units as an external def here, which blocks hoisting any
     // candidate whose def unit merely overlaps a live-in -- even when the
     // live-in and the def touch disjoint lanes of the same super-register.
-    // We instead clobber live-in units lane-precisely, after the region walk
-    // has collected RUDefs; see below.
+    // Targets that opt in get a lane-precise clobber pass after the region walk
+    // instead (see below). Everyone else keeps upstream's conservative rule: it
+    // is load-bearing (e.g. AArch64's mlicm-implicit-defs.mir), so we must not
+    // relax it globally.
+    if (!LanePreciseLiveIns) {
+      for (const auto &LI : BB->liveins()) {
+        for (MCRegUnit Unit : TRI->regunits(LI.PhysReg))
+          RUDefs.set(static_cast<unsigned>(Unit));
+      }
+    }
 
     // Funclet entry blocks will clobber all registers
     if (const uint32_t *Mask = BB->getBeginClobberMask(TRI))
@@ -634,20 +649,22 @@ void MachineLICMImpl::HoistRegionPostRA(MachineLoop *CurLoop) {
       ProcessMI(&MI, RUDefs, RUClobbers, StoredFIs, Candidates, CurLoop);
   }
 
-  // amd/aie/ port: mark a register unit as clobbered only if it is live-in to
-  // the loop header *and* the loop actually defines lanes that overlap the
-  // live-in lanes. This replaces upstream's blanket "live-ins are external
-  // defs", whose FIXME already notes it is too conservative. Lane precision
-  // matters on targets whose sub-registers are separately addressable: a copy
-  // defining one half of a super-register is hoistable even when the other half
-  // is live-in.
-  for (const auto &LoopLI : CurLoop->getHeader()->liveins()) {
-    const LaneBitmask LiveInMask = LoopLI.LaneMask;
-    for (MCRegUnitMaskIterator RUI(LoopLI.PhysReg, TRI); RUI.isValid(); ++RUI) {
-      const auto [LiveInUnit, UnitMask] = *RUI;
-      const auto Unit = static_cast<unsigned>(LiveInUnit);
-      if ((UnitMask & LiveInMask).any() && RUDefs.test(Unit))
-        RUClobbers.set(Unit);
+  // amd/aie/ port: for opted-in targets, mark a register unit as clobbered only
+  // if it is live-in to the loop header *and* the loop actually defines lanes
+  // that overlap the live-in lanes -- instead of upstream's blanket "live-ins
+  // are external defs" above. Lane precision matters on targets whose
+  // sub-registers are separately addressable: a copy defining one half of a
+  // super-register is hoistable even when the other half is live-in.
+  if (LanePreciseLiveIns) {
+    for (const auto &LoopLI : CurLoop->getHeader()->liveins()) {
+      const LaneBitmask LiveInMask = LoopLI.LaneMask;
+      for (MCRegUnitMaskIterator RUI(LoopLI.PhysReg, TRI); RUI.isValid();
+           ++RUI) {
+        const auto [LiveInUnit, UnitMask] = *RUI;
+        const auto Unit = static_cast<unsigned>(LiveInUnit);
+        if ((UnitMask & LiveInMask).any() && RUDefs.test(Unit))
+          RUClobbers.set(Unit);
+      }
     }
   }
 

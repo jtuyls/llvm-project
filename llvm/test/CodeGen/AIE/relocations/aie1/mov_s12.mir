@@ -28,14 +28,14 @@ body:             |
       NOP_LDA
       NOP_LDB
       renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:0 {{.*}} Kind:142
+      ; FIXUP: Fixup @0 {{.*}} Kind:4024
       ; RELOC: {{.*}} R_AIE_14
     }
 
     BUNDLE {
       NOP_LDA
       renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:8 {{.*}} Kind:141
+      ; FIXUP: Fixup @8 {{.*}} Kind:4023
       ; RELOC: {{.*}} R_AIE_13
       NOP_ST
     }
@@ -44,7 +44,7 @@ body:             |
       NOP_LDA
       NOP_MV0
       renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:16 {{.*}} Kind:142
+      ; FIXUP: Fixup @16 {{.*}} Kind:4024
       ; RELOC: {{.*}} R_AIE_14
     }
 
@@ -52,14 +52,14 @@ body:             |
       NOP_LDA
       NOP_MV1
       renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:24 {{.*}} Kind:142
+      ; FIXUP: Fixup @24 {{.*}} Kind:4024
       ; RELOC: {{.*}} R_AIE_14
     }
 
     BUNDLE {
       NOP_ST
       renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:32 {{.*}} Kind:144
+      ; FIXUP: Fixup @32 {{.*}} Kind:4026
       ; RELOC: {{.*}} R_AIE_16
       NOP_MV0
     }
@@ -67,14 +67,14 @@ body:             |
     BUNDLE {
       NOP_ST
       renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:40 {{.*}} Kind:144
+      ; FIXUP: Fixup @40 {{.*}} Kind:4026
       ; RELOC: {{.*}} R_AIE_16
       NOP_MV1
     }
 
     BUNDLE {
       renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:48 {{.*}} Kind:143
+      ; FIXUP: Fixup @48 {{.*}} Kind:4025
       ; RELOC: {{.*}} R_AIE_15
       NOP_MV0
       NOP_MV1
@@ -82,21 +82,21 @@ body:             |
 
     BUNDLE {
       renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:56 {{.*}} Kind:143
+      ; FIXUP: Fixup @56 {{.*}} Kind:4025
       ; RELOC: {{.*}} R_AIE_15
       NOP_LNG
     }
 
     BUNDLE {
       renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:64 {{.*}} Kind:143
+      ; FIXUP: Fixup @64 {{.*}} Kind:4025
       ; RELOC: {{.*}} R_AIE_15
       NOP_VECA
     }
 
     BUNDLE {
       renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:72 {{.*}} Kind:143
+      ; FIXUP: Fixup @72 {{.*}} Kind:4025
       ; RELOC: {{.*}} R_AIE_15
       NOP_VECM
     }
@@ -104,7 +104,7 @@ body:             |
     BUNDLE {
       NOP_ST
       renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:80 {{.*}} Kind:148
+      ; FIXUP: Fixup @80 {{.*}} Kind:4030
       ; RELOC: {{.*}} R_AIE_20
       NOP_VECA
     }
@@ -112,7 +112,7 @@ body:             |
     BUNDLE {
       NOP_LDA
       renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:92 {{.*}} Kind:146
+      ; FIXUP: Fixup @92 {{.*}} Kind:4028
       ; RELOC: {{.*}} R_AIE_18
       NOP_MV0
       NOP_VECA
@@ -121,7 +121,7 @@ body:             |
     BUNDLE {
       NOP_LDA
       renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:104 {{.*}} Kind:147
+      ; FIXUP: Fixup @104 {{.*}} Kind:4029
       ; RELOC: {{.*}} R_AIE_19
       NOP_MV1
       NOP_VECA
@@ -132,7 +132,7 @@ body:             |
       NOP_LDB
       NOP_ST
       renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:116 {{.*}} Kind:152
+      ; FIXUP: Fixup @116 {{.*}} Kind:4034
       ; RELOC: {{.*}} R_AIE_24
       NOP_MV0
     }
@@ -142,7 +142,7 @@ body:             |
       NOP_LDB
       NOP_ST
       renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:128 {{.*}} Kind:145
+      ; FIXUP: Fixup @128 {{.*}} Kind:4027
       ; RELOC: {{.*}} R_AIE_17
       NOP_MV1
     }
@@ -152,7 +152,7 @@ body:             |
       NOP_MV0
       NOP_ST
       renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:140 {{.*}} Kind:145
+      ; FIXUP: Fixup @140 {{.*}} Kind:4027
       ; RELOC: {{.*}} R_AIE_17
       NOP_MV1
     }
@@ -161,7 +161,7 @@ body:             |
       NOP_LDA
       NOP_LDB
       renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:152 {{.*}} Kind:150
+      ; FIXUP: Fixup @152 {{.*}} Kind:4032
       ; RELOC: {{.*}} R_AIE_22
       NOP_MV0
       NOP_MV1
@@ -171,7 +171,7 @@ body:             |
       NOP_LDA
       NOP_LDB
       renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:164 {{.*}} Kind:150
+      ; FIXUP: Fixup @164 {{.*}} Kind:4032
       ; RELOC: {{.*}} R_AIE_22
       NOP_LNG
     }
@@ -179,7 +179,7 @@ body:             |
     BUNDLE {
       NOP_ST
       renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:176 {{.*}} Kind:148
+      ; FIXUP: Fixup @176 {{.*}} Kind:4030
       ; RELOC: {{.*}} R_AIE_20
       NOP_VECM
     }
@@ -187,7 +187,7 @@ body:             |
     BUNDLE {
       NOP_LDA
       renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:188 {{.*}} Kind:146
+      ; FIXUP: Fixup @188 {{.*}} Kind:4028
       ; RELOC: {{.*}} R_AIE_18
       NOP_MV0
       NOP_VECM
@@ -196,7 +196,7 @@ body:             |
     BUNDLE {
       NOP_LDA
       renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:200 {{.*}} Kind:147
+      ; FIXUP: Fixup @200 {{.*}} Kind:4029
       ; RELOC: {{.*}} R_AIE_19
       NOP_MV1
       NOP_VECM
@@ -206,7 +206,7 @@ body:             |
       NOP_LDA
       NOP_LDB
       renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:212 {{.*}} Kind:149
+      ; FIXUP: Fixup @212 {{.*}} Kind:4031
       ; RELOC: {{.*}} R_AIE_21
       NOP_MV0
       NOP_MV1
@@ -217,52 +217,52 @@ body:             |
       NOP_LDA
       NOP_LDB
       renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:228 {{.*}} Kind:149
-      ; RELOC: {{.*}} R_AIE_21
-      NOP_LNG
-      NOP_VECA
-    }
-
-    BUNDLE {
-      NOP_LDA
-      NOP_LDB
-      NOP_ST
-      renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:244 {{.*}} Kind:139
-      ; RELOC: {{.*}} R_AIE_11
-      NOP_MV1
-      NOP_VECA
-    }
-
-    BUNDLE {
-      NOP_LDA
-      NOP_MV0
-      NOP_ST
-      renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:260 {{.*}} Kind:139
-      ; RELOC: {{.*}} R_AIE_11
-      NOP_MV1
-      NOP_VECA
-    }
-
-    BUNDLE {
-      NOP_LDA
-      NOP_LDB
-      renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:276 {{.*}} Kind:149
-      ; RELOC: {{.*}} R_AIE_21
-      NOP_MV0
-      NOP_MV1
-      NOP_VECM
-    }
-
-    BUNDLE {
-      NOP_LDA
-      NOP_LDB
-      renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:292 {{.*}} Kind:149
+      ; FIXUP: Fixup @228 {{.*}} Kind:4031
       ; RELOC: {{.*}} R_AIE_21
       NOP_LNG
+      NOP_VECA
+    }
+
+    BUNDLE {
+      NOP_LDA
+      NOP_LDB
+      NOP_ST
+      renamable $r0 = MOV_S12 target-flags(aie-global) @myint
+      ; FIXUP: Fixup @244 {{.*}} Kind:4021
+      ; RELOC: {{.*}} R_AIE_11
+      NOP_MV1
+      NOP_VECA
+    }
+
+    BUNDLE {
+      NOP_LDA
+      NOP_MV0
+      NOP_ST
+      renamable $r0 = MOV_S12 target-flags(aie-global) @myint
+      ; FIXUP: Fixup @260 {{.*}} Kind:4021
+      ; RELOC: {{.*}} R_AIE_11
+      NOP_MV1
+      NOP_VECA
+    }
+
+    BUNDLE {
+      NOP_LDA
+      NOP_LDB
+      renamable $r0 = MOV_S12 target-flags(aie-global) @myint
+      ; FIXUP: Fixup @276 {{.*}} Kind:4031
+      ; RELOC: {{.*}} R_AIE_21
+      NOP_MV0
+      NOP_MV1
+      NOP_VECM
+    }
+
+    BUNDLE {
+      NOP_LDA
+      NOP_LDB
+      renamable $r0 = MOV_S12 target-flags(aie-global) @myint
+      ; FIXUP: Fixup @292 {{.*}} Kind:4031
+      ; RELOC: {{.*}} R_AIE_21
+      NOP_LNG
       NOP_VECM
     }
 
@@ -271,7 +271,7 @@ body:             |
       NOP_LDB
       NOP_ST
       renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:308 {{.*}} Kind:139
+      ; FIXUP: Fixup @308 {{.*}} Kind:4021
       ; RELOC: {{.*}} R_AIE_11
       NOP_MV1
       NOP_VECM
@@ -282,7 +282,7 @@ body:             |
       NOP_MV0
       NOP_ST
       renamable $r0 = MOV_S12 target-flags(aie-global) @myint
-      ; FIXUP: MCFixup Offset:324 {{.*}} Kind:139
+      ; FIXUP: Fixup @324 {{.*}} Kind:4021
       ; RELOC: {{.*}} R_AIE_11
       NOP_MV1
       NOP_VECM
