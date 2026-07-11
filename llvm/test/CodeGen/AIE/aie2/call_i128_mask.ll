@@ -28,20 +28,16 @@ define i128 @test_i128_spill(i128 %q) {
 ; CHECK-NEXT:    nopb ; nopa ; nops ; jl #f; nopv
 ; CHECK-NEXT:    nop // Delay Slot 5
 ; CHECK-NEXT:    paddb [sp], #32 // Delay Slot 4
-; CHECK-NEXT:    st lr, [sp, #-32] // 4-byte Folded Spill
-; CHECK-NEXT:    // 4-byte Folded Spill Delay Slot 3
-; CHECK-NEXT:    st q2, [sp, #-16] // 16-byte Folded Spill
-; CHECK-NEXT:    // 16-byte Folded Spill Delay Slot 2
+; CHECK-NEXT:    st lr, [sp, #-16] // 4-byte Folded Spill Delay Slot 3
+; CHECK-NEXT:    st q2, [sp, #-32] // 16-byte Folded Spill Delay Slot 2
 ; CHECK-NEXT:    nop // Delay Slot 1
-; CHECK-NEXT:    nopb ; lda lr, [sp, #-32]; nops ; nopxm ; nopv // 4-byte Folded Reload
-; CHECK-NEXT:    // 4-byte Folded Reload
+; CHECK-NEXT:    nopb ; lda lr, [sp, #-16]; nops ; nopxm ; nopv // 4-byte Folded Reload
 ; CHECK-NEXT:    nopx
 ; CHECK-NEXT:    nop
 ; CHECK-NEXT:    nop
 ; CHECK-NEXT:    nop
 ; CHECK-NEXT:    nop
-; CHECK-NEXT:    lda q0, [sp, #-16] // 16-byte Folded Reload
-; CHECK-NEXT:    // 16-byte Folded Reload
+; CHECK-NEXT:    lda q0, [sp, #-32] // 16-byte Folded Reload
 ; CHECK-NEXT:    ret lr
 ; CHECK-NEXT:    nop // Delay Slot 5
 ; CHECK-NEXT:    nop // Delay Slot 4

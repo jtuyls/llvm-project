@@ -16,20 +16,16 @@ define i32 @test(i32 %x) {
 ; CHECK-NEXT:    nopa ; nopb ; jl #f; nops
 ; CHECK-NEXT:    nop // Delay Slot 5
 ; CHECK-NEXT:    paddb [sp], #32 // Delay Slot 4
-; CHECK-NEXT:    st lr, [sp, #-28] // 4-byte Folded Spill
-; CHECK-NEXT:    // 4-byte Folded Spill Delay Slot 3
-; CHECK-NEXT:    st r16, [sp, #-32] // 4-byte Folded Spill
-; CHECK-NEXT:    // 4-byte Folded Spill Delay Slot 2
+; CHECK-NEXT:    st lr, [sp, #-32] // 4-byte Folded Spill Delay Slot 3
+; CHECK-NEXT:    st r16, [sp, #-28] // 4-byte Folded Spill Delay Slot 2
 ; CHECK-NEXT:    mov r16, r1 // Delay Slot 1
-; CHECK-NEXT:    nopb ; lda lr, [sp, #-28]; nops ; nopxm ; nopv // 4-byte Folded Reload
-; CHECK-NEXT:    // 4-byte Folded Reload
+; CHECK-NEXT:    nopb ; lda lr, [sp, #-32]; nops ; nopxm ; nopv // 4-byte Folded Reload
 ; CHECK-NEXT:    nop
 ; CHECK-NEXT:    nop
 ; CHECK-NEXT:    nop
 ; CHECK-NEXT:    nop
 ; CHECK-NEXT:    nop
-; CHECK-NEXT:    lda r16, [sp, #-32] // 4-byte Folded Reload
-; CHECK-NEXT:    // 4-byte Folded Reload
+; CHECK-NEXT:    lda r16, [sp, #-28] // 4-byte Folded Reload
 ; CHECK-NEXT:    ret lr
 ; CHECK-NEXT:    nop // Delay Slot 5
 ; CHECK-NEXT:    nop // Delay Slot 4
