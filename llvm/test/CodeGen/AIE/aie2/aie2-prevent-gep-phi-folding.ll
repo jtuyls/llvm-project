@@ -16,13 +16,14 @@ define i32 @dontFoldGEPs(ptr %dm, i1 %arg4, i64 %arg9, i64 %arg19) {
 ; CHECK-NEXT:    br i1 [[ARG4:%.*]], label [[BB1:%.*]], label [[BB2:%.*]]
 ; CHECK:       bb1:
 ; CHECK-NEXT:    [[TMP3:%.*]] = trunc nsw i64 [[ARG9:%.*]] to i20
+; CHECK-NEXT:    [[TMP5:%.*]] = getelementptr inbounds [8 x i8], ptr [[TMP1]], i20 [[TMP3]]
 ; CHECK-NEXT:    br label [[BB3:%.*]]
 ; CHECK:       bb2:
 ; CHECK-NEXT:    [[TMP2:%.*]] = trunc nsw i64 [[ARG19:%.*]] to i20
+; CHECK-NEXT:    [[TMP4:%.*]] = getelementptr inbounds [8 x i8], ptr [[TMP1]], i20 [[TMP2]]
 ; CHECK-NEXT:    br label [[BB3]]
 ; CHECK:       bb3:
-; CHECK-NEXT:    [[DOTPN:%.*]] = phi i20 [ [[TMP3]], [[BB1]] ], [ [[TMP2]], [[BB2]] ]
-; CHECK-NEXT:    [[PHI:%.*]] = getelementptr inbounds [8 x i8], ptr [[TMP1]], i20 [[DOTPN]]
+; CHECK-NEXT:    [[PHI:%.*]] = phi ptr [ [[TMP5]], [[BB1]] ], [ [[TMP4]], [[BB2]] ]
 ; CHECK-NEXT:    [[TMP25:%.*]] = load i32, ptr [[PHI]], align 4
 ; CHECK-NEXT:    ret i32 [[TMP25]]
 ;
